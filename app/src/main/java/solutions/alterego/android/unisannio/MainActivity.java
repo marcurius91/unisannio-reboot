@@ -14,6 +14,7 @@ import solutions.alterego.android.unisannio.ingegneria.IngegneriaFragment;
 import solutions.alterego.android.unisannio.navigation_drawer.NavigationDrawerCallbacks;
 import solutions.alterego.android.unisannio.navigation_drawer.NavigationDrawerFragment;
 import solutions.alterego.android.unisannio.scienze.ScienzeFragment;
+import solutions.alterego.android.unisannio.utils.CollectionUtils;
 
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
@@ -26,11 +27,20 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
+    private CollectionUtils d2EStringUtils;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
+
+        //Inject to non-private fields
+        UnisannioApplication.component(this).inject(this);
+
+        //Inject to private fields or local variables
+        d2EStringUtils = UnisannioApplication.component(this).getD2EStringUtils();
+
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
