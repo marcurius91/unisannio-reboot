@@ -73,5 +73,10 @@ dependencies {
 
     provided 'javax.annotation:jsr250-api:1.0'
     provided "org.projectlombok:lombok:1.14.8"
+
+    compile 'org.jsoup:jsoup:1.7.3'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'org.apache.commons:commons-lang3:3.3.2'
+
     compile 'com.netflix.rxjava:rxjava-android:0.18.3'
 }
