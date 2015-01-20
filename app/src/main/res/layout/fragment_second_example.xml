@@ -2,7 +2,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="solutions.alterego.android.unisannio.example2.SecondExampleFragment">
+             tools:context="solutions.alterego.android.unisannio.ingegneria.IngegneriaFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

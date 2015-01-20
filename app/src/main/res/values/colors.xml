@@ -1,12 +1,16 @@
 <resources>
 
-    <color name="myPrimaryColor">#F59927</color>
-    <color name="myPrimaryDarkColor">#ffcd8221</color>
-    <color name="myAccentColor">#000000</color>
-    <color name="myDrawerBackground">#F2F2F2</color>
+    <color name="myPrimaryColor">@color/unisannio_yellow</color>
+    <color name="myPrimaryDarkColor">@color/unisannio_yellow_dark</color>
+    <color name="myAccentColor">@color/unisannio_blue</color>
+    <color name="drawerBackground">#ffffff</color>
     <color name="myWindowBackground">#DEDEDE</color>
-    <color name="myTextPrimaryColor">#000000</color>
+    <color name="myTextPrimaryColor">@color/unisannio_blue</color>
     <color name="myNavigationColor">#000000</color>
 
     <color name="selected_gray">#ffdbdbdb</color>
+
+    <color name="unisannio_yellow">#FDBE17</color>
+    <color name="unisannio_yellow_dark">#ffeba917</color>
+    <color name="unisannio_blue">#1761A0</color>
 </resources>

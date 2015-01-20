@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">RxJava Essentials</string>
+    <string name="app_name">Unisannio</string>
     <string name="drawer_open">Menu opened</string>
     <string name="drawer_close">Menu closed</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ateneo">Ateneo</string>
+    <string name="ingegneria">Ingegneria</string>
+    <string name="scienze">Scienze</string>
+    <string name="giurisprudenza">Giurisprudenza</string>
+    <string name="sea">S.E.A</string>
 
 </resources>

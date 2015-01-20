@@ -2,6 +2,11 @@ package solutions.alterego.android.unisannio.navigation_drawer;
 
 import android.graphics.drawable.Drawable;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+@Data
+@Accessors(prefix = "m")
 public class NavigationItem {
 
     private String mText;
@@ -10,22 +15,6 @@ public class NavigationItem {
 
     public NavigationItem(String text, Drawable drawable) {
         mText = text;
-        mDrawable = drawable;
-    }
-
-    public String getText() {
-        return mText;
-    }
-
-    public void setText(String text) {
-        mText = text;
-    }
-
-    public Drawable getDrawable() {
-        return mDrawable;
-    }
-
-    public void setDrawable(Drawable drawable) {
         mDrawable = drawable;
     }
 }

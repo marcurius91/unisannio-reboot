@@ -1,11 +1,5 @@
 package solutions.alterego.android.unisannio;
 
-import solutions.alterego.android.unisannio.example1.FirstExampleFragment;
-import solutions.alterego.android.unisannio.example2.SecondExampleFragment;
-import solutions.alterego.android.unisannio.example3.ThirdExampleFragment;
-import solutions.alterego.android.unisannio.navigation_drawer.NavigationDrawerCallbacks;
-import solutions.alterego.android.unisannio.navigation_drawer.NavigationDrawerFragment;
-
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -15,6 +9,11 @@ import android.view.Menu;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import solutions.alterego.android.unisannio.ateneo.AteneoFragment;
+import solutions.alterego.android.unisannio.ingegneria.IngegneriaFragment;
+import solutions.alterego.android.unisannio.navigation_drawer.NavigationDrawerCallbacks;
+import solutions.alterego.android.unisannio.navigation_drawer.NavigationDrawerFragment;
+import solutions.alterego.android.unisannio.scienze.ScienzeFragment;
 
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
@@ -30,7 +29,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_topdrawer);
+        setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
         setSupportActionBar(mToolbar);
@@ -52,17 +51,17 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         switch (position) {
             case 0:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, new FirstExampleFragment())
+                        .replace(R.id.container, new AteneoFragment())
                         .commit();
                 break;
             case 1:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, new SecondExampleFragment())
+                        .replace(R.id.container, new IngegneriaFragment())
                         .commit();
                 break;
             case 2:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, new ThirdExampleFragment())
+                        .replace(R.id.container, new ScienzeFragment())
                         .commit();
                 break;
         }

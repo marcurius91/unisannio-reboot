@@ -1,4 +1,4 @@
-package solutions.alterego.android.unisannio.example3;
+package solutions.alterego.android.unisannio.scienze;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -11,10 +11,10 @@ import solutions.alterego.android.unisannio.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ThirdExampleFragment extends Fragment {
+public class ScienzeFragment extends Fragment {
 
 
-    public ThirdExampleFragment() {
+    public ScienzeFragment() {
         // Required empty public constructor
     }
 

@@ -28,7 +28,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
 
-    private static final String PREFERENCES_FILE = "my_app_settings"; //TODO: change this to your file
+    private static final String PREFERENCES_FILE = "unisannio";
 
     private NavigationDrawerCallbacks mCallbacks;
 
@@ -139,12 +139,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
             mDrawerLayout.openDrawer(mFragmentContainerView);
         }
 
-        mDrawerLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                mActionBarDrawerToggle.syncState();
-            }
-        });
+        mDrawerLayout.post(() -> mActionBarDrawerToggle.syncState());
 
         mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
     }
@@ -165,9 +160,11 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
     public List<NavigationItem> getMenu() {
         List<NavigationItem> items = new ArrayList<>();
-        items.add(new NavigationItem("Example 1", getResources().getDrawable(R.drawable.ic_menu_check)));
-        items.add(new NavigationItem("Example 2", getResources().getDrawable(R.drawable.ic_menu_check)));
-        items.add(new NavigationItem("Example 3", getResources().getDrawable(R.drawable.ic_menu_check)));
+        items.add(new NavigationItem(getString(R.string.ateneo), getResources().getDrawable(R.drawable.ic_ateneo)));
+        items.add(new NavigationItem(getString(R.string.ingegneria), getResources().getDrawable(R.drawable.ic_ingegneria)));
+        items.add(new NavigationItem(getString(R.string.scienze), getResources().getDrawable(R.drawable.ic_scienze)));
+        items.add(new NavigationItem(getString(R.string.giurisprudenza), getResources().getDrawable(R.drawable.ic_giurisprudenza)));
+        items.add(new NavigationItem(getString(R.string.sea), getResources().getDrawable(R.drawable.ic_sea)));
         return items;
     }
 

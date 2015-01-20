@@ -1,21 +1,17 @@
-package solutions.alterego.android.unisannio.example2;
+package solutions.alterego.android.unisannio.ateneo;
 
-
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import solutions.alterego.android.unisannio.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class SecondExampleFragment extends Fragment {
+public class AteneoFragment extends Fragment {
 
 
-    public SecondExampleFragment() {
+    public AteneoFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +20,7 @@ public class SecondExampleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second_example, container, false);
+        return inflater.inflate(R.layout.fragment_first_example, container, false);
     }
 
 
