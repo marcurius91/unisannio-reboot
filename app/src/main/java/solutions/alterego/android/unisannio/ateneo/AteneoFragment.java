@@ -1,8 +1,6 @@
 package solutions.alterego.android.unisannio.ateneo;
 
 import android.app.Fragment;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +13,6 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnItemClick;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -28,8 +25,6 @@ public class AteneoFragment extends Fragment {
     RecyclerView mRecyclerView;
 
     private AteneoAdapter mAdapter;
-
-    private List<AteneoNews> mNewsList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,7 +59,6 @@ public class AteneoFragment extends Fragment {
 
                     @Override
                     public void onNext(List<AteneoNews> ateneoNewses) {
-                        mNewsList = ateneoNewses;
                         mAdapter.addNews(ateneoNewses);
                     }
                 });
