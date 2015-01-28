@@ -5,7 +5,7 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(prefix = "m")
-public class News {
+public class AteneoNews {
 
     private String mId;
 
@@ -13,7 +13,7 @@ public class News {
 
     private String mDate;
 
-    public News(String date, String body, String id) {
+    public AteneoNews(String date, String body, String id) {
         mDate = date;
         mBody = body;
         mId = id;

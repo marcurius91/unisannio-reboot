@@ -13,4 +13,7 @@
     <color name="unisannio_yellow">#FDBE17</color>
     <color name="unisannio_yellow_dark">#ffeba917</color>
     <color name="unisannio_blue">#1761A0</color>
+
+    <color name="list_background_normal">#FCFCFC</color>
+    <color name="list_background_secondary_normal">#F2F2F2</color>
 </resources>

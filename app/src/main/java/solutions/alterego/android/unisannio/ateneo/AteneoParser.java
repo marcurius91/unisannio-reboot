@@ -9,8 +9,8 @@ import java.util.List;
 
 public class AteneoParser {
 
-    public List<News> parse(Document doc) {
-        List<News> newsList = new ArrayList<>();
+    public List<AteneoNews> parse(Document doc) {
+        List<AteneoNews> newsList = new ArrayList<>();
 
         Elements newsItems = doc.select("div.meta > table > tbody > tr");
 
@@ -32,7 +32,7 @@ public class AteneoParser {
             }
 
             if (date != null && body != null) {
-                newsList.add(new News(date, body, id));
+                newsList.add(new AteneoNews(date, body, id));
             }
         }
         return newsList;
