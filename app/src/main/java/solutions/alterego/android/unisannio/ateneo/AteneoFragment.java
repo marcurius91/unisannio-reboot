@@ -1,5 +1,6 @@
 package solutions.alterego.android.unisannio.ateneo;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,6 +14,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import rx.Observer;
@@ -20,6 +23,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
+import solutions.alterego.android.unisannio.UnisannioApplication;
 
 public class AteneoFragment extends Fragment {
 
@@ -28,6 +32,9 @@ public class AteneoFragment extends Fragment {
 
     @InjectView(R.id.ateneo_ptr)
     SwipeRefreshLayout mSwipeRefreshLayout;
+
+    @Inject
+    AteneoRetriever mAteneoRetriever;
 
     private AteneoAdapter mAdapter;
 
@@ -66,7 +73,7 @@ public class AteneoFragment extends Fragment {
         mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
 
-        AteneoRetriever.getNewsList(URLS.ATENEO_NEWS)
+        mAteneoRetriever.getNewsList(URLS.ATENEO_NEWS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<AteneoNews>>() {
@@ -96,5 +103,11 @@ public class AteneoFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        UnisannioApplication.component(activity).inject(this);
     }
 }

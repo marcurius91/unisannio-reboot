@@ -3,13 +3,13 @@ package solutions.alterego.android.unisannio;
 import android.app.Application;
 import android.content.Context;
 
-import solutions.alterego.android.unisannio.di.D2EComponent;
+import solutions.alterego.android.unisannio.di.Component;
 
 public class UnisannioApplication extends Application {
 
-    private D2EComponent component;
+    private Component component;
 
-    public static D2EComponent component(Context context) {
+    public static Component component(Context context) {
         return ((UnisannioApplication) context.getApplicationContext()).component;
     }
 
@@ -20,6 +20,6 @@ public class UnisannioApplication extends Application {
     }
 
     public void buildComponentAndInject() {
-        component = D2EComponent.Initializer.init(this);
+        component = Component.Initializer.init(this);
     }
 }

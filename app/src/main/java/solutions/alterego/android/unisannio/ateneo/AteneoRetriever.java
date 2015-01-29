@@ -13,7 +13,7 @@ import rx.schedulers.Schedulers;
 
 public class AteneoRetriever {
 
-    public static Observable<List<AteneoNews>> getNewsList(final String url) {
+    public Observable<List<AteneoNews>> getNewsList(final String url) {
         return Observable
                 .create(new Observable.OnSubscribe<List<AteneoNews>>() {
                     @Override
@@ -27,7 +27,7 @@ public class AteneoRetriever {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    private static List<AteneoNews> get(String url) {
+    private List<AteneoNews> get(String url) {
         List<AteneoNews> newsList;
         try {
             Document doc = Jsoup.connect(url).timeout(10 * 1000).get();

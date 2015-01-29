@@ -4,14 +4,15 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import solutions.alterego.android.unisannio.ateneo.AteneoRetriever;
 import solutions.alterego.android.unisannio.utils.CollectionUtils;
 
 @Module
-public class D2EUtilsModule {
+public class RetrieversModule {
 
     @Provides
     @Singleton
-    CollectionUtils provideStringUtils() {
-        return new CollectionUtils();
+    AteneoRetriever provideAteneoRetriever() {
+        return new AteneoRetriever();
     }
 }
