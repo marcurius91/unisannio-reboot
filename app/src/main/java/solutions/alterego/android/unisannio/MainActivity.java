@@ -41,7 +41,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         //Inject to private fields or local variables
         d2EStringUtils = UnisannioApplication.component(this).getD2EStringUtils();
 
-
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -51,7 +50,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
