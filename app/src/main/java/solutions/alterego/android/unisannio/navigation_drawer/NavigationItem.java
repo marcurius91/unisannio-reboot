@@ -9,12 +9,15 @@ import lombok.experimental.Accessors;
 @Accessors(prefix = "m")
 public class NavigationItem {
 
+    private int mType;
+
     private String mText;
 
     private Drawable mDrawable;
 
-    public NavigationItem(String text, Drawable drawable) {
+    public NavigationItem(String text, Drawable drawable, int type) {
         mText = text;
         mDrawable = drawable;
+        mType = type;
     }
 }

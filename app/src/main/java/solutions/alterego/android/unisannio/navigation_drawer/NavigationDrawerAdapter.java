@@ -35,9 +35,23 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     }
 
     @Override
-    public NavigationDrawerAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.drawer_row, viewGroup, false);
+    public NavigationDrawerAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int type) {
+        View v;
+
+        switch (type) {
+            case ItemType.SECTION:
+                v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.drawer_section_row, viewGroup, false);
+                break;
+            default:
+                v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.drawer_item_row, viewGroup, false);
+                break;
+        }
         return new ViewHolder(v);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return mData.get(position).getType();
     }
 
     @Override
@@ -63,7 +77,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
                 }
         );
         viewHolder.itemView.setOnClickListener(v -> {
-                    if (mNavigationDrawerCallbacks != null) {
+                    if (mNavigationDrawerCallbacks != null && getItem(i).getType() == ItemType.ITEM) {
                         mNavigationDrawerCallbacks.onNavigationDrawerItemSelected(i);
                     }
                 }
@@ -75,6 +89,10 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         } else {
             viewHolder.itemView.setBackgroundColor(Color.TRANSPARENT);
         }
+    }
+
+    private NavigationItem getItem(int i) {
+        return mData.get(i);
     }
 
     private void touchPosition(int position) {

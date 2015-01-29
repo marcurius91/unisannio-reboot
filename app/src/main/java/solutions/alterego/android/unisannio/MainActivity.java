@@ -59,17 +59,17 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     public void onNavigationDrawerItemSelected(int position) {
         FragmentManager fragmentManager = getFragmentManager();
         switch (position) {
-            case 0:
+            case 1:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, new AteneoFragment())
                         .commit();
                 break;
-            case 1:
+            case 5:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, new IngegneriaFragment())
                         .commit();
                 break;
-            case 2:
+            case 6:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, new ScienzeFragment())
                         .commit();

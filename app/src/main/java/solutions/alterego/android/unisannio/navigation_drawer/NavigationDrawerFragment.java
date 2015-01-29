@@ -83,6 +83,8 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         if (savedInstanceState != null) {
             mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
             mFromSavedInstanceState = true;
+        } else {
+            mCurrentSelectedPosition = 1;
         }
     }
 
@@ -160,11 +162,32 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
     public List<NavigationItem> getMenu() {
         List<NavigationItem> items = new ArrayList<>();
-        items.add(new NavigationItem(getString(R.string.ateneo), getResources().getDrawable(R.drawable.ic_ateneo)));
-        items.add(new NavigationItem(getString(R.string.ingegneria), getResources().getDrawable(R.drawable.ic_ingegneria)));
-        items.add(new NavigationItem(getString(R.string.scienze), getResources().getDrawable(R.drawable.ic_scienze)));
-        items.add(new NavigationItem(getString(R.string.giurisprudenza), getResources().getDrawable(R.drawable.ic_giurisprudenza)));
-        items.add(new NavigationItem(getString(R.string.sea), getResources().getDrawable(R.drawable.ic_sea)));
+        items.add(new NavigationItem(getString(R.string.ateneo), getResources().getDrawable(R.drawable.ic_ateneo), ItemType.SECTION));
+        items.add(new NavigationItem(getString(R.string.ateneo_avvisi), null, ItemType.ITEM));
+        items.add(new NavigationItem(getString(R.string.avvisi_studenti), null, ItemType.ITEM));
+        items.add(new NavigationItem(getString(R.string.sito_web), null, ItemType.ITEM));
+        items.add(new NavigationItem(getString(R.string.mappa), null, ItemType.ITEM));
+
+        items.add(new NavigationItem(getString(R.string.ingegneria), getResources().getDrawable(R.drawable.ic_ingegneria), ItemType.SECTION));
+        items.add(new NavigationItem(getString(R.string.avvisi_studenti), null, ItemType.ITEM));
+        items.add(new NavigationItem(getString(R.string.sito_web), null, ItemType.ITEM));
+        items.add(new NavigationItem(getString(R.string.mappa), null, ItemType.ITEM));
+
+        items.add(new NavigationItem(getString(R.string.scienze), getResources().getDrawable(R.drawable.ic_scienze), ItemType.SECTION));
+        items.add(new NavigationItem(getString(R.string.avvisi_studenti), null, ItemType.ITEM));
+        items.add(new NavigationItem(getString(R.string.sito_web), null, ItemType.ITEM));
+        items.add(new NavigationItem(getString(R.string.mappa), null, ItemType.ITEM));
+
+        items.add(new NavigationItem(getString(R.string.giurisprudenza), getResources().getDrawable(R.drawable.ic_giurisprudenza), ItemType.SECTION));
+        items.add(new NavigationItem(getString(R.string.avvisi_studenti), null, ItemType.ITEM));
+        items.add(new NavigationItem(getString(R.string.sito_web), null, ItemType.ITEM));
+        items.add(new NavigationItem(getString(R.string.mappa), null, ItemType.ITEM));
+
+        items.add(new NavigationItem(getString(R.string.sea), getResources().getDrawable(R.drawable.ic_sea), ItemType.SECTION));
+        items.add(new NavigationItem(getString(R.string.avvisi_studenti), null, ItemType.ITEM));
+        items.add(new NavigationItem(getString(R.string.sito_web), null, ItemType.ITEM));
+        items.add(new NavigationItem(getString(R.string.mappa), null, ItemType.ITEM));
+
         return items;
     }
 
