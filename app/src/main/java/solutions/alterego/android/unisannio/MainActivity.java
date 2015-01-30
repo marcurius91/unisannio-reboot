@@ -1,6 +1,8 @@
 package solutions.alterego.android.unisannio;
 
 import android.app.FragmentManager;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -59,6 +61,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, AteneoAvvisiFragment.newInstance(true))
                         .commit();
+                break;
+            case 3:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.ATENEO));
+                startActivity(browserIntent);
                 break;
             case 5:
                 fragmentManager.beginTransaction()
