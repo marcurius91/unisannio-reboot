@@ -21,15 +21,18 @@ import solutions.alterego.android.unisannio.URLS;
 
 public class AteneoAdapter extends RecyclerView.Adapter<AteneoAdapter.ViewHolder> {
 
+    private final boolean isStudenti;
+
     private List<AteneoNews> mNewsList = new ArrayList<>();
 
     private int mRowLayout;
 
     private Context mContext;
 
-    public AteneoAdapter(List<AteneoNews> newsList, int rowLayout) {
+    public AteneoAdapter(List<AteneoNews> newsList, int rowLayout, boolean isStudenti) {
         mNewsList = newsList;
         mRowLayout = rowLayout;
+        this.isStudenti = isStudenti;
     }
 
     public void addNews(List<AteneoNews> newsList) {
@@ -42,7 +45,7 @@ public class AteneoAdapter extends RecyclerView.Adapter<AteneoAdapter.ViewHolder
     public ViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
         mContext = viewGroup.getContext();
         View v = LayoutInflater.from(mContext).inflate(mRowLayout, viewGroup, false);
-        return new ViewHolder(v);
+        return new ViewHolder(v, isStudenti);
     }
 
     @Override
@@ -58,6 +61,8 @@ public class AteneoAdapter extends RecyclerView.Adapter<AteneoAdapter.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        private final boolean isStudenti;
+
         @InjectView(R.id.ateneo_card)
         CardView card;
 
@@ -69,9 +74,10 @@ public class AteneoAdapter extends RecyclerView.Adapter<AteneoAdapter.ViewHolder
 
         private AteneoNews mNews;
 
-        public ViewHolder(View view) {
+        public ViewHolder(View view, boolean isStudenti) {
             super(view);
             ButterKnife.inject(this, view);
+            this.isStudenti = isStudenti;
         }
 
         void setItem(AteneoNews news) {
@@ -82,7 +88,12 @@ public class AteneoAdapter extends RecyclerView.Adapter<AteneoAdapter.ViewHolder
 
         @OnClick(R.id.ateneo_card)
         public void openDetailPage(View v) {
-            String url = URLS.ATENEO_DETAIL_BASE_URL + mNews.getId();
+            String url;
+            if (isStudenti) {
+                url = URLS.ATENEO_DETAIL_STUDENTI_BASE_URL + mNews.getId();
+            } else {
+                url = URLS.ATENEO_DETAIL_BASE_URL + mNews.getId();
+            }
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             v.getContext().startActivity(browserIntent);
         }

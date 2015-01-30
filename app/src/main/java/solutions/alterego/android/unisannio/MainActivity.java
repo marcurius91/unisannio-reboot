@@ -9,12 +9,11 @@ import android.view.Menu;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import solutions.alterego.android.unisannio.ateneo.AteneoFragment;
+import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiFragment;
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaFragment;
 import solutions.alterego.android.unisannio.navigation_drawer.NavigationDrawerCallbacks;
 import solutions.alterego.android.unisannio.navigation_drawer.NavigationDrawerFragment;
 import solutions.alterego.android.unisannio.scienze.ScienzeFragment;
-import solutions.alterego.android.unisannio.utils.CollectionUtils;
 
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
@@ -53,7 +52,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         switch (position) {
             case 1:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, new AteneoFragment())
+                        .replace(R.id.container, AteneoAvvisiFragment.newInstance(false))
+                        .commit();
+                break;
+            case 2:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, AteneoAvvisiFragment.newInstance(true))
                         .commit();
                 break;
             case 5:

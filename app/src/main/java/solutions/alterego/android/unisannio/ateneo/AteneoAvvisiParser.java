@@ -7,7 +7,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AteneoParser {
+public class AteneoAvvisiParser implements IAteneoParser {
 
     public List<AteneoNews> parse(Document doc) {
         List<AteneoNews> newsList = new ArrayList<>();

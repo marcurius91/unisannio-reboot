@@ -10,15 +10,16 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import solutions.alterego.android.unisannio.URLS;
 
 public class AteneoRetriever {
 
-    public Observable<List<AteneoNews>> getNewsList(final String url) {
+    public Observable<List<AteneoNews>> getNewsList(final boolean studenti) {
         return Observable
                 .create(new Observable.OnSubscribe<List<AteneoNews>>() {
                     @Override
                     public void call(Subscriber<? super List<AteneoNews>> subscriber) {
-                        List<AteneoNews> list = get(url);
+                        List<AteneoNews> list = get(studenti);
                         subscriber.onNext(list);
                         subscriber.onCompleted();
                     }
@@ -27,11 +28,23 @@ public class AteneoRetriever {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    private List<AteneoNews> get(String url) {
+    private List<AteneoNews> get(boolean studenti) {
+        String url;
+        IAteneoParser parser;
+        if (studenti) {
+            url = URLS.ATENEO_STUDENTI_NEWS;
+            // Al momento il parser e` lo stesso perche` le due pagine sono simili.
+            // Teniamo la porta aperta in caso ci fossero cambiamenti al sito.
+            parser = new AteneoAvvisiParser();
+        } else {
+            url = URLS.ATENEO_NEWS;
+            parser = new AteneoAvvisiParser();
+        }
+
         List<AteneoNews> newsList;
         try {
             Document doc = Jsoup.connect(url).timeout(10 * 1000).get();
-            newsList = new AteneoParser().parse(doc);
+            newsList = parser.parse(doc);
         } catch (Exception e) {
             return new ArrayList<>();
         }
