@@ -34,3 +34,4 @@ proguard/
 .gradle
 .navigation
 build/
+/app/crashlytics.properties

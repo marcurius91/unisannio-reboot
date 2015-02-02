@@ -3,6 +3,8 @@ package solutions.alterego.android.unisannio;
 import android.app.Application;
 import android.content.Context;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 import solutions.alterego.android.unisannio.di.Component;
 
 public class UnisannioApplication extends Application {
@@ -16,6 +18,7 @@ public class UnisannioApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         buildComponentAndInject();
     }
 
