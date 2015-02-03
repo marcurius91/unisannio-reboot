@@ -40,7 +40,6 @@ public class SystemServicesModule {
 
     @Provides
     @Singleton
-        //Method parameter injected by Dagger2
     NetworkStateManager provideNetworkStateManager(ConnectivityManager connectivityManagerCompat) {
         return new NetworkStateManager(connectivityManagerCompat);
     }

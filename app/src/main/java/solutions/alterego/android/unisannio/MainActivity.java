@@ -12,7 +12,7 @@ import android.view.Menu;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiFragment;
-import solutions.alterego.android.unisannio.ingegneria.IngegneriaFragment;
+import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
 import solutions.alterego.android.unisannio.map.MapFragment;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.navigation_drawer.NavigationDrawerCallbacks;
@@ -73,12 +73,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                         .replace(R.id.container, MapFragment.newInstance(UnisannioGeoData.ATENEO()))
                         .commit();
                 break;
-            case 5:
+            case 6:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, new IngegneriaFragment())
+                        .replace(R.id.container, new IngegneriaAvvisiFragment())
                         .commit();
                 break;
-            case 6:
+            case 7:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, new ScienzeFragment())
                         .commit();
