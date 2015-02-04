@@ -66,7 +66,7 @@ public class IngegneriaAvvisiFragment extends Fragment {
 
         mSwipeRefreshLayout.setOnRefreshListener(this::refreshList);
 
-        mAdapter = new IngegneriaAdapter(new ArrayList<>(), R.layout.ingegneria_card, mIsStudenti);
+        mAdapter = new IngegneriaAdapter(new ArrayList<>(), R.layout.ingegneria_card);
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());

@@ -22,6 +22,16 @@
 
         <TextView
                 android:layout_below="@+id/ingegneria_news_date"
+                android:id="@+id/ingegneria_news_author"
+                android:gravity="start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/textPrimaryColor"
+                android:layout_marginTop="5dp"/>
+        <TextView
+                android:layout_below="@+id/ingegneria_news_author"
                 android:id="@+id/ingegneria_news_body"
                 android:gravity="center_vertical"
                 android:layout_width="match_parent"

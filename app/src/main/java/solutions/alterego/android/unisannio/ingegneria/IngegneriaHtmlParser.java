@@ -19,7 +19,13 @@ public class IngegneriaHtmlParser implements IIngegneriaParser {
             String title = header.text();
             String url = header.attr("href");
 
-            String author = element.select("#publishinfo").first().text();
+            Elements paragraphs = element.select("p");
+            String author = "";
+            for (Element paragraph : paragraphs) {
+                if (paragraph.text().contains("Autore")) {
+                    author = paragraph.text().replace("Autore: ", "");
+                }
+            }
             String body = element.select(".avvtext").first().text();
 
             String date = element.select("#publishinfo").first().text().replace("Pubblicato il ", "");

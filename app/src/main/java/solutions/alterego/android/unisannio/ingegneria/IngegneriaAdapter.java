@@ -20,18 +20,15 @@ import solutions.alterego.android.unisannio.R;
 
 public class IngegneriaAdapter extends RecyclerView.Adapter<IngegneriaAdapter.ViewHolder> {
 
-    private final boolean isStudenti;
-
     private List<IngegneriaDidatticaItem> mNewsList = new ArrayList<>();
 
     private int mRowLayout;
 
     private Context mContext;
 
-    public IngegneriaAdapter(List<IngegneriaDidatticaItem> newsList, int rowLayout, boolean isStudenti) {
+    public IngegneriaAdapter(List<IngegneriaDidatticaItem> newsList, int rowLayout) {
         mNewsList = newsList;
         mRowLayout = rowLayout;
-        this.isStudenti = isStudenti;
     }
 
     public void addNews(List<IngegneriaDidatticaItem> newsList) {
@@ -44,7 +41,7 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<IngegneriaAdapter.Vi
     public ViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
         mContext = viewGroup.getContext();
         View v = LayoutInflater.from(mContext).inflate(mRowLayout, viewGroup, false);
-        return new ViewHolder(v, isStudenti);
+        return new ViewHolder(v);
     }
 
     @Override
@@ -60,29 +57,30 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<IngegneriaAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final boolean isStudenti;
-
         @InjectView(R.id.ingengeria_card)
         CardView card;
 
         @InjectView(R.id.ingegneria_news_body)
         TextView info;
 
+        @InjectView(R.id.ingegneria_news_author)
+        TextView author;
+
         @InjectView(R.id.ingegneria_news_date)
         TextView date;
 
         private IngegneriaDidatticaItem mNews;
 
-        public ViewHolder(View view, boolean isStudenti) {
+        public ViewHolder(View view) {
             super(view);
             ButterKnife.inject(this, view);
-            this.isStudenti = isStudenti;
         }
 
         void setItem(IngegneriaDidatticaItem news) {
             mNews = news;
             date.setText(news.getDate());
             info.setText(news.getTitle());
+            author.setText(news.getAuthor());
         }
 
         @OnClick(R.id.ingengeria_card)
