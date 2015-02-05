@@ -94,7 +94,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 break;
             case 9:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, new IngegneriaAvvisiFragment())
+                        .replace(R.id.container, MapFragment.newInstance(UnisannioGeoData.INGEGNERIA()))
                         .commit();
                 break;
 
