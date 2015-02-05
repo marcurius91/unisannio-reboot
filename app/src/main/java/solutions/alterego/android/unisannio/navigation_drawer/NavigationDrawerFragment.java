@@ -170,6 +170,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
         items.add(new NavigationItem(getString(R.string.ingegneria), getResources().getDrawable(R.drawable.ic_ingegneria), ItemType.SECTION));
         items.add(new NavigationItem(getString(R.string.avvisi_studenti), null, ItemType.ITEM));
+        items.add(new NavigationItem(getString(R.string.avvisi_dipartimento), null, ItemType.ITEM));
         items.add(new NavigationItem(getString(R.string.sito_web), null, ItemType.ITEM));
         items.add(new NavigationItem(getString(R.string.mappa), null, ItemType.ITEM));
 

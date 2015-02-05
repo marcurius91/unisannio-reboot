@@ -53,7 +53,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         FragmentManager fragmentManager = getFragmentManager();
+        Intent browserIntent;
+
         switch (position) {
+            // ATENEO
             case 1:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, AteneoAvvisiFragment.newInstance(false))
@@ -65,7 +68,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                         .commit();
                 break;
             case 3:
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.ATENEO));
+                browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.ATENEO));
                 startActivity(browserIntent);
                 break;
             case 4:
@@ -73,12 +76,30 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                         .replace(R.id.container, MapFragment.newInstance(UnisannioGeoData.ATENEO()))
                         .commit();
                 break;
+
+            // INGEGNERIA
             case 6:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, new IngegneriaAvvisiFragment())
                         .commit();
                 break;
             case 7:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, new IngegneriaAvvisiFragment())
+                        .commit();
+                break;
+            case 8:
+                browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.INGEGNERIA));
+                startActivity(browserIntent);
+                break;
+            case 9:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, new IngegneriaAvvisiFragment())
+                        .commit();
+                break;
+
+            // SCIENZE
+            case 10:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, new ScienzeFragment())
                         .commit();
