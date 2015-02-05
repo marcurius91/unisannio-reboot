@@ -80,12 +80,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             // INGEGNERIA
             case 6:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, new IngegneriaAvvisiFragment())
+                        .replace(R.id.container, IngegneriaAvvisiFragment.newInstance(false))
                         .commit();
                 break;
             case 7:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, new IngegneriaAvvisiFragment())
+                        .replace(R.id.container, IngegneriaAvvisiFragment.newInstance(true))
                         .commit();
                 break;
             case 8:

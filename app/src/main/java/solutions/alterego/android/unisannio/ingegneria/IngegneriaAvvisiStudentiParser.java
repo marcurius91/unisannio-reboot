@@ -7,7 +7,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IngegneriaHtmlParser implements IIngegneriaParser {
+public class IngegneriaAvvisiStudentiParser implements IIngegneriaParser {
 
     @Override
     public List parse(Elements elements) throws ParseException {

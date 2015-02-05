@@ -15,8 +15,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import rx.Observer;
@@ -32,12 +30,20 @@ public class IngegneriaAvvisiFragment extends Fragment {
     @InjectView(R.id.ingengeria_ptr)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
-    @Inject
     IngegneriaRetriever mRetriever;
 
     private IngegneriaAdapter mAdapter;
 
-    private boolean mIsStudenti;
+    private boolean isDipartimento;
+
+    public static IngegneriaAvvisiFragment newInstance(boolean isDipartimento) {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("DIPARTIMENTO", isDipartimento);
+
+        IngegneriaAvvisiFragment fragment = new IngegneriaAvvisiFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,7 +67,13 @@ public class IngegneriaAvvisiFragment extends Fragment {
 
         Bundle bundle = getArguments();
         if (bundle != null) {
-            mIsStudenti = bundle.getBoolean("STUDENTI");
+            isDipartimento = bundle.getBoolean("DIPARTIMENTO");
+
+            if (!isDipartimento) {
+                mRetriever = new IngegneriaAvvisiStudentiRetriever();
+            } else {
+                mRetriever = new IngegneriaAvvisiDipartimentoRetriever();
+            }
         }
 
         mSwipeRefreshLayout.setOnRefreshListener(this::refreshList);

@@ -18,9 +18,9 @@ public class URLS {
 
     public static final String INGEGNERIA = "https://www.ding.unisannio.it/";
 
-    public static final String INGEGNERIA_NEWS_RSS = "https://www.ding.unisannio.it/en/avvisi-com/avvisi-didattica";
+    public static final String INGEGNERIA_NEWS_STUDENTI = "https://www.ding.unisannio.it/en/avvisi-com/avvisi-didattica";
 
-    public static final String INGEGNERIA_NEWS_PHP = "http://www.ing.unisannio.it/avvisi/index.php";
+    public static final String INGEGNERIA_NEWS_DIPARTIMENTO = "https://www.ding.unisannio.it/avvisi-com/avvisi";
 
     public static final String INGEGNERIA_EVENTI = "http://www.ing.unisannio.it/eventi/index.html";
 

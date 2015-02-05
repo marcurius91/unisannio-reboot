@@ -85,8 +85,11 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<IngegneriaAdapter.Vi
 
         @OnClick(R.id.ingengeria_card)
         public void openDetailPage(View v) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mNews.getUrl()));
-            v.getContext().startActivity(browserIntent);
+            String url = mNews.getUrl();
+            if (!"".equals(url)) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                v.getContext().startActivity(browserIntent);
+            }
         }
     }
 }
