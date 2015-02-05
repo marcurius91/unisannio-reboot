@@ -18,41 +18,68 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import solutions.alterego.android.unisannio.R;
 
-public class IngegneriaAdapter extends RecyclerView.Adapter<IngegneriaAdapter.ViewHolder> {
+public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private static final int TYPE_HEADER = 0;
+
+    private static final int TYPE_ITEM = 1;
 
     private List<IngegneriaDidatticaItem> mNewsList = new ArrayList<>();
 
-    private int mRowLayout;
-
-    private Context mContext;
-
-    public IngegneriaAdapter(List<IngegneriaDidatticaItem> newsList, int rowLayout) {
+    public IngegneriaAdapter(List<IngegneriaDidatticaItem> newsList) {
         mNewsList = newsList;
-        mRowLayout = rowLayout;
     }
 
     public void addNews(List<IngegneriaDidatticaItem> newsList) {
         mNewsList.clear();
+        mNewsList.add(null);
         mNewsList.addAll(newsList);
         notifyDataSetChanged();
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
-        mContext = viewGroup.getContext();
-        View v = LayoutInflater.from(mContext).inflate(mRowLayout, viewGroup, false);
-        return new ViewHolder(v);
+    public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup viewGroup, int viewType) {
+        Context context = viewGroup.getContext();
+
+        if (viewType == TYPE_ITEM) {
+            View v = LayoutInflater.from(context).inflate(R.layout.ingegneria_card, viewGroup, false);
+            return new ViewHolder(v);
+        } else if (viewType == TYPE_HEADER) {
+            View v = LayoutInflater.from(context).inflate(R.layout.ingegneria_header, viewGroup, false);
+            return new VHHeader(v);
+        }
+        return null;
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, int i) {
-        final IngegneriaDidatticaItem news = mNewsList.get(i);
-        viewHolder.setItem(news);
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof IngegneriaAdapter.ViewHolder) {
+            final IngegneriaDidatticaItem news = getItem(position);
+            ((ViewHolder) holder).setItem(news);
+        } else if (holder instanceof VHHeader) {
+        }
     }
 
     @Override
     public int getItemCount() {
         return mNewsList == null ? 0 : mNewsList.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (isPositionHeader(position)) {
+            return TYPE_HEADER;
+        }
+
+        return TYPE_ITEM;
+    }
+
+    private boolean isPositionHeader(int position) {
+        return position == 0;
+    }
+
+    private IngegneriaDidatticaItem getItem(int position) {
+        return mNewsList.get(position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -90,6 +117,13 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<IngegneriaAdapter.Vi
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 v.getContext().startActivity(browserIntent);
             }
+        }
+    }
+
+    class VHHeader extends RecyclerView.ViewHolder {
+
+        public VHHeader(View itemView) {
+            super(itemView);
         }
     }
 }
