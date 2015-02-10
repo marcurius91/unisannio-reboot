@@ -36,6 +36,15 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
 
     private GiurisprudenzaAdapter mAdapter;
 
+    public static Fragment newInstance(String url) {
+        Bundle bundle = new Bundle();
+        bundle.putString("URL", url);
+
+        GiurisprudenzaAvvisiFragment fragment = new GiurisprudenzaAvvisiFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_recyclerview, container, false);
@@ -44,6 +53,9 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         ButterKnife.inject(this, view);
+
+        Bundle bundle = getArguments();
+        String url = bundle.getString("URL");
 
         mSwipeRefreshLayout.setColorSchemeResources(
                 R.color.unisannio_yellow,
@@ -56,7 +68,7 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList());
+        mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(url));
 
         mAdapter = new GiurisprudenzaAdapter(new ArrayList<>());
         mRecyclerView.setAdapter(mAdapter);
@@ -64,14 +76,14 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         mRecyclerView.setLayoutManager(layoutManager);
 
-        refreshList();
+        refreshList(url);
     }
 
-    private void refreshList() {
+    private void refreshList(String url) {
         mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
 
-        mRetriever.get()
+        mRetriever.get(url)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<Article>>() {
                     @Override

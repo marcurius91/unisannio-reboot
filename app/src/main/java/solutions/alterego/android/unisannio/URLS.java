@@ -30,7 +30,7 @@ public class URLS {
 
     public static final String GIURISPRUDENZA_AVVISI = "http://www.giurisprudenza.unisannio.it/index.php?option=com_avvisi&controller=elenco&view=elenco&catid=2&Itemid=267";
 
-    public static final String GIURISPRUDENZA_COMUNICAZIONI = "http://www.giurisprudenza.unisannio.it/index.php?option=com_rss&catid=1";
+    public static final String GIURISPRUDENZA_COMUNICAZIONI = "http://www.giurisprudenza.unisannio.it/index.php?option=com_avvisi&controller=elenco&view=elenco&catid=1&Itemid=431";
 
     public static final String SEA_NEWS = "http://www.didatticademm.it/index.php?option=com_content&view=section&id=5&Itemid=65";
 

@@ -18,7 +18,6 @@ import solutions.alterego.android.unisannio.map.MapFragment;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.navigation_drawer.NavigationDrawerCallbacks;
 import solutions.alterego.android.unisannio.navigation_drawer.NavigationDrawerFragment;
-import solutions.alterego.android.unisannio.scienze.ScienzeFragment;
 
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
@@ -113,7 +112,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             // GIURISPRUDENZA
             case 14:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, new GiurisprudenzaAvvisiFragment())
+                        .replace(R.id.container, GiurisprudenzaAvvisiFragment.newInstance(URLS.GIURISPRUDENZA_AVVISI))
+                        .commit();
+                break;
+            case 15:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, GiurisprudenzaAvvisiFragment.newInstance(URLS.GIURISPRUDENZA_COMUNICAZIONI))
+                        .commit();
+                break;
                         .commit();
                 break;
         }

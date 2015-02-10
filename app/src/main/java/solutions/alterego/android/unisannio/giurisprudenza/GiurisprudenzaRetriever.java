@@ -12,14 +12,14 @@ import solutions.alterego.android.unisannio.URLS;
 
 public class GiurisprudenzaRetriever {
 
-    public Observable<List<Article>> get() {
+    public Observable<List<Article>> get(String url) {
         return Observable
                 .create(new Observable.OnSubscribe<List<Article>>() {
                     @Override
                     public void call(Subscriber<? super List<Article>> subscriber) {
                         List<Article> newsList;
                         try {
-                            Document doc = Jsoup.connect(URLS.GIURISPRUDENZA_AVVISI).timeout(10 * 1000).userAgent("Mozilla").get();
+                            Document doc = Jsoup.connect(url).timeout(10 * 1000).userAgent("Mozilla").get();
 
                             newsList = new GiurisprudenzaParser().parse(doc);
                             subscriber.onNext(newsList);
