@@ -80,4 +80,17 @@ public class UnisannioGeoData {
 
         return points;
     }
+
+    public static List<UniPoint> SEA() {
+        List<UniPoint> points = new ArrayList<>();
+
+        final String faculty = "SEA";
+
+        // Via delle Puglie
+        double lat = 41.12801;
+        double lng = 14.78157;
+        points.add(new UniPoint(faculty, faculty, "Via delle Puglie", lat, lng));
+
+        return points;
+    }
 }

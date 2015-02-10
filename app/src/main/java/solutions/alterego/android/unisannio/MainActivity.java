@@ -126,7 +126,18 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 break;
             case 17:
                 fragmentManager.beginTransaction()
-                            .replace(R.id.container, MapFragment.newInstance(UnisannioGeoData.GIURISPRUDENZA()))
+                        .replace(R.id.container, MapFragment.newInstance(UnisannioGeoData.GIURISPRUDENZA()))
+                        .commit();
+                break;
+
+            // SEA
+            case 20:
+                browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.SEA));
+                startActivity(browserIntent);
+                break;
+            case 21:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, MapFragment.newInstance(UnisannioGeoData.SEA()))
                         .commit();
                 break;
         }
