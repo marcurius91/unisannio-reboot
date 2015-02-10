@@ -75,10 +75,7 @@ dependencies {
     androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
 
     apt "org.projectlombok:lombok:1.14.8"
-    apt ('com.google.dagger:dagger-compiler:2.0-SNAPSHOT') {
-        exclude group: 'com.google.auto'
-    }
-    apt files('libs/auto-common-1.0-20150122.001631-7.jar')
+    apt "com.google.dagger:dagger-compiler:2.0-SNAPSHOT"
 
     provided 'javax.annotation:jsr250-api:1.0'
     provided "org.projectlombok:lombok:1.14.8"
