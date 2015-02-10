@@ -14,7 +14,7 @@ public class URLS {
 
     public static final String SCIENZE_NEWS = "http://www.sciunisannio.it";
 
-    public static final String SCIENZE = SCIENZE_NEWS;
+    public static final String SCIENZE = "http://www.dstunisannio.it";
 
     public static final String INGEGNERIA = "https://www.ding.unisannio.it/";
 

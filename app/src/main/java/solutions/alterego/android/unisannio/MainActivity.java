@@ -99,10 +99,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 break;
 
             // SCIENZE
-            case 10:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, new ScienzeFragment())
-                        .commit();
+            case 11:
+                browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.SCIENZE));
+                startActivity(browserIntent);
                 break;
         }
     }
