@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import solutions.alterego.android.unisannio.R;
+import solutions.alterego.android.unisannio.utils.VHHeader;
 
 public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -45,7 +47,7 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             View v = LayoutInflater.from(context).inflate(R.layout.ingegneria_card, viewGroup, false);
             return new ViewHolder(v);
         } else if (viewType == TYPE_HEADER) {
-            View v = LayoutInflater.from(context).inflate(R.layout.ingegneria_header, viewGroup, false);
+            View v = LayoutInflater.from(context).inflate(R.layout.recyclerview_header_image, viewGroup, false);
             return new VHHeader(v);
         }
         return null;
@@ -57,6 +59,7 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             final IngegneriaDidatticaItem news = getItem(position);
             ((ViewHolder) holder).setItem(news);
         } else if (holder instanceof VHHeader) {
+            ((VHHeader) holder).header.setImageResource(R.drawable.ding);
         }
     }
 
@@ -117,13 +120,6 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 v.getContext().startActivity(browserIntent);
             }
-        }
-    }
-
-    class VHHeader extends RecyclerView.ViewHolder {
-
-        public VHHeader(View itemView) {
-            super(itemView);
         }
     }
 }

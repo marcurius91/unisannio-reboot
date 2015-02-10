@@ -18,8 +18,13 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
+import solutions.alterego.android.unisannio.utils.VHHeader;
 
-public class AteneoAdapter extends RecyclerView.Adapter<AteneoAdapter.ViewHolder> {
+public class AteneoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private static final int TYPE_HEADER = 0;
+
+    private static final int TYPE_ITEM = 1;
 
     private final boolean isStudenti;
 
@@ -42,16 +47,27 @@ public class AteneoAdapter extends RecyclerView.Adapter<AteneoAdapter.ViewHolder
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
-        mContext = viewGroup.getContext();
-        View v = LayoutInflater.from(mContext).inflate(mRowLayout, viewGroup, false);
-        return new ViewHolder(v, isStudenti);
+    public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup viewGroup, int viewType) {
+        Context context = viewGroup.getContext();
+
+        if (viewType == TYPE_ITEM) {
+            View v = LayoutInflater.from(context).inflate(R.layout.ateneo_card, viewGroup, false);
+            return new ViewHolder(v, isStudenti);
+        } else if (viewType == TYPE_HEADER) {
+            View v = LayoutInflater.from(context).inflate(R.layout.recyclerview_header_image, viewGroup, false);
+            return new VHHeader(v);
+        }
+        return null;
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, int i) {
-        final AteneoNews news = mNewsList.get(i);
-        viewHolder.setItem(news);
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int i) {
+        if (holder instanceof AteneoAdapter.ViewHolder) {
+            final AteneoNews news = mNewsList.get(i);
+            ((ViewHolder) holder).setItem(news);
+        } else if (holder instanceof VHHeader) {
+            ((VHHeader) holder).header.setImageResource(R.drawable.guerrazzi);
+        }
     }
 
     @Override
@@ -59,6 +75,19 @@ public class AteneoAdapter extends RecyclerView.Adapter<AteneoAdapter.ViewHolder
         return mNewsList == null ? 0 : mNewsList.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (isPositionHeader(position)) {
+            return TYPE_HEADER;
+        }
+
+        return TYPE_ITEM;
+    }
+
+    private boolean isPositionHeader(int position) {
+        return position == 0;
+    }
+    
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final boolean isStudenti;
