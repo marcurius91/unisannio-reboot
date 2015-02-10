@@ -1,5 +1,6 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -7,12 +8,14 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import solutions.alterego.android.unisannio.IParser;
 import solutions.alterego.android.unisannio.URLS;
 
-public class IngegneriaAvvisiDipartimentoParser implements IIngegneriaParser {
+public class IngegneriaAvvisiDipartimentoParser implements IParser {
 
     @Override
-    public List parse(Elements elements) throws ParseException {
+    public List parse(Document document) {
+        Elements elements = document.select(".items-leading");
 
         List<IngegneriaDidatticaItem> list = new ArrayList<>();
 

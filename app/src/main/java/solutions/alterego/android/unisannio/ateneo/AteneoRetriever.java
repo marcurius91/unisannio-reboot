@@ -10,6 +10,7 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import solutions.alterego.android.unisannio.IParser;
 import solutions.alterego.android.unisannio.URLS;
 
 public class AteneoRetriever {
@@ -30,7 +31,7 @@ public class AteneoRetriever {
 
     private List<AteneoNews> get(boolean studenti) {
         String url;
-        IAteneoParser parser;
+        IParser parser;
         if (studenti) {
             url = URLS.ATENEO_STUDENTI_NEWS;
             // Al momento il parser e` lo stesso perche` le due pagine sono simili.

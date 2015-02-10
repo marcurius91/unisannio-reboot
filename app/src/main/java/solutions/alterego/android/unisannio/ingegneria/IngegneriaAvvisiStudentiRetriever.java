@@ -2,10 +2,8 @@ package solutions.alterego.android.unisannio.ingegneria;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.List;
 
 import rx.Observable;
@@ -27,15 +25,9 @@ public class IngegneriaAvvisiStudentiRetriever implements IngegneriaRetriever {
                             subscriber.onError(e);
                         }
                         if (doc != null) {
-                            Elements elements = doc.select("#maincontent-block > #item");
-
-                            try {
-                                final List<IngegneriaDidatticaItem> items = new IngegneriaAvvisiStudentiParser().parse(elements);
-                                subscriber.onNext(items);
-                                subscriber.onCompleted();
-                            } catch (ParseException e) {
-                                subscriber.onError(e);
-                            }
+                            final List<IngegneriaDidatticaItem> items = new IngegneriaAvvisiStudentiParser().parse(doc);
+                            subscriber.onNext(items);
+                            subscriber.onCompleted();
                         }
                     }
                 })

@@ -7,7 +7,9 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AteneoAvvisiParser implements IAteneoParser {
+import solutions.alterego.android.unisannio.IParser;
+
+public class AteneoAvvisiParser implements IParser {
 
     public List<AteneoNews> parse(Document doc) {
         List<AteneoNews> newsList = new ArrayList<>();

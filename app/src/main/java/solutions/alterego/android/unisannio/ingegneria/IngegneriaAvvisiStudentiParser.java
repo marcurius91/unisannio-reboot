@@ -1,16 +1,19 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IngegneriaAvvisiStudentiParser implements IIngegneriaParser {
+import solutions.alterego.android.unisannio.IParser;
+
+public class IngegneriaAvvisiStudentiParser implements IParser {
 
     @Override
-    public List parse(Elements elements) throws ParseException {
+    public List parse(Document document) {
+        Elements elements = document.select("#maincontent-block > #item");
 
         List<IngegneriaDidatticaItem> list = new ArrayList<>();
 
