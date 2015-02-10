@@ -67,4 +67,17 @@ public class UnisannioGeoData {
 
         return points;
     }
+
+    public static List<UniPoint> GIURISPRUDENZA() {
+        List<UniPoint> points = new ArrayList<>();
+
+        final String faculty = "Giurisprudenza";
+
+        // Via Calandra
+        double lat = 41.12895;
+        double lng = 14.79217;
+        points.add(new UniPoint(faculty, faculty, "Via Calandra", lat, lng));
+
+        return points;
+    }
 }

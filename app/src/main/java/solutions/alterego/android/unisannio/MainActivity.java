@@ -120,6 +120,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                         .replace(R.id.container, GiurisprudenzaAvvisiFragment.newInstance(URLS.GIURISPRUDENZA_COMUNICAZIONI))
                         .commit();
                 break;
+            case 16:
+                browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.GIURISPRUDENZA));
+                startActivity(browserIntent);
+                break;
+            case 17:
+                fragmentManager.beginTransaction()
+                            .replace(R.id.container, MapFragment.newInstance(UnisannioGeoData.GIURISPRUDENZA()))
                         .commit();
                 break;
         }
