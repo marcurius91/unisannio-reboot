@@ -34,5 +34,5 @@ public class URLS {
 
     public static final String SEA_NEWS = "http://www.didatticademm.it/index.php?option=com_content&view=section&id=5&Itemid=65";
 
-    public static final String SEA = "http://www.didatticademm.it/";
+    public static final String SEA = "http://www.didatticademm.it";
 }

@@ -1,4 +1,4 @@
-package solutions.alterego.android.unisannio.giurisprudenza;
+package solutions.alterego.android.unisannio.sea;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,9 +18,10 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
+import solutions.alterego.android.unisannio.giurisprudenza.Article;
 import solutions.alterego.android.unisannio.utils.VHHeader;
 
-public class GiurisprudenzaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SeaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int TYPE_HEADER = 0;
 
@@ -28,7 +29,7 @@ public class GiurisprudenzaAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     private List<Article> mNewsList = new ArrayList<>();
 
-    public GiurisprudenzaAdapter(List<Article> newsList) {
+    public SeaAdapter(List<Article> newsList) {
         mNewsList = newsList;
     }
 
@@ -55,11 +56,11 @@ public class GiurisprudenzaAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof GiurisprudenzaAdapter.ViewHolder) {
+        if (holder instanceof SeaAdapter.ViewHolder) {
             final Article news = mNewsList.get(i);
             ((ViewHolder) holder).setItem(news);
         } else if (holder instanceof VHHeader) {
-            ((VHHeader) holder).header.setImageResource(R.drawable.calandra);
+            ((VHHeader) holder).header.setImageResource(R.drawable.sea);
         }
     }
 
@@ -107,7 +108,7 @@ public class GiurisprudenzaAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         @OnClick(R.id.ingengeria_card)
         public void openDetailPage(View v) {
-            String url = URLS.GIURISPRUDENZA + mNews.getLink();
+            String url = URLS.SEA + mNews.getLink();
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             v.getContext().startActivity(browserIntent);
         }

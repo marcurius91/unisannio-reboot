@@ -18,6 +18,7 @@ import solutions.alterego.android.unisannio.map.MapFragment;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.navigation_drawer.NavigationDrawerCallbacks;
 import solutions.alterego.android.unisannio.navigation_drawer.NavigationDrawerFragment;
+import solutions.alterego.android.unisannio.sea.SeaAvvisiFragment;
 
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
@@ -131,6 +132,11 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 break;
 
             // SEA
+            case 19:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, SeaAvvisiFragment.newInstance(URLS.SEA_NEWS))
+                        .commit();
+                break;
             case 20:
                 browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.SEA));
                 startActivity(browserIntent);

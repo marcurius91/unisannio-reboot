@@ -42,6 +42,7 @@ public class AteneoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public void addNews(List<AteneoNews> newsList) {
         mNewsList.clear();
+        mNewsList.add(null);
         mNewsList.addAll(newsList);
         notifyDataSetChanged();
     }

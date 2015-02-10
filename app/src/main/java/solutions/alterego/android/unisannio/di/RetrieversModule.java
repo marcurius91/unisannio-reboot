@@ -6,6 +6,7 @@ import dagger.Module;
 import dagger.Provides;
 import solutions.alterego.android.unisannio.ateneo.AteneoRetriever;
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaRetriever;
+import solutions.alterego.android.unisannio.sea.SeaRetriever;
 
 @Module
 public class RetrieversModule {
@@ -20,5 +21,11 @@ public class RetrieversModule {
     @Singleton
     GiurisprudenzaRetriever provideGiurisprudenzaRetriever() {
         return new GiurisprudenzaRetriever();
+    }
+
+    @Provides
+    @Singleton
+    SeaRetriever provideSeaRetriever() {
+        return new SeaRetriever();
     }
 }
