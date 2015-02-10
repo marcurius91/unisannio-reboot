@@ -18,6 +18,7 @@ import solutions.alterego.android.unisannio.map.MapFragment;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.navigation_drawer.NavigationDrawerCallbacks;
 import solutions.alterego.android.unisannio.navigation_drawer.NavigationDrawerFragment;
+import solutions.alterego.android.unisannio.scienze.ScienzeAvvisiFragment;
 import solutions.alterego.android.unisannio.sea.SeaAvvisiFragment;
 
 
@@ -101,47 +102,52 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
             // SCIENZE
             case 11:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, new ScienzeAvvisiFragment())
+                        .commit();
+                break;
+            case 12:
                 browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.SCIENZE));
                 startActivity(browserIntent);
                 break;
-            case 12:
+            case 13:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, MapFragment.newInstance(UnisannioGeoData.SCIENZE()))
                         .commit();
                 break;
 
             // GIURISPRUDENZA
-            case 14:
+            case 15:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, GiurisprudenzaAvvisiFragment.newInstance(URLS.GIURISPRUDENZA_AVVISI))
                         .commit();
                 break;
-            case 15:
+            case 16:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, GiurisprudenzaAvvisiFragment.newInstance(URLS.GIURISPRUDENZA_COMUNICAZIONI))
                         .commit();
                 break;
-            case 16:
+            case 17:
                 browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.GIURISPRUDENZA));
                 startActivity(browserIntent);
                 break;
-            case 17:
+            case 18:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, MapFragment.newInstance(UnisannioGeoData.GIURISPRUDENZA()))
                         .commit();
                 break;
 
             // SEA
-            case 19:
+            case 20:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, SeaAvvisiFragment.newInstance(URLS.SEA_NEWS))
                         .commit();
                 break;
-            case 20:
+            case 21:
                 browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.SEA));
                 startActivity(browserIntent);
                 break;
-            case 21:
+            case 22:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, MapFragment.newInstance(UnisannioGeoData.SEA()))
                         .commit();

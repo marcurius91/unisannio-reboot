@@ -9,6 +9,7 @@ import solutions.alterego.android.unisannio.UnisannioApplication;
 import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiFragment;
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaAvvisiFragment;
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
+import solutions.alterego.android.unisannio.scienze.ScienzeAvvisiFragment;
 import solutions.alterego.android.unisannio.sea.SeaAvvisiFragment;
 
 @Singleton
@@ -27,6 +28,7 @@ public interface Component {
 
     void inject(SeaAvvisiFragment app);
 
+    void inject(ScienzeAvvisiFragment app);
 
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public final static class Initializer {
