@@ -152,6 +152,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                         .replace(R.id.container, MapFragment.newInstance(UnisannioGeoData.SEA()))
                         .commit();
                 break;
+            case 24:
+                browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.ALTEREGO));
+                startActivity(browserIntent);
+                break;
+            case 25:
+                browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.GITHUB));
+                startActivity(browserIntent);
+                break;
         }
     }
 

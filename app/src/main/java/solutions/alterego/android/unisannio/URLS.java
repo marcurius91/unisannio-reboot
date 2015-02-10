@@ -24,11 +24,17 @@ public class URLS {
 
     public static final String GIURISPRUDENZA = "http://www.giurisprudenza.unisannio.it";
 
-    public static final String GIURISPRUDENZA_AVVISI = "http://www.giurisprudenza.unisannio.it/index.php?option=com_avvisi&controller=elenco&view=elenco&catid=2&Itemid=267";
+    public static final String GIURISPRUDENZA_AVVISI
+            = "http://www.giurisprudenza.unisannio.it/index.php?option=com_avvisi&controller=elenco&view=elenco&catid=2&Itemid=267";
 
-    public static final String GIURISPRUDENZA_COMUNICAZIONI = "http://www.giurisprudenza.unisannio.it/index.php?option=com_avvisi&controller=elenco&view=elenco&catid=1&Itemid=431";
+    public static final String GIURISPRUDENZA_COMUNICAZIONI
+            = "http://www.giurisprudenza.unisannio.it/index.php?option=com_avvisi&controller=elenco&view=elenco&catid=1&Itemid=431";
 
     public static final String SEA_NEWS = "http://www.didatticademm.it/index.php?option=com_content&view=section&id=5&Itemid=65";
 
     public static final String SEA = "http://www.didatticademm.it";
+
+    public static final String ALTEREGO = "http://alterego.solutions";
+
+    public static final String GITHUB = "https://github.com/alter-ego/unisannio-reboot";
 }

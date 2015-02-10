@@ -18,5 +18,8 @@
     <string name="mappa">Mappa</string>
     <string name="avvisi_dipartimento">Avvisi Dipartimento</string>
     <string name="comunicazioni">Comunicazioni</string>
+    <string name="about">About</string>
+    <string name="alter_ego">Alter Ego Solutions</string>
+    <string name="github">Github</string>
 
 </resources>
