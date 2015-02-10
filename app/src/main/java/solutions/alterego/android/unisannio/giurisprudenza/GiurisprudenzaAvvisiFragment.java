@@ -1,4 +1,4 @@
-package solutions.alterego.android.unisannio.ateneo;
+package solutions.alterego.android.unisannio.giurisprudenza;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -20,11 +20,10 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.UnisannioApplication;
 
-public class AteneoAvvisiFragment extends Fragment {
+public class GiurisprudenzaAvvisiFragment extends Fragment {
 
     @InjectView(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -33,20 +32,9 @@ public class AteneoAvvisiFragment extends Fragment {
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Inject
-    AteneoRetriever mAteneoRetriever;
+    GiurisprudenzaRetriever mRetriever;
 
-    private AteneoAdapter mAdapter;
-
-    private boolean mIsStudenti;
-
-    public static AteneoAvvisiFragment newInstance(boolean studenti) {
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("STUDENTI", studenti);
-
-        AteneoAvvisiFragment fragment = new AteneoAvvisiFragment();
-        fragment.setArguments(bundle);
-        return fragment;
-    }
+    private GiurisprudenzaAdapter mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,30 +56,24 @@ public class AteneoAvvisiFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            mIsStudenti = bundle.getBoolean("STUDENTI");
-        }
+        mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList());
 
-        mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(mIsStudenti));
-
-        mAdapter = new AteneoAdapter(new ArrayList<>(), R.layout.ateneo_card, mIsStudenti);
+        mAdapter = new GiurisprudenzaAdapter(new ArrayList<>());
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         mRecyclerView.setLayoutManager(layoutManager);
 
-        refreshList(mIsStudenti);
+        refreshList();
     }
 
-    private void refreshList(boolean isStudenti) {
+    private void refreshList() {
         mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
 
-        mAteneoRetriever.getNewsList(isStudenti)
-                .subscribeOn(Schedulers.io())
+        mRetriever.get()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<AteneoNews>>() {
+                .subscribe(new Observer<List<Article>>() {
                     @Override
                     public void onCompleted() {
                         if (mSwipeRefreshLayout != null) {
@@ -107,7 +89,7 @@ public class AteneoAvvisiFragment extends Fragment {
                     }
 
                     @Override
-                    public void onNext(List<AteneoNews> ateneoNewses) {
+                    public void onNext(List<Article> ateneoNewses) {
                         mAdapter.addNews(ateneoNewses);
                         mRecyclerView.setVisibility(View.VISIBLE);
                     }

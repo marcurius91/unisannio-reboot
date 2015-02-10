@@ -1,4 +1,4 @@
-package solutions.alterego.android.unisannio.ingegneria;
+package solutions.alterego.android.unisannio.giurisprudenza;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,23 +17,23 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import solutions.alterego.android.unisannio.R;
+import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.utils.VHHeader;
 
-public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class GiurisprudenzaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int TYPE_HEADER = 0;
 
     private static final int TYPE_ITEM = 1;
 
-    private List<IngegneriaDidatticaItem> mNewsList = new ArrayList<>();
+    private List<Article> mNewsList = new ArrayList<>();
 
-    public IngegneriaAdapter(List<IngegneriaDidatticaItem> newsList) {
+    public GiurisprudenzaAdapter(List<Article> newsList) {
         mNewsList = newsList;
     }
 
-    public void addNews(List<IngegneriaDidatticaItem> newsList) {
+    public void addNews(List<Article> newsList) {
         mNewsList.clear();
-        mNewsList.add(null);
         mNewsList.addAll(newsList);
         notifyDataSetChanged();
     }
@@ -53,12 +53,12 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof IngegneriaAdapter.ViewHolder) {
-            final IngegneriaDidatticaItem news = getItem(position);
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int i) {
+        if (holder instanceof GiurisprudenzaAdapter.ViewHolder) {
+            final Article news = mNewsList.get(i);
             ((ViewHolder) holder).setItem(news);
         } else if (holder instanceof VHHeader) {
-            ((VHHeader) holder).header.setImageResource(R.drawable.ding);
+            ((VHHeader) holder).header.setImageResource(R.drawable.calandra);
         }
     }
 
@@ -80,46 +80,35 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return position == 0;
     }
 
-    private IngegneriaDidatticaItem getItem(int position) {
-        return mNewsList.get(position);
-    }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         @InjectView(R.id.ingengeria_card)
         CardView card;
 
         @InjectView(R.id.article_card_body)
-        TextView info;
-
-        @InjectView(R.id.article_card_author)
-        TextView author;
+        TextView body;
 
         @InjectView(R.id.article_card_date)
         TextView date;
 
-        private IngegneriaDidatticaItem mNews;
+        private Article mNews;
 
         public ViewHolder(View view) {
             super(view);
             ButterKnife.inject(this, view);
         }
 
-        void setItem(IngegneriaDidatticaItem news) {
+        void setItem(Article news) {
             mNews = news;
-            date.setText(news.getDate());
-            info.setText(news.getTitle());
-            author.setText(news.getAuthor());
-            author.setVisibility(View.VISIBLE);
+            date.setText(news.getPubDate());
+            body.setText(news.getTitle());
         }
 
         @OnClick(R.id.ingengeria_card)
         public void openDetailPage(View v) {
-            String url = mNews.getUrl();
-            if (!"".equals(url)) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                v.getContext().startActivity(browserIntent);
-            }
+            String url = URLS.GIURISPRUDENZA + mNews.getLink();
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            v.getContext().startActivity(browserIntent);
         }
     }
 }

@@ -12,6 +12,7 @@ import android.view.Menu;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiFragment;
+import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaAvvisiFragment;
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
 import solutions.alterego.android.unisannio.map.MapFragment;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
@@ -106,6 +107,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             case 12:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, MapFragment.newInstance(UnisannioGeoData.SCIENZE()))
+                        .commit();
+                break;
+
+            // GIURISPRUDENZA
+            case 14:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, new GiurisprudenzaAvvisiFragment())
                         .commit();
                 break;
         }

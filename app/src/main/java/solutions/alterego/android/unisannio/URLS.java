@@ -28,7 +28,7 @@ public class URLS {
 
     public static final String GIURISPRUDENZA = "http://www.giurisprudenza.unisannio.it";
 
-    public static final String GIURISPRUDENZA_AVVISI = "http://www.giurisprudenza.unisannio.it/index.php?option=com_rss&catid=2";
+    public static final String GIURISPRUDENZA_AVVISI = "http://www.giurisprudenza.unisannio.it/index.php?option=com_avvisi&controller=elenco&view=elenco&catid=2&Itemid=267";
 
     public static final String GIURISPRUDENZA_COMUNICAZIONI = "http://www.giurisprudenza.unisannio.it/index.php?option=com_rss&catid=1";
 
