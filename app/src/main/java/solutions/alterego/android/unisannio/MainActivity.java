@@ -103,6 +103,11 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.SCIENZE));
                 startActivity(browserIntent);
                 break;
+            case 12:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, MapFragment.newInstance(UnisannioGeoData.SCIENZE()))
+                        .commit();
+                break;
         }
     }
 
