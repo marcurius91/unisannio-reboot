@@ -29,6 +29,10 @@ public class IngegneriaAvvisiStudentiParser implements IParser {
                     author = paragraph.text().replace("Autore: ", "");
                 }
             }
+            if ("".equals(author)) {
+                author = "Presidio didattico";
+            }
+
             String body = element.select(".avvtext").first().text();
 
             String date = element.select("#publishinfo").first().text().replace("Pubblicato il ", "");
