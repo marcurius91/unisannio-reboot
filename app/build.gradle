@@ -33,8 +33,8 @@ android {
         applicationId "solutions.alterego.android.unisannio"
         minSdkVersion 16
         targetSdkVersion 21
-        versionCode 1
-        versionName "20150210"
+        versionCode 2
+        versionName "20150213"
     }
 
     buildTypes {
@@ -88,4 +88,6 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.2.1@aar') {
         transitive = true;
     }
+
+    compile 'com.joanzapata.android:android-iconify:1.0.9'
 }

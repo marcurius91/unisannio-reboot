@@ -7,12 +7,13 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import solutions.alterego.android.unisannio.IParser;
+import solutions.alterego.android.unisannio.interfaces.IParser;
+import solutions.alterego.android.unisannio.models.Article;
 
 public class AteneoAvvisiParser implements IParser {
 
-    public List<AteneoNews> parse(Document doc) {
-        List<AteneoNews> newsList = new ArrayList<>();
+    public List<Article> parse(Document doc) {
+        List<Article> newsList = new ArrayList<>();
 
         Elements newsItems = doc.select("div.meta > table > tbody > tr");
 
@@ -23,18 +24,18 @@ public class AteneoAvvisiParser implements IParser {
                 date = dateElement.text();
             }
 
-            String body = null;
+            String title = null;
             Element bodyElement = newsItems.get(i).select("a").first();
             String id = "";
             if (bodyElement != null) {
-                body = bodyElement.text();
+                title = bodyElement.text();
 
                 String href = bodyElement.attr("href");
                 id = href.substring(href.indexOf("=") + 1);
             }
 
-            if (date != null && body != null) {
-                newsList.add(new AteneoNews(date, body, id));
+            if (date != null && title != null) {
+                newsList.add(Article.builder().title(title).date(date).url(id).build());
             }
         }
         return newsList;

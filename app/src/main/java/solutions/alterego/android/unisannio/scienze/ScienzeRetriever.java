@@ -10,7 +10,7 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import solutions.alterego.android.unisannio.giurisprudenza.Article;
+import solutions.alterego.android.unisannio.models.Article;
 
 public class ScienzeRetriever {
 

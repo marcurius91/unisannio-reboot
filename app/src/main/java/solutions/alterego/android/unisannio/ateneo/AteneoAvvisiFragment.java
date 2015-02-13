@@ -23,6 +23,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.UnisannioApplication;
+import solutions.alterego.android.unisannio.models.Article;
 
 public class AteneoAvvisiFragment extends Fragment {
 
@@ -91,7 +92,7 @@ public class AteneoAvvisiFragment extends Fragment {
         mAteneoRetriever.getNewsList(isStudenti)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<AteneoNews>>() {
+                .subscribe(new Observer<List<Article>>() {
                     @Override
                     public void onCompleted() {
                         if (mSwipeRefreshLayout != null) {
@@ -107,7 +108,7 @@ public class AteneoAvvisiFragment extends Fragment {
                     }
 
                     @Override
-                    public void onNext(List<AteneoNews> ateneoNewses) {
+                    public void onNext(List<Article> ateneoNewses) {
                         mAdapter.addNews(ateneoNewses);
                         mRecyclerView.setVisibility(View.VISIBLE);
                     }

@@ -8,7 +8,7 @@ import java.util.List;
 import rx.Observable;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
-import solutions.alterego.android.unisannio.URLS;
+import solutions.alterego.android.unisannio.models.Article;
 
 public class GiurisprudenzaRetriever {
 

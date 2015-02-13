@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
+import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.UnisannioApplication;
 
@@ -93,7 +94,7 @@ public class IngegneriaAvvisiFragment extends Fragment {
 
         mRetriever.get()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<IngegneriaDidatticaItem>>() {
+                .subscribe(new Observer<List<Article>>() {
                     @Override
                     public void onCompleted() {
                         mRecyclerView.setVisibility(View.VISIBLE);
@@ -106,7 +107,7 @@ public class IngegneriaAvvisiFragment extends Fragment {
                     }
 
                     @Override
-                    public void onNext(List<IngegneriaDidatticaItem> list) {
+                    public void onNext(List<Article> list) {
                         mAdapter.addNews(list);
                     }
                 });

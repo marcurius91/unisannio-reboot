@@ -16,6 +16,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.utils.VHHeader;
@@ -101,13 +102,13 @@ public class GiurisprudenzaAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         void setItem(Article news) {
             mNews = news;
-            date.setText(news.getPubDate());
+            date.setText(news.getDate());
             body.setText(news.getTitle());
         }
 
         @OnClick(R.id.ingengeria_card)
         public void openDetailPage(View v) {
-            String url = URLS.GIURISPRUDENZA + mNews.getLink();
+            String url = URLS.GIURISPRUDENZA + mNews.getUrl();
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             v.getContext().startActivity(browserIntent);
         }

@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
+import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.UnisannioApplication;
 

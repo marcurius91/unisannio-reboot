@@ -1,4 +1,4 @@
-package solutions.alterego.android.unisannio;
+package solutions.alterego.android.unisannio.interfaces;
 
 import org.jsoup.nodes.Document;
 

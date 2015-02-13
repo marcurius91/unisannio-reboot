@@ -7,7 +7,8 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import solutions.alterego.android.unisannio.IParser;
+import solutions.alterego.android.unisannio.models.Article;
+import solutions.alterego.android.unisannio.interfaces.IParser;
 
 public class IngegneriaAvvisiStudentiParser implements IParser {
 
@@ -15,7 +16,7 @@ public class IngegneriaAvvisiStudentiParser implements IParser {
     public List parse(Document document) {
         Elements elements = document.select("#maincontent-block > #item");
 
-        List<IngegneriaDidatticaItem> list = new ArrayList<>();
+        List<Article> list = new ArrayList<>();
 
         for (Element element : elements) {
             Element header = element.select("#header > h2 > a").first();
@@ -37,7 +38,7 @@ public class IngegneriaAvvisiStudentiParser implements IParser {
 
             String date = element.select("#publishinfo").first().text().replace("Pubblicato il ", "");
 
-            list.add(new IngegneriaDidatticaItem(title, url, author, body, date));
+            list.add(Article.builder().title(title).url(url).body(body).date(date).author(author).build());
         }
         return list;
     }

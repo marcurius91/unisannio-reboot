@@ -10,17 +10,18 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import solutions.alterego.android.unisannio.IParser;
 import solutions.alterego.android.unisannio.URLS;
+import solutions.alterego.android.unisannio.interfaces.IParser;
+import solutions.alterego.android.unisannio.models.Article;
 
 public class AteneoRetriever {
 
-    public Observable<List<AteneoNews>> getNewsList(final boolean studenti) {
+    public Observable<List<Article>> getNewsList(final boolean studenti) {
         return Observable
-                .create(new Observable.OnSubscribe<List<AteneoNews>>() {
+                .create(new Observable.OnSubscribe<List<Article>>() {
                     @Override
-                    public void call(Subscriber<? super List<AteneoNews>> subscriber) {
-                        List<AteneoNews> list = get(studenti);
+                    public void call(Subscriber<? super List<Article>> subscriber) {
+                        List<Article> list = get(studenti);
                         subscriber.onNext(list);
                         subscriber.onCompleted();
                     }
@@ -29,7 +30,7 @@ public class AteneoRetriever {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    private List<AteneoNews> get(boolean studenti) {
+    private List<Article> get(boolean studenti) {
         String url;
         IParser parser;
         if (studenti) {
@@ -42,7 +43,7 @@ public class AteneoRetriever {
             parser = new AteneoAvvisiParser();
         }
 
-        List<AteneoNews> newsList;
+        List<Article> newsList;
         try {
             Document doc = Jsoup.connect(url).timeout(10 * 1000).get();
             newsList = parser.parse(doc);

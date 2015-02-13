@@ -4,11 +4,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import solutions.alterego.android.unisannio.IParser;
+import solutions.alterego.android.unisannio.models.Article;
+import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.URLS;
 
 public class IngegneriaAvvisiDipartimentoParser implements IParser {
@@ -17,7 +17,7 @@ public class IngegneriaAvvisiDipartimentoParser implements IParser {
     public List parse(Document document) {
         Elements elements = document.select(".items-leading");
 
-        List<IngegneriaDidatticaItem> list = new ArrayList<>();
+        List<Article> list = new ArrayList<>();
 
         for (Element element : elements) {
             String title = element.select(".leading-0 > h2").first().text();
@@ -26,7 +26,7 @@ public class IngegneriaAvvisiDipartimentoParser implements IParser {
 
             String date = element.select(".published").first().text().replace("Pubblicato ", "");
 
-            list.add(new IngegneriaDidatticaItem(title, URLS.INGEGNERIA_NEWS_DIPARTIMENTO, "", body, date));
+            list.add(Article.builder().title(title).url(URLS.INGEGNERIA_NEWS_DIPARTIMENTO).body(body).date(date).build());
         }
         return list;
     }

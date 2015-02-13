@@ -9,16 +9,17 @@ import java.util.List;
 import rx.Observable;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
+import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.URLS;
 
 public class IngegneriaAvvisiDipartimentoRetriever implements IngegneriaRetriever {
 
     @Override
-    public Observable<List<IngegneriaDidatticaItem>> get() {
+    public Observable<List<Article>> get() {
         return Observable
-                .create(new Observable.OnSubscribe<List<IngegneriaDidatticaItem>>() {
+                .create(new Observable.OnSubscribe<List<Article>>() {
                     @Override
-                    public void call(Subscriber<? super List<IngegneriaDidatticaItem>> subscriber) {
+                    public void call(Subscriber<? super List<Article>> subscriber) {
                         Document doc = null;
                         try {
                             doc = Jsoup.connect(URLS.INGEGNERIA_NEWS_DIPARTIMENTO).timeout(10 * 1000).get();
@@ -26,7 +27,7 @@ public class IngegneriaAvvisiDipartimentoRetriever implements IngegneriaRetrieve
                             subscriber.onError(e);
                         }
                         if (doc != null) {
-                            final List<IngegneriaDidatticaItem> items = new IngegneriaAvvisiDipartimentoParser().parse(doc);
+                            final List<Article> items = new IngegneriaAvvisiDipartimentoParser().parse(doc);
                             subscriber.onNext(items);
                             subscriber.onCompleted();
                         }

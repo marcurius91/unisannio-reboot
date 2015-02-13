@@ -7,8 +7,8 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import solutions.alterego.android.unisannio.IParser;
-import solutions.alterego.android.unisannio.giurisprudenza.Article;
+import solutions.alterego.android.unisannio.models.Article;
+import solutions.alterego.android.unisannio.interfaces.IParser;
 
 public class ScienzeParser implements IParser {
 
@@ -32,7 +32,7 @@ public class ScienzeParser implements IParser {
             }
 
             if (date != null && title != null) {
-                newsList.add(new Article(title, link, null, date, null));
+                newsList.add(Article.builder().title(title).url(link).date(date).build());
             }
         }
 
@@ -53,7 +53,7 @@ public class ScienzeParser implements IParser {
             }
 
             if (date != null && title != null) {
-                newsList.add(new Article(title, link, null, date, null));
+                newsList.add(Article.builder().title(title).url(link).date(date).build());
             }
         }
         return newsList;

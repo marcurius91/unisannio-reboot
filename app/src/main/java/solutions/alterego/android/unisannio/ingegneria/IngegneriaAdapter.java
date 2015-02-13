@@ -19,6 +19,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.DetailActivity;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.utils.VHHeader;
@@ -31,14 +32,14 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private final Fragment mFragment;
 
-    private List<IngegneriaDidatticaItem> mNewsList = new ArrayList<>();
+    private List<Article> mNewsList = new ArrayList<>();
 
-    public IngegneriaAdapter(Fragment fragment, List<IngegneriaDidatticaItem> newsList) {
+    public IngegneriaAdapter(Fragment fragment, List<Article> newsList) {
         mNewsList = newsList;
         mFragment = fragment;
     }
 
-    public void addNews(List<IngegneriaDidatticaItem> newsList) {
+    public void addNews(List<Article> newsList) {
         mNewsList.clear();
         mNewsList.add(null);
         mNewsList.addAll(newsList);
@@ -62,7 +63,7 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof IngegneriaAdapter.ViewHolder) {
-            final IngegneriaDidatticaItem news = getItem(position);
+            final Article news = getItem(position);
             ((ViewHolder) holder).setItem(news);
         } else if (holder instanceof VHHeader) {
             ((VHHeader) holder).header.setImageResource(R.drawable.ding);
@@ -87,7 +88,7 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return position == 0;
     }
 
-    private IngegneriaDidatticaItem getItem(int position) {
+    private Article getItem(int position) {
         return mNewsList.get(position);
     }
 
@@ -105,14 +106,14 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         @InjectView(R.id.article_card_date)
         TextView date;
 
-        private IngegneriaDidatticaItem mNews;
+        private Article mNews;
 
         public ViewHolder(View view) {
             super(view);
             ButterKnife.inject(this, view);
         }
 
-        void setItem(IngegneriaDidatticaItem news) {
+        void setItem(Article news) {
             mNews = news;
             date.setText(news.getDate());
             title.setText(news.getTitle());

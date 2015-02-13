@@ -7,7 +7,8 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import solutions.alterego.android.unisannio.IParser;
+import solutions.alterego.android.unisannio.models.Article;
+import solutions.alterego.android.unisannio.interfaces.IParser;
 
 public class GiurisprudenzaParser implements IParser {
 
@@ -21,7 +22,7 @@ public class GiurisprudenzaParser implements IParser {
             String pubDate = e.select("span.nota").first().text().split("Pubblicato il:")[1].replace(")", "");
             String link = e.select("a").attr("href");
 
-            articles.add(new Article(title, link, "", pubDate, ""));
+            articles.add(Article.builder().title(title).url(link).date(pubDate).build());
         }
         return articles;
     }

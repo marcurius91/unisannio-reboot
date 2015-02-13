@@ -7,8 +7,8 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import solutions.alterego.android.unisannio.IParser;
-import solutions.alterego.android.unisannio.giurisprudenza.Article;
+import solutions.alterego.android.unisannio.interfaces.IParser;
+import solutions.alterego.android.unisannio.models.Article;
 
 public class SeaParser implements IParser {
 
@@ -21,7 +21,7 @@ public class SeaParser implements IParser {
 
             String link = e.select("a").attr("href");
 
-            articles.add(new Article(title, link, "", "", ""));
+            articles.add(Article.builder().title(title).url(link).build());
         }
         return articles;
     }

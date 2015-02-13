@@ -1,17 +1,18 @@
 package solutions.alterego.android.unisannio;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import solutions.alterego.android.unisannio.ingegneria.IngegneriaDidatticaItem;
+import solutions.alterego.android.unisannio.models.Article;
 
 
 public class DetailActivity extends ActionBarActivity {
@@ -31,8 +32,11 @@ public class DetailActivity extends ActionBarActivity {
     @InjectView(R.id.toolbar_actionbar)
     Toolbar mToolbar;
 
-    private IngegneriaDidatticaItem mArticle;
+    private Article mArticle;
 
+    private int mCurrentApiVersion;
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

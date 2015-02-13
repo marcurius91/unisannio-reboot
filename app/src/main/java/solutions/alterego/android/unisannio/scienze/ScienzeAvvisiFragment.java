@@ -23,9 +23,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.UnisannioApplication;
-import solutions.alterego.android.unisannio.giurisprudenza.Article;
-import solutions.alterego.android.unisannio.sea.SeaAdapter;
-import solutions.alterego.android.unisannio.sea.SeaRetriever;
+import solutions.alterego.android.unisannio.models.Article;
 
 public class ScienzeAvvisiFragment extends Fragment {
 

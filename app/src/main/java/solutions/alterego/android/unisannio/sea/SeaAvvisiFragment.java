@@ -22,7 +22,7 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.UnisannioApplication;
-import solutions.alterego.android.unisannio.giurisprudenza.Article;
+import solutions.alterego.android.unisannio.models.Article;
 
 public class SeaAvvisiFragment extends Fragment {
 

@@ -18,6 +18,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
+import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.utils.VHHeader;
 
 public class AteneoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -28,19 +29,19 @@ public class AteneoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private final boolean isStudenti;
 
-    private List<AteneoNews> mNewsList = new ArrayList<>();
+    private List<Article> mNewsList = new ArrayList<>();
 
     private int mRowLayout;
 
     private Context mContext;
 
-    public AteneoAdapter(List<AteneoNews> newsList, int rowLayout, boolean isStudenti) {
+    public AteneoAdapter(List<Article> newsList, int rowLayout, boolean isStudenti) {
         mNewsList = newsList;
         mRowLayout = rowLayout;
         this.isStudenti = isStudenti;
     }
 
-    public void addNews(List<AteneoNews> newsList) {
+    public void addNews(List<Article> newsList) {
         mNewsList.clear();
         mNewsList.add(null);
         mNewsList.addAll(newsList);
@@ -64,7 +65,7 @@ public class AteneoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int i) {
         if (holder instanceof AteneoAdapter.ViewHolder) {
-            final AteneoNews news = mNewsList.get(i);
+            final Article news = mNewsList.get(i);
             ((ViewHolder) holder).setItem(news);
         } else if (holder instanceof VHHeader) {
             ((VHHeader) holder).header.setImageResource(R.drawable.guerrazzi);
@@ -102,7 +103,7 @@ public class AteneoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         @InjectView(R.id.ateneo_news_date)
         TextView date;
 
-        private AteneoNews mNews;
+        private Article mNews;
 
         public ViewHolder(View view, boolean isStudenti) {
             super(view);
@@ -110,19 +111,19 @@ public class AteneoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             this.isStudenti = isStudenti;
         }
 
-        void setItem(AteneoNews news) {
+        void setItem(Article news) {
             mNews = news;
             date.setText(news.getDate());
-            info.setText(news.getBody());
+            info.setText(news.getTitle());
         }
 
         @OnClick(R.id.ateneo_card)
         public void openDetailPage(View v) {
             String url;
             if (isStudenti) {
-                url = URLS.ATENEO_DETAIL_STUDENTI_BASE_URL + mNews.getId();
+                url = URLS.ATENEO_DETAIL_STUDENTI_BASE_URL + mNews.getUrl();
             } else {
-                url = URLS.ATENEO_DETAIL_BASE_URL + mNews.getId();
+                url = URLS.ATENEO_DETAIL_BASE_URL + mNews.getUrl();
             }
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             v.getContext().startActivity(browserIntent);
