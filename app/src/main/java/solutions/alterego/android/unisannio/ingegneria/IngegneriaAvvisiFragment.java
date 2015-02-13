@@ -78,7 +78,7 @@ public class IngegneriaAvvisiFragment extends Fragment {
 
         mSwipeRefreshLayout.setOnRefreshListener(this::refreshList);
 
-        mAdapter = new IngegneriaAdapter(new ArrayList<>());
+        mAdapter = new IngegneriaAdapter(this, new ArrayList<>());
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
