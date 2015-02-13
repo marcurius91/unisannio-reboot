@@ -109,8 +109,12 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             mNews = news;
             date.setText(news.getDate());
             info.setText(news.getTitle());
-            author.setText(news.getAuthor());
-            author.setVisibility(View.VISIBLE);
+
+            String author = news.getAuthor();
+            if (!"".equals(author)) {
+                this.author.setText(author);
+                this.author.setVisibility(View.VISIBLE);
+            }
         }
 
         @OnClick(R.id.ingengeria_card)
