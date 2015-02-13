@@ -89,8 +89,8 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         @InjectView(R.id.ingengeria_card)
         CardView card;
 
-        @InjectView(R.id.article_card_body)
-        TextView info;
+        @InjectView(R.id.article_card_title)
+        TextView title;
 
         @InjectView(R.id.article_card_author)
         TextView author;
@@ -108,7 +108,7 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         void setItem(IngegneriaDidatticaItem news) {
             mNews = news;
             date.setText(news.getDate());
-            info.setText(news.getTitle());
+            title.setText(news.getTitle());
 
             String author = news.getAuthor();
             if (!"".equals(author)) {

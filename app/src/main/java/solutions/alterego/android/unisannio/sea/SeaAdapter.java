@@ -87,7 +87,7 @@ public class SeaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @InjectView(R.id.ingengeria_card)
         CardView card;
 
-        @InjectView(R.id.article_card_body)
+        @InjectView(R.id.article_card_title)
         TextView body;
 
         @InjectView(R.id.article_card_date)
