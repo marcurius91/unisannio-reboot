@@ -1,10 +1,12 @@
 package solutions.alterego.android.unisannio;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import butterknife.ButterKnife;
@@ -29,6 +31,8 @@ public class DetailActivity extends ActionBarActivity {
     @InjectView(R.id.toolbar_actionbar)
     Toolbar mToolbar;
 
+    private IngegneriaDidatticaItem mArticle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,13 +40,16 @@ public class DetailActivity extends ActionBarActivity {
         ButterKnife.inject(this);
 
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        IngegneriaDidatticaItem article = getIntent().getParcelableExtra("ARTICLE");
-        mTitle.setText(article.getTitle());
-        mDate.setText(article.getDate());
-        mAuthor.setText(article.getAuthor());
-        mBody.setText(article.getBody());
+        mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_action_arrow_left));
+        mToolbar.setNavigationOnClickListener(v -> onBackPressed());
+
+        mArticle = getIntent().getParcelableExtra("ARTICLE");
+        mTitle.setText(mArticle.getTitle());
+        mDate.setText(mArticle.getDate());
+        mAuthor.setText(mArticle.getAuthor());
+        mBody.setText(mArticle.getBody());
     }
 
 
@@ -59,8 +66,12 @@ public class DetailActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_share) {
+            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            String shareBody = mArticle.getTitle() + " - " + mArticle.getUrl();
+            sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+            startActivity(Intent.createChooser(sharingIntent, "Share via"));
             return true;
         }
         return super.onOptionsItemSelected(item);

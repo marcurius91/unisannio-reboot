@@ -25,5 +25,6 @@
     <string name="transition_article_title">transition_article_title</string>
     <string name="transition_article_date">transition_article_date</string>
     <string name="transition_article_author">transition_article_author</string>
+    <string name="action_share">Share</string>
 
 </resources>
