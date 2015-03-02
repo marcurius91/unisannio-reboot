@@ -33,8 +33,8 @@ android {
         applicationId "solutions.alterego.android.unisannio"
         minSdkVersion 16
         targetSdkVersion 21
-        versionCode 2
-        versionName "20150213"
+        versionCode 3
+        versionName "20150302"
     }
 
     buildTypes {
