@@ -9,12 +9,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
+import java.util.ArrayList;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiFragment;
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaAvvisiFragment;
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
-import solutions.alterego.android.unisannio.map.MapFragment;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.navigation_drawer.NavigationDrawerCallbacks;
 import solutions.alterego.android.unisannio.navigation_drawer.NavigationDrawerFragment;
@@ -56,6 +57,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     public void onNavigationDrawerItemSelected(int position) {
         FragmentManager fragmentManager = getFragmentManager();
         Intent browserIntent;
+        Intent map = new Intent(this, MapsActivity.class);
 
         switch (position) {
             // ATENEO
@@ -74,9 +76,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 startActivity(browserIntent);
                 break;
             case 4:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, MapFragment.newInstance(UnisannioGeoData.ATENEO()))
-                        .commit();
+                map.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.ATENEO()));
+                startActivity(map);
                 break;
 
             // INGEGNERIA
@@ -95,9 +96,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 startActivity(browserIntent);
                 break;
             case 9:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, MapFragment.newInstance(UnisannioGeoData.INGEGNERIA()))
-                        .commit();
+                map.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.INGEGNERIA()));
+                startActivity(map);
                 break;
 
             // SCIENZE
@@ -111,9 +111,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 startActivity(browserIntent);
                 break;
             case 13:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, MapFragment.newInstance(UnisannioGeoData.SCIENZE()))
-                        .commit();
+                map.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.SCIENZE()));
+                startActivity(map);
                 break;
 
             // GIURISPRUDENZA
@@ -132,9 +131,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 startActivity(browserIntent);
                 break;
             case 18:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, MapFragment.newInstance(UnisannioGeoData.GIURISPRUDENZA()))
-                        .commit();
+                map.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.GIURISPRUDENZA()));
+                startActivity(map);
                 break;
 
             // SEA
@@ -148,9 +146,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 startActivity(browserIntent);
                 break;
             case 22:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, MapFragment.newInstance(UnisannioGeoData.SEA()))
-                        .commit();
+                map.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.SEA()));
+                startActivity(map);
                 break;
             case 24:
                 browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.ALTEREGO));

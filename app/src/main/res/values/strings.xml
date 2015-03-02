@@ -19,12 +19,11 @@
     <string name="about">About</string>
     <string name="alter_ego">Alter Ego Solutions</string>
     <string name="github">Github</string>
-
     <string name="title_activity_detail">News</string>
-
     <string name="transition_article_title">transition_article_title</string>
     <string name="transition_article_date">transition_article_date</string>
     <string name="transition_article_author">transition_article_author</string>
     <string name="action_share">Share</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
