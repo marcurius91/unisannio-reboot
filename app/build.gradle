@@ -33,14 +33,24 @@ android {
         applicationId "solutions.alterego.android.unisannio"
         minSdkVersion 16
         targetSdkVersion 21
-        versionCode 3
-        versionName "20150302"
+        versionCode 1
+        versionName "1.0"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("../../android-keystore")
+            storePassword ""
+            keyAlias "android"
+            keyPassword ""
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
@@ -56,6 +66,8 @@ android {
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
+
+
 }
 
 dependencies {
@@ -84,7 +96,8 @@ dependencies {
     compile 'com.google.code.gson:gson:2.3'
     compile 'org.apache.commons:commons-lang3:3.3.2'
 
-    compile 'com.netflix.rxjava:rxjava-android:0.18.3'
+    compile 'io.reactivex:rxandroid:0.24.0'
+
     compile('com.crashlytics.sdk.android:crashlytics:2.2.2@aar') {
         transitive = true;
     }
