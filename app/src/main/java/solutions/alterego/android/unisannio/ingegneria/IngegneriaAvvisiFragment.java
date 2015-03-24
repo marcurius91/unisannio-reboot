@@ -19,9 +19,9 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
-import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.UnisannioApplication;
+import solutions.alterego.android.unisannio.models.Article;
 
 public class IngegneriaAvvisiFragment extends Fragment {
 
@@ -97,13 +97,17 @@ public class IngegneriaAvvisiFragment extends Fragment {
                 .subscribe(new Observer<List<Article>>() {
                     @Override
                     public void onCompleted() {
-                        mRecyclerView.setVisibility(View.VISIBLE);
-                        mSwipeRefreshLayout.setRefreshing(false);
+                        if (mRecyclerView != null && mSwipeRefreshLayout != null) {
+                            mRecyclerView.setVisibility(View.VISIBLE);
+                            mSwipeRefreshLayout.setRefreshing(false);
+                        }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        mSwipeRefreshLayout.setRefreshing(false);
+                        if (mSwipeRefreshLayout != null) {
+                            mSwipeRefreshLayout.setRefreshing(false);
+                        }
                     }
 
                     @Override
