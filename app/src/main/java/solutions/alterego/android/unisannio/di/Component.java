@@ -34,7 +34,7 @@ public interface Component {
     public final static class Initializer {
 
         public static Component init(UnisannioApplication app) {
-            return Dagger_Component.builder()
+            return DaggerComponent.builder()
                     .systemServicesModule(new SystemServicesModule(app))
                     .build();
         }
