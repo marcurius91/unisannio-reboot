@@ -87,8 +87,8 @@ public class UnisannioGeoData {
         final String faculty = "SEA";
 
         // Via delle Puglie
-        double lat = 41.12801;
-        double lng = 14.78157;
+        double lat = 41.1280638;
+        double lng = 14.7817069;
         points.add(new UniPoint(faculty, faculty, "Via delle Puglie", lat, lng));
 
         return points;
