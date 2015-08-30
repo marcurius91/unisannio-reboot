@@ -6,6 +6,10 @@ If you want to join development team, well, just fork this repo and work with br
 
 Every active contributor will receive a free license of [Intellij Idea](https://www.jetbrains.com/idea/), that JetBrains generously donated to our Open Source project.
 
+### Important step to import in right way our project
+After project import from GitHub you have to install the Lombok Plugin, without this plugin the Editor think that some method are missing (for example news.getData(), news.getTitle(), news.getAuthor() from IngegneriaAdapter.java)
+[Lombok Plugin](https://plugins.jetbrains.com/plugin/6317)
+
 ### An issue to rule them all
 We are using issues for everything:
 
