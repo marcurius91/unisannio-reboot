@@ -27,12 +27,13 @@
     </LinearLayout>
     <!-- android:layout_marginTop="?android:attr/actionBarSize"-->
 
-    <fragment
-            android:id="@+id/fragment_drawer"
-            android:name="solutions.alterego.android.unisannio.navigation_drawer.NavigationDrawerFragment"
-            android:layout_width="@dimen/navigation_drawer_width"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            app:layout="@layout/fragment_navigation_drawer"/>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/drawer"
+        />
 
 </android.support.v4.widget.DrawerLayout>
