@@ -28,6 +28,7 @@ import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiFragment;
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaAvvisiFragment;
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
+import solutions.alterego.android.unisannio.navigation_drawer.NavigationDrawerFragment;
 import solutions.alterego.android.unisannio.scienze.ScienzeAvvisiFragment;
 import solutions.alterego.android.unisannio.sea.SeaAvvisiFragment;
 
@@ -49,16 +50,16 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.inject(this);
         map = new Intent(this, MapsActivity.class);
 
-
-
         UnisannioApplication.component(this).inject(this);
         // Initializing Toolbar and setting it as the actionbar
         //toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+
         //Initializing NavigationView
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
+
 
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -188,7 +189,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Initializing Drawer Layout and ActionBarToggle
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        //set fragment Avvisi ateneo default when the app start
+        getFragmentManager().beginTransaction().replace(R.id.container, AteneoAvvisiFragment.newInstance(false)).commit();
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,mToolbar,R.string.drawer_open, R.string.drawer_close){
+
 
             @Override
             public void onDrawerClosed(View drawerView) {
