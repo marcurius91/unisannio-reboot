@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/ATENEO"
+            android:enabled="false"
+            android:icon="@drawable/ic_ateneo"
+            android:title="@string/ateneo"/>
+
+        <item
+            android:id="@+id/avvisi_ateneo"
+            android:checked="false"
+            android:title="Avvisi Ateneo" />
+
+        <item
+            android:id="@+id/avvisi_studenti"
+            android:checked="false"
+            android:title="Avvisi Studenti" />
+
+        <item
+            android:id="@+id/sito_web"
+            android:checked="false"
+            android:title="Sito WEB" />
+
+        <item
+            android:id="@+id/mappa"
+            android:checked="false"
+            android:title="Mappa" />
+
+    </group>
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/INGEGNERIA"
+            android:enabled="false"
+            android:icon="@drawable/ic_ingegneria"
+            android:title="@string/ingegneria" />
+        <item
+            android:id="@+id/avvisi_studenti_ingegneria"
+            android:checked="false"
+            android:title="Avvisi Ateneo" />
+
+        <item
+            android:id="@+id/avvisi_dipartimento"
+            android:checked="false"
+            android:title="Avvisi Studenti" />
+
+        <item
+            android:id="@+id/sito_web_ingegneria"
+            android:checked="false"
+            android:title="Sito WEB" />
+
+        <item
+            android:id="@+id/mappa_ingegneria"
+            android:checked="false"
+            android:title="Mappa" />
+    </group>
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/SCIENZE_TECNOLOGIE"
+            android:enabled="false"
+            android:icon="@drawable/ic_scienze"
+            android:title="@string/scienze" />
+        <item
+            android:id="@+id/avvisi_studenti_scienze_tecnologie"
+            android:checked="false"
+            android:title="Avvisi Studenti" />
+
+        <item
+            android:id="@+id/sito_web_scienze_tecnologie"
+            android:checked="false"
+            android:title="Sito WEB" />
+
+        <item
+            android:id="@+id/mappa_scienze_tecnologie"
+            android:checked="false"
+            android:title="Mappa" />
+    </group>
+
+    <group android:checkableBehavior="single">
+
+    <item
+        android:id="@+id/GIURISPRUDENZA"
+        android:enabled="false"
+        android:icon="@drawable/ic_giurisprudenza"
+        android:title="@string/giurisprudenza" />
+    <item
+        android:id="@+id/avvisi_studenti_giurisprudenza"
+        android:checked="false"
+        android:title="Avvisi Studenti" />
+
+    <item
+        android:id="@+id/comunicazioni"
+        android:checked="false"
+        android:title="Comunicazioni" />
+
+    <item
+        android:id="@+id/sito_web_giurisprudenza"
+        android:checked="false"
+        android:title="Sito WEB" />
+
+    <item
+        android:id="@+id/mappa_giurisprudenza"
+        android:checked="false"
+        android:title="Mappa" />
+</group>
+
+    <group android:checkableBehavior="single">
+
+    <item
+        android:id="@+id/SEA"
+        android:enabled="false"
+        android:icon="@drawable/ic_sea"
+        android:title="@string/sea" />
+    <item
+        android:id="@+id/avvisi_studenti_sea"
+        android:checked="false"
+        android:title="Avvisi Studenti" />
+
+    <item
+        android:id="@+id/sito_web_sea"
+        android:checked="false"
+        android:title="Sito WEB" />
+
+    <item
+        android:id="@+id/mappa_sea"
+        android:checked="false"
+        android:title="Mappa" />
+
+    </group>
+
+    <group android:checkableBehavior="single">
+
+    <item
+        android:id="@+id/about"
+        android:enabled="false"
+        android:icon="@drawable/ic_action_android"
+        android:title="@string/about" />
+    <item
+        android:id="@+id/alteregosolution"
+        android:checked="false"
+        android:title="Alter Ego Solutions" />
+    <item
+            android:id="@+id/github"
+            android:checked="false"
+            android:title="GitHub" />
+    </group>
+
+</menu>
