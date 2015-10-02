@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
         //Initializing NavigationView
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                         browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.ATENEO));
                         startActivity(browserIntent);
                         return true;
-                    case R.id.map:
+                    case R.id.mappa:
                         map.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.ATENEO()));
                         startActivity(map);
                         return true;
