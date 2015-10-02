@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                         browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.ATENEO));
                         startActivity(browserIntent);
                         return true;
-                    case R.id.mappa:
+                    case R.id.mappa_ateneo:
                         map.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.ATENEO()));
                         startActivity(map);
                         return true;

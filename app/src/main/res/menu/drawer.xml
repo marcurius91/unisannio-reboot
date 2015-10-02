@@ -25,7 +25,7 @@
             android:title="Sito WEB" />
 
         <item
-            android:id="@+id/mappa"
+            android:id="@+id/mappa_ateneo"
             android:checked="false"
             android:title="Mappa" />
 
