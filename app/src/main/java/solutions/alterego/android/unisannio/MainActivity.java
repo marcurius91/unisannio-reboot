@@ -16,8 +16,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
 import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiFragment;
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaAvvisiFragment;
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
@@ -31,19 +34,23 @@ public class MainActivity extends AppCompatActivity {
     //private Toolbar toolbar;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
-    private Intent map;
+    private Intent mMap;
 
     @Bind(R.id.toolbar_actionbar)
     Toolbar mToolbar;
 
+    @Inject
+    AnalyticsManager mAnalyticsManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        UnisannioApplication.component(this).inject(this);
+
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        map = new Intent(this, MapsActivity.class);
 
-        UnisannioApplication.component(this).inject(this);
+        mMap = new Intent(this, MapsActivity.class);
         // Initializing Toolbar and setting it as the actionbar
         //toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
@@ -135,12 +142,13 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(browserIntent);
                         return true;
                     case R.id.mappa_ateneo:
-                        map.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.ATENEO()));
-                        startActivity(map);
+                        mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.ATENEO()));
+                        startActivity(mMap);
                         return true;
 
                     //Ingegneria
                     case R.id.avvisi_dipartimento:
+                        mAnalyticsManager.track(AnalyticsManager.INGEGNERIA);
                         fragmentManager.beginTransaction()
                                 .replace(R.id.container, IngegneriaAvvisiFragment.newInstance(false))
                                 .commit();
@@ -155,8 +163,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(browserIntent);
                         return true;
                     case R.id.mappa_ingegneria:
-                        map.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.INGEGNERIA()));
-                        startActivity(map);
+                        mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.INGEGNERIA()));
+                        startActivity(mMap);
                         return true;
 
                     // Scienze e tecnologie
@@ -170,8 +178,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(browserIntent);
                         return true;
                     case R.id.mappa_scienze_tecnologie:
-                        map.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.SCIENZE()));
-                        startActivity(map);
+                        mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.SCIENZE()));
+                        startActivity(mMap);
                         return true;
 
                     // Giurisprudenza
@@ -190,8 +198,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(browserIntent);
                         return true;
                     case R.id.mappa_giurisprudenza:
-                        map.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.GIURISPRUDENZA()));
-                        startActivity(map);
+                        mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.GIURISPRUDENZA()));
+                        startActivity(mMap);
                         return true;
 
                     // SEA
@@ -205,8 +213,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(browserIntent);
                         return true;
                     case R.id.mappa_sea:
-                        map.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.SEA()));
-                        startActivity(map);
+                        mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.SEA()));
+                        startActivity(mMap);
                         return true;
 
                     //About
