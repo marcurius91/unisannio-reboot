@@ -22,7 +22,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Università Degli Studi Del Sannio"
+        android:text="@string/header_title"
         android:textSize="14sp"
         android:textColor="#FFF"
         android:textStyle="bold"
@@ -36,7 +36,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="username_account@unisannio.it"
+        android:text="@string/header_login_mail"
         android:id="@+id/email"
         android:gravity="left"
         android:layout_marginBottom="8dp"
@@ -44,6 +44,7 @@
         android:textColor="@color/unisannio_yellow"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/username"
-        android:layout_alignStart="@+id/username" />
+        android:layout_alignStart="@+id/username"
+        android:visibility="invisible"   />
 
 </RelativeLayout>

@@ -25,5 +25,7 @@
     <string name="transition_article_author">transition_article_author</string>
     <string name="action_share">Share</string>
     <string name="title_activity_maps">Map</string>
+    <string name="header_title">Università Degli Studi Del Sannio</string>
+    <string name="header_login_mail">username_account@unisannio.it</string>
 
 </resources>
