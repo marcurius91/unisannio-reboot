@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:background="@drawable/arco01">
+
+    <include
+            android:id="@+id/toolbar_actionbar"
+            layout="@layout/toolbar_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+
+    <ScrollView
+            android:layout_gravity="center"
+            android:layout_margin="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView"
+            android:layout_below="@+id/toolbar_actionbar">
+
+    </ScrollView>
+
+        <RelativeLayout
+                android:layout_width="600dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@color/white"
+                tools:context="solutions.alterego.android.unisannio.DetailActivity"
+                android:layout_alignTop="@+id/scrollView"
+                android:layout_centerHorizontal="true">
+
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:transitionName="@string/transition_article_date"
+                    android:text="date"
+                    android:id="@+id/detail_date"
+                    android:textColor="@color/primaryDarkColor"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="title"
+                    android:transitionName="@string/transition_article_title"
+                    android:id="@+id/detail_title"
+                    android:layout_below="@+id/detail_date"
+                    android:layout_centerHorizontal="true"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="body"
+                    android:textColor="@color/black"
+                    android:id="@+id/detail_body"
+                    android:layout_below="@+id/detail_title"
+                    android:layout_centerHorizontal="true"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="author"
+                    android:textStyle="bold"
+                    android:textColor="@color/accentColor"
+                    android:transitionName="@string/transition_article_author"
+                    android:id="@+id/detail_author"
+                    android:layout_below="@+id/detail_body"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+</RelativeLayout>
