@@ -5,18 +5,18 @@
     <string name="drawer_open">Menu opened</string>
     <string name="drawer_close">Menu closed</string>
     <string name="action_settings">Settings</string>
-    <string name="ateneo">Ateneo</string>
+    <string name="ateneo"><b><i>Ateneo</i></b></string>
     <string name="ateneo_avvisi">Avvisi Ateneo</string>
-    <string name="ingegneria">Ingegneria</string>
-    <string name="scienze">Scienze e Tecnologie</string>
-    <string name="giurisprudenza">Giurisprudenza</string>
-    <string name="sea">S.E.A</string>
+    <string name="ingegneria"><b><i>Ingegneria</i></b></string>
+    <string name="scienze"><b><i>Scienze e Tecnologie</i></b></string>
+    <string name="giurisprudenza"><b><i>Giurisprudenza</i></b></string>
+    <string name="sea"><b><i>S.E.A.</i></b></string>
     <string name="avvisi_studenti">Avvisi Studenti</string>
     <string name="sito_web">Sito WEB</string>
     <string name="mappa">Mappa</string>
     <string name="avvisi_dipartimento">Avvisi Dipartimento</string>
     <string name="comunicazioni">Comunicazioni</string>
-    <string name="about">About</string>
+    <string name="about"><b><i>About</i></b></string>
     <string name="alter_ego">Alter Ego Solutions</string>
     <string name="github">Github</string>
     <string name="title_activity_detail">News</string>
@@ -25,5 +25,7 @@
     <string name="transition_article_author">transition_article_author</string>
     <string name="action_share">Share</string>
     <string name="title_activity_maps">Map</string>
+    <string name="header_title">Università Degli Studi Del Sannio</string>
+    <string name="header_login_mail">username_account@unisannio.it</string>
 
 </resources>
