@@ -13,8 +13,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
@@ -94,20 +94,20 @@ public class AteneoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         private final boolean isStudenti;
 
-        @InjectView(R.id.ateneo_card)
+        @Bind(R.id.ateneo_card)
         CardView card;
 
-        @InjectView(R.id.ateneo_news_body)
+        @Bind(R.id.ateneo_news_body)
         TextView info;
 
-        @InjectView(R.id.ateneo_news_date)
+        @Bind(R.id.ateneo_news_date)
         TextView date;
 
         private Article mNews;
 
         public ViewHolder(View view, boolean isStudenti) {
             super(view);
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
             this.isStudenti = isStudenti;
         }
 

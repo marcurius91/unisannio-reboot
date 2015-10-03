@@ -10,26 +10,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import solutions.alterego.android.unisannio.models.Article;
 
 
 public class DetailActivity extends ActionBarActivity {
 
-    @InjectView(R.id.detail_date)
+    @Bind(R.id.detail_date)
     TextView mDate;
 
-    @InjectView(R.id.detail_title)
+    @Bind(R.id.detail_title)
     TextView mTitle;
 
-    @InjectView(R.id.detail_body)
+    @Bind(R.id.detail_body)
     TextView mBody;
 
-    @InjectView(R.id.detail_author)
+    @Bind(R.id.detail_author)
     TextView mAuthor;
 
-    @InjectView(R.id.toolbar_actionbar)
+    @Bind(R.id.toolbar_actionbar)
     Toolbar mToolbar;
 
     private Article mArticle;
@@ -41,7 +41,7 @@ public class DetailActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

@@ -16,8 +16,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.R;
@@ -27,10 +27,10 @@ import solutions.alterego.android.unisannio.models.Article;
 
 public class ScienzeAvvisiFragment extends Fragment {
 
-    @InjectView(R.id.recycler_view)
+    @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    @InjectView(R.id.ateneo_ptr)
+    @Bind(R.id.ateneo_ptr)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Inject
@@ -45,7 +45,7 @@ public class ScienzeAvvisiFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         mSwipeRefreshLayout.setColorSchemeResources(
                 R.color.unisannio_yellow,
@@ -102,7 +102,7 @@ public class ScienzeAvvisiFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
+        ButterKnife.unbind(this);
     }
 
     @Override

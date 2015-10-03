@@ -7,9 +7,9 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import solutions.alterego.android.unisannio.models.Article;
-import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.URLS;
+import solutions.alterego.android.unisannio.interfaces.IParser;
+import solutions.alterego.android.unisannio.models.Article;
 
 public class IngegneriaAvvisiDipartimentoParser implements IParser {
 

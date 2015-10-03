@@ -1,6 +1,5 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -15,8 +14,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.R;
@@ -25,10 +24,10 @@ import solutions.alterego.android.unisannio.models.Article;
 
 public class IngegneriaAvvisiFragment extends Fragment {
 
-    @InjectView(R.id.ingegneria_recycler_view)
+    @Bind(R.id.ingegneria_recycler_view)
     RecyclerView mRecyclerView;
 
-    @InjectView(R.id.ingengeria_ptr)
+    @Bind(R.id.ingengeria_ptr)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     IngegneriaRetriever mRetriever;
@@ -53,7 +52,7 @@ public class IngegneriaAvvisiFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         mSwipeRefreshLayout.setColorSchemeResources(
                 R.color.unisannio_yellow,
@@ -120,7 +119,7 @@ public class IngegneriaAvvisiFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
+        ButterKnife.unbind(this);
     }
 
     @Override
@@ -128,5 +127,4 @@ public class IngegneriaAvvisiFragment extends Fragment {
         super.onAttach(activity);
         UnisannioApplication.component(activity).inject(this);
     }
-
 }

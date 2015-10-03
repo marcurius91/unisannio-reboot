@@ -13,12 +13,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
-import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
+import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.utils.VHHeader;
 
 public class GiurisprudenzaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -84,20 +84,20 @@ public class GiurisprudenzaAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @InjectView(R.id.ingengeria_card)
+        @Bind(R.id.ingengeria_card)
         CardView card;
 
-        @InjectView(R.id.article_card_title)
+        @Bind(R.id.article_card_title)
         TextView body;
 
-        @InjectView(R.id.article_card_date)
+        @Bind(R.id.article_card_date)
         TextView date;
 
         private Article mNews;
 
         public ViewHolder(View view) {
             super(view);
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
         }
 
         void setItem(Article news) {
