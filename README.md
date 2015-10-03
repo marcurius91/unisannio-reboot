@@ -1,12 +1,13 @@
 # University of Sannio Android App
 
-## BETA PROGRAM
-
-If you want to join the Beta Testing program, drop a mail to _info_ @ _alterego_ . _solutions_ . We will invite you to join our Crashlytics testing team.
-
 ## Contributing
 
-If you want to join development team, well, just fork this repo and work with branches, issue numbers and pull-request. Every contribution is greatly appreciated.
+If you want to join development team, well, just fork this repo and work with branches, issue numbers and pull-requests. Every contribution is greatly appreciated.
+
+Every active contributor will receive a free license of [Intellij Idea](https://www.jetbrains.com/idea/), that JetBrains generously donated to our Open Source project.
+
+### Important step to import in right way our project
+After project import from GitHub you have to install the [Lombok Plugin](https://plugins.jetbrains.com/plugin/6317)
 
 ### An issue to rule them all
 We are using issues for everything:
