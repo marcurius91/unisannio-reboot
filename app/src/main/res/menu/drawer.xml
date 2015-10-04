@@ -12,22 +12,22 @@
         <item
             android:id="@+id/avvisi_ateneo"
             android:checked="false"
-            android:title="Avvisi Ateneo" />
+            android:title="@string/ateneo_avvisi" />
 
         <item
             android:id="@+id/avvisi_studenti"
             android:checked="false"
-            android:title="Avvisi Studenti" />
+            android:title="@string/avvisi_studenti" />
 
         <item
             android:id="@+id/sito_web"
             android:checked="false"
-            android:title="Sito WEB" />
+            android:title="@string/sito_web" />
 
         <item
             android:id="@+id/mappa_ateneo"
             android:checked="false"
-            android:title="Mappa" />
+            android:title="@string/mappa" />
 
     </group>
 
@@ -41,22 +41,22 @@
         <item
             android:id="@+id/avvisi_dipartimento"
             android:checked="false"
-            android:title="Avvisi Ateneo" />
+            android:title="@string/ateneo_avvisi" />
 
         <item
             android:id="@+id/avvisi_studenti_ingegneria"
             android:checked="false"
-            android:title="Avvisi Studenti" />
+            android:title="@string/avvisi_studenti" />
 
         <item
             android:id="@+id/sito_web_ingegneria"
             android:checked="false"
-            android:title="Sito WEB" />
+            android:title="@string/sito_web" />
 
         <item
             android:id="@+id/mappa_ingegneria"
             android:checked="false"
-            android:title="Mappa" />
+            android:title="@string/mappa" />
     </group>
 
     <group android:checkableBehavior="single">
@@ -69,17 +69,17 @@
         <item
             android:id="@+id/avvisi_studenti_scienze_tecnologie"
             android:checked="false"
-            android:title="Avvisi Studenti" />
+            android:title="@string/avvisi_studenti" />
 
         <item
             android:id="@+id/sito_web_scienze_tecnologie"
             android:checked="false"
-            android:title="Sito WEB" />
+            android:title="@string/sito_web" />
 
         <item
             android:id="@+id/mappa_scienze_tecnologie"
             android:checked="false"
-            android:title="Mappa" />
+            android:title="@string/mappa" />
     </group>
 
     <group android:checkableBehavior="single">
@@ -92,22 +92,22 @@
     <item
         android:id="@+id/avvisi_studenti_giurisprudenza"
         android:checked="false"
-        android:title="Avvisi Studenti" />
+        android:title="@string/avvisi_studenti" />
 
     <item
         android:id="@+id/comunicazioni"
         android:checked="false"
-        android:title="Comunicazioni" />
+        android:title="@string/comunicazioni" />
 
     <item
         android:id="@+id/sito_web_giurisprudenza"
         android:checked="false"
-        android:title="Sito WEB" />
+        android:title="@string/sito_web" />
 
     <item
         android:id="@+id/mappa_giurisprudenza"
         android:checked="false"
-        android:title="Mappa" />
+        android:title="@string/mappa" />
 </group>
 
     <group android:checkableBehavior="single">
@@ -120,17 +120,17 @@
     <item
         android:id="@+id/avvisi_studenti_sea"
         android:checked="false"
-        android:title="Avvisi Studenti" />
+        android:title="@string/avvisi_studenti" />
 
     <item
         android:id="@+id/sito_web_sea"
         android:checked="false"
-        android:title="Sito WEB" />
+        android:title="@string/sito_web" />
 
     <item
         android:id="@+id/mappa_sea"
         android:checked="false"
-        android:title="Mappa" />
+        android:title="@string/mappa" />
 
     </group>
 
@@ -144,11 +144,11 @@
     <item
         android:id="@+id/alteregosolution"
         android:checked="false"
-        android:title="Alter Ego Solutions" />
+        android:title="@string/alter_ego" />
     <item
             android:id="@+id/github"
             android:checked="false"
-            android:title="GitHub" />
+            android:title="@string/github" />
     </group>
 
 </menu>
