@@ -4,11 +4,11 @@
         android:id="@+id/ingengeria_card"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_margin="5dp"
+        android:layout_margin="@dimen/small"
         android:layout_height="wrap_content">
 
     <RelativeLayout
-            android:padding="10dp"
+            android:padding="@dimen/medium"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -17,8 +17,9 @@
                 android:transitionName="@string/transition_article_date"
                 android:textColor="@color/primaryDarkColor"
                 android:layout_width="wrap_content"
-                android:layout_height="15dp"
+                android:layout_height="20dp"
                 android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"/>
 
         <TextView
@@ -33,7 +34,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/textPrimaryColor"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="@dimen/small"/>
         <TextView
                 android:id="@+id/article_card_title"
                 android:layout_below="@+id/article_card_author"
@@ -43,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textColor="@color/textPrimaryColor"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="@dimen/small"/>
 
     </RelativeLayout>
 
