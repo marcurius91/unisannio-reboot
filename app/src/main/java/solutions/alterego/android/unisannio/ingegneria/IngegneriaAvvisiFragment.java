@@ -1,8 +1,8 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,13 +53,13 @@ public class IngegneriaAvvisiFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         mSwipeRefreshLayout.setColorSchemeResources(
-                R.color.unisannio_yellow,
-                R.color.unisannio_yellow_dark,
-                R.color.unisannio_yellow_light,
-                R.color.unisannio_blue);
+            R.color.unisannio_yellow,
+            R.color.unisannio_yellow_dark,
+            R.color.unisannio_yellow_light,
+            R.color.unisannio_blue);
 
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
+            (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
@@ -90,28 +90,28 @@ public class IngegneriaAvvisiFragment extends Fragment {
         mSwipeRefreshLayout.setRefreshing(true);
 
         mRetriever.get()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Article>>() {
-                    @Override
-                    public void onCompleted() {
-                        if (mRecyclerView != null && mSwipeRefreshLayout != null) {
-                            mRecyclerView.setVisibility(View.VISIBLE);
-                            mSwipeRefreshLayout.setRefreshing(false);
-                        }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Observer<List<Article>>() {
+                @Override
+                public void onCompleted() {
+                    if (mRecyclerView != null && mSwipeRefreshLayout != null) {
+                        mRecyclerView.setVisibility(View.VISIBLE);
+                        mSwipeRefreshLayout.setRefreshing(false);
                     }
+                }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        if (mSwipeRefreshLayout != null) {
-                            mSwipeRefreshLayout.setRefreshing(false);
-                        }
+                @Override
+                public void onError(Throwable e) {
+                    if (mSwipeRefreshLayout != null) {
+                        mSwipeRefreshLayout.setRefreshing(false);
                     }
+                }
 
-                    @Override
-                    public void onNext(List<Article> list) {
-                        mAdapter.addNews(list);
-                    }
-                });
+                @Override
+                public void onNext(List<Article> list) {
+                    mAdapter.addNews(list);
+                }
+            });
     }
 
     @Override

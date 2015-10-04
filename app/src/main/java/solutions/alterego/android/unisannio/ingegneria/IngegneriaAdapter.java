@@ -1,10 +1,10 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -132,11 +132,11 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             intent.putExtra("ARTICLE", mNews);
 
             ActivityOptionsCompat options =
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(mFragment.getActivity(),
-                            Pair.create(title, v.getContext().getString(R.string.transition_article_title)),
-                            Pair.create(date, v.getContext().getString(R.string.transition_article_date)),
-                            Pair.create(author, v.getContext().getString(R.string.transition_article_author))
-                    );
+                ActivityOptionsCompat.makeSceneTransitionAnimation(mFragment.getActivity(),
+                    Pair.create(title, v.getContext().getString(R.string.transition_article_title)),
+                    Pair.create(date, v.getContext().getString(R.string.transition_article_date)),
+                    Pair.create(author, v.getContext().getString(R.string.transition_article_author))
+                );
             ActivityCompat.startActivity(mFragment.getActivity(), intent, options.toBundle());
         }
     }

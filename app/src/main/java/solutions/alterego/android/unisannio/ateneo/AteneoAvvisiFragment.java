@@ -1,8 +1,8 @@
 package solutions.alterego.android.unisannio.ateneo;
 
-import android.app.Activity;
-import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -76,7 +76,7 @@ public class AteneoAvvisiFragment extends Fragment {
 
         mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(mIsStudenti));
 
-        mAdapter = new AteneoAdapter(new ArrayList<>(), R.layout.ateneo_card, mIsStudenti);
+        mAdapter = new AteneoAdapter(new ArrayList<>(), mIsStudenti);
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
@@ -122,8 +122,8 @@ public class AteneoAvvisiFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        UnisannioApplication.component(activity).inject(this);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        UnisannioApplication.component(context).inject(this);
     }
 }

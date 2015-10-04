@@ -31,13 +31,8 @@ public class AteneoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private List<Article> mNewsList = new ArrayList<>();
 
-    private int mRowLayout;
-
-    private Context mContext;
-
-    public AteneoAdapter(List<Article> newsList, int rowLayout, boolean isStudenti) {
+    public AteneoAdapter(List<Article> newsList, boolean isStudenti) {
         mNewsList = newsList;
-        mRowLayout = rowLayout;
         this.isStudenti = isStudenti;
     }
 
@@ -89,7 +84,7 @@ public class AteneoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private boolean isPositionHeader(int position) {
         return position == 0;
     }
-    
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final boolean isStudenti;
