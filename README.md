@@ -1,4 +1,5 @@
-# University of Sannio Android App
+# University of Sannio Android App 
+![TravisCI](https://travis-ci.org/alter-ego/unisannio-reboot.svg?branch=develop)
 
 ## Contributing
 
