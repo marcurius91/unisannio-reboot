@@ -31,6 +31,8 @@ apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.getkeepsafe.dexcount'
 
+def mixpanel_key = hasProperty('MIXPANEL_UNISANNIO') ? MIXPANEL_UNISANNIO : System.getenv('MIXPANEL_UNISANNIO')
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
@@ -55,7 +57,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "MIXPANEL_TOKEN", mixpanel
+            buildConfigField "String", "MIXPANEL_TOKEN", mixpanel_key
         }
 
         release {
@@ -63,7 +65,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
 
-            buildConfigField "String", "MIXPANEL_TOKEN", mixpanel
+            buildConfigField "String", "MIXPANEL_TOKEN", mixpanel_key
         }
     }
 
