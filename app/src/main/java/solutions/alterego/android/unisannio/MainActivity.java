@@ -21,6 +21,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
+import solutions.alterego.android.unisannio.analytics.Screen;
 import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiFragment;
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaAvvisiFragment;
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
@@ -33,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
     //Defining Variables
     //private Toolbar toolbar;
     private NavigationView navigationView;
+
     private DrawerLayout drawerLayout;
+
     private Intent mMap;
 
     @Bind(R.id.toolbar_actionbar)
@@ -65,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         //set fragment Avvisi ateneo default when the app start
         getFragmentManager().beginTransaction().replace(R.id.container, AteneoAvvisiFragment.newInstance(false)).commit();
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,mToolbar,R.string.drawer_open, R.string.drawer_close){
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.drawer_open,
+            R.string.drawer_close) {
 
 
             @Override
@@ -106,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public NavigationView setUpNavigationDrawer(NavigationView navigationView){
+    public NavigationView setUpNavigationDrawer(NavigationView navigationView) {
 
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -119,118 +123,137 @@ public class MainActivity extends AppCompatActivity {
                 Intent browserIntent;
 
                 //Checking if the item is in checked state or not, if not make it in checked state
-                if(menuItem.isChecked()) menuItem.setChecked(false);
-                else menuItem.setChecked(true);
+                if (menuItem.isChecked()) {
+                    menuItem.setChecked(false);
+                } else {
+                    menuItem.setChecked(true);
+                }
 
-                //Closing drawer on item click
                 drawerLayout.closeDrawers();
 
                 //Check to see which item was being clicked and perform appropriate action
-                switch (menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
 
                     //Ateneo
                     case R.id.avvisi_ateneo:
                         fragmentManager.beginTransaction()
-                                .replace(R.id.container, AteneoAvvisiFragment.newInstance(false))
-                                .commit();
+                            .replace(R.id.container, AteneoAvvisiFragment.newInstance(false))
+                            .commit();
                         return true;
                     case R.id.avvisi_studenti:
-                        fragmentManager.beginTransaction().replace(R.id.container,AteneoAvvisiFragment.newInstance(true)).commit();
+                        mAnalyticsManager.track(new Screen(getString(R.string.ateneo), getString(R.string.avvisi_studenti)));
+                        fragmentManager.beginTransaction().replace(R.id.container, AteneoAvvisiFragment.newInstance(true)).commit();
                         return true;
                     case R.id.sito_web:
+                        mAnalyticsManager.track(new Screen(getString(R.string.ateneo), getString(R.string.sito_web)));
                         browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.ATENEO));
                         startActivity(browserIntent);
                         return true;
                     case R.id.mappa_ateneo:
+                        mAnalyticsManager.track(new Screen(getString(R.string.ateneo), getString(R.string.mappa)));
                         mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.ATENEO()));
                         startActivity(mMap);
                         return true;
 
                     //Ingegneria
                     case R.id.avvisi_dipartimento:
-                        mAnalyticsManager.track(AnalyticsManager.INGEGNERIA);
+                        mAnalyticsManager.track(new Screen(getString(R.string.ingegneria), getString(R.string.avvisi_dipartimento)));
                         fragmentManager.beginTransaction()
-                                .replace(R.id.container, IngegneriaAvvisiFragment.newInstance(false))
-                                .commit();
+                            .replace(R.id.container, IngegneriaAvvisiFragment.newInstance(true))
+                            .commit();
                         return true;
                     case R.id.avvisi_studenti_ingegneria:
+                        mAnalyticsManager.track(new Screen(getString(R.string.ingegneria), getString(R.string.avvisi_studenti)));
                         fragmentManager.beginTransaction()
-                                .replace(R.id.container, IngegneriaAvvisiFragment.newInstance(true))
-                                .commit();
+                            .replace(R.id.container, IngegneriaAvvisiFragment.newInstance(false))
+                            .commit();
                         return true;
                     case R.id.sito_web_ingegneria:
+                        mAnalyticsManager.track(new Screen(getString(R.string.ingegneria), getString(R.string.sito_web)));
                         browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.INGEGNERIA));
                         startActivity(browserIntent);
                         return true;
                     case R.id.mappa_ingegneria:
+                        mAnalyticsManager.track(new Screen(getString(R.string.ingegneria), getString(R.string.mappa)));
                         mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.INGEGNERIA()));
                         startActivity(mMap);
                         return true;
 
                     // Scienze e tecnologie
                     case R.id.avvisi_studenti_scienze_tecnologie:
+                        mAnalyticsManager.track(new Screen(getString(R.string.scienze), getString(R.string.avvisi_studenti)));
                         fragmentManager.beginTransaction()
-                                .replace(R.id.container, new ScienzeAvvisiFragment())
-                                .commit();
+                            .replace(R.id.container, new ScienzeAvvisiFragment())
+                            .commit();
                         return true;
                     case R.id.sito_web_scienze_tecnologie:
+                        mAnalyticsManager.track(new Screen(getString(R.string.scienze), getString(R.string.sito_web)));
                         browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.SCIENZE));
                         startActivity(browserIntent);
                         return true;
                     case R.id.mappa_scienze_tecnologie:
+                        mAnalyticsManager.track(new Screen(getString(R.string.scienze), getString(R.string.mappa)));
                         mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.SCIENZE()));
                         startActivity(mMap);
                         return true;
 
                     // Giurisprudenza
                     case R.id.avvisi_studenti_giurisprudenza:
+                        mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.avvisi_studenti)));
                         fragmentManager.beginTransaction()
-                                .replace(R.id.container, GiurisprudenzaAvvisiFragment.newInstance(URLS.GIURISPRUDENZA_AVVISI))
-                                .commit();
+                            .replace(R.id.container, GiurisprudenzaAvvisiFragment.newInstance(URLS.GIURISPRUDENZA_AVVISI))
+                            .commit();
                         return true;
                     case R.id.comunicazioni:
+                        mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.comunicazioni)));
                         fragmentManager.beginTransaction()
-                                .replace(R.id.container, GiurisprudenzaAvvisiFragment.newInstance(URLS.GIURISPRUDENZA_COMUNICAZIONI))
-                                .commit();
+                            .replace(R.id.container, GiurisprudenzaAvvisiFragment.newInstance(URLS.GIURISPRUDENZA_COMUNICAZIONI))
+                            .commit();
                         return true;
                     case R.id.sito_web_giurisprudenza:
+                        mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.sito_web)));
                         browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.GIURISPRUDENZA));
                         startActivity(browserIntent);
                         return true;
                     case R.id.mappa_giurisprudenza:
+                        mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.mappa)));
                         mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.GIURISPRUDENZA()));
                         startActivity(mMap);
                         return true;
 
                     // SEA
                     case R.id.avvisi_studenti_sea:
+                        mAnalyticsManager.track(new Screen(getString(R.string.sea), getString(R.string.avvisi_studenti)));
                         fragmentManager.beginTransaction()
-                                .replace(R.id.container, SeaAvvisiFragment.newInstance(URLS.SEA_NEWS))
-                                .commit();
+                            .replace(R.id.container, SeaAvvisiFragment.newInstance(URLS.SEA_NEWS))
+                            .commit();
                         return true;
                     case R.id.sito_web_sea:
+                        mAnalyticsManager.track(new Screen(getString(R.string.sea), getString(R.string.sito_web)));
                         browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.SEA));
                         startActivity(browserIntent);
                         return true;
                     case R.id.mappa_sea:
+                        mAnalyticsManager.track(new Screen(getString(R.string.sea), getString(R.string.mappa)));
                         mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.SEA()));
                         startActivity(mMap);
                         return true;
 
                     //About
                     case R.id.alteregosolution:
+                        mAnalyticsManager.track(new Screen(getString(R.string.about), getString(R.string.sito_web)));
                         browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.ALTEREGO));
                         startActivity(browserIntent);
                         return true;
                     case R.id.github:
+                        mAnalyticsManager.track(new Screen(getString(R.string.about), getString(R.string.github)));
                         browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.GITHUB));
                         startActivity(browserIntent);
                         return true;
 
                     default:
-                        Toast.makeText(getApplicationContext(),"Somethings Wrong",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
                         return true;
-
                 }
             }
         });

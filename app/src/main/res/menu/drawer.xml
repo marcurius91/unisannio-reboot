@@ -39,12 +39,12 @@
             android:icon="@drawable/ic_ingegneria"
             android:title="@string/ingegneria" />
         <item
-            android:id="@+id/avvisi_studenti_ingegneria"
+            android:id="@+id/avvisi_dipartimento"
             android:checked="false"
             android:title="Avvisi Ateneo" />
 
         <item
-            android:id="@+id/avvisi_dipartimento"
+            android:id="@+id/avvisi_studenti_ingegneria"
             android:checked="false"
             android:title="Avvisi Studenti" />
 

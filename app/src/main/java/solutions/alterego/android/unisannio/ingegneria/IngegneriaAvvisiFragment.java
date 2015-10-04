@@ -34,8 +34,6 @@ public class IngegneriaAvvisiFragment extends Fragment {
 
     private IngegneriaAdapter mAdapter;
 
-    private boolean isDipartimento;
-
     public static IngegneriaAvvisiFragment newInstance(boolean isDipartimento) {
         Bundle bundle = new Bundle();
         bundle.putBoolean("DIPARTIMENTO", isDipartimento);
@@ -67,12 +65,12 @@ public class IngegneriaAvvisiFragment extends Fragment {
 
         Bundle bundle = getArguments();
         if (bundle != null) {
-            isDipartimento = bundle.getBoolean("DIPARTIMENTO");
+            boolean isDipartimento = bundle.getBoolean("DIPARTIMENTO");
 
-            if (!isDipartimento) {
-                mRetriever = new IngegneriaAvvisiStudentiRetriever();
-            } else {
+            if (isDipartimento) {
                 mRetriever = new IngegneriaAvvisiDipartimentoRetriever();
+            } else {
+                mRetriever = new IngegneriaAvvisiStudentiRetriever();
             }
         }
 

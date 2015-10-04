@@ -1,5 +1,8 @@
 package solutions.alterego.android.unisannio;
 
+import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
+import com.alterego.advancedandroidlogger.implementations.NullAndroidLogger;
+import com.alterego.advancedandroidlogger.interfaces.IAndroidLogger;
 import com.crashlytics.android.Crashlytics;
 
 import android.app.Application;
@@ -12,6 +15,8 @@ public class UnisannioApplication extends Application {
 
     private Component component;
 
+    public static IAndroidLogger l = NullAndroidLogger.instance;
+
     public static Component component(Context context) {
         return ((UnisannioApplication) context.getApplicationContext()).component;
     }
@@ -21,6 +26,10 @@ public class UnisannioApplication extends Application {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
         buildComponentAndInject();
+
+        if (BuildConfig.DEBUG) {
+            l = new DetailedAndroidLogger("UNISANNIO", IAndroidLogger.LoggingLevel.VERBOSE);
+        }
     }
 
     public void buildComponentAndInject() {
