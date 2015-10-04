@@ -20,8 +20,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
+import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.R;
-import solutions.alterego.android.unisannio.UnisannioApplication;
 import solutions.alterego.android.unisannio.models.Article;
 
 public class GiurisprudenzaAvvisiFragment extends Fragment {
@@ -118,6 +118,6 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        UnisannioApplication.component(activity).inject(this);
+        App.component(activity).inject(this);
     }
 }

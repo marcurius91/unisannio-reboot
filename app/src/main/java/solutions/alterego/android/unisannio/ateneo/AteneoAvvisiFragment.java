@@ -22,7 +22,7 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.R;
-import solutions.alterego.android.unisannio.UnisannioApplication;
+import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.models.Article;
 
 public class AteneoAvvisiFragment extends Fragment {
@@ -124,6 +124,6 @@ public class AteneoAvvisiFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        UnisannioApplication.component(context).inject(this);
+        App.component(context).inject(this);
     }
 }

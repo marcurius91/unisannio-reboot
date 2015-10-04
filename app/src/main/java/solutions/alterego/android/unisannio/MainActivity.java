@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        UnisannioApplication.component(this).inject(this);
+        App.component(this).inject(this);
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);

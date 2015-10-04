@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import solutions.alterego.android.unisannio.BuildConfig;
-import solutions.alterego.android.unisannio.UnisannioApplication;
+import solutions.alterego.android.unisannio.App;
 
 @Singleton
 public class AnalyticsManager {
@@ -29,7 +29,7 @@ public class AnalyticsManager {
             props.put("Section", screen.getSection());
             props.put("Screen", screen.getScreen());
         } catch (JSONException e) {
-            UnisannioApplication.l.e(e);
+            App.l.e(e);
         }
         mMixpanel.track(screen.getSection(), props);
     }
