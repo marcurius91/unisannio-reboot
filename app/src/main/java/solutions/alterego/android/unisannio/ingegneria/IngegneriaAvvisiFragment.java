@@ -113,6 +113,7 @@ public class IngegneriaAvvisiFragment extends Fragment {
 
                 @Override
                 public void onError(Throwable e) {
+                    App.l.e(e);
                     if (mSwipeRefreshLayout != null) {
                         mSwipeRefreshLayout.setRefreshing(false);
                     }

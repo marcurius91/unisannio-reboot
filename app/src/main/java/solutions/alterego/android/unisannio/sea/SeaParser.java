@@ -18,10 +18,8 @@ public class SeaParser implements IParser {
 
         for (Element e : elements) {
             String title = e.text();
-
             String link = e.select("a").attr("href");
-
-            articles.add(Article.builder().title(title).url(link).build());
+            articles.add(new Article(title, link, "", null, ""));
         }
         return articles;
     }

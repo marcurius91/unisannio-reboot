@@ -1,5 +1,8 @@
 package solutions.alterego.android.unisannio.ateneo;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -35,7 +38,9 @@ public class AteneoAvvisiParser implements IParser {
             }
 
             if (date != null && title != null) {
-                newsList.add(Article.builder().title(title).date(date).url(id).build());
+                DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
+                DateTime jodatime = dtf.parseDateTime(date);
+                newsList.add(new Article(title, id, "", jodatime, ""));
             }
         }
         return newsList;

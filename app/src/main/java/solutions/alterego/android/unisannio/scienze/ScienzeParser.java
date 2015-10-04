@@ -1,11 +1,15 @@
 package solutions.alterego.android.unisannio.scienze;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.models.Article;
@@ -32,7 +36,9 @@ public class ScienzeParser implements IParser {
             }
 
             if (date != null && title != null) {
-                newsList.add(Article.builder().title(title).url(link).date(date).build());
+                DateTimeFormatter dtf = DateTimeFormat.forPattern("dd MMM yyyy");
+                DateTime jodatime = dtf.withLocale(Locale.ITALIAN).parseDateTime(date.replace(".", " ").toLowerCase());
+                newsList.add(new Article(title, link, "", jodatime, ""));
             }
         }
 
@@ -53,7 +59,9 @@ public class ScienzeParser implements IParser {
             }
 
             if (date != null && title != null) {
-                newsList.add(Article.builder().title(title).url(link).date(date).build());
+                DateTimeFormatter dtf = DateTimeFormat.forPattern("dd MMM yyyy");
+                DateTime jodatime = dtf.withLocale(Locale.ITALIAN).parseDateTime(date.replace(".", " ").toLowerCase());
+                newsList.add(new Article(title, link, "", jodatime, ""));
             }
         }
         return newsList;

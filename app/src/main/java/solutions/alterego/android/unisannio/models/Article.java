@@ -1,62 +1,28 @@
 package solutions.alterego.android.unisannio.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import org.joda.time.DateTime;
+import org.parceler.Parcel;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.experimental.Builder;
+import lombok.experimental.Accessors;
 
 @Data
-@Builder
-public class Article implements Parcelable {
+@Parcel
+@Accessors(prefix = "m")
+@AllArgsConstructor
+public class Article {
 
-    private String title;
+    String mTitle;
 
-    private String url;
+    String mUrl;
 
-    private String body;
+    String mBody;
 
-    private String date;
+    DateTime mDate;
 
-    private String author;
+    String mAuthor;
 
-    public Article(String title, String link, String body, String date, String author) {
-        this.title = title;
-        url = link;
-        this.body = body;
-        this.date = date;
-        this.author = author;
+    public Article() {
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.title);
-        dest.writeString(this.url);
-        dest.writeString(this.body);
-        dest.writeString(this.date);
-        dest.writeString(this.author);
-    }
-
-    private Article(Parcel in) {
-        this.title = in.readString();
-        this.url = in.readString();
-        this.body = in.readString();
-        this.date = in.readString();
-        this.author = in.readString();
-    }
-
-    public static final Parcelable.Creator<Article> CREATOR = new Parcelable.Creator<Article>() {
-        public Article createFromParcel(Parcel source) {
-            return new Article(source);
-        }
-
-        public Article[] newArray(int size) {
-            return new Article[size];
-        }
-    };
 }

@@ -1,5 +1,7 @@
 package solutions.alterego.android.unisannio.ateneo;
 
+import org.joda.time.format.DateTimeFormat;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -108,7 +111,8 @@ public class AteneoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         void setItem(Article news) {
             mNews = news;
-            date.setText(news.getDate());
+            String prettyDate = DateTimeFormat.forPattern("EEEE dd MMM YYYY").withLocale(Locale.ITALIAN).print(news.getDate());
+            date.setText(prettyDate);
             info.setText(news.getTitle());
         }
 

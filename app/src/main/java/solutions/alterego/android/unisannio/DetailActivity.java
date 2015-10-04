@@ -1,5 +1,7 @@
 package solutions.alterego.android.unisannio;
 
+import org.parceler.Parcels;
+
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
@@ -34,8 +36,6 @@ public class DetailActivity extends AppCompatActivity {
 
     private Article mArticle;
 
-    private int mCurrentApiVersion;
-
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +49,9 @@ public class DetailActivity extends AppCompatActivity {
         mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_action_arrow_left));
         mToolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        mArticle = getIntent().getParcelableExtra("ARTICLE");
+        mArticle = Parcels.unwrap(getIntent().getParcelableExtra("ARTICLE"));
         mTitle.setText(mArticle.getTitle());
-        mDate.setText(mArticle.getDate());
+        mDate.setText(mArticle.getDate().toLocalDateTime().toString());
         mAuthor.setText(mArticle.getAuthor());
         mBody.setText(mArticle.getBody());
     }

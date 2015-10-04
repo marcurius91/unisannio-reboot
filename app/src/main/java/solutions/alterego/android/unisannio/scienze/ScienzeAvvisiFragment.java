@@ -14,15 +14,13 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
+import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
-import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.models.Article;
 
 public class ScienzeAvvisiFragment extends Fragment {
@@ -32,9 +30,6 @@ public class ScienzeAvvisiFragment extends Fragment {
 
     @Bind(R.id.ateneo_ptr)
     SwipeRefreshLayout mSwipeRefreshLayout;
-
-    @Inject
-    ScienzeRetriever mRetriever;
 
     private ScienzeAdapter mAdapter;
 
@@ -74,7 +69,7 @@ public class ScienzeAvvisiFragment extends Fragment {
         mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
 
-        mRetriever.get(url)
+        ScienzeRetriever.get(url)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new Observer<List<Article>>() {
                 @Override
@@ -86,6 +81,7 @@ public class ScienzeAvvisiFragment extends Fragment {
 
                 @Override
                 public void onError(Throwable e) {
+                    App.l.e(e);
                     if (mSwipeRefreshLayout != null) {
                         mSwipeRefreshLayout.setRefreshing(false);
                     }

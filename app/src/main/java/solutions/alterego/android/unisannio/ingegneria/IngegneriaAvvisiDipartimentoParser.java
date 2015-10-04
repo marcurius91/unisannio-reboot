@@ -1,11 +1,15 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.interfaces.IParser;
@@ -25,8 +29,10 @@ public class IngegneriaAvvisiDipartimentoParser implements IParser {
             String body = element.select(".leading-0 > p").first().text();
 
             String date = element.select(".published").first().text().replace("Pubblicato ", "");
+            DateTimeFormatter dtf = DateTimeFormat.forPattern("EEEE, dd MMMM yyyy");
+            DateTime jodatime = dtf.withLocale(Locale.ITALIAN).parseDateTime(date.toLowerCase());
 
-            list.add(Article.builder().title(title).url(URLS.INGEGNERIA_NEWS_DIPARTIMENTO).body(body).date(date).build());
+            list.add(new Article(title, URLS.INGEGNERIA_NEWS_DIPARTIMENTO, body, jodatime, ""));
         }
         return list;
     }

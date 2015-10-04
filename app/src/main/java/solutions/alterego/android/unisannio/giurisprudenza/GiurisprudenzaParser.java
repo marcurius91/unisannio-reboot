@@ -1,5 +1,8 @@
 package solutions.alterego.android.unisannio.giurisprudenza;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -19,10 +22,14 @@ public class GiurisprudenzaParser implements IParser {
         for (Element e : elements) {
             String title = e.select(".title").first().text();
 
-            String pubDate = e.select("span.nota").first().text().split("Pubblicato il:")[1].replace(")", "");
+            String date = e.select("span.nota").first().text().split("Pubblicato il:")[1].replace(")", "");
             String link = e.select("a").attr("href");
 
-            articles.add(Article.builder().title(title).url(link).date(pubDate).build());
+            //01-10-2015 alle 13:28:04
+            DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-MM-yyyyHH:mm:SS");
+            DateTime jodatime = dtf.parseDateTime(date.trim().replace("alle", "").replace(" ", "").substring(1));
+
+            articles.add(new Article(title, link, "", jodatime, ""));
         }
         return articles;
     }

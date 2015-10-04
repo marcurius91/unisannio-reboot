@@ -1,5 +1,8 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
+import org.joda.time.format.DateTimeFormat;
+import org.parceler.Parcels;
+
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -12,6 +15,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -113,7 +117,8 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         void setItem(Article news) {
             mNews = news;
-            date.setText(news.getDate());
+            String prettyDate = DateTimeFormat.forPattern("EEEE dd MMM YYYY").withLocale(Locale.ITALIAN).print(news.getDate());
+            date.setText(prettyDate);
             title.setText(news.getTitle());
 
             String author = news.getAuthor();
@@ -127,7 +132,7 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         public void openDetailPage(View v) {
             Intent intent = new Intent();
             intent.setClass(v.getContext(), DetailActivity.class);
-            intent.putExtra("ARTICLE", mNews);
+            intent.putExtra("ARTICLE", Parcels.wrap(mNews));
             mListener.startActivity(intent, this);
         }
     }
