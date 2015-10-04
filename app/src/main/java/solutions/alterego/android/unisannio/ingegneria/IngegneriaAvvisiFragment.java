@@ -2,7 +2,10 @@ package solutions.alterego.android.unisannio.ingegneria;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -76,7 +79,15 @@ public class IngegneriaAvvisiFragment extends Fragment {
 
         mSwipeRefreshLayout.setOnRefreshListener(this::refreshList);
 
-        mAdapter = new IngegneriaAdapter(this, new ArrayList<>());
+        mAdapter = new IngegneriaAdapter((intent, viewHolder) -> {
+            ActivityOptionsCompat options =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
+                    Pair.create(((IngegneriaAdapter.ViewHolder) viewHolder).title, getString(R.string.transition_article_title)),
+                    Pair.create(((IngegneriaAdapter.ViewHolder) viewHolder).date, getString(R.string.transition_article_date)),
+                    Pair.create(((IngegneriaAdapter.ViewHolder) viewHolder).author, getString(R.string.transition_article_author))
+                );
+            ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
+        }, new ArrayList<>());
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
