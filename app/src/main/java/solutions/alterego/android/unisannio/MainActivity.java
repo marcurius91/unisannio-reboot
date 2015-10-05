@@ -110,16 +110,23 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        switch (id){
-            case R.id.action_web_page:
-                Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
-                break;
-            case R.id.action_map:
-                Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
-                break;
+        String fragmentName = getVisibleFragmentName(getVisibleFragment());
+        
+        if(fragmentName.equalsIgnoreCase("AteneoAvvisiFragment")){
+            switch (id){
+                case R.id.action_web_page:
+                    //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.ATENEO));
+                    startActivity(browserIntent);
+                    break;
+                case R.id.action_map:
+                    //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
+                    mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.ATENEO()));
+                    startActivity(mMap);
+                    break;
+            }
         }
-
+        
         return super.onOptionsItemSelected(item);
     }
 
