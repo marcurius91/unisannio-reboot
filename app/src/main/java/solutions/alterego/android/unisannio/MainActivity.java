@@ -4,17 +4,21 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.inject.Inject;
 
@@ -106,6 +110,15 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        switch (id){
+            case R.id.action_web_page:
+                Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
+                break;
+            case R.id.action_map:
+                Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
+                break;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -258,5 +271,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return navigationView;
+    }
+
+    //get the active Fragment
+    public Fragment getVisibleFragment(){
+        FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
+        List<Fragment> fragments = fragmentManager.getFragments();
+        for(Fragment fragment : fragments){
+            if(fragment != null && fragment.getUserVisibleHint())
+                return (Fragment)fragment;
+        }
+        return null;
+    }
+
+    //get the name of the active Fragment
+    public String getVisibleFragmentName(Fragment fragment){
+        String str,fragmentName;
+        str = fragment.toString();
+        StringTokenizer st = new StringTokenizer(str,"{");
+        fragmentName = st.nextToken();
+        return fragmentName;
     }
 }
