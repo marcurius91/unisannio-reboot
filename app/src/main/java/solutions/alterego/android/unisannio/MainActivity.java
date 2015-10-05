@@ -4,17 +4,21 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.inject.Inject;
 
@@ -97,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        return false;
+        return true;
     }
 
     @Override
@@ -106,6 +110,98 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        String fragmentName = getVisibleFragmentName(getVisibleFragment());
+        Intent browserIntent;
+
+        //Ateneo
+        if(fragmentName.equalsIgnoreCase("AteneoAvvisiFragment")){
+            switch (id){
+                case R.id.action_web_page:
+                    //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
+                    mAnalyticsManager.track(new Screen(getString(R.string.ateneo), getString(R.string.sito_web)));
+                    browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.ATENEO));
+                    startActivity(browserIntent);
+                    break;
+                case R.id.action_map:
+                    //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
+                    mAnalyticsManager.track(new Screen(getString(R.string.ateneo), getString(R.string.mappa)));
+                    mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.ATENEO()));
+                    startActivity(mMap);
+                    break;
+            }
+        }
+
+        //Ingegneria
+        if(fragmentName.equalsIgnoreCase("IngegneriaAvvisiFragment")){
+            switch (id){
+                case R.id.action_web_page:
+                    //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
+                    mAnalyticsManager.track(new Screen(getString(R.string.ingegneria), getString(R.string.sito_web)));
+                    browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.INGEGNERIA));
+                    startActivity(browserIntent);
+                    break;
+                case R.id.action_map:
+                    //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
+                    mAnalyticsManager.track(new Screen(getString(R.string.ingegneria), getString(R.string.mappa)));
+                    mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.INGEGNERIA()));
+                    startActivity(mMap);
+                    break;
+            }
+        }
+
+        //Scienze e Tecnologie
+        if(fragmentName.equalsIgnoreCase("ScienzeAvvisiFragment")){
+            switch (id){
+                case R.id.action_web_page:
+                    //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
+                    mAnalyticsManager.track(new Screen(getString(R.string.scienze), getString(R.string.sito_web)));
+                    browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.SCIENZE));
+                    startActivity(browserIntent);
+                    break;
+                case R.id.action_map:
+                    //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
+                    mAnalyticsManager.track(new Screen(getString(R.string.scienze), getString(R.string.mappa)));
+                    mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.SCIENZE()));
+                    startActivity(mMap);
+                    break;
+            }
+        }
+
+        //Giurisprudenza
+        if(fragmentName.equalsIgnoreCase("GiurisprudenzaAvvisiFragment")){
+            switch (id){
+                case R.id.action_web_page:
+                    //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
+                    mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.sito_web)));
+                    browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.GIURISPRUDENZA));
+                    startActivity(browserIntent);
+                    break;
+                case R.id.action_map:
+                    //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
+                    mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.mappa)));
+                    mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.GIURISPRUDENZA()));
+                    startActivity(mMap);
+                    break;
+            }
+        }
+
+        //SEA
+        if(fragmentName.equalsIgnoreCase("SeaAvvisiFragment")){
+            switch (id){
+                case R.id.action_web_page:
+                    //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
+                    mAnalyticsManager.track(new Screen(getString(R.string.sea), getString(R.string.sito_web)));
+                    browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.SEA));
+                    startActivity(browserIntent);
+                    break;
+                case R.id.action_map:
+                    //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
+                    mAnalyticsManager.track(new Screen(getString(R.string.sea), getString(R.string.mappa)));
+                    mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.SEA()));
+                    startActivity(mMap);
+                    break;
+            }
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -144,16 +240,6 @@ public class MainActivity extends AppCompatActivity {
                         mAnalyticsManager.track(new Screen(getString(R.string.ateneo), getString(R.string.avvisi_studenti)));
                         fragmentManager.beginTransaction().replace(R.id.container, AteneoAvvisiFragment.newInstance(true)).commit();
                         return true;
-                    case R.id.sito_web:
-                        mAnalyticsManager.track(new Screen(getString(R.string.ateneo), getString(R.string.sito_web)));
-                        browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.ATENEO));
-                        startActivity(browserIntent);
-                        return true;
-                    case R.id.mappa_ateneo:
-                        mAnalyticsManager.track(new Screen(getString(R.string.ateneo), getString(R.string.mappa)));
-                        mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.ATENEO()));
-                        startActivity(mMap);
-                        return true;
 
                     //Ingegneria
                     case R.id.avvisi_dipartimento:
@@ -168,16 +254,6 @@ public class MainActivity extends AppCompatActivity {
                             .replace(R.id.container, IngegneriaAvvisiFragment.newInstance(false))
                             .commit();
                         return true;
-                    case R.id.sito_web_ingegneria:
-                        mAnalyticsManager.track(new Screen(getString(R.string.ingegneria), getString(R.string.sito_web)));
-                        browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.INGEGNERIA));
-                        startActivity(browserIntent);
-                        return true;
-                    case R.id.mappa_ingegneria:
-                        mAnalyticsManager.track(new Screen(getString(R.string.ingegneria), getString(R.string.mappa)));
-                        mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.INGEGNERIA()));
-                        startActivity(mMap);
-                        return true;
 
                     // Scienze e tecnologie
                     case R.id.avvisi_studenti_scienze_tecnologie:
@@ -185,16 +261,6 @@ public class MainActivity extends AppCompatActivity {
                         fragmentManager.beginTransaction()
                             .replace(R.id.container, new ScienzeAvvisiFragment())
                             .commit();
-                        return true;
-                    case R.id.sito_web_scienze_tecnologie:
-                        mAnalyticsManager.track(new Screen(getString(R.string.scienze), getString(R.string.sito_web)));
-                        browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.SCIENZE));
-                        startActivity(browserIntent);
-                        return true;
-                    case R.id.mappa_scienze_tecnologie:
-                        mAnalyticsManager.track(new Screen(getString(R.string.scienze), getString(R.string.mappa)));
-                        mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.SCIENZE()));
-                        startActivity(mMap);
                         return true;
 
                     // Giurisprudenza
@@ -210,16 +276,6 @@ public class MainActivity extends AppCompatActivity {
                             .replace(R.id.container, GiurisprudenzaAvvisiFragment.newInstance(URLS.GIURISPRUDENZA_COMUNICAZIONI))
                             .commit();
                         return true;
-                    case R.id.sito_web_giurisprudenza:
-                        mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.sito_web)));
-                        browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.GIURISPRUDENZA));
-                        startActivity(browserIntent);
-                        return true;
-                    case R.id.mappa_giurisprudenza:
-                        mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.mappa)));
-                        mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.GIURISPRUDENZA()));
-                        startActivity(mMap);
-                        return true;
 
                     // SEA
                     case R.id.avvisi_studenti_sea:
@@ -227,16 +283,6 @@ public class MainActivity extends AppCompatActivity {
                         fragmentManager.beginTransaction()
                             .replace(R.id.container, SeaAvvisiFragment.newInstance(URLS.SEA_NEWS))
                             .commit();
-                        return true;
-                    case R.id.sito_web_sea:
-                        mAnalyticsManager.track(new Screen(getString(R.string.sea), getString(R.string.sito_web)));
-                        browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.SEA));
-                        startActivity(browserIntent);
-                        return true;
-                    case R.id.mappa_sea:
-                        mAnalyticsManager.track(new Screen(getString(R.string.sea), getString(R.string.mappa)));
-                        mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.SEA()));
-                        startActivity(mMap);
                         return true;
 
                     //About
@@ -258,5 +304,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return navigationView;
+    }
+
+    //get the active Fragment
+    public Fragment getVisibleFragment(){
+        FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
+        List<Fragment> fragments = fragmentManager.getFragments();
+        for(Fragment fragment : fragments){
+            if(fragment != null && fragment.getUserVisibleHint())
+                return (Fragment)fragment;
+        }
+        return null;
+    }
+
+    //get the name of the active Fragment
+    public String getVisibleFragmentName(Fragment fragment){
+        String str,fragmentName;
+        str = fragment.toString();
+        StringTokenizer st = new StringTokenizer(str,"{");
+        fragmentName = st.nextToken();
+        return fragmentName;
     }
 }

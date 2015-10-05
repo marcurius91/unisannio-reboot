@@ -19,16 +19,6 @@
             android:checked="false"
             android:title="@string/avvisi_studenti" />
 
-        <item
-            android:id="@+id/sito_web"
-            android:checked="false"
-            android:title="@string/sito_web" />
-
-        <item
-            android:id="@+id/mappa_ateneo"
-            android:checked="false"
-            android:title="@string/mappa" />
-
     </group>
 
     <group android:checkableBehavior="single">
@@ -48,15 +38,6 @@
             android:checked="false"
             android:title="@string/avvisi_studenti" />
 
-        <item
-            android:id="@+id/sito_web_ingegneria"
-            android:checked="false"
-            android:title="@string/sito_web" />
-
-        <item
-            android:id="@+id/mappa_ingegneria"
-            android:checked="false"
-            android:title="@string/mappa" />
     </group>
 
     <group android:checkableBehavior="single">
@@ -71,15 +52,6 @@
             android:checked="false"
             android:title="@string/avvisi_studenti" />
 
-        <item
-            android:id="@+id/sito_web_scienze_tecnologie"
-            android:checked="false"
-            android:title="@string/sito_web" />
-
-        <item
-            android:id="@+id/mappa_scienze_tecnologie"
-            android:checked="false"
-            android:title="@string/mappa" />
     </group>
 
     <group android:checkableBehavior="single">
@@ -99,15 +71,6 @@
         android:checked="false"
         android:title="@string/comunicazioni" />
 
-    <item
-        android:id="@+id/sito_web_giurisprudenza"
-        android:checked="false"
-        android:title="@string/sito_web" />
-
-    <item
-        android:id="@+id/mappa_giurisprudenza"
-        android:checked="false"
-        android:title="@string/mappa" />
 </group>
 
     <group android:checkableBehavior="single">
@@ -121,16 +84,6 @@
         android:id="@+id/avvisi_studenti_sea"
         android:checked="false"
         android:title="@string/avvisi_studenti" />
-
-    <item
-        android:id="@+id/sito_web_sea"
-        android:checked="false"
-        android:title="@string/sito_web" />
-
-    <item
-        android:id="@+id/mappa_sea"
-        android:checked="false"
-        android:title="@string/mappa" />
 
     </group>
 
