@@ -24,6 +24,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import solutions.alterego.android.unisannio.NavigationViewManager.NavigationViewManager;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
 import solutions.alterego.android.unisannio.analytics.Screen;
 import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiFragment;
@@ -41,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
 
+    private FragmentManager fragmentManager;
+
+    NavigationViewManager navigationViewManager;
     private Intent mMap;
 
     @Bind(R.id.toolbar_actionbar)
@@ -66,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         //Initializing NavigationView
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
-        navigationView = setUpNavigationDrawer(navigationView);
+        //navigationView = setUpNavigationDrawer(navigationView);
 
         // Initializing Drawer Layout and ActionBarToggle
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
@@ -92,8 +96,12 @@ public class MainActivity extends AppCompatActivity {
         //Setting the actionbarToggle to drawer layout
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
+        navigationViewManager = new NavigationViewManager(navigationView,fragmentManager,drawerLayout,this);
+        navigationViewManager.setUpNavigationDrawer();
+
         //calling sync state is necessay or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();
+
 
     }
 
@@ -206,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public NavigationView setUpNavigationDrawer(NavigationView navigationView) {
+    /*public NavigationView setUpNavigationDrawer(NavigationView navigationView) {
 
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -215,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
 
-                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager = getSupportFragmentManager();
                 Intent browserIntent;
 
                 //Checking if the item is in checked state or not, if not make it in checked state
@@ -304,7 +312,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return navigationView;
-    }
+    }*/
 
     //get the active Fragment
     public Fragment getVisibleFragment(){
