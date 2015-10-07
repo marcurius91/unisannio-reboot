@@ -42,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
 
-    private FragmentManager fragmentManager;
-
     NavigationViewManager navigationViewManager;
     private Intent mMap;
 
@@ -77,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         //set fragment Avvisi ateneo default when the app start
         getSupportFragmentManager().beginTransaction().replace(R.id.container, AteneoAvvisiFragment.newInstance(false)).commit();
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.drawer_open,
-            R.string.drawer_close) {
+                R.string.drawer_close) {
 
 
             @Override
@@ -96,8 +94,8 @@ public class MainActivity extends AppCompatActivity {
         //Setting the actionbarToggle to drawer layout
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
-        navigationViewManager = new NavigationViewManager(navigationView,fragmentManager,drawerLayout,this);
-        navigationViewManager.setUpNavigationDrawer();
+        navigationViewManager = new NavigationViewManager(drawerLayout,this);
+        navigationView = navigationViewManager.setUpNavigationDrawer(navigationView);
 
         //calling sync state is necessay or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();
@@ -215,29 +213,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*public NavigationView setUpNavigationDrawer(NavigationView navigationView) {
-
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-
             // This method will trigger on item Click of navigation menu
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-
-                fragmentManager = getSupportFragmentManager();
+                FragmentManager fragmentManager = getSupportFragmentManager();
                 Intent browserIntent;
-
                 //Checking if the item is in checked state or not, if not make it in checked state
                 if (menuItem.isChecked()) {
                     menuItem.setChecked(false);
                 } else {
                     menuItem.setChecked(true);
                 }
-
                 drawerLayout.closeDrawers();
-
                 //Check to see which item was being clicked and perform appropriate action
                 switch (menuItem.getItemId()) {
-
                     //Ateneo
                     case R.id.avvisi_ateneo:
                         fragmentManager.beginTransaction()
@@ -248,7 +239,6 @@ public class MainActivity extends AppCompatActivity {
                         mAnalyticsManager.track(new Screen(getString(R.string.ateneo), getString(R.string.avvisi_studenti)));
                         fragmentManager.beginTransaction().replace(R.id.container, AteneoAvvisiFragment.newInstance(true)).commit();
                         return true;
-
                     //Ingegneria
                     case R.id.avvisi_dipartimento:
                         mAnalyticsManager.track(new Screen(getString(R.string.ingegneria), getString(R.string.avvisi_dipartimento)));
@@ -262,7 +252,6 @@ public class MainActivity extends AppCompatActivity {
                             .replace(R.id.container, IngegneriaAvvisiFragment.newInstance(false))
                             .commit();
                         return true;
-
                     // Scienze e tecnologie
                     case R.id.avvisi_studenti_scienze_tecnologie:
                         mAnalyticsManager.track(new Screen(getString(R.string.scienze), getString(R.string.avvisi_studenti)));
@@ -270,7 +259,6 @@ public class MainActivity extends AppCompatActivity {
                             .replace(R.id.container, new ScienzeAvvisiFragment())
                             .commit();
                         return true;
-
                     // Giurisprudenza
                     case R.id.avvisi_studenti_giurisprudenza:
                         mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.avvisi_studenti)));
@@ -284,7 +272,6 @@ public class MainActivity extends AppCompatActivity {
                             .replace(R.id.container, GiurisprudenzaAvvisiFragment.newInstance(URLS.GIURISPRUDENZA_COMUNICAZIONI))
                             .commit();
                         return true;
-
                     // SEA
                     case R.id.avvisi_studenti_sea:
                         mAnalyticsManager.track(new Screen(getString(R.string.sea), getString(R.string.avvisi_studenti)));
@@ -292,7 +279,6 @@ public class MainActivity extends AppCompatActivity {
                             .replace(R.id.container, SeaAvvisiFragment.newInstance(URLS.SEA_NEWS))
                             .commit();
                         return true;
-
                     //About
                     case R.id.alteregosolution:
                         mAnalyticsManager.track(new Screen(getString(R.string.about), getString(R.string.sito_web)));
@@ -304,7 +290,6 @@ public class MainActivity extends AppCompatActivity {
                         browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.GITHUB));
                         startActivity(browserIntent);
                         return true;
-
                     default:
                         Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
                         return true;

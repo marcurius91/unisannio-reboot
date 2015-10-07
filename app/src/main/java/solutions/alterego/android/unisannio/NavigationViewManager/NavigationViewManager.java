@@ -25,10 +25,8 @@ import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
 import solutions.alterego.android.unisannio.scienze.ScienzeAvvisiFragment;
 import solutions.alterego.android.unisannio.sea.SeaAvvisiFragment;
 
-public class NavigationViewManager {
+public class NavigationViewManager extends Activity{
 
-    private NavigationView navigationView;
-    private FragmentManager fragmentManager;
     private DrawerLayout drawerLayout;
     public Context context;
 
@@ -36,15 +34,13 @@ public class NavigationViewManager {
     @Inject
     AnalyticsManager mAnalyticsManager;
 
-    public NavigationViewManager(NavigationView navigationView, FragmentManager fragmentManager,DrawerLayout drawerLayout,Context context){
-        this.navigationView = navigationView;
-        this.fragmentManager = fragmentManager;
+    public NavigationViewManager(DrawerLayout drawerLayout,Context context){
         this.drawerLayout = drawerLayout;
         this.context = context;
 
 
     }
-    public NavigationView setUpNavigationDrawer() {
+    public NavigationView setUpNavigationDrawer(NavigationView navigationView) {
 
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -54,7 +50,7 @@ public class NavigationViewManager {
             public boolean onNavigationItemSelected(MenuItem menuItem) {
 
 
-                fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+                FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
                 Intent browserIntent;
 
                 //Checking if the item is in checked state or not, if not make it in checked state
