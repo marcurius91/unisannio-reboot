@@ -15,11 +15,14 @@ import java.util.StringTokenizer;
 
 import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.models.Article;
+import solutions.alterego.android.unisannio.utils.DateUtils;
 
 public class IngegneriaAvvisiStudentiParser implements IParser {
 
     @Override
     public List parse(Document document) {
+        DateUtils dateUtils = null;
+
         Elements elements = document.select("#maincontent-block > #item");
 
         List<Article> list = new ArrayList<>();
@@ -42,7 +45,7 @@ public class IngegneriaAvvisiStudentiParser implements IParser {
 
             String body = element.select(".avvtext").first().text();
 
-            String date = getDate(element.select("#publishinfo").first().text());
+            String date = dateUtils.extractingData(element.select("#publishinfo").first().text());
 
             DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
             DateTime jodatime = dtf.parseDateTime(date);
