@@ -1,7 +1,6 @@
 package solutions.alterego.android.unisannio.NavigationViewManager;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
-import solutions.alterego.android.unisannio.MainActivity;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
@@ -25,7 +23,7 @@ import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
 import solutions.alterego.android.unisannio.scienze.ScienzeAvvisiFragment;
 import solutions.alterego.android.unisannio.sea.SeaAvvisiFragment;
 
-public class NavigationViewManager extends Activity{
+public class NavigationViewManager{
 
     private DrawerLayout drawerLayout;
     public Context context;

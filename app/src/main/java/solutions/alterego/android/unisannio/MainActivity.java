@@ -61,14 +61,11 @@ public class MainActivity extends AppCompatActivity {
 
         mMap = new Intent(this, MapsActivity.class);
         // Initializing Toolbar and setting it as the actionbar
-        //toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         //Initializing NavigationView
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
-
-        //navigationView = setUpNavigationDrawer(navigationView);
 
         // Initializing Drawer Layout and ActionBarToggle
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
@@ -211,93 +208,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    /*public NavigationView setUpNavigationDrawer(NavigationView navigationView) {
-        //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            // This method will trigger on item Click of navigation menu
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                Intent browserIntent;
-                //Checking if the item is in checked state or not, if not make it in checked state
-                if (menuItem.isChecked()) {
-                    menuItem.setChecked(false);
-                } else {
-                    menuItem.setChecked(true);
-                }
-                drawerLayout.closeDrawers();
-                //Check to see which item was being clicked and perform appropriate action
-                switch (menuItem.getItemId()) {
-                    //Ateneo
-                    case R.id.avvisi_ateneo:
-                        fragmentManager.beginTransaction()
-                            .replace(R.id.container, AteneoAvvisiFragment.newInstance(false))
-                            .commit();
-                        return true;
-                    case R.id.avvisi_studenti:
-                        mAnalyticsManager.track(new Screen(getString(R.string.ateneo), getString(R.string.avvisi_studenti)));
-                        fragmentManager.beginTransaction().replace(R.id.container, AteneoAvvisiFragment.newInstance(true)).commit();
-                        return true;
-                    //Ingegneria
-                    case R.id.avvisi_dipartimento:
-                        mAnalyticsManager.track(new Screen(getString(R.string.ingegneria), getString(R.string.avvisi_dipartimento)));
-                        fragmentManager.beginTransaction()
-                            .replace(R.id.container, IngegneriaAvvisiFragment.newInstance(true))
-                            .commit();
-                        return true;
-                    case R.id.avvisi_studenti_ingegneria:
-                        mAnalyticsManager.track(new Screen(getString(R.string.ingegneria), getString(R.string.avvisi_studenti)));
-                        fragmentManager.beginTransaction()
-                            .replace(R.id.container, IngegneriaAvvisiFragment.newInstance(false))
-                            .commit();
-                        return true;
-                    // Scienze e tecnologie
-                    case R.id.avvisi_studenti_scienze_tecnologie:
-                        mAnalyticsManager.track(new Screen(getString(R.string.scienze), getString(R.string.avvisi_studenti)));
-                        fragmentManager.beginTransaction()
-                            .replace(R.id.container, new ScienzeAvvisiFragment())
-                            .commit();
-                        return true;
-                    // Giurisprudenza
-                    case R.id.avvisi_studenti_giurisprudenza:
-                        mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.avvisi_studenti)));
-                        fragmentManager.beginTransaction()
-                            .replace(R.id.container, GiurisprudenzaAvvisiFragment.newInstance(URLS.GIURISPRUDENZA_AVVISI))
-                            .commit();
-                        return true;
-                    case R.id.comunicazioni:
-                        mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.comunicazioni)));
-                        fragmentManager.beginTransaction()
-                            .replace(R.id.container, GiurisprudenzaAvvisiFragment.newInstance(URLS.GIURISPRUDENZA_COMUNICAZIONI))
-                            .commit();
-                        return true;
-                    // SEA
-                    case R.id.avvisi_studenti_sea:
-                        mAnalyticsManager.track(new Screen(getString(R.string.sea), getString(R.string.avvisi_studenti)));
-                        fragmentManager.beginTransaction()
-                            .replace(R.id.container, SeaAvvisiFragment.newInstance(URLS.SEA_NEWS))
-                            .commit();
-                        return true;
-                    //About
-                    case R.id.alteregosolution:
-                        mAnalyticsManager.track(new Screen(getString(R.string.about), getString(R.string.sito_web)));
-                        browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.ALTEREGO));
-                        startActivity(browserIntent);
-                        return true;
-                    case R.id.github:
-                        mAnalyticsManager.track(new Screen(getString(R.string.about), getString(R.string.github)));
-                        browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.GITHUB));
-                        startActivity(browserIntent);
-                        return true;
-                    default:
-                        Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
-                        return true;
-                }
-            }
-        });
-        return navigationView;
-    }*/
 
     //get the active Fragment
     public Fragment getVisibleFragment(){
