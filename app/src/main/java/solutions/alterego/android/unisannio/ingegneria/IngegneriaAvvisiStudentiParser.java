@@ -54,13 +54,4 @@ public class IngegneriaAvvisiStudentiParser implements IParser {
         }
         return list;
     }
-
-    public String getDate(String str){
-        StringTokenizer strtok = new StringTokenizer(str," ");
-        String st1 = strtok.nextToken();
-        String st2 = strtok.nextToken();
-        String date = strtok.nextToken();
-
-        return date;
-    }
 }
