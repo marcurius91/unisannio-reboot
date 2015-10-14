@@ -6,7 +6,7 @@
 If you want to join development team, well, just fork this repo and work with branches and pull-requests. Every contribution is greatly appreciated.
 
 Every active contributor will receive a free license of [Intellij Idea](https://www.jetbrains.com/idea/), that JetBrains generously donated to our Open Source project. An active contributor will join the Trello board used to manage the project.
-![alt tag](/unisannio-reboot/app/src/drawable-hdpi/logo_jetbrains.jpg)
+![alt tag](https://www.jetbrains.com/company/docs/logo_jetbrains.svg)
 ### Build
 * Clone the repo
 * Import the project into Android Studio/IntelliJ Idea
