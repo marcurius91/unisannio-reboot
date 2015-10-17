@@ -1,5 +1,7 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
+import android.support.annotation.NonNull;
+
 import java.util.List;
 
 import solutions.alterego.android.unisannio.cercapersone.ICercapersonePresenter;
@@ -14,12 +16,12 @@ public class IngegneriaCercapersonePresenter implements ICercapersonePresenter {
     private IRetriever mRetriever;
 
     @Override
-    public void setParser(IParser parser) {
+    public void setParser(@NonNull IParser parser) {
         mParser = parser;
     }
 
     @Override
-    public void setRetriever(IRetriever retriever) {
+    public void setRetriever(@NonNull IRetriever retriever) {
         mRetriever = retriever;
     }
 

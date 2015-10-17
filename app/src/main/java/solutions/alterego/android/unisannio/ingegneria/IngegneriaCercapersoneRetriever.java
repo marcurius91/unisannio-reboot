@@ -6,9 +6,15 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import solutions.alterego.android.unisannio.interfaces.IRetriever;
 
 public class IngegneriaCercapersoneRetriever implements IRetriever<Document> {
+
+    @Inject
+    public IngegneriaCercapersoneRetriever() {
+    }
 
     @Override
     public List<Document> retrieve(@NonNull String url) {
