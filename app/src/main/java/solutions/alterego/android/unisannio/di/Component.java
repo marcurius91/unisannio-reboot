@@ -13,7 +13,7 @@ import solutions.alterego.android.unisannio.scienze.ScienzeAvvisiFragment;
 import solutions.alterego.android.unisannio.sea.SeaAvvisiFragment;
 
 @Singleton
-@dagger.Component(modules = {SystemServicesModule.class, RetrieversModule.class})
+@dagger.Component(modules = {SystemServicesModule.class, RetrieversModule.class, PresentersModule.class})
 public interface Component {
 
     void inject(App app);
