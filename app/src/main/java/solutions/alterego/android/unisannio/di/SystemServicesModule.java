@@ -28,14 +28,14 @@ public class SystemServicesModule {
 
     @Provides
     @Singleton
-    SharedPreferences providePreferenceManager() {
-        return PreferenceManager.getDefaultSharedPreferences(application);
+    SharedPreferences providePreferenceManager(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     @Provides
     @Singleton
-    ConnectivityManager provideConnectivityManager() {
-        return (ConnectivityManager) application.getSystemService(Context.CONNECTIVITY_SERVICE);
+    ConnectivityManager provideConnectivityManager(Context context) {
+        return (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
     @Provides
