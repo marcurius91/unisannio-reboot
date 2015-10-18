@@ -2,9 +2,11 @@ package solutions.alterego.android.unisannio.interfaces;
 
 import android.support.annotation.NonNull;
 
+import org.jsoup.nodes.Document;
+
 import java.util.List;
 
-public interface IRetriever<T> {
+public interface IRetriever {
 
-    List<T> retrieve(@NonNull String url);
+    Document retrieve(@NonNull String url);
 }
