@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import solutions.alterego.android.unisannio.MainActivity;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
@@ -20,13 +21,15 @@ import solutions.alterego.android.unisannio.analytics.Screen;
 import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiFragment;
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaAvvisiFragment;
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
+import solutions.alterego.android.unisannio.ingegneria.IngengeriaCercapersoneActivity;
 import solutions.alterego.android.unisannio.scienze.ScienzeAvvisiFragment;
 import solutions.alterego.android.unisannio.sea.SeaAvvisiFragment;
 
-public class NavigationViewManager{
+public class NavigationViewManager extends FragmentActivity{
 
     private DrawerLayout drawerLayout;
     public Context context;
+    private Intent cercapersoneIngegneria;
 
 
     @Inject
@@ -38,7 +41,7 @@ public class NavigationViewManager{
 
 
     }
-    public NavigationView setUpNavigationDrawer(NavigationView navigationView) {
+    public NavigationView setUpNavigationDrawer(NavigationView navigationView){
 
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -50,6 +53,7 @@ public class NavigationViewManager{
 
                 FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
                 Intent browserIntent;
+
 
                 //Checking if the item is in checked state or not, if not make it in checked state
                 if (menuItem.isChecked()) {
@@ -87,8 +91,12 @@ public class NavigationViewManager{
                                 .replace(R.id.container, IngegneriaAvvisiFragment.newInstance(false))
                                 .commit();
                         return true;
+                    case R.id.cercapersone_ingegneria:
+                        cercapersoneIngegneria = new Intent(context, IngengeriaCercapersoneActivity.class);
+                        context.startActivity(cercapersoneIngegneria);
+                        return true;
 
-                    // Scienze e tecnologie
+                        // Scienze e tecnologie
                     case R.id.avvisi_studenti_scienze_tecnologie:
                         //mAnalyticsManager.track(new Screen(context.getString(R.string.scienze), context.getString(R.string.avvisi_studenti)));
                         fragmentManager.beginTransaction()

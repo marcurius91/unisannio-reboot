@@ -27,7 +27,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        android:debuggable="true" >
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -58,7 +59,9 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
-        <activity android:name=".ingegneria.IngengeriaCercapersoneActivity" >
+        <activity
+            android:name=".ingegneria.IngengeriaCercapersoneActivity"
+            android:label="@string/title_activity_cercapersone">
         </activity>
     </application>
 
