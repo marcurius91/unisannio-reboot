@@ -1,5 +1,7 @@
 package solutions.alterego.android.unisannio;
 
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.parceler.Parcels;
 
 import android.annotation.TargetApi;
@@ -12,12 +14,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import solutions.alterego.android.unisannio.models.Article;
 
 
 public class DetailActivity extends AppCompatActivity {
+
+    private DateTimeFormatter localDateFormatter = DateTimeFormat.fullDate().withLocale(Locale.getDefault());
 
     @Bind(R.id.detail_date)
     TextView mDate;
@@ -51,7 +57,7 @@ public class DetailActivity extends AppCompatActivity {
 
         mArticle = Parcels.unwrap(getIntent().getParcelableExtra("ARTICLE"));
         mTitle.setText(mArticle.getTitle());
-        mDate.setText(mArticle.getDate().toLocalDateTime().toString());
+        mDate.setText(localDateFormatter.print(mArticle.getDate()));
         mAuthor.setText(mArticle.getAuthor());
         mBody.setText(mArticle.getBody());
     }
