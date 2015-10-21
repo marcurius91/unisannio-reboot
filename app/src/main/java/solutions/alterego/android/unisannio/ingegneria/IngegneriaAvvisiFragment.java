@@ -1,6 +1,9 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
+import org.parceler.Parcels;
+
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -22,8 +25,10 @@ import butterknife.ButterKnife;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
+import solutions.alterego.android.unisannio.DetailActivity;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.models.Article;
+import solutions.alterego.android.unisannio.models.ArticleAdapter;
 
 public class IngegneriaAvvisiFragment extends Fragment {
 
@@ -35,7 +40,7 @@ public class IngegneriaAvvisiFragment extends Fragment {
 
     IngegneriaRetriever mRetriever;
 
-    private IngegneriaAdapter mAdapter;
+    private ArticleAdapter mAdapter;
 
     public static IngegneriaAvvisiFragment newInstance(boolean isDipartimento) {
         Bundle bundle = new Bundle();
@@ -79,15 +84,19 @@ public class IngegneriaAvvisiFragment extends Fragment {
 
         mSwipeRefreshLayout.setOnRefreshListener(this::refreshList);
 
-        mAdapter = new IngegneriaAdapter((intent, viewHolder) -> {
+        mAdapter = new ArticleAdapter(new ArrayList<>(), (article, holder) -> {
+            Intent intent = new Intent();
+            intent.setClass(getActivity(), DetailActivity.class);
+            intent.putExtra("ARTICLE", Parcels.wrap(article));
+
             ActivityOptionsCompat options =
-                ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
-                    Pair.create(((IngegneriaAdapter.ViewHolder) viewHolder).title, getString(R.string.transition_article_title)),
-                    Pair.create(((IngegneriaAdapter.ViewHolder) viewHolder).date, getString(R.string.transition_article_date)),
-                    Pair.create(((IngegneriaAdapter.ViewHolder) viewHolder).author, getString(R.string.transition_article_author))
-                );
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
+                            Pair.create(((ArticleAdapter.ViewHolder) holder).title, getString(R.string.transition_article_title)),
+                            Pair.create(((ArticleAdapter.ViewHolder) holder).date, getString(R.string.transition_article_date)),
+                            Pair.create(((ArticleAdapter.ViewHolder) holder).author, getString(R.string.transition_article_author))
+                    );
             ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
-        }, new ArrayList<>());
+        });
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());

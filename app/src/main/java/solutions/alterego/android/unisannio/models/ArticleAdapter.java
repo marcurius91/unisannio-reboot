@@ -97,13 +97,13 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         CardView card;
 
         @Bind(R.id.article_card_title)
-        TextView title;
+        public TextView title;
 
         @Bind(R.id.article_card_author)
-        TextView author;
+        public TextView author;
 
         @Bind(R.id.article_card_date)
-        TextView date;
+        public TextView date;
 
         private Article mArticle;
 
