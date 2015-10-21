@@ -1,6 +1,7 @@
 package solutions.alterego.android.unisannio.models;
 
 import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -88,6 +89,8 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        private DateTimeFormatter localDateFormatter = DateTimeFormat.fullDate().withLocale(Locale.getDefault());
+
         private final OpenArticleDetailListener mOpenArticleDetailListener;
 
         @Bind(R.id.article_card)
@@ -109,7 +112,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         void setItem(Article news) {
             mArticle = news;
-            String prettyDate = DateTimeFormat.forPattern("EEEE dd MMM YYYY").withLocale(Locale.ITALIAN).print(news.getDate());
+            String prettyDate = localDateFormatter.print(news.getDate());
             date.setText(prettyDate);
             body.setText(news.getTitle());
         }
