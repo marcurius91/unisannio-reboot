@@ -3,8 +3,6 @@ package solutions.alterego.android.unisannio.models;
 import org.joda.time.format.DateTimeFormat;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +19,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import solutions.alterego.android.unisannio.R;
+import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener;
 import solutions.alterego.android.unisannio.utils.VHHeader;
 
 public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -29,13 +28,13 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private static final int TYPE_ITEM = 1;
 
+    private final OpenArticleDetailListener mOpenArticleDetailListener;
+
     private List<Article> mArticleList = new ArrayList<>();
 
-    private String mArticleBaseUrl;
-
-    public ArticleAdapter(@NonNull List<Article> articleList, String articleBaseUrl) {
+    public ArticleAdapter(@NonNull List<Article> articleList, @NonNull OpenArticleDetailListener openArticleDetailListener) {
         mArticleList = articleList;
-        mArticleBaseUrl = articleBaseUrl;
+        mOpenArticleDetailListener = openArticleDetailListener;
     }
 
     public void addNews(List<Article> articleList) {
@@ -51,7 +50,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         if (viewType == TYPE_ITEM) {
             View v = LayoutInflater.from(context).inflate(R.layout.article_card, viewGroup, false);
-            return new ViewHolder(v, mArticleBaseUrl);
+            return new ViewHolder(v, mOpenArticleDetailListener);
         } else if (viewType == TYPE_HEADER) {
             View v = LayoutInflater.from(context).inflate(R.layout.recyclerview_header_image, viewGroup, false);
             return new VHHeader(v);
@@ -89,7 +88,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final String mArticleBaseUrl;
+        private final OpenArticleDetailListener mOpenArticleDetailListener;
 
         @Bind(R.id.article_card)
         CardView card;
@@ -100,16 +99,16 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         @Bind(R.id.article_card_date)
         TextView date;
 
-        private Article mNews;
+        private Article mArticle;
 
-        public ViewHolder(View view, String articleBaseUrl) {
+        public ViewHolder(View view, @NonNull OpenArticleDetailListener openArticleDetailListener) {
             super(view);
             ButterKnife.bind(this, view);
-            mArticleBaseUrl = articleBaseUrl;
+            mOpenArticleDetailListener = openArticleDetailListener;
         }
 
         void setItem(Article news) {
-            mNews = news;
+            mArticle = news;
             String prettyDate = DateTimeFormat.forPattern("EEEE dd MMM YYYY").withLocale(Locale.ITALIAN).print(news.getDate());
             date.setText(prettyDate);
             body.setText(news.getTitle());
@@ -117,9 +116,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         @OnClick(R.id.article_card)
         public void openDetailPage(View v) {
-            String url = mArticleBaseUrl + mNews.getUrl();
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            v.getContext().startActivity(browserIntent);
+            mOpenArticleDetailListener.openArticleDetail(mArticle, this);
         }
     }
 }

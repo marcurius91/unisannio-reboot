@@ -1,6 +1,8 @@
 package solutions.alterego.android.unisannio.sea;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -67,13 +69,17 @@ public class SeaAvvisiFragment extends Fragment {
             R.color.unisannio_blue);
 
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,
-            (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
         mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(url));
 
-        mAdapter = new ArticleAdapter(new ArrayList<>(), URLS.SEA);
+        mAdapter = new ArticleAdapter(new ArrayList<>(), (article, holder) -> {
+            String url1 = URLS.SEA + article.getUrl();
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url1));
+            getActivity().startActivity(browserIntent);
+        });
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());

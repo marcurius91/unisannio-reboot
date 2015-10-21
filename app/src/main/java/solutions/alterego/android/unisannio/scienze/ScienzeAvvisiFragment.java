@@ -1,6 +1,8 @@
 package solutions.alterego.android.unisannio.scienze;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -57,7 +59,11 @@ public class ScienzeAvvisiFragment extends Fragment {
         String url = URLS.SCIENZE_NEWS;
         mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(url));
 
-        mAdapter = new ArticleAdapter(new ArrayList<>(), URLS.SCIENZE_NEWS);
+        mAdapter = new ArticleAdapter(new ArrayList<>(), (article, holder) -> {
+            String url1 = URLS.SCIENZE_NEWS + article.getUrl();
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url1));
+            getActivity().startActivity(browserIntent);
+        });
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());

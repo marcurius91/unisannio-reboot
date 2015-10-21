@@ -1,6 +1,8 @@
 package solutions.alterego.android.unisannio.giurisprudenza;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -73,7 +75,11 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
 
         mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(url));
 
-        mAdapter = new ArticleAdapter(new ArrayList<>(), URLS.GIURISPRUDENZA);
+        mAdapter = new ArticleAdapter(new ArrayList<>(), (article, holder) -> {
+            String url1 = URLS.GIURISPRUDENZA + article.getUrl();
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url1));
+            getActivity().startActivity(browserIntent);
+        });
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
