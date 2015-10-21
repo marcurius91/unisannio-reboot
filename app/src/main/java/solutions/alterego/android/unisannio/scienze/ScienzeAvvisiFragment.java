@@ -22,6 +22,7 @@ import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.models.Article;
+import solutions.alterego.android.unisannio.models.ArticleAdapter;
 
 public class ScienzeAvvisiFragment extends Fragment {
 
@@ -31,7 +32,7 @@ public class ScienzeAvvisiFragment extends Fragment {
     @Bind(R.id.ateneo_ptr)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
-    private ScienzeAdapter mAdapter;
+    private ArticleAdapter mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class ScienzeAvvisiFragment extends Fragment {
         String url = URLS.SCIENZE_NEWS;
         mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(url));
 
-        mAdapter = new ScienzeAdapter(new ArrayList<>());
+        mAdapter = new ArticleAdapter(new ArrayList<>(), URLS.SCIENZE_NEWS);
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());

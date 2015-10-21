@@ -1,10 +1,11 @@
-package solutions.alterego.android.unisannio.scienze;
+package solutions.alterego.android.unisannio.models;
 
 import org.joda.time.format.DateTimeFormat;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,26 +21,27 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import solutions.alterego.android.unisannio.R;
-import solutions.alterego.android.unisannio.URLS;
-import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.utils.VHHeader;
 
-public class ScienzeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int TYPE_HEADER = 0;
 
     private static final int TYPE_ITEM = 1;
 
-    private List<Article> mNewsList = new ArrayList<>();
+    private List<Article> mArticleList = new ArrayList<>();
 
-    public ScienzeAdapter(List<Article> newsList) {
-        mNewsList = newsList;
+    private String mArticleBaseUrl;
+
+    public ArticleAdapter(@NonNull List<Article> articleList, String articleBaseUrl) {
+        mArticleList = articleList;
+        mArticleBaseUrl = articleBaseUrl;
     }
 
-    public void addNews(List<Article> newsList) {
-        mNewsList.clear();
-        mNewsList.add(null);
-        mNewsList.addAll(newsList);
+    public void addNews(List<Article> articleList) {
+        mArticleList.clear();
+        mArticleList.add(null);
+        mArticleList.addAll(articleList);
         notifyDataSetChanged();
     }
 
@@ -49,7 +51,7 @@ public class ScienzeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         if (viewType == TYPE_ITEM) {
             View v = LayoutInflater.from(context).inflate(R.layout.article_card, viewGroup, false);
-            return new ViewHolder(v);
+            return new ViewHolder(v, mArticleBaseUrl);
         } else if (viewType == TYPE_HEADER) {
             View v = LayoutInflater.from(context).inflate(R.layout.recyclerview_header_image, viewGroup, false);
             return new VHHeader(v);
@@ -59,17 +61,17 @@ public class ScienzeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof ScienzeAdapter.ViewHolder) {
-            final Article news = mNewsList.get(i);
+        if (holder instanceof ArticleAdapter.ViewHolder) {
+            final Article news = mArticleList.get(i);
             ((ViewHolder) holder).setItem(news);
         } else if (holder instanceof VHHeader) {
-            ((VHHeader) holder).header.setImageResource(R.drawable.teatro);
+            ((VHHeader) holder).header.setImageResource(R.drawable.sea);
         }
     }
 
     @Override
     public int getItemCount() {
-        return mNewsList == null ? 0 : mNewsList.size();
+        return mArticleList == null ? 0 : mArticleList.size();
     }
 
     @Override
@@ -87,7 +89,9 @@ public class ScienzeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.ingengeria_card)
+        private final String mArticleBaseUrl;
+
+        @Bind(R.id.article_card)
         CardView card;
 
         @Bind(R.id.article_card_title)
@@ -98,9 +102,10 @@ public class ScienzeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         private Article mNews;
 
-        public ViewHolder(View view) {
+        public ViewHolder(View view, String articleBaseUrl) {
             super(view);
             ButterKnife.bind(this, view);
+            mArticleBaseUrl = articleBaseUrl;
         }
 
         void setItem(Article news) {
@@ -110,9 +115,9 @@ public class ScienzeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             body.setText(news.getTitle());
         }
 
-        @OnClick(R.id.ingengeria_card)
+        @OnClick(R.id.article_card)
         public void openDetailPage(View v) {
-            String url = URLS.SCIENZE_NEWS + mNews.getUrl();
+            String url = mArticleBaseUrl + mNews.getUrl();
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             v.getContext().startActivity(browserIntent);
         }

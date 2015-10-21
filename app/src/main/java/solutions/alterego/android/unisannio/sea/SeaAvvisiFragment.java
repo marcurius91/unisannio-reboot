@@ -20,9 +20,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
-import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.App;
+import solutions.alterego.android.unisannio.R;
+import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.models.Article;
+import solutions.alterego.android.unisannio.models.ArticleAdapter;
 
 public class SeaAvvisiFragment extends Fragment {
 
@@ -35,7 +37,7 @@ public class SeaAvvisiFragment extends Fragment {
     @Inject
     SeaRetriever mRetriever;
 
-    private SeaAdapter mAdapter;
+    private ArticleAdapter mAdapter;
 
     public static Fragment newInstance(String url) {
         Bundle bundle = new Bundle();
@@ -71,7 +73,7 @@ public class SeaAvvisiFragment extends Fragment {
 
         mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(url));
 
-        mAdapter = new SeaAdapter(new ArrayList<>());
+        mAdapter = new ArticleAdapter(new ArrayList<>(), URLS.SEA);
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());

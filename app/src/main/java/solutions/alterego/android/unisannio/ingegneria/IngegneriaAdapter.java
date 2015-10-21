@@ -96,7 +96,7 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.ingengeria_card)
+        @Bind(R.id.article_card)
         CardView card;
 
         @Bind(R.id.article_card_title)
@@ -128,7 +128,7 @@ public class IngegneriaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
         }
 
-        @OnClick(R.id.ingengeria_card)
+        @OnClick(R.id.article_card)
         public void openDetailPage(View v) {
             Intent intent = new Intent();
             intent.setClass(v.getContext(), DetailActivity.class);

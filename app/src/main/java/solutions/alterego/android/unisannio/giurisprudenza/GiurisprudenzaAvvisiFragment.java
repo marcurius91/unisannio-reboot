@@ -22,7 +22,9 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.R;
+import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.models.Article;
+import solutions.alterego.android.unisannio.models.ArticleAdapter;
 
 public class GiurisprudenzaAvvisiFragment extends Fragment {
 
@@ -35,7 +37,7 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
     @Inject
     GiurisprudenzaRetriever mRetriever;
 
-    private GiurisprudenzaAdapter mAdapter;
+    private ArticleAdapter mAdapter;
 
     public static Fragment newInstance(String url) {
         Bundle bundle = new Bundle();
@@ -71,7 +73,7 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
 
         mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(url));
 
-        mAdapter = new GiurisprudenzaAdapter(new ArrayList<>());
+        mAdapter = new ArticleAdapter(new ArrayList<>(), URLS.GIURISPRUDENZA);
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
