@@ -97,7 +97,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         CardView card;
 
         @Bind(R.id.article_card_title)
-        TextView body;
+        TextView title;
+
+        @Bind(R.id.article_card_author)
+        TextView author;
 
         @Bind(R.id.article_card_date)
         TextView date;
@@ -114,7 +117,11 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mArticle = news;
             String prettyDate = localDateFormatter.print(news.getDate());
             date.setText(prettyDate);
-            body.setText(news.getTitle());
+            title.setText(news.getTitle());
+
+            author.setText(news.getAuthor());
+            boolean showAuthor = news.getAuthor() != null && !news.getAuthor().isEmpty();
+            author.setVisibility(showAuthor ? View.VISIBLE : View.GONE);
         }
 
         @OnClick(R.id.article_card)
