@@ -13,5 +13,5 @@ public interface ICercapersonePresenter {
 
     public void setRetriever(@NonNull IRetriever retriever);
 
-    public List<Person> getPeople();
+    public List getPeople();
 }
