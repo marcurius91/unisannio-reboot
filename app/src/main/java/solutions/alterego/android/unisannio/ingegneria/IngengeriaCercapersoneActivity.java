@@ -28,5 +28,6 @@ public class IngengeriaCercapersoneActivity extends FragmentActivity {
         IngegneriaCercapersonePresenter icp = new IngegneriaCercapersonePresenter();
 
         icp.getPeople();
+
     }
 }

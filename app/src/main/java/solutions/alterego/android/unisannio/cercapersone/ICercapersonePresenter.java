@@ -2,7 +2,7 @@ package solutions.alterego.android.unisannio.cercapersone;
 
 import android.support.annotation.NonNull;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.interfaces.IRetriever;
@@ -13,5 +13,5 @@ public interface ICercapersonePresenter {
 
     public void setRetriever(@NonNull IRetriever retriever);
 
-    public List getPeople();
+    public ArrayList<Person> getPeople();
 }

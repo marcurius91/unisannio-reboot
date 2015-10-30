@@ -5,14 +5,12 @@ import android.util.Log;
 
 import org.jsoup.nodes.Document;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
-import nl.matshofman.saxrssreader.FeedItem;
-import rx.Observable;
 import rx.Observer;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.cercapersone.ICercapersonePresenter;
 import solutions.alterego.android.unisannio.cercapersone.Person;
 import solutions.alterego.android.unisannio.interfaces.IParser;
@@ -24,7 +22,7 @@ public class IngegneriaCercapersonePresenter implements ICercapersonePresenter {
 
     private IRetriever mRetriever;
 
-    public List<Person> persons;
+    ArrayList<Person> persons;
 
     @Override
     public void setParser(@NonNull IParser parser) {
@@ -37,36 +35,46 @@ public class IngegneriaCercapersonePresenter implements ICercapersonePresenter {
     }
 
     @Override
-    public List<Person> getPeople() {
+    public ArrayList<Person> getPeople() {
 
         IngegneriaCercapersoneRetriever icr = new IngegneriaCercapersoneRetriever();
-        setRetriever(icr);
         IngegneriaCercapersoneParser icp = (new IngegneriaCercapersoneParser());
+
+        setRetriever(icr);
         setParser(icp);
 
-        mRetriever.retrieve()
+            mRetriever.retriveDocument()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<FeedItem>>() {
-            @Override
-            public void onCompleted() {
-                Log.i("OBSERVER", "Completed");
-            }
+                .subscribe(new Observer<Document>() {
 
-            @Override
-            public void onError(Throwable e) {
+                    @Override
+                    public void onCompleted() {
+                        Log.e("OBSERVER RETRIVE DOCUMENT onCompleted()", "Completed without errors");
+                    }
 
-                Log.e("OBSERVER ERROR", e.toString());
-            }
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("OBSERVER RETRIVE DOCUMENT onError()", e.toString());
 
-            @Override
-            public void onNext(List<FeedItem> feedItems) {
+                    }
 
-                Log.e("ON NEXT RESULT",feedItems.get(0).toString());
-            }
+                    @Override
+                    public void onNext(Document document) {
+                        persons = (ArrayList<Person>) mParser.parse(document);
+                        for (int i = 0; i < persons.size(); i++) {
+                            Log.e("OBSERVER RETRIVE DOCUMENT onNext()", persons.get(i).getNome());
+                        }
 
+                    }
+                });
 
-        });
+        if(persons != null) {
+            return persons;
+        }
+        else {
+            Log.e("PRESENTER ERROR", "persons is empty");
+            return null;
+        }
 
-        return persons;
     }
 }

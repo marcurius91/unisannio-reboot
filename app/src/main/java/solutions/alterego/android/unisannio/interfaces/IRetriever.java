@@ -8,7 +8,7 @@ import nl.matshofman.saxrssreader.Feed;
 import nl.matshofman.saxrssreader.FeedItem;
 import rx.Observable;
 
-public interface IRetriever {
+public interface IRetriever<T> {
 
-    Observable<List<FeedItem>> retrieve();
+    Observable<T> retriveDocument();
 }

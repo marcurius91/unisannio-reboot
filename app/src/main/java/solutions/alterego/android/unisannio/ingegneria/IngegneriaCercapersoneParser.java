@@ -22,8 +22,8 @@ public class IngegneriaCercapersoneParser implements IParser<Person> {
     }
 
     @Override
-    public List<Person> parse(Document document) {
-        List<Person> persons = new ArrayList<Person>();
+    public ArrayList<Person> parse(Document document) {
+        ArrayList<Person> persons = new ArrayList<>();
 
         Elements elements = document.getElementsByTag("item");
 
@@ -40,14 +40,7 @@ public class IngegneriaCercapersoneParser implements IParser<Person> {
             Person person = new Person(nome, ruolo, email, telefono, ufficio, webPage, tutoring);
             persons.add(person);
         }
-
-        if(persons != null){
             return persons;
-        }
-        else{
-            Log.e("PERSON LIST","Empty persons");
-            return null;
-        }
 
     }
 }
