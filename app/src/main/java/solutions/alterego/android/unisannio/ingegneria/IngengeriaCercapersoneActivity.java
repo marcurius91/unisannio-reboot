@@ -18,6 +18,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.cercapersone.Person;
+import solutions.alterego.android.unisannio.cercapersone.SearchPerson;
 
 public class IngengeriaCercapersoneActivity extends FragmentActivity {
 
@@ -46,10 +47,12 @@ public class IngengeriaCercapersoneActivity extends FragmentActivity {
 
                     @Override
                     public void onNext(ArrayList<Person> persons) {
+                        String search = "Glielmo";
 
-                        for(Person p: persons){
+                        ArrayList<Person> prsSrc = SearchPerson.searchPerson(search,persons);
+                        for(Person p: prsSrc){
                             //Log.e("ACTIVITY CERCAPERSONE onNext()",p.getNome());
-                            tv.setText(p.getNome());
+                            tv.setText(p.getEmail());
                         }
 
 
