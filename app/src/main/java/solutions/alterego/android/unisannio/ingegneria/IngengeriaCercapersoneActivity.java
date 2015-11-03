@@ -12,6 +12,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.cercapersone.Person;
 
@@ -27,7 +31,32 @@ public class IngengeriaCercapersoneActivity extends FragmentActivity {
 
         IngegneriaCercapersonePresenter icp = new IngegneriaCercapersonePresenter();
 
-        icp.getPeople();
+        icp.getPeople()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ArrayList<Person>>() {
+                    @Override
+                    public void onCompleted() {
+                        //Log.e("ACTIVITY CERCAPERSONE onCompleted()","Completed");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("ACTIVITY CERCAPERSONE onError()",e.toString());
+                    }
+
+                    @Override
+                    public void onNext(ArrayList<Person> persons) {
+
+                        for(Person p: persons){
+                            //Log.e("ACTIVITY CERCAPERSONE onNext()",p.getNome());
+                            tv.setText(p.getNome());
+                        }
+
+
+                    }
+                });
+
+
 
     }
 }

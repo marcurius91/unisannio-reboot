@@ -23,6 +23,7 @@ public class IngegneriaCercapersoneParser implements IParser<Person> {
 
     @Override
     public ArrayList<Person> parse(Document document) {
+
         ArrayList<Person> persons = new ArrayList<>();
 
         Elements elements = document.getElementsByTag("item");
@@ -37,10 +38,11 @@ public class IngegneriaCercapersoneParser implements IParser<Person> {
                 String webPage = element.getElementsByTag("personalwebpage").text();
                 String tutoring = element.getElementsByTag("tutoring").text();
 
-            Person person = new Person(nome, ruolo, email, telefono, ufficio, webPage, tutoring);
-            persons.add(person);
+            if(nome != null) {
+                Person person = new Person(nome, ruolo, email, telefono, ufficio, webPage, tutoring);
+                persons.add(person);
+            }
         }
-            return persons;
-
+                return persons;
     }
 }
