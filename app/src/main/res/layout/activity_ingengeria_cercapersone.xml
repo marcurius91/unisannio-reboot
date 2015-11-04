@@ -15,14 +15,14 @@
         android:id="@+id/searchViewCercapersoneIngegneria"
         android:layout_gravity="center_horizontal" />
 
-    <TextView
-        android:id="@+id/tvCercapersoneIngegneria"
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="236dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:padding="15dp"
-        android:text="hello word!!" />
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/tvCercapersoneIngegneria"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.77" />
 
 </LinearLayout>
 

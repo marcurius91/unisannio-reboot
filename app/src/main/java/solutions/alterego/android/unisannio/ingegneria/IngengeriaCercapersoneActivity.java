@@ -1,21 +1,15 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import java.util.ArrayList;
-import java.util.List;
 
-import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.cercapersone.Person;
 import solutions.alterego.android.unisannio.cercapersone.SearchPerson;
