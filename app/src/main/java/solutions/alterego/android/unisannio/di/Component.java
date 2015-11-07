@@ -9,6 +9,7 @@ import solutions.alterego.android.unisannio.MainActivity;
 import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiFragment;
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaAvvisiFragment;
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
+import solutions.alterego.android.unisannio.ingegneria.IngengeriaCercapersoneActivity;
 import solutions.alterego.android.unisannio.scienze.ScienzeAvvisiFragment;
 import solutions.alterego.android.unisannio.sea.SeaAvvisiFragment;
 
@@ -16,7 +17,7 @@ import solutions.alterego.android.unisannio.sea.SeaAvvisiFragment;
 @dagger.Component(modules = {SystemServicesModule.class, RetrieversModule.class, PresentersModule.class})
 public interface Component {
 
-    void inject(App app);
+    void inject(IngengeriaCercapersoneActivity app);
 
     void inject(MainActivity app);
 
