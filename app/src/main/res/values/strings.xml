@@ -34,5 +34,5 @@
         Madonna!
     </string>
     <string name="cercapersone_editText">Inserisci il nome della persona da ricercare</string>
-
+    <string name="activity_cercapersone_detail_title">Dettaglio Persona</string>
 </resources>

@@ -49,7 +49,6 @@
         <meta-data
             android:name="com.crashlytics.ApiKey"
             android:value="8501bc0640d6af5e895dfc1c5d65a99fbd2c0286" />
-
         <activity
             android:name=".DetailActivity"
             android:label="@string/title_activity_detail"
@@ -62,6 +61,9 @@
         <activity
             android:name=".ingegneria.IngengeriaCercapersoneActivity"
             android:label="@string/title_activity_cercapersone">
+        </activity>
+        <activity android:name=".ingegneria.IngegneriaCercapersoneDetailActivity"
+            android:label="@string/activity_cercapersone_detail_title">
         </activity>
     </application>
 

@@ -1,6 +1,10 @@
 package solutions.alterego.android.unisannio.cercapersone;
 
-public class Person {
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Person implements Parcelable{
 
     String nome,ruolo,email,telefono,ufficio,webPage,tutoring;
 
@@ -13,6 +17,18 @@ public class Person {
         this.webPage = webPage;
         this.tutoring = tutoring;
 
+    }
+
+    public Person(Parcel in) {
+        String[] single_person = new String[7];
+        in.readStringArray(single_person);
+        this.nome = single_person[0];
+        this.ruolo = single_person[1];
+        this.email = single_person[2];
+        this.telefono = single_person[3];
+        this.ufficio = single_person[4];
+        this.webPage = single_person[5];
+        this.tutoring = single_person[6];
     }
 
     public void setNome(String name){
@@ -66,4 +82,37 @@ public class Person {
 
     public String getTutoring(){ return tutoring; }
 
+    public Person getPerson(){
+        Person p = new Person(nome,ruolo,email,telefono,ufficio,webPage,tutoring);
+        return p;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeStringArray(new String[] {
+                this.nome,
+                this.ruolo,
+                this.email,
+                this.telefono,
+                this.ufficio,
+                this.webPage,
+                this.tutoring});
+
+    }
+
+    public static final Parcelable.Creator<Person> CREATOR = new Parcelable.Creator<Person>() {
+        public Person createFromParcel(Parcel in) {
+            return new Person(in);
+        }
+
+        @Override
+        public Person[] newArray(int size) {
+            return new Person[size];
+        }
+    };
 }

@@ -1,5 +1,6 @@
 package solutions.alterego.android.unisannio.cercapersone;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,10 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.parceler.Parcels;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import solutions.alterego.android.unisannio.DetailActivity;
 import solutions.alterego.android.unisannio.R;
+import solutions.alterego.android.unisannio.ingegneria.IngegneriaCercapersoneDetailActivity;
+
+import static android.support.v4.app.ActivityCompat.startActivity;
 
 public class CercapersoneAdapter extends RecyclerView.Adapter<CercapersoneAdapter.ViewHolder>{
 
@@ -70,8 +78,11 @@ public class CercapersoneAdapter extends RecyclerView.Adapter<CercapersoneAdapte
 
         @Override
         public void onClick(View v) {
-            Log.e("CERCAPERSONE ADAPTER onClick()", "The Item Clicked position: " + pers.get(getPosition()).getNome());
-            //TODO add code for launch intent for detail activity on Clicked Person
+            Log.e("CERCAPERSONE ADAPTER onClick()", "The Item Clicked position: " + pers.get(getPosition()).getPerson().getNome());
+            Person prs = pers.get(getPosition()).getPerson();
+            Intent intent = new Intent(v.getContext(),IngegneriaCercapersoneDetailActivity.class);
+            intent.putExtra("PERSON",prs);
+            v.getContext().startActivity(intent);
         }
     }
 }
