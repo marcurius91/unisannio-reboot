@@ -142,8 +142,6 @@ public class IngengeriaCercapersoneActivity extends AppCompatActivity{
             }
         });
 
-
-
         // Initializing Drawer Layout and ActionBarToggle
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_cercapersone);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.drawer_open,
