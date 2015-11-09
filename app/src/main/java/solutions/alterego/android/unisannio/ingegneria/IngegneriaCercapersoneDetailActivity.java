@@ -3,12 +3,14 @@ package solutions.alterego.android.unisannio.ingegneria;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import org.parceler.Parcels;
@@ -66,6 +68,41 @@ public class IngegneriaCercapersoneDetailActivity extends AppCompatActivity{
         mWebpage.setText(mPerson.getWebPage());
         mPhone.setText(mPerson.getTelefono());
         mName.setText(mPerson.getNome());
+
+        //Check if email String is empty and launch the relative Intent
+        if(!mPerson.getEmail().isEmpty()) {
+            mEmail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                            "mailto", mPerson.getEmail(), null));
+                    startActivity(Intent.createChooser(emailIntent, "Invio Email alla Persona"));
+                }
+            });
+        }
+
+        //Check if phone String is empty and launch the relative Intent
+        if(!mPerson.getTelefono().isEmpty()) {
+            mPhone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mPerson.getTelefono()));
+                    startActivity(intent);
+                }
+            });
+        }
+
+        //TODO Capire se effettivamente ci serve dato che apre il sito interno di facoltà e non quello personale del professore
+        //Check if WebPage String is empty and launch the relative Intent
+        if(!mPerson.getWebPage().isEmpty()) {
+            mWebpage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mPerson.getWebPage()));
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
 
