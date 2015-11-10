@@ -122,8 +122,8 @@ public class IngegneriaCercapersoneDetailActivity extends AppCompatActivity{
         if (id == R.id.action_share) {
             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
-            //String shareBody = mArticle.getTitle() + " - " + mArticle.getUrl();
-            //sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+            String shareBody = mPerson.getNome() + " - " + mPerson.getTelefono() + " - " + mPerson.getWebPage() + " - " + mPerson.getUfficio();
+            sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
             startActivity(Intent.createChooser(sharingIntent, "Share via"));
             return true;
         }
