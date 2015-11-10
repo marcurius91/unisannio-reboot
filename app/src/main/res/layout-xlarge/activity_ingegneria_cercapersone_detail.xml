@@ -66,9 +66,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                tools:text="web page"
+                tools:text="phone"
                 android:textColor="@color/black"
-                android:id="@+id/detail_cercapersone_webpage"
+                android:id="@+id/detail_cercapersone_phone"
                 android:layout_below="@+id/detail_cercapersone_office"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentStart="true" />
@@ -77,10 +77,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                tools:text="phone"
+                tools:text="web page"
                 android:textColor="@color/black"
-                android:id="@+id/detail_cercapersone_phone"
-                android:layout_below="@+id/detail_cercapersone_webpage"
+                android:id="@+id/detail_cercapersone_webpage"
+                android:layout_below="@+id/detail_cercapersone_phone"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentStart="true" />
 
@@ -91,7 +91,7 @@
                 tools:text="tutoring"
                 android:textColor="@color/black"
                 android:id="@+id/detail_cercapersone_tutoring"
-                android:layout_below="@+id/detail_cercapersone_phone"
+                android:layout_below="@+id/detail_cercapersone_webpage"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentStart="true" />
 
