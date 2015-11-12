@@ -37,4 +37,6 @@ public class URLS {
     public static final String ALTEREGO = "http://alterego.solutions";
 
     public static final String GITHUB = "https://github.com/alter-ego/unisannio-reboot";
+
+    public static final String RSS_FEED_INGEGNERIA = "http://www.ding.unisannio.it/html/rss/rssIVAN.php?key=kjsdh2cijnhGVIUBiGd598oyagdo";
 }

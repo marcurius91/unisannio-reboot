@@ -38,6 +38,11 @@
             android:checked="false"
             android:title="@string/avvisi_studenti" />
 
+        <item
+            android:id="@+id/cercapersone_ingegneria"
+            android:checked="false"
+            android:title="@string/cercapersone" />
+
     </group>
 
     <group android:checkableBehavior="single">
