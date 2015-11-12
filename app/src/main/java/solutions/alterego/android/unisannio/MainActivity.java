@@ -10,11 +10,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,15 +22,11 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import solutions.alterego.android.unisannio.NavigationViewManager.NavigationViewManager;
+import solutions.alterego.android.unisannio.navigation.NavigationViewManager;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
 import solutions.alterego.android.unisannio.analytics.Screen;
 import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiFragment;
-import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaAvvisiFragment;
-import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
-import solutions.alterego.android.unisannio.scienze.ScienzeAvvisiFragment;
-import solutions.alterego.android.unisannio.sea.SeaAvvisiFragment;
 
 public class MainActivity extends AppCompatActivity {
 

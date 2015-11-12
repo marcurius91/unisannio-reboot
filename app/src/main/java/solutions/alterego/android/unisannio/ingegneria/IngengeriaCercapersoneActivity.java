@@ -1,12 +1,7 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,31 +11,23 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
-import solutions.alterego.android.unisannio.MapsActivity;
-import solutions.alterego.android.unisannio.NavigationViewManager.NavigationViewManager;
+import solutions.alterego.android.unisannio.navigation.NavigationViewManager;
 import solutions.alterego.android.unisannio.R;
-import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
-import solutions.alterego.android.unisannio.analytics.Screen;
-import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiFragment;
 import solutions.alterego.android.unisannio.cercapersone.CercapersoneAdapter;
 import solutions.alterego.android.unisannio.cercapersone.Person;
 import solutions.alterego.android.unisannio.cercapersone.SearchPerson;
-import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 
 
 public class IngengeriaCercapersoneActivity extends AppCompatActivity{

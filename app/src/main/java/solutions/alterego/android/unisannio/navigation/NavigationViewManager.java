@@ -1,4 +1,4 @@
-package solutions.alterego.android.unisannio.NavigationViewManager;
+package solutions.alterego.android.unisannio.navigation;
 
 import android.app.Activity;
 import android.content.Context;
