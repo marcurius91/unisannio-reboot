@@ -14,6 +14,8 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -41,6 +43,9 @@ public class IngengeriaCercapersoneActivity extends AppCompatActivity{
     @Bind(R.id.toolbar_actionbar)
     Toolbar mToolbar;
 
+    @Bind(R.id.searchView_Cercapersone_Ingegneria)
+    SearchView mCercapersoneSearchView;
+
     @Inject
     AnalyticsManager mAnalyticsManager;
 
@@ -64,8 +69,7 @@ public class IngengeriaCercapersoneActivity extends AppCompatActivity{
         //Initializing NavigationView
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
-        EditText tv_cercapersone = (EditText) findViewById(R.id.textView_ingegneria_cercapersone);
-        Button btn_cercapersone = (Button) findViewById(R.id.button_ingegneria_cercapersone);
+        mCercapersoneSearchView = (SearchView) findViewById(R.id.searchView_Cercapersone_Ingegneria);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.cercapersone_ingegneria_recycle_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.cercapersone_ingegneria_swipe_container);
@@ -87,12 +91,13 @@ public class IngengeriaCercapersoneActivity extends AppCompatActivity{
 
         mRecyclerView.setVisibility(View.VISIBLE);
 
-        btn_cercapersone.setOnClickListener(new View.OnClickListener() {
+        mCercapersoneSearchView.setQueryHint("Cerca Persona");
 
+        mCercapersoneSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onQueryTextSubmit(String query) {
 
-                personToSearch = tv_cercapersone.getText().toString();
+                personToSearch = query;
 
                 icp.getPeople()
                         .observeOn(AndroidSchedulers.mainThread())
@@ -114,6 +119,12 @@ public class IngengeriaCercapersoneActivity extends AppCompatActivity{
                                 mSwipeRefreshLayout.setRefreshing(false);
                             }
                         });
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
             }
         });
 
