@@ -1,6 +1,8 @@
 package solutions.alterego.android.unisannio.giurisprudenza;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -22,7 +24,9 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.R;
+import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.models.Article;
+import solutions.alterego.android.unisannio.models.ArticleAdapter;
 
 public class GiurisprudenzaAvvisiFragment extends Fragment {
 
@@ -35,7 +39,7 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
     @Inject
     GiurisprudenzaRetriever mRetriever;
 
-    private GiurisprudenzaAdapter mAdapter;
+    private ArticleAdapter mAdapter;
 
     public static Fragment newInstance(String url) {
         Bundle bundle = new Bundle();
@@ -71,7 +75,11 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
 
         mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(url));
 
-        mAdapter = new GiurisprudenzaAdapter(new ArrayList<>());
+        mAdapter = new ArticleAdapter(new ArrayList<>(), (article, holder) -> {
+            String url1 = URLS.GIURISPRUDENZA + article.getUrl();
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url1));
+            getActivity().startActivity(browserIntent);
+        },R.drawable.calandra);
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());

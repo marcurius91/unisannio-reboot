@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/ingengeria_card"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/article_card"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_margin="@dimen/small"
@@ -15,6 +16,7 @@
         <TextView
                 android:id="@+id/article_card_date"
                 android:transitionName="@string/transition_article_date"
+                tools:text="Mon 1 Jan 2015"
                 android:textColor="@color/primaryDarkColor"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
@@ -27,7 +29,9 @@
                 android:tag=""
                 android:layout_below="@+id/article_card_date"
                 android:transitionName="@string/transition_article_title"
+                tools:text="Miei Amici"
                 android:visibility="gone"
+                tools:visibility="visible"
                 android:gravity="start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,6 +43,7 @@
                 android:id="@+id/article_card_title"
                 android:layout_below="@+id/article_card_author"
                 android:transitionName="@string/transition_article_author"
+                tools:text="@string/antanipsum"
                 android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

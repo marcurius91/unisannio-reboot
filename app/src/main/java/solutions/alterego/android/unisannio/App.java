@@ -27,12 +27,12 @@ public class App extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        LeakCanary.install(this);
 
         Fabric.with(this, new Crashlytics());
         buildComponentAndInject();
 
         if (BuildConfig.DEBUG) {
+            LeakCanary.install(this);
             l = new DetailedAndroidLogger("UNISANNIO", IAndroidLogger.LoggingLevel.VERBOSE);
         }
         JodaTimeAndroid.init(this);

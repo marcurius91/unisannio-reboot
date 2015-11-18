@@ -1,6 +1,8 @@
 package solutions.alterego.android.unisannio.sea;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -20,9 +22,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
-import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.App;
+import solutions.alterego.android.unisannio.R;
+import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.models.Article;
+import solutions.alterego.android.unisannio.models.ArticleAdapter;
 
 public class SeaAvvisiFragment extends Fragment {
 
@@ -35,7 +39,7 @@ public class SeaAvvisiFragment extends Fragment {
     @Inject
     SeaRetriever mRetriever;
 
-    private SeaAdapter mAdapter;
+    private ArticleAdapter mAdapter;
 
     public static Fragment newInstance(String url) {
         Bundle bundle = new Bundle();
@@ -65,13 +69,17 @@ public class SeaAvvisiFragment extends Fragment {
             R.color.unisannio_blue);
 
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,
-            (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
         mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(url));
 
-        mAdapter = new SeaAdapter(new ArrayList<>());
+        mAdapter = new ArticleAdapter(new ArrayList<>(), (article, holder) -> {
+            String url1 = URLS.SEA + article.getUrl();
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url1));
+            getActivity().startActivity(browserIntent);
+        },R.drawable.sea);
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());

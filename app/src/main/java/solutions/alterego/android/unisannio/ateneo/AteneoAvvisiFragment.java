@@ -1,6 +1,8 @@
 package solutions.alterego.android.unisannio.ateneo;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -23,7 +25,9 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.App;
+import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.models.Article;
+import solutions.alterego.android.unisannio.models.ArticleAdapter;
 
 public class AteneoAvvisiFragment extends Fragment {
 
@@ -36,7 +40,7 @@ public class AteneoAvvisiFragment extends Fragment {
     @Inject
     AteneoRetriever mAteneoRetriever;
 
-    private AteneoAdapter mAdapter;
+    private ArticleAdapter mAdapter;
 
     private boolean mIsStudenti;
 
@@ -58,6 +62,8 @@ public class AteneoAvvisiFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
 
+        int drawable = R.drawable.guerrazzi;
+
         mSwipeRefreshLayout.setColorSchemeResources(
                 R.color.unisannio_yellow,
                 R.color.unisannio_yellow_dark,
@@ -76,7 +82,12 @@ public class AteneoAvvisiFragment extends Fragment {
 
         mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(mIsStudenti));
 
-        mAdapter = new AteneoAdapter(new ArrayList<>(), mIsStudenti);
+        mAdapter = new ArticleAdapter(new ArrayList<>(), (article, holder) -> {
+            String url1 = mIsStudenti ? URLS.ATENEO_DETAIL_STUDENTI_BASE_URL + article.getUrl() : URLS.ATENEO_DETAIL_BASE_URL + article.getUrl();
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url1));
+            getActivity().startActivity(browserIntent);
+        },R.drawable.guerrazzi);
+
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
@@ -108,8 +119,8 @@ public class AteneoAvvisiFragment extends Fragment {
                     }
 
                     @Override
-                    public void onNext(List<Article> ateneoNewses) {
-                        mAdapter.addNews(ateneoNewses);
+                    public void onNext(List<Article> ateneoNewsList) {
+                        mAdapter.addNews(ateneoNewsList);
                         mRecyclerView.setVisibility(View.VISIBLE);
                     }
                 });
