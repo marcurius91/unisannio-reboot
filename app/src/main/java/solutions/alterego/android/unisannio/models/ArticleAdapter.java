@@ -4,6 +4,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -33,10 +34,14 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private List<Article> mArticleList = new ArrayList<>();
 
-    public ArticleAdapter(@NonNull List<Article> articleList, @NonNull OpenArticleDetailListener openArticleDetailListener) {
+    int header_image;
+
+    public ArticleAdapter(@NonNull List<Article> articleList, @NonNull OpenArticleDetailListener openArticleDetailListener,int header_resource) {
         mArticleList = articleList;
         mOpenArticleDetailListener = openArticleDetailListener;
+        header_image = header_resource;
     }
+
 
     public void addNews(List<Article> articleList) {
         mArticleList.clear();
@@ -65,7 +70,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             final Article news = mArticleList.get(i);
             ((ViewHolder) holder).setItem(news);
         } else if (holder instanceof VHHeader) {
-            ((VHHeader) holder).header.setImageResource(R.drawable.sea);
+            ((VHHeader) holder).header.setImageResource(header_image);
         }
     }
 

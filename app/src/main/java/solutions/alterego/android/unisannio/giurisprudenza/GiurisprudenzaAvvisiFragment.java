@@ -79,7 +79,7 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
             String url1 = URLS.GIURISPRUDENZA + article.getUrl();
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url1));
             getActivity().startActivity(browserIntent);
-        });
+        },R.drawable.calandra);
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());

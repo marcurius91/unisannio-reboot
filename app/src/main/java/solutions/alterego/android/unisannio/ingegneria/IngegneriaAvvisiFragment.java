@@ -96,7 +96,7 @@ public class IngegneriaAvvisiFragment extends Fragment {
                             Pair.create(((ArticleAdapter.ViewHolder) holder).author, getString(R.string.transition_article_author))
                     );
             ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
-        });
+        },R.drawable.ding);
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());

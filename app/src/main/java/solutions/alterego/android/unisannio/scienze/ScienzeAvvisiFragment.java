@@ -63,7 +63,7 @@ public class ScienzeAvvisiFragment extends Fragment {
             String url1 = URLS.SCIENZE_NEWS + article.getUrl();
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url1));
             getActivity().startActivity(browserIntent);
-        });
+        },R.drawable.teatro);
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());

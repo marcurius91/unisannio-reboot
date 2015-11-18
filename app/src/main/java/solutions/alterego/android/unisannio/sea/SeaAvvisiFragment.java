@@ -79,7 +79,7 @@ public class SeaAvvisiFragment extends Fragment {
             String url1 = URLS.SEA + article.getUrl();
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url1));
             getActivity().startActivity(browserIntent);
-        });
+        },R.drawable.sea);
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());

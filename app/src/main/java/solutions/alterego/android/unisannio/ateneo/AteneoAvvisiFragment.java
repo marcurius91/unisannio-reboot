@@ -62,6 +62,8 @@ public class AteneoAvvisiFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
 
+        int drawable = R.drawable.guerrazzi;
+
         mSwipeRefreshLayout.setColorSchemeResources(
                 R.color.unisannio_yellow,
                 R.color.unisannio_yellow_dark,
@@ -84,7 +86,7 @@ public class AteneoAvvisiFragment extends Fragment {
             String url1 = mIsStudenti ? URLS.ATENEO_DETAIL_STUDENTI_BASE_URL + article.getUrl() : URLS.ATENEO_DETAIL_BASE_URL + article.getUrl();
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url1));
             getActivity().startActivity(browserIntent);
-        });
+        },R.drawable.guerrazzi);
 
         mRecyclerView.setAdapter(mAdapter);
 
