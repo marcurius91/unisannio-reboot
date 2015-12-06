@@ -2,6 +2,7 @@ package solutions.alterego.android.unisannio.ateneo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,9 @@ public class AteneoAvvisiFragment extends Fragment {
     @Bind(R.id.ateneo_ptr)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
+    @Bind(R.id.image_view_collapsed_recycler)
+    ImageView mImageCollapsed;
+
     @Inject
     AteneoRetriever mAteneoRetriever;
 
@@ -61,8 +66,6 @@ public class AteneoAvvisiFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
-
-        int drawable = R.drawable.guerrazzi;
 
         mSwipeRefreshLayout.setColorSchemeResources(
                 R.color.unisannio_yellow,

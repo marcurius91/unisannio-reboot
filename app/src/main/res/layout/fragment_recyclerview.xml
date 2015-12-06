@@ -37,6 +37,7 @@
                 <!--PUT HERE WHAT EVER YOU WANT TO COLLAPSE, A TOOLBAR, ETC...-->
 
                 <ImageView
+                    android:id="@+id/image_view_collapsed_recycler"
                     android:src="@drawable/calandra"
                     app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
                     android:layout_width="wrap_content"
