@@ -12,6 +12,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,9 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
 
     @Bind(R.id.ateneo_ptr)
     SwipeRefreshLayout mSwipeRefreshLayout;
+
+    @Bind(R.id.image_view_collapsed_recycler)
+    ImageView mImageCollapsed;
 
     @Inject
     GiurisprudenzaRetriever mRetriever;
@@ -69,7 +73,7 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
             R.color.unisannio_blue);
 
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,
-            (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
@@ -80,6 +84,10 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url1));
             getActivity().startActivity(browserIntent);
         },R.drawable.calandra);
+
+        mImageCollapsed.setImageResource(R.drawable.calandra);
+
+
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());

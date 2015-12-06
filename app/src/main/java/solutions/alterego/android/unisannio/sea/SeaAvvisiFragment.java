@@ -12,6 +12,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,9 @@ public class SeaAvvisiFragment extends Fragment {
 
     @Bind(R.id.ateneo_ptr)
     SwipeRefreshLayout mSwipeRefreshLayout;
+
+    @Bind(R.id.image_view_collapsed_recycler)
+    ImageView mImageCollapsed;
 
     @Inject
     SeaRetriever mRetriever;
@@ -80,6 +84,10 @@ public class SeaAvvisiFragment extends Fragment {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url1));
             getActivity().startActivity(browserIntent);
         },R.drawable.sea);
+
+        mImageCollapsed.setImageResource(R.drawable.sea);
+
+
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());

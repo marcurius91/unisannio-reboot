@@ -91,6 +91,8 @@ public class AteneoAvvisiFragment extends Fragment {
             getActivity().startActivity(browserIntent);
         },R.drawable.guerrazzi);
 
+        mImageCollapsed.setImageResource(R.drawable.guerrazzi);
+
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
