@@ -108,17 +108,6 @@ public class AteneoAvvisiFragment extends Fragment {
 
         mAdapter = new ArticleAdapter(new ArrayList<>(), (article, holder) -> {
             String url1 = mIsStudenti ? URLS.ATENEO_DETAIL_STUDENTI_BASE_URL + article.getUrl() : URLS.ATENEO_DETAIL_BASE_URL + article.getUrl();
-            //TODO Put here implementation of custom tab chrome
-
-            mCustomTabsHelperFragment.setConnectionCallback(
-                    new CustomTabsActivityHelper.ConnectionCallback() {
-                        @Override
-                        public void onCustomTabsConnected() {
-                            mCustomTabsHelperFragment.mayLaunchUrl(Uri.parse(url1), null, null);
-                        }
-                        @Override
-                        public void onCustomTabsDisconnected() {}
-                    });
             CustomTabsHelperFragment.open(getActivity(), mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
         },R.drawable.guerrazzi);
 
@@ -172,20 +161,16 @@ public class AteneoAvvisiFragment extends Fragment {
         App.component(context).inject(this);
     }
 
-    /*private static final Uri PROJECT_URI = Uri.parse(
-            "https://github.com/DreaminginCodeZH/CustomTabsHelper");*/
-
     private final CustomTabsActivityHelper.CustomTabsFallback mCustomTabsFallback =
             new CustomTabsActivityHelper.CustomTabsFallback() {
                 @Override
                 public void openUri(Activity activity, Uri uri) {
-                    Toast.makeText(activity, "Custom Tab Failed", Toast.LENGTH_SHORT)
-                            .show();
+                    Toast.makeText(activity, R.string.custom_tab_error, Toast.LENGTH_SHORT).show();
                     try {
                         activity.startActivity(new Intent(Intent.ACTION_VIEW, uri));
                     } catch (ActivityNotFoundException e) {
                         e.printStackTrace();
-                        Toast.makeText(activity, "Activity not found", Toast.LENGTH_SHORT)
+                        Toast.makeText(activity, R.string.custom_tab_error_activity, Toast.LENGTH_SHORT)
                                 .show();
                     }
                 }
