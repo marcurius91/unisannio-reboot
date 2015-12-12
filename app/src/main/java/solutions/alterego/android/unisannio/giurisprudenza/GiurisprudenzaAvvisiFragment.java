@@ -1,9 +1,11 @@
 package solutions.alterego.android.unisannio.giurisprudenza;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +14,9 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import org.chromium.customtabsclient.CustomTabsActivityHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +24,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.BindColor;
 import butterknife.ButterKnife;
+import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
@@ -36,10 +43,17 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
     @Bind(R.id.ateneo_ptr)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
+    @BindColor(R.color.primaryColor)
+    int mColorPrimary;
+
     @Inject
     GiurisprudenzaRetriever mRetriever;
 
     private ArticleAdapter mAdapter;
+
+    private CustomTabsHelperFragment mCustomTabsHelperFragment;
+
+    private CustomTabsIntent mCustomTabsIntent;
 
     public static Fragment newInstance(String url) {
         Bundle bundle = new Bundle();
@@ -75,10 +89,16 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
 
         mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(url));
 
+        mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this.getActivity());
+        mCustomTabsIntent = new CustomTabsIntent.Builder()
+                .enableUrlBarHiding()
+                .setToolbarColor(mColorPrimary)
+                .setShowTitle(true)
+                .build();
+
         mAdapter = new ArticleAdapter(new ArrayList<>(), (article, holder) -> {
             String url1 = URLS.GIURISPRUDENZA + article.getUrl();
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url1));
-            getActivity().startActivity(browserIntent);
+            CustomTabsHelperFragment.open(getActivity(), mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
         },R.drawable.calandra);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -129,4 +149,19 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
         super.onAttach(activity);
         App.component(activity).inject(this);
     }
+
+    private final CustomTabsActivityHelper.CustomTabsFallback mCustomTabsFallback =
+            new CustomTabsActivityHelper.CustomTabsFallback() {
+                @Override
+                public void openUri(Activity activity, Uri uri) {
+                    Toast.makeText(activity, R.string.custom_tab_error, Toast.LENGTH_SHORT).show();
+                    try {
+                        activity.startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                    } catch (ActivityNotFoundException e) {
+                        e.printStackTrace();
+                        Toast.makeText(activity, R.string.custom_tab_error_activity, Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+            };
 }
