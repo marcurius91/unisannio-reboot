@@ -35,4 +35,6 @@
     </string>
     <string name="cercapersone_editText">Inserisci il nome della persona da ricercare</string>
     <string name="activity_cercapersone_detail_title">Dettaglio Persona</string>
+    <string name="custom_tab_error">"Non possiedi installato il browser Google Chrome"</string>
+    <string name="custom_tab_error_activity">"Impossibile lanciare l'activity di browsing"</string>
 </resources>

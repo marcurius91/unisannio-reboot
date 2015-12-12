@@ -1,8 +1,11 @@
 package solutions.alterego.android.unisannio;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +16,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import org.chromium.customtabsclient.CustomTabsActivityHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +27,9 @@ import java.util.StringTokenizer;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.BindColor;
 import butterknife.ButterKnife;
+import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import solutions.alterego.android.unisannio.navigation.NavigationViewManager;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
 import solutions.alterego.android.unisannio.analytics.Screen;
@@ -42,8 +50,15 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.toolbar_actionbar)
     Toolbar mToolbar;
 
+    @BindColor(R.color.primaryColor)
+    int mColorPrimary;
+
     @Inject
     AnalyticsManager mAnalyticsManager;
+
+    private CustomTabsHelperFragment mCustomTabsHelperFragment;
+
+    private CustomTabsIntent mCustomTabsIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +72,13 @@ public class MainActivity extends AppCompatActivity {
         // Initializing Toolbar and setting it as the actionbar
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
+        mCustomTabsIntent = new CustomTabsIntent.Builder()
+                .enableUrlBarHiding()
+                .setToolbarColor(mColorPrimary)
+                .setShowTitle(true)
+                .build();
 
         //Initializing NavigationView
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -115,8 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.action_web_page:
                     //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
                     mAnalyticsManager.track(new Screen(getString(R.string.ateneo), getString(R.string.sito_web)));
-                    browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.ATENEO));
-                    startActivity(browserIntent);
+                    CustomTabsHelperFragment.open(this, mCustomTabsIntent, Uri.parse(URLS.ATENEO), mCustomTabsFallback);
                     break;
                 case R.id.action_map:
                     //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
@@ -133,8 +154,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.action_web_page:
                     //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
                     mAnalyticsManager.track(new Screen(getString(R.string.ingegneria), getString(R.string.sito_web)));
-                    browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.INGEGNERIA));
-                    startActivity(browserIntent);
+                    CustomTabsHelperFragment.open(this, mCustomTabsIntent, Uri.parse(URLS.INGEGNERIA), mCustomTabsFallback);
                     break;
                 case R.id.action_map:
                     //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
@@ -151,8 +171,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.action_web_page:
                     //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
                     mAnalyticsManager.track(new Screen(getString(R.string.scienze), getString(R.string.sito_web)));
-                    browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.SCIENZE));
-                    startActivity(browserIntent);
+                    CustomTabsHelperFragment.open(this, mCustomTabsIntent, Uri.parse(URLS.SCIENZE), mCustomTabsFallback);
                     break;
                 case R.id.action_map:
                     //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
@@ -169,8 +188,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.action_web_page:
                     //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
                     mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.sito_web)));
-                    browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.GIURISPRUDENZA));
-                    startActivity(browserIntent);
+                    CustomTabsHelperFragment.open(this, mCustomTabsIntent, Uri.parse(URLS.GIURISPRUDENZA), mCustomTabsFallback);
                     break;
                 case R.id.action_map:
                     //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
@@ -187,8 +205,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.action_web_page:
                     //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
                     mAnalyticsManager.track(new Screen(getString(R.string.sea), getString(R.string.sito_web)));
-                    browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(URLS.SEA));
-                    startActivity(browserIntent);
+                    CustomTabsHelperFragment.open(this, mCustomTabsIntent, Uri.parse(URLS.SEA), mCustomTabsFallback);
                     break;
                 case R.id.action_map:
                     //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
@@ -221,4 +238,19 @@ public class MainActivity extends AppCompatActivity {
         fragmentName = st.nextToken();
         return fragmentName;
     }
+
+    private final CustomTabsActivityHelper.CustomTabsFallback mCustomTabsFallback =
+            new CustomTabsActivityHelper.CustomTabsFallback() {
+                @Override
+                public void openUri(Activity activity, Uri uri) {
+                    Toast.makeText(activity, R.string.custom_tab_error, Toast.LENGTH_SHORT).show();
+                    try {
+                        activity.startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                    } catch (ActivityNotFoundException e) {
+                        e.printStackTrace();
+                        Toast.makeText(activity, R.string.custom_tab_error_activity, Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+            };
 }

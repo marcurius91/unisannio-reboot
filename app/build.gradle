@@ -151,4 +151,5 @@ dependencies {
 
     compile "org.parceler:parceler-api:1.0.3"
     apt "org.parceler:parceler:1.0.3"
+    compile 'com.github.DreaminginCodeZH:CustomTabsHelper:v1.0.1'
 }
