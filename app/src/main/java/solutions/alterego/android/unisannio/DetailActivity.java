@@ -20,7 +20,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import solutions.alterego.android.unisannio.models.Article;
 
-
 public class DetailActivity extends AppCompatActivity {
 
     private DateTimeFormatter localDateFormatter = DateTimeFormat.fullDate().withLocale(Locale.getDefault());

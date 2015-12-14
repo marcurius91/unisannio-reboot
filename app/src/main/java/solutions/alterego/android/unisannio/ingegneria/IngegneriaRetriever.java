@@ -7,5 +7,5 @@ import solutions.alterego.android.unisannio.models.Article;
 
 public interface IngegneriaRetriever {
 
-    abstract public Observable<List<Article>> get();
+    Observable<List<Article>> get();
 }

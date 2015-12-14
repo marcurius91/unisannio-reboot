@@ -60,7 +60,7 @@ public class IngegneriaCercapersoneDetailActivity extends AppCompatActivity{
         mToolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         Bundle data = getIntent().getExtras();
-        mPerson = (Person) data.getParcelable("PERSON");
+        mPerson = data.getParcelable("PERSON");
 
         mEmail.setText(mPerson.getEmail());
         mRole.setText(mPerson.getRuolo());

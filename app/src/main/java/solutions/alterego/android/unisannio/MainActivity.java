@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
         List<Fragment> fragments = fragmentManager.getFragments();
         for(Fragment fragment : fragments){
             if(fragment != null && fragment.getUserVisibleHint())
-                return (Fragment)fragment;
+                return fragment;
         }
         return null;
     }

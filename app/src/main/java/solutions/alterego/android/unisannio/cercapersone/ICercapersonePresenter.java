@@ -10,9 +10,9 @@ import solutions.alterego.android.unisannio.interfaces.IRetriever;
 
 public interface ICercapersonePresenter {
 
-    public void setParser(@NonNull IParser parser);
+    void setParser(@NonNull IParser parser);
 
-    public void setRetriever(@NonNull IRetriever retriever);
+    void setRetriever(@NonNull IRetriever retriever);
 
-    public Observable<ArrayList<Person>> getPeople();
+    Observable<ArrayList<Person>> getPeople();
 }

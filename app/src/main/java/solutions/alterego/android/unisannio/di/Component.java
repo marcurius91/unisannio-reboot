@@ -32,7 +32,7 @@ public interface Component {
     void inject(ScienzeAvvisiFragment app);
 
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public final static class Initializer {
+    final class Initializer {
 
         public static Component init(App app) {
             return DaggerComponent.builder()

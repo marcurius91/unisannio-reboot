@@ -1,7 +1,5 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
-import android.util.Log;
-
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -11,7 +9,6 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.models.Article;
@@ -45,7 +42,7 @@ public class IngegneriaAvvisiStudentiParser implements IParser {
 
             String body = element.select(".avvtext").first().text();
 
-            String date = dateUtils.extractingData(element.select("#publishinfo").first().text());
+            String date = DateUtils.extractingData(element.select("#publishinfo").first().text());
 
             DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
             DateTime jodatime = dtf.parseDateTime(date);
