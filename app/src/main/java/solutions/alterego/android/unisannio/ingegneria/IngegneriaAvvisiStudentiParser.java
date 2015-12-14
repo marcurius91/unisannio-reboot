@@ -16,33 +16,48 @@ import solutions.alterego.android.unisannio.utils.DateUtils;
 
 public class IngegneriaAvvisiStudentiParser implements IParser {
 
+    public static final String SELECT_HEADER = "#header > h2 > a";
+
+    public static final String URL = "href";
+
+    public static final String SELECT_PARAGRAFS = "p";
+
+    public static final String EMPTY_AUTHOR_PLACEHOLDER = "Presidio didattico";
+
+    public static final String SELECT_PUBLISH_INFO = "#publishinfo";
+
+    public static final String SELECT_BODY = ".avvtext";
+
+    public static final String AUTHOR = "Autore";
+
+    public static String SELECT_ELEMENTS = "#maincontent-block > #item";
+
     @Override
     public List parse(Document document) {
-        DateUtils dateUtils = null;
 
-        Elements elements = document.select("#maincontent-block > #item");
+        Elements elements = getElements(document);
 
         List<Article> list = new ArrayList<>();
 
         for (Element element : elements) {
-            Element header = element.select("#header > h2 > a").first();
+            Element header = element.select(SELECT_HEADER).first();
             String title = header.text();
-            String url = header.attr("href");
+            String url = header.attr(URL);
 
-            Elements paragraphs = element.select("p");
+            Elements paragraphs = element.select(SELECT_PARAGRAFS);
             String author = "";
             for (Element paragraph : paragraphs) {
-                if (paragraph.text().contains("Autore")) {
+                if (paragraph.text().contains(AUTHOR)) {
                     author = paragraph.text().replace("Autore: ", "");
                 }
             }
             if ("".equals(author)) {
-                author = "Presidio didattico";
+                author = EMPTY_AUTHOR_PLACEHOLDER;
             }
 
-            String body = element.select(".avvtext").first().text();
+            String body = element.select(SELECT_BODY).first().text();
 
-            String date = DateUtils.extractingData(element.select("#publishinfo").first().text());
+            String date = DateUtils.extractingData(element.select(SELECT_PUBLISH_INFO).first().text());
 
             DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
             DateTime jodatime = dtf.parseDateTime(date);
@@ -50,5 +65,9 @@ public class IngegneriaAvvisiStudentiParser implements IParser {
             list.add(new Article(title, url, body, jodatime, author));
         }
         return list;
+    }
+
+    public Elements getElements(Document document) {
+        return document.select(SELECT_ELEMENTS);
     }
 }

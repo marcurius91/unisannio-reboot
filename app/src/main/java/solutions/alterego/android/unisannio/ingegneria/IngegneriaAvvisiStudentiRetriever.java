@@ -21,7 +21,7 @@ public class IngegneriaAvvisiStudentiRetriever implements IngegneriaRetriever {
                     public void call(Subscriber<? super List<Article>> subscriber) {
                         Document doc = null;
                         try {
-                            doc = Jsoup.connect(URLS.INGEGNERIA_NEWS_STUDENTI).timeout(10 * 1000).get();
+                            doc = getDocument();
                         } catch (IOException e) {
                             subscriber.onError(e);
                         }
@@ -33,5 +33,9 @@ public class IngegneriaAvvisiStudentiRetriever implements IngegneriaRetriever {
                     }
                 })
                 .subscribeOn(Schedulers.io());
+    }
+
+    public Document getDocument() throws IOException {
+        return Jsoup.connect(URLS.INGEGNERIA_NEWS_STUDENTI).timeout(10 * 1000).get();
     }
 }
