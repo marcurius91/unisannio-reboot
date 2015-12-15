@@ -36,7 +36,7 @@ def mixpanel_key = hasProperty('MIXPANEL_UNISANNIO') ? MIXPANEL_UNISANNIO : Syst
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "23.0.1"
 
     defaultConfig {
         applicationId "solutions.alterego.android.unisannio"
