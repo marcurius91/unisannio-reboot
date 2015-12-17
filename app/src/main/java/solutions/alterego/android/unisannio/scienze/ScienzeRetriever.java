@@ -13,7 +13,6 @@ import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.models.Article;
 
 public class ScienzeRetriever {
-
     public static Observable<List<Article>> get(final String url) {
         return Observable
                 .create(new Observable.OnSubscribe<List<Article>>() {
