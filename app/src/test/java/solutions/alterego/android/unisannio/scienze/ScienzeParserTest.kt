@@ -23,7 +23,7 @@ class ScienzeParserTest {
     @Before
     fun setUp(){
     document = retriver.document;
-    assertThat(document).isEqualTo(null);
+    assertThat(document).isNotNull;
     }
 
     @After
