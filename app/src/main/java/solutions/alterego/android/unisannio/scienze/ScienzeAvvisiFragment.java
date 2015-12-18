@@ -135,7 +135,9 @@ public class ScienzeAvvisiFragment extends Fragment {
         mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
 
-        ScienzeRetriever.get(url)
+        ScienzeRetriever sr = new ScienzeRetriever(url);
+
+        sr.get()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new Observer<List<Article>>() {
                 @Override
