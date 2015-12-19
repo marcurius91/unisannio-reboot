@@ -12,8 +12,6 @@ import solutions.alterego.android.assertThat
 @RunWith(MockitoJUnitRunner::class)
 class ScienzeParserTest {
 
-    private inline fun <reified T : Any> mock() = Mockito.mock(T::class.java)
-
     val url = "http://www.sciunisannio.it";
     val parser = ScienzeParser();
     val retriver = ScienzeRetriever(url);
