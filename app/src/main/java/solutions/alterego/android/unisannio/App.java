@@ -28,7 +28,10 @@ public class App extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
 
-        Fabric.with(this, new Crashlytics());
+        if (!BuildConfig.DEBUG) {
+            Fabric.with(this, new Crashlytics());
+        }
+
         buildComponentAndInject();
 
         if (BuildConfig.DEBUG) {
