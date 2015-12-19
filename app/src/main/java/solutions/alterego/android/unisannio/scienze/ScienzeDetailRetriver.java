@@ -11,7 +11,6 @@ import java.io.IOException;
 import rx.Observable;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
-import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.interfaces.IRetriever;
 
 
@@ -33,7 +32,7 @@ public class ScienzeDetailRetriver implements IRetriever<Document>{
 
                         Document doc = null;
                         try {
-                            doc = Jsoup.connect(url).ignoreContentType(true).timeout(10 * 1000).get();
+                            doc = getDocument();
                         }
                         catch (IOException e) {
                             subscriber.onError(e);
@@ -45,5 +44,9 @@ public class ScienzeDetailRetriver implements IRetriever<Document>{
                         }
                     }
                 }).subscribeOn(Schedulers.io());
+    }
+
+    public Document getDocument() throws IOException {
+        return Jsoup.connect(url).timeout(10 * 1000).get();
     }
 }
