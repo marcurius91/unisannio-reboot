@@ -5,10 +5,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import solutions.alterego.android.assertThat
-import solutions.alterego.android.unisannio.models.Article
-import java.util.*
-import kotlin.test.assertTrue
-import kotlin.test.expect
 
 
 class GiurisprudenzaParserTest {
@@ -23,7 +19,6 @@ class GiurisprudenzaParserTest {
         assertThat(url).isNotNull;
         document = retriver.document;
         assertThat(document).isNotNull;
-
     }
 
     @After
@@ -31,7 +26,7 @@ class GiurisprudenzaParserTest {
     }
 
     @Test
-    fun testParseDetail() {
+    fun testNotNullParseDetail() {
         var list = parser.parse(document);
         assertThat(list).isNotNull;
     }
