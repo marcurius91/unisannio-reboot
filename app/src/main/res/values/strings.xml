@@ -37,4 +37,6 @@
     <string name="activity_cercapersone_detail_title">Dettaglio Persona</string>
     <string name="custom_tab_error">"Non possiedi installato il browser Google Chrome"</string>
     <string name="custom_tab_error_activity">"Impossibile lanciare l'activity di browsing"</string>
+  <string name="title_activity_ateneo">AteneoActivity</string>
+  <string name="hello_world">Hello world!</string>
 </resources>
