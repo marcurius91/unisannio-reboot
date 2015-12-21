@@ -4,18 +4,18 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/ATENEO"
+            android:id="@+id/drawer_section_ateneo"
             android:enabled="false"
             android:icon="@drawable/ic_ateneo"
             android:title="@string/ateneo"/>
 
         <item
-            android:id="@+id/avvisi_ateneo"
+            android:id="@+id/drawer_ateneo_avvisi"
             android:checked="false"
             android:title="@string/ateneo_avvisi" />
 
         <item
-            android:id="@+id/avvisi_studenti"
+            android:id="@+id/drawer_ateneo_avvisi_studenti"
             android:checked="false"
             android:title="@string/avvisi_studenti" />
 
@@ -24,17 +24,17 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/INGEGNERIA"
+            android:id="@+id/drawer_section_ingegneria"
             android:enabled="false"
             android:icon="@drawable/ic_ingegneria"
             android:title="@string/ingegneria" />
         <item
-            android:id="@+id/avvisi_dipartimento"
+            android:id="@+id/drawer_ingegneria_avvisi_dipartimento"
             android:checked="false"
             android:title="@string/ateneo_avvisi" />
 
         <item
-            android:id="@+id/avvisi_studenti_ingegneria"
+            android:id="@+id/drawer_ingegneria_avvisi_studenti"
             android:checked="false"
             android:title="@string/avvisi_studenti" />
 

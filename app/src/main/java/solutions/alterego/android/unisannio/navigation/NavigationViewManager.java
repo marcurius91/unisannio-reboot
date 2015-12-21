@@ -1,5 +1,11 @@
 package solutions.alterego.android.unisannio.navigation;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import org.chromium.customtabsclient.CustomTabsActivityHelper;
+
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -14,21 +20,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-
-import org.chromium.customtabsclient.CustomTabsActivityHelper;
-
 import javax.inject.Inject;
 
 import butterknife.BindColor;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
-import solutions.alterego.android.unisannio.MainActivity;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
-import solutions.alterego.android.unisannio.analytics.Screen;
 import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiFragment;
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaAvvisiFragment;
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
@@ -100,24 +98,24 @@ public class NavigationViewManager extends FragmentActivity {
                 switch (menuItem.getItemId()) {
 
                     //Ateneo
-                    case R.id.avvisi_ateneo:
+                    case R.id.drawer_ateneo_avvisi:
                         fragmentManager.beginTransaction()
                                 .replace(R.id.container, AteneoAvvisiFragment.newInstance(false))
                                 .commit();
                         return true;
-                    case R.id.avvisi_studenti:
+                    case R.id.drawer_ateneo_avvisi_studenti:
                         //mAnalyticsManager.track(new Screen(context.getString(R.string.ateneo), context.getString(R.string.avvisi_studenti)));
                         fragmentManager.beginTransaction().replace(R.id.container, AteneoAvvisiFragment.newInstance(true)).commit();
                         return true;
 
                     //Ingegneria
-                    case R.id.avvisi_dipartimento:
+                    case R.id.drawer_ingegneria_avvisi_dipartimento:
                         //mAnalyticsManager.track(new Screen(context.getString(R.string.ingegneria), context.getString(R.string.avvisi_dipartimento)));
                         fragmentManager.beginTransaction()
                                 .replace(R.id.container, IngegneriaAvvisiFragment.newInstance(true))
                                 .commit();
                         return true;
-                    case R.id.avvisi_studenti_ingegneria:
+                    case R.id.drawer_ingegneria_avvisi_studenti:
                         //mAnalyticsManager.track(new Screen(context.getString(R.string.ingegneria), context.getString(R.string.avvisi_studenti)));
                         fragmentManager.beginTransaction()
                                 .replace(R.id.container, IngegneriaAvvisiFragment.newInstance(false))

@@ -1,6 +1,7 @@
 package solutions.alterego.android.unisannio;
 
-import android.app.Activity;
+import org.chromium.customtabsclient.CustomTabsActivityHelper;
+
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,8 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import org.chromium.customtabsclient.CustomTabsActivityHelper;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -30,11 +29,11 @@ import butterknife.Bind;
 import butterknife.BindColor;
 import butterknife.ButterKnife;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
-import solutions.alterego.android.unisannio.navigation.NavigationViewManager;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
 import solutions.alterego.android.unisannio.analytics.Screen;
 import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiFragment;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
+import solutions.alterego.android.unisannio.navigation.NavigationViewManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -240,17 +239,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private final CustomTabsActivityHelper.CustomTabsFallback mCustomTabsFallback =
-            new CustomTabsActivityHelper.CustomTabsFallback() {
-                @Override
-                public void openUri(Activity activity, Uri uri) {
-                    Toast.makeText(activity, R.string.custom_tab_error, Toast.LENGTH_SHORT).show();
-                    try {
-                        activity.startActivity(new Intent(Intent.ACTION_VIEW, uri));
-                    } catch (ActivityNotFoundException e) {
-                        e.printStackTrace();
-                        Toast.makeText(activity, R.string.custom_tab_error_activity, Toast.LENGTH_SHORT)
-                                .show();
-                    }
-                }
-            };
+        (activity, uri) -> {
+            Toast.makeText(activity, R.string.custom_tab_error, Toast.LENGTH_SHORT).show();
+            try {
+                activity.startActivity(new Intent(Intent.ACTION_VIEW, uri));
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(activity, R.string.custom_tab_error_activity, Toast.LENGTH_SHORT)
+                    .show();
+            }
+        };
 }

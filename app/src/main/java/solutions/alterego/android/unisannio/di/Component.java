@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.MainActivity;
+import solutions.alterego.android.unisannio.ateneo.AteneoActivity;
 import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiFragment;
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaAvvisiFragment;
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
@@ -30,6 +31,8 @@ public interface Component {
     void inject(SeaAvvisiFragment app);
 
     void inject(ScienzeAvvisiFragment app);
+
+    void inject(AteneoActivity ateneoActivity);
 
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     final class Initializer {
