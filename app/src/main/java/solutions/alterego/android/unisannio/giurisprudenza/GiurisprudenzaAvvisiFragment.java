@@ -46,10 +46,9 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
     @BindColor(R.color.primaryColor)
     int mColorPrimary;
 
-    @Inject
-    GiurisprudenzaRetriever mRetriever;
-
     private ArticleAdapter mAdapter;
+
+    private GiurisprudenzaPresenter gp;
 
     private CustomTabsHelperFragment mCustomTabsHelperFragment;
 
@@ -76,18 +75,20 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
         Bundle bundle = getArguments();
         String url = bundle.getString("URL");
 
+        gp = new GiurisprudenzaPresenter(url);
+
         mSwipeRefreshLayout.setColorSchemeResources(
-            R.color.unisannio_yellow,
-            R.color.unisannio_yellow_dark,
-            R.color.unisannio_yellow_light,
-            R.color.unisannio_blue);
+                R.color.unisannio_yellow,
+                R.color.unisannio_yellow_dark,
+                R.color.unisannio_yellow_light,
+                R.color.unisannio_blue);
 
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,
-            (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
+                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(url));
+        mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList());
 
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this.getActivity());
         mCustomTabsIntent = new CustomTabsIntent.Builder()
@@ -105,37 +106,41 @@ public class GiurisprudenzaAvvisiFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         mRecyclerView.setLayoutManager(layoutManager);
 
-        refreshList(url);
+        refreshList();
     }
 
-    private void refreshList(String url) {
+    private void refreshList() {
         mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
 
-        mRetriever.get(url)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(new Observer<List<Article>>() {
-                @Override
-                public void onCompleted() {
-                    if (mSwipeRefreshLayout != null) {
-                        mSwipeRefreshLayout.setRefreshing(false);
+        gp.getArticles()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ArrayList<Article>>() {
+                    @Override
+                    public void onCompleted() {
+                        if (mSwipeRefreshLayout != null) {
+                            mSwipeRefreshLayout.setRefreshing(false);
+                        }
                     }
-                }
 
-                @Override
-                public void onError(Throwable e) {
-                    App.l.e(e);
-                    if (mSwipeRefreshLayout != null) {
-                        mSwipeRefreshLayout.setRefreshing(false);
+                    @Override
+                    public void onError(Throwable e) {
+                        App.l.e(e);
+                        if (mSwipeRefreshLayout != null) {
+                            mSwipeRefreshLayout.setRefreshing(false);
+                        }
                     }
-                }
 
-                @Override
-                public void onNext(List<Article> ateneoNewses) {
-                    mAdapter.addNews(ateneoNewses);
-                    mRecyclerView.setVisibility(View.VISIBLE);
-                }
-            });
+                    @Override
+                    public void onNext(ArrayList<Article> articles) {
+                        mAdapter.addNews(articles);
+                        mRecyclerView.setVisibility(View.VISIBLE);
+                    }
+                });
+
+        if (mSwipeRefreshLayout != null) {
+            mSwipeRefreshLayout.setRefreshing(false);
+        }
     }
 
     @Override

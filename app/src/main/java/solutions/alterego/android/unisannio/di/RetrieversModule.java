@@ -20,8 +20,8 @@ public class RetrieversModule {
 
     @Provides
     @Singleton
-    GiurisprudenzaRetriever provideGiurisprudenzaRetriever() {
-        return new GiurisprudenzaRetriever();
+    GiurisprudenzaRetriever provideGiurisprudenzaRetriever(String url) {
+        return new GiurisprudenzaRetriever(url);
     }
 
     @Provides
