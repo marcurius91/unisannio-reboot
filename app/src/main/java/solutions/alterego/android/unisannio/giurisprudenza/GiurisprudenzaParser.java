@@ -13,7 +13,7 @@ import java.util.List;
 import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.models.Article;
 
-class GiurisprudenzaParser implements IParser<Article> {
+public class GiurisprudenzaParser implements IParser<Article> {
 
     public List<Article> parse(Document document) {
         Elements elements = document.select("table.lista > tbody > tr[class^=row]");
