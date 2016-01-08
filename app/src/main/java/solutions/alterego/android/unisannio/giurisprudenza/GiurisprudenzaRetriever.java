@@ -3,32 +3,46 @@ package solutions.alterego.android.unisannio.giurisprudenza;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import java.util.List;
+import java.io.IOException;
 
 import rx.Observable;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
-import solutions.alterego.android.unisannio.models.Article;
+import solutions.alterego.android.unisannio.interfaces.IRetriever;
 
-public class GiurisprudenzaRetriever {
+public class GiurisprudenzaRetriever implements IRetriever<Document> {
 
-    public Observable<List<Article>> get(String url) {
+    private String urlToRetrive;
+
+    public GiurisprudenzaRetriever(String url) {
+        this.urlToRetrive = url;
+    }
+
+    @Override
+    public Observable<Document> retriveDocument() {
         return Observable
-                .create(new Observable.OnSubscribe<List<Article>>() {
-                    @Override
-                    public void call(Subscriber<? super List<Article>> subscriber) {
-                        List<Article> newsList;
-                        try {
-                            Document doc = Jsoup.connect(url).timeout(10 * 1000).userAgent("Mozilla").get();
+            .create(new Observable.OnSubscribe<Document>() {
+                @Override
+                public void call(Subscriber<? super Document> subscriber) {
 
-                            newsList = new GiurisprudenzaParser().parse(doc);
-                            subscriber.onNext(newsList);
-                            subscriber.onCompleted();
-                        } catch (Exception e) {
-                            subscriber.onError(e);
-                        }
+                    Document doc = null;
+                    try {
+                        doc = getDocument();
+                    } catch (IOException e) {
+                        subscriber.onError(e);
                     }
-                })
-                .subscribeOn(Schedulers.io());
+
+                    if (doc != null) {
+                        subscriber.onNext(doc);
+                        //Log.e("RETRIVER",doc.getAllElements().toString());
+                        subscriber.onCompleted();
+                    }
+                }
+            }).subscribeOn(Schedulers.io());
+
+    }
+
+    public Document getDocument() throws IOException {
+        return Jsoup.connect(urlToRetrive).timeout(10 * 1000).userAgent("Mozilla").get();
     }
 }
