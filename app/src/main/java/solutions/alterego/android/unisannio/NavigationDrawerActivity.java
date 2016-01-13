@@ -168,6 +168,9 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
                 case R.id.drawer_ingegneria_avvisi_dipartimento:
                     navigate().toIngegneria();
                     break;
+                case R.id.cercapersone_ingegneria:
+                    navigate().toIngegneriaCercapersone();
+                    break;
                 default:
                     throw new DeveloperError("Menu item " + item + " not supported");
             }
