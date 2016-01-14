@@ -1,16 +1,10 @@
-package solutions.alterego.android.unisannio.ateneo;
+package solutions.alterego.android.unisannio.scienze;
 
-import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
-import org.chromium.customtabsclient.CustomTabsActivityHelper;
 
 import java.util.ArrayList;
 
@@ -27,7 +21,7 @@ import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
 import solutions.alterego.android.unisannio.analytics.Screen;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 
-public class AteneoActivity extends NavigationDrawerActivity {
+public class ScienzeActivity extends NavigationDrawerActivity {
 
     @Inject
     AnalyticsManager mAnalyticsManager;
@@ -37,10 +31,11 @@ public class AteneoActivity extends NavigationDrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         App.component(this).inject(this);
 
-        setContentView(R.layout.activity_new_ateneo);
+        setContentView(R.layout.activity_scienze);
         ButterKnife.bind(this);
 
         mCustomTabsIntent = new CustomTabsIntent.Builder()
@@ -49,7 +44,6 @@ public class AteneoActivity extends NavigationDrawerActivity {
                 .setShowTitle(true)
                 .build();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -62,12 +56,12 @@ public class AteneoActivity extends NavigationDrawerActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_web_page:
-                mAnalyticsManager.track(new Screen(getString(R.string.ateneo), getString(R.string.sito_web)));
-                CustomTabsHelperFragment.open(this, mCustomTabsIntent, Uri.parse(URLS.ATENEO), mCustomTabsFallback);
+                mAnalyticsManager.track(new Screen(getString(R.string.scienze), getString(R.string.sito_web)));
+                CustomTabsHelperFragment.open(this, mCustomTabsIntent, Uri.parse(URLS.SCIENZE), mCustomTabsFallback);
                 break;
             case R.id.action_map:
-                mAnalyticsManager.track(new Screen(getString(R.string.ateneo), getString(R.string.mappa)));
-                mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.ATENEO()));
+                mAnalyticsManager.track(new Screen(getString(R.string.scienze), getString(R.string.mappa)));
+                mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.SCIENZE()));
                 startActivity(mMap);
                 break;
         }
@@ -76,9 +70,11 @@ public class AteneoActivity extends NavigationDrawerActivity {
 
     @Override
     protected int getNavigationDrawerMenuIdForThisActivity() {
-        return R.id.drawer_section_ateneo;
+        return R.id.avvisi_studenti_scienze_tecnologie;
     }
 
     @Override
-    protected void onAppbarNavigationClick() { openNavigationDrawer(); }
+    protected void onAppbarNavigationClick() {
+        openNavigationDrawer();
+    }
 }
