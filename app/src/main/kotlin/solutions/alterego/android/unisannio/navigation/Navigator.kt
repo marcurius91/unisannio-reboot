@@ -5,6 +5,7 @@ import android.content.Intent
 import android.support.v4.app.TaskStackBuilder
 import solutions.alterego.android.unisannio.ateneo.AteneoActivity
 import solutions.alterego.android.unisannio.ingegneria.IngengeriaCercapersoneActivity
+import solutions.alterego.android.unisannio.scienze.ScienzeActivity
 
 class Navigator(val activityContext: Activity) {
 
@@ -33,7 +34,8 @@ class Navigator(val activityContext: Activity) {
     }
 
     fun toScienzeStudenti(){
-
+        val scienze_studenti = Intent(activityContext, ScienzeActivity::class.java);
+        activityContext.startActivity(scienze_studenti);
     }
 
     fun toGiurisprudenza(){
