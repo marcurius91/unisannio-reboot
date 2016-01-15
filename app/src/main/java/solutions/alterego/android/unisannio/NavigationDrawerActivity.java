@@ -1,16 +1,22 @@
 package solutions.alterego.android.unisannio;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Toolbar;
+
+import javax.inject.Inject;
 
 import solutions.alterego.android.unisannio.utils.DeveloperError;
 
@@ -173,6 +179,15 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
                     break;
                 case R.id.avvisi_studenti_scienze_tecnologie:
                     navigate().toScienzeStudenti();
+                    break;
+                case R.id.avvisi_studenti_giurisprudenza://TODO Fix Implementation problem
+                    navigate().toGiurisprudenzaStudenti();
+                    break;
+                case R.id.comunicazioni://TODO Fix Implementation problem
+                    navigate().toGiurisprudenzaComunicazioni();
+                    break;
+                case R.id.avvisi_studenti_sea:
+                    navigate().toSeaStudenti();
                     break;
                 default:
                     throw new DeveloperError("Menu item " + item + " not supported");

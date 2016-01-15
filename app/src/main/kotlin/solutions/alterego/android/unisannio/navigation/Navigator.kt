@@ -4,8 +4,10 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v4.app.TaskStackBuilder
 import solutions.alterego.android.unisannio.ateneo.AteneoActivity
+import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaActivity
 import solutions.alterego.android.unisannio.ingegneria.IngengeriaCercapersoneActivity
 import solutions.alterego.android.unisannio.scienze.ScienzeActivity
+import solutions.alterego.android.unisannio.sea.SeaActivity
 
 class Navigator(val activityContext: Activity) {
 
@@ -38,8 +40,9 @@ class Navigator(val activityContext: Activity) {
         activityContext.startActivity(scienze_studenti);
     }
 
-    fun toGiurisprudenza(){
-
+    fun toGiurisprudenzaStudenti(){
+        val giurisprudenza = Intent(activityContext, GiurisprudenzaActivity::class.java);
+        activityContext.startActivity(giurisprudenza);
     }
 
     fun toGiurisprudenzaComunicazioni(){
@@ -47,7 +50,8 @@ class Navigator(val activityContext: Activity) {
     }
 
     fun toSeaStudenti(){
-
+        val sea = Intent(activityContext,SeaActivity::class.java);
+        activityContext.startActivity(sea);
     }
 
     fun toAlterego(){

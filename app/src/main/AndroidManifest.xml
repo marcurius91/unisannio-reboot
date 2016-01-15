@@ -55,16 +55,16 @@
         <activity
             android:name=".DetailActivity"
             android:label="@string/title_activity_detail"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
         <activity
             android:name=".ingegneria.IngengeriaCercapersoneActivity"
-            android:label="@string/title_activity_cercapersone"></activity>
+            android:label="@string/title_activity_cercapersone" />
         <activity
             android:name=".ingegneria.IngegneriaCercapersoneDetailActivity"
-            android:label="@string/activity_cercapersone_detail_title"></activity>
+            android:label="@string/activity_cercapersone_detail_title" />
         <activity
             android:name=".ateneo.AteneoActivity"
             android:label="@string/title_activity_ateneo">
@@ -77,6 +77,14 @@
         <activity
             android:name=".scienze.ScienzeActivity"
             android:label="@string/title_activity_scienze"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".giurisprudenza.GiurisprudenzaActivity"
+            android:label="@string/title_activity_giurisprudenza"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".sea.SeaActivity"
+            android:label="@string/title_activity_sea"
             android:theme="@style/AppTheme"></activity>
     </application>
 

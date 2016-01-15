@@ -68,10 +68,10 @@ public class GiurisprudenzaAvvisiFragment extends Fragment implements Giurisprud
     public void onViewCreated(View view, Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
 
-        Bundle bundle = getArguments();
-        String url = bundle.getString("URL");
+        //Bundle bundle = getArguments();
+        //String url = bundle.getString("URL");
 
-        presenter = new GiurisprudenzaPresenter(this, url);
+        presenter = new GiurisprudenzaPresenter(this,URLS.GIURISPRUDENZA_AVVISI);
 
         mSwipeRefreshLayout.setColorSchemeResources(
             R.color.unisannio_yellow,

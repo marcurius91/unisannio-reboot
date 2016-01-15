@@ -73,8 +73,9 @@ public class SeaAvvisiFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
 
-        Bundle bundle = getArguments();
-        String url = bundle.getString("URL");
+        //Bundle bundle = getArguments();
+        //String url = bundle.getString("URL");
+        //replaced refreshlist(url) with refreshlist()
 
         mSwipeRefreshLayout.setColorSchemeResources(
             R.color.unisannio_yellow,
@@ -87,7 +88,7 @@ public class SeaAvvisiFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(url));
+        mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList());
 
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this.getActivity());
         mCustomTabsIntent = new CustomTabsIntent.Builder()
@@ -105,14 +106,14 @@ public class SeaAvvisiFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         mRecyclerView.setLayoutManager(layoutManager);
 
-        refreshList(url);
+        refreshList();
     }
 
-    private void refreshList(String url) {
+    private void refreshList() {
         mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
 
-        mRetriever.get(url)
+        mRetriever.get()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new Observer<List<Article>>() {
                 @Override

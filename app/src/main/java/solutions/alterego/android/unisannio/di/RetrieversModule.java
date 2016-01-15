@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.ateneo.AteneoRetriever;
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaRetriever;
 import solutions.alterego.android.unisannio.scienze.ScienzeRetriever;
@@ -20,14 +21,14 @@ public class RetrieversModule {
 
     @Provides
     @Singleton
-    GiurisprudenzaRetriever provideGiurisprudenzaRetriever(String url) {
-        return new GiurisprudenzaRetriever(url);
+    GiurisprudenzaRetriever provideGiurisprudenzaRetriever() {
+        return new GiurisprudenzaRetriever(URLS.GIURISPRUDENZA_AVVISI);
     }
 
     @Provides
     @Singleton
     SeaRetriever provideSeaRetriever() {
-        return new SeaRetriever();
+        return new SeaRetriever(URLS.SEA_NEWS);
     }
 
     @Provides
