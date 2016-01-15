@@ -40,4 +40,6 @@
     <string name="title_activity_ateneo">AteneoActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_scienze">ScienzeActivity</string>
+    <string name="title_activity_giurisprudenza">GiurisprudenzaActivity</string>
+    <string name="title_activity_sea">SeaActivity</string>
 </resources>

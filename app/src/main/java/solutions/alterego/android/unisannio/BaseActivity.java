@@ -74,8 +74,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         appbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         if (appbar != null) {
             setSupportActionBar(appbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             appbar.setNavigationOnClickListener(v -> onAppbarNavigationClick());
         }
+
     }
 
     protected void onAppbarNavigationClick() {

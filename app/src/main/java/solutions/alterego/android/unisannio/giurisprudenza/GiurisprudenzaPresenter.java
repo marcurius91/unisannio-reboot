@@ -11,7 +11,7 @@ import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.interfaces.IRetriever;
 import solutions.alterego.android.unisannio.models.Article;
 
-class GiurisprudenzaPresenter implements IGiurisprudenzaPresenter {
+public class GiurisprudenzaPresenter implements IGiurisprudenzaPresenter {
 
     private IParser<Article> mParser;
 
@@ -19,7 +19,7 @@ class GiurisprudenzaPresenter implements IGiurisprudenzaPresenter {
 
     private final GiurisprudenzaView view;
 
-    GiurisprudenzaPresenter(GiurisprudenzaView view, String url) {
+    public GiurisprudenzaPresenter(GiurisprudenzaView view, String url) {
         this.view = view;
 
         mParser = new GiurisprudenzaParser();
