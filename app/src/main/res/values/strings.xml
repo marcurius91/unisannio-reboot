@@ -42,4 +42,6 @@
     <string name="title_activity_scienze">ScienzeActivity</string>
     <string name="title_activity_giurisprudenza">GiurisprudenzaActivity</string>
     <string name="title_activity_sea">SeaActivity</string>
+    <string name="title_activity_giurisprudenza_comunicazioni">GiurisprudenzaComunicazioniActivity
+    </string>
 </resources>

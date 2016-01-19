@@ -5,6 +5,7 @@ import android.content.Intent
 import android.support.v4.app.TaskStackBuilder
 import solutions.alterego.android.unisannio.ateneo.AteneoActivity
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaActivity
+import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaComunicazioniActivity
 import solutions.alterego.android.unisannio.ingegneria.IngengeriaCercapersoneActivity
 import solutions.alterego.android.unisannio.scienze.ScienzeActivity
 import solutions.alterego.android.unisannio.sea.SeaActivity
@@ -46,7 +47,8 @@ class Navigator(val activityContext: Activity) {
     }
 
     fun toGiurisprudenzaComunicazioni(){
-
+        val giurisprudenza_comunicazioni = Intent(activityContext,GiurisprudenzaComunicazioniActivity::class.java);
+        activityContext.startActivity(giurisprudenza_comunicazioni);
     }
 
     fun toSeaStudenti(){
