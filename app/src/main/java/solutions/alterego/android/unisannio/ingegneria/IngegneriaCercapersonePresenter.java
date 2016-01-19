@@ -63,7 +63,7 @@ public class IngegneriaCercapersonePresenter implements ICercapersonePresenter {
 
                                     @Override
                                     public void onError(Throwable e) {
-                                        Log.e("OBSERVER RETRIVE DOCUMENT onError()", e.toString());
+                                        Log.e("CERCAPERSONE onError()", e.toString());
 
                                     }
 

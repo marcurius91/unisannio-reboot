@@ -85,6 +85,10 @@
         <activity
             android:name=".sea.SeaActivity"
             android:label="@string/title_activity_sea"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".giurisprudenza.GiurisprudenzaComunicazioniActivity"
+            android:label="@string/title_activity_giurisprudenza_comunicazioni"
             android:theme="@style/AppTheme"></activity>
     </application>
 

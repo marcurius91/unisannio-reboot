@@ -162,10 +162,10 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
             drawerLayout.setDrawerListener(null);
 
             switch (item.getItemId()) {
-                case R.id.drawer_ateneo_avvisi:
+                case R.id.drawer_ateneo_avvisi://TODO pointing to same News
                     navigate().toAteneo();
                     break;
-                case R.id.drawer_ateneo_avvisi_studenti:
+                case R.id.drawer_ateneo_avvisi_studenti://TODO pointing to same News
                     navigate().toAteneoStudenti();
                     break;
                 case R.id.drawer_ingegneria_avvisi_studenti:
@@ -180,10 +180,10 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
                 case R.id.avvisi_studenti_scienze_tecnologie:
                     navigate().toScienzeStudenti();
                     break;
-                case R.id.avvisi_studenti_giurisprudenza://TODO Fix Implementation problem
+                case R.id.avvisi_studenti_giurisprudenza:
                     navigate().toGiurisprudenzaStudenti();
                     break;
-                case R.id.comunicazioni://TODO Fix Implementation problem
+                case R.id.comunicazioni:
                     navigate().toGiurisprudenzaComunicazioni();
                     break;
                 case R.id.avvisi_studenti_sea:

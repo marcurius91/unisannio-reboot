@@ -10,6 +10,7 @@ import solutions.alterego.android.unisannio.ateneo.AteneoActivity;
 import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiFragment;
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaActivity;
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaAvvisiFragment;
+import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaComunicazioniActivity;
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
 import solutions.alterego.android.unisannio.ingegneria.IngengeriaCercapersoneActivity;
 import solutions.alterego.android.unisannio.scienze.ScienzeActivity;
@@ -41,7 +42,10 @@ public interface Component {
 
     void inject(GiurisprudenzaActivity giurisprudenzaActivity);
 
+    void inject(GiurisprudenzaComunicazioniActivity giurisprudenzaComunicazioniActivity);
+
     void inject(SeaActivity seaActivity);
+
 
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     final class Initializer {
