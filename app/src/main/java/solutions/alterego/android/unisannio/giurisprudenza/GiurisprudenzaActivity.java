@@ -1,22 +1,22 @@
-package solutions.alterego.android.unisannio.ateneo;
+package solutions.alterego.android.unisannio.giurisprudenza;
 
-import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-
-import org.chromium.customtabsclient.CustomTabsActivityHelper;
+import android.widget.SearchView;
 
 import java.util.ArrayList;
 
@@ -34,30 +34,33 @@ import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
 import solutions.alterego.android.unisannio.analytics.Screen;
-import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaPresenter;
+import solutions.alterego.android.unisannio.cercapersone.CercapersoneAdapter;
+import solutions.alterego.android.unisannio.cercapersone.Person;
+import solutions.alterego.android.unisannio.cercapersone.SearchPerson;
+import solutions.alterego.android.unisannio.ingegneria.IngegneriaCercapersonePresenter;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
 
-public class AteneoActivity extends NavigationDrawerActivity {
+public class GiurisprudenzaActivity extends NavigationDrawerActivity {
 
     @Inject
     AnalyticsManager mAnalyticsManager;
 
-    @Bind(R.id.ateneo_recycle_view)
+    @Bind(R.id.giurisprudenza_recycle_view)
     RecyclerView mRecyclerView;
 
     @BindColor(R.color.primaryColor)
     int mColorPrimary;
 
-    @Bind(R.id.ateneo_swipe_container)
+    @Bind(R.id.giurisprudenza_swipe_container)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     private CustomTabsHelperFragment mCustomTabsHelperFragment;
 
     private ArticleAdapter mAdapter;
 
-    private AteneoAvvisiPresenter mPresenter;
+    private GiurisprudenzaPresenter mPresenter;
 
     private CustomTabsIntent mCustomTabsIntent;
 
@@ -66,16 +69,16 @@ public class AteneoActivity extends NavigationDrawerActivity {
         super.onCreate(savedInstanceState);
         //App.component(this).inject(this);
 
-        setContentView(R.layout.activity_new_ateneo);
+        setContentView(R.layout.activity_giurisprudenza);
         //ButterKnife.bind(this);
 
-        boolean mIsStudenti = true;
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
-
-        mRecyclerView = (RecyclerView) findViewById(R.id.ateneo_recycle_view);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.ateneo_swipe_container);
+        
+        mRecyclerView = (RecyclerView) findViewById(R.id.giurisprudenza_recycle_view);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.giurisprudenza_swipe_container);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        mPresenter = new AteneoAvvisiPresenter();
+        mPresenter = new GiurisprudenzaPresenter(URLS.GIURISPRUDENZA_AVVISI);
+
         mRecyclerView.setLayoutManager(layoutManager);
 
         mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.primaryColor));
@@ -96,19 +99,18 @@ public class AteneoActivity extends NavigationDrawerActivity {
         mRecyclerView.setVisibility(View.VISIBLE);
 
         mAdapter = new ArticleAdapter(new ArrayList<>(), (article, holder) -> {
-            String url1 = mIsStudenti ? URLS.ATENEO_DETAIL_STUDENTI_BASE_URL + article.getUrl() : URLS.ATENEO_DETAIL_BASE_URL + article.getUrl();
+            String url1 = URLS.GIURISPRUDENZA + article.getUrl();
             CustomTabsHelperFragment.open(this, mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
-        },R.drawable.guerrazzi);
+        }, R.drawable.calandra);
 
-        mPresenter.getNews(true);
-        //refreshList();
+        refreshList();
 
         mRecyclerView.setAdapter(mAdapter);
 
 
     }
 
-    /*private void refreshList() {
+    private void refreshList() {
         //mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
         mPresenter.getArticles()
@@ -121,7 +123,7 @@ public class AteneoActivity extends NavigationDrawerActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("GIUR ACTIVITY:", e.toString());
+                        Log.e("GIUR ACTIVITY:",e.toString());
                     }
 
                     @Override
@@ -130,38 +132,38 @@ public class AteneoActivity extends NavigationDrawerActivity {
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
                 });
-    }*/
-
-    @Override
-    public boolean onCreateOptionsMenu (Menu menu){
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected (MenuItem item){
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.action_web_page:
-                mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.sito_web)));
-                CustomTabsHelperFragment.open(this, mCustomTabsIntent, Uri.parse(URLS.GIURISPRUDENZA), mCustomTabsFallback);
-                break;
-            case R.id.action_map:
-                mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.mappa)));
-                mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.GIURISPRUDENZA()));
-                startActivity(mMap);
-                break;
+        @Override
+        public boolean onCreateOptionsMenu (Menu menu){
+            getMenuInflater().inflate(R.menu.main, menu);
+            return true;
         }
-        return super.onOptionsItemSelected(item);
-    }
 
-    @Override
-    protected int getNavigationDrawerMenuIdForThisActivity () {
-        return R.id.avvisi_studenti_giurisprudenza;
-    }
+        @Override
+        public boolean onOptionsItemSelected (MenuItem item){
+            int id = item.getItemId();
+            switch (id) {
+                case R.id.action_web_page:
+                    mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.sito_web)));
+                    CustomTabsHelperFragment.open(this, mCustomTabsIntent, Uri.parse(URLS.GIURISPRUDENZA), mCustomTabsFallback);
+                    break;
+                case R.id.action_map:
+                    mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.mappa)));
+                    mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.GIURISPRUDENZA()));
+                    startActivity(mMap);
+                    break;
+            }
+            return super.onOptionsItemSelected(item);
+        }
 
-    @Override
-    protected void onAppbarNavigationClick () {
-        openNavigationDrawer();
+        @Override
+        protected int getNavigationDrawerMenuIdForThisActivity () {
+            return R.id.avvisi_studenti_giurisprudenza;
+        }
+
+        @Override
+        protected void onAppbarNavigationClick () {
+            openNavigationDrawer();
+        }
     }
-}
