@@ -19,7 +19,7 @@ import solutions.alterego.android.unisannio.sea.SeaActivity;
 import solutions.alterego.android.unisannio.sea.SeaAvvisiFragment;
 
 @Singleton
-@dagger.Component(modules = {SystemServicesModule.class, RetrieversModule.class, PresentersModule.class})
+@dagger.Component(modules = {SystemServicesModule.class, RetrieversModule.class, PresentersModule.class, ParserModule.class})
 public interface Component {
 
     void inject(IngengeriaCercapersoneActivity app);

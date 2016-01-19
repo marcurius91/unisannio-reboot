@@ -53,21 +53,21 @@ public class AteneoActivity extends NavigationDrawerActivity {
     @Bind(R.id.ateneo_swipe_container)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
+    @Inject AteneoAvvisiPresenter mPresenter;
+
     private CustomTabsHelperFragment mCustomTabsHelperFragment;
 
     private ArticleAdapter mAdapter;
-
-    private AteneoAvvisiPresenter mPresenter;
 
     private CustomTabsIntent mCustomTabsIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //App.component(this).inject(this);
+        App.component(this).inject(this);
 
         setContentView(R.layout.activity_new_ateneo);
-        //ButterKnife.bind(this);
+        ButterKnife.bind(this);
 
         boolean mIsStudenti = true;
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
@@ -75,7 +75,6 @@ public class AteneoActivity extends NavigationDrawerActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.ateneo_recycle_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.ateneo_swipe_container);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        mPresenter = new AteneoAvvisiPresenter();
         mRecyclerView.setLayoutManager(layoutManager);
 
         mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.primaryColor));
@@ -143,12 +142,12 @@ public class AteneoActivity extends NavigationDrawerActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_web_page:
-                mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.sito_web)));
-                CustomTabsHelperFragment.open(this, mCustomTabsIntent, Uri.parse(URLS.GIURISPRUDENZA), mCustomTabsFallback);
+                mAnalyticsManager.track(new Screen(getString(R.string.ateneo), getString(R.string.sito_web)));
+                CustomTabsHelperFragment.open(this, mCustomTabsIntent, Uri.parse(URLS.ATENEO), mCustomTabsFallback);
                 break;
             case R.id.action_map:
-                mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.mappa)));
-                mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.GIURISPRUDENZA()));
+                mAnalyticsManager.track(new Screen(getString(R.string.ateneo), getString(R.string.mappa)));
+                mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.ATENEO()));
                 startActivity(mMap);
                 break;
         }
@@ -157,7 +156,7 @@ public class AteneoActivity extends NavigationDrawerActivity {
 
     @Override
     protected int getNavigationDrawerMenuIdForThisActivity () {
-        return R.id.avvisi_studenti_giurisprudenza;
+        return R.id.drawer_section_ateneo;
     }
 
     @Override
