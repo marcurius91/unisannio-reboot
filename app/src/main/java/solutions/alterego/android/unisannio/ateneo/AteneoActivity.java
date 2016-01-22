@@ -69,7 +69,7 @@ public class AteneoActivity extends NavigationDrawerActivity {
         setContentView(R.layout.activity_new_ateneo);
         ButterKnife.bind(this);
 
-        boolean mIsStudenti = true;
+        //boolean mIsStudenti = true;
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.ateneo_recycle_view);
@@ -95,10 +95,11 @@ public class AteneoActivity extends NavigationDrawerActivity {
         mRecyclerView.setVisibility(View.VISIBLE);
 
         mAdapter = new ArticleAdapter(new ArrayList<>(), (article, holder) -> {
-            String url1 = mIsStudenti ? URLS.ATENEO_DETAIL_STUDENTI_BASE_URL + article.getUrl() : URLS.ATENEO_DETAIL_BASE_URL + article.getUrl();
+            String url1 = /*URLS.ATENEO_DETAIL_STUDENTI_BASE_URL + article.getUrl():*/ URLS.ATENEO_DETAIL_BASE_URL + article.getUrl();
             CustomTabsHelperFragment.open(this, mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
         },R.drawable.guerrazzi);
 
+        //TODO Fix problem with presenter Kotlin
         mPresenter.getNews(true);
         //refreshList();
 

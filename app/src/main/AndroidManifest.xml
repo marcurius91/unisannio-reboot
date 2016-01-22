@@ -89,6 +89,14 @@
         <activity
             android:name=".giurisprudenza.GiurisprudenzaComunicazioniActivity"
             android:label="@string/title_activity_giurisprudenza_comunicazioni"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ingegneria.IngegneriaDipartimentoActivity"
+            android:label="@string/title_activity_ingegneria_dipartimento"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ingegneria.IngegneriaAvvisiStudentiActivity"
+            android:label="@string/title_activity_ingegneria_avvisi_studenti"
             android:theme="@style/AppTheme"></activity>
     </application>
 

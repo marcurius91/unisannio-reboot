@@ -7,6 +7,8 @@ import dagger.Provides;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.ateneo.AteneoRetriever;
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaRetriever;
+import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiDipartimentoRetriever;
+import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiStudentiRetriever;
 import solutions.alterego.android.unisannio.scienze.ScienzeRetriever;
 import solutions.alterego.android.unisannio.sea.SeaRetriever;
 
@@ -35,6 +37,18 @@ public class RetrieversModule {
     @Singleton
     ScienzeRetriever provideScienzeRetriever() {
         return new ScienzeRetriever();
+    }
+
+    @Provides
+    @Singleton
+    IngegneriaAvvisiDipartimentoRetriever provideIngegneriaDipartimentoRetriever() {
+        return new IngegneriaAvvisiDipartimentoRetriever();
+    }
+
+    @Provides
+    @Singleton
+    IngegneriaAvvisiStudentiRetriever provideIngegneriaStudentiRetriever() {
+        return new IngegneriaAvvisiStudentiRetriever();
     }
 
 }

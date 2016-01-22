@@ -169,10 +169,10 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
                     navigate().toAteneoStudenti();
                     break;
                 case R.id.drawer_ingegneria_avvisi_studenti:
-                    navigate().toIngegneria();
+                    navigate().toIngegneriaStudenti();
                     break;
                 case R.id.drawer_ingegneria_avvisi_dipartimento:
-                    navigate().toIngegneria();
+                    navigate().toIngegneriaDipartimento();
                     break;
                 case R.id.cercapersone_ingegneria:
                     navigate().toIngegneriaCercapersone();
@@ -189,6 +189,8 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
                 case R.id.avvisi_studenti_sea:
                     navigate().toSeaStudenti();
                     break;
+
+                //TODO Add reaction to button AlterEgo Solutions and Github with ChromeCustomTab
                 default:
                     throw new DeveloperError("Menu item " + item + " not supported");
             }
