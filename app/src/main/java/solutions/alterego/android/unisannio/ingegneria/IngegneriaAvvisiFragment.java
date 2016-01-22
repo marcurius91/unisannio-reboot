@@ -43,12 +43,13 @@ public class IngegneriaAvvisiFragment extends Fragment {
     private ArticleAdapter mAdapter;
 
     public static IngegneriaAvvisiFragment newInstance(boolean isDipartimento) {
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("DIPARTIMENTO", isDipartimento);
+        //Bundle bundle = new Bundle();
+        //bundle.putBoolean("DIPARTIMENTO", isDipartimento);
 
         IngegneriaAvvisiFragment fragment = new IngegneriaAvvisiFragment();
-        fragment.setArguments(bundle);
+        //fragment.setArguments(bundle);
         return fragment;
+
     }
 
     @Override
@@ -71,16 +72,16 @@ public class IngegneriaAvvisiFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            boolean isDipartimento = bundle.getBoolean("DIPARTIMENTO");
+        //Bundle bundle = getArguments();
+        //if (bundle != null) {
+            boolean isDipartimento = /*bundle.getBoolean("DIPARTIMENTO");*/ true;
 
             if (isDipartimento) {
                 mRetriever = new IngegneriaAvvisiDipartimentoRetriever();
             } else {
                 mRetriever = new IngegneriaAvvisiStudentiRetriever();
             }
-        }
+        //}
 
         mSwipeRefreshLayout.setOnRefreshListener(this::refreshList);
 

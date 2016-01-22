@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiParser;
+import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiDipartimentoParser;
 
 @Module
 public class ParserModule {
@@ -14,4 +15,8 @@ public class ParserModule {
             AteneoAvvisiParser provideAteneoParser(){
             return new AteneoAvvisiParser();
     }
+
+    @Provides
+    @Singleton
+    IngegneriaAvvisiDipartimentoParser provideIngegneriaDipartimentoParser(){ return new IngegneriaAvvisiDipartimentoParser();}
 }

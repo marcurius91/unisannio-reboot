@@ -6,6 +6,8 @@ import android.support.v4.app.TaskStackBuilder
 import solutions.alterego.android.unisannio.ateneo.AteneoActivity
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaActivity
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaComunicazioniActivity
+import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiStudentiActivity
+import solutions.alterego.android.unisannio.ingegneria.IngegneriaDipartimentoActivity
 import solutions.alterego.android.unisannio.ingegneria.IngengeriaCercapersoneActivity
 import solutions.alterego.android.unisannio.scienze.ScienzeActivity
 import solutions.alterego.android.unisannio.sea.SeaActivity
@@ -23,12 +25,14 @@ class Navigator(val activityContext: Activity) {
         activityContext.startActivity(ateneo);
     }
 
-    fun toIngegneria() {
-
+    fun toIngegneriaDipartimento() {
+        val ingegneriaDipartimento = Intent(activityContext, IngegneriaDipartimentoActivity::class.java);
+        activityContext.startActivity(ingegneriaDipartimento);
     }
 
     fun toIngegneriaStudenti(){
-
+        val ingegneriaStudenti = Intent(activityContext, IngegneriaAvvisiStudentiActivity::class.java);
+        activityContext.startActivity(ingegneriaStudenti);
     }
 
     fun toIngegneriaCercapersone(){

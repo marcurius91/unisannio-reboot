@@ -44,4 +44,7 @@
     <string name="title_activity_sea">SeaActivity</string>
     <string name="title_activity_giurisprudenza_comunicazioni">GiurisprudenzaComunicazioniActivity
     </string>
+    <string name="title_activity_ingegneria_dipartimento">IngegneriaDipartimentoActivity</string>
+    <string name="title_activity_ingegneria_avvisi_studenti">IngegneriaAvvisiStudentiActivity
+    </string>
 </resources>
