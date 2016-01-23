@@ -1,6 +1,7 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -9,6 +10,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import org.parceler.Parcels;
@@ -21,16 +24,24 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.BindColor;
 import butterknife.ButterKnife;
+import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.DetailActivity;
 import solutions.alterego.android.unisannio.NavigationDrawerActivity;
 import solutions.alterego.android.unisannio.R;
+import solutions.alterego.android.unisannio.URLS;
+import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
+import solutions.alterego.android.unisannio.analytics.Screen;
+import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
 
 public class IngegneriaAvvisiStudentiActivity extends NavigationDrawerActivity {
+
+    @Inject
+    AnalyticsManager mAnalyticsManager;
 
     @Inject
     IngegneriaAvvisiStudentiRetriever mRetriever;
@@ -120,7 +131,35 @@ public class IngegneriaAvvisiStudentiActivity extends NavigationDrawerActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu (Menu menu){
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item){
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_web_page:
+                mAnalyticsManager.track(new Screen(getString(R.string.ingegneria), getString(R.string.sito_web)));
+                CustomTabsHelperFragment.open(this, mCustomTabsIntent, Uri.parse(URLS.INGEGNERIA), mCustomTabsFallback);
+                break;
+            case R.id.action_map:
+                mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.mappa)));
+                mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.INGEGNERIA()));
+                startActivity(mMap);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected int getNavigationDrawerMenuIdForThisActivity() {
         return R.id.drawer_ingegneria_avvisi_studenti;
+    }
+
+    @Override
+    protected void onAppbarNavigationClick () {
+        openNavigationDrawer();
     }
 }

@@ -61,11 +61,11 @@ public class AteneoAvvisiFragment extends Fragment {
     private CustomTabsIntent mCustomTabsIntent;
 
     public static AteneoAvvisiFragment newInstance(boolean studenti) {
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("STUDENTI", studenti);
+        //Bundle bundle = new Bundle();
+        //bundle.putBoolean("STUDENTI", studenti);
 
         AteneoAvvisiFragment fragment = new AteneoAvvisiFragment();
-        fragment.setArguments(bundle);
+        //fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -91,10 +91,12 @@ public class AteneoAvvisiFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        Bundle bundle = getArguments();
-        if (bundle != null) {
+        //Bundle bundle = getArguments();
+        /*if (bundle != null) {
             mIsStudenti = bundle.getBoolean("STUDENTI");
-        }
+        }*/
+
+        mIsStudenti = true;
 
         mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(mIsStudenti));
 
