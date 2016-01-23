@@ -69,7 +69,6 @@ public class AteneoActivity extends NavigationDrawerActivity {
         setContentView(R.layout.activity_new_ateneo);
         ButterKnife.bind(this);
 
-        //boolean mIsStudenti = true;
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.ateneo_recycle_view);
@@ -157,7 +156,7 @@ public class AteneoActivity extends NavigationDrawerActivity {
 
     @Override
     protected int getNavigationDrawerMenuIdForThisActivity () {
-        return R.id.drawer_section_ateneo;
+        return R.id.drawer_ateneo_avvisi;
     }
 
     @Override
