@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -152,6 +153,8 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
 
         private CustomTabsIntent mCustomTabsIntent;
 
+        private CustomTabsHelperFragment mCustomTabsHelperFragment;
+
         private final MenuItem item;
 
         public NavigateAfterDrawerCloseListener(MenuItem item) {
@@ -172,7 +175,7 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
         public void onDrawerClosed(View drawerView) {
             drawerLayout.setDrawerListener(null);
 
-                    mCustomTabsIntent = new CustomTabsIntent.Builder()
+            mCustomTabsIntent = new CustomTabsIntent.Builder()
                     .enableUrlBarHiding()
                     .setToolbarColor(mColorPrimary)
                     .setShowTitle(true)
@@ -207,10 +210,10 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
                     navigate().toSeaStudenti();
                     break;
                 case R.id.alteregosolution:
-                    CustomTabsHelperFragment.open(getParent(), mCustomTabsIntent, Uri.parse(URLS.ALTEREGO), mCustomTabsFallback);
+                    CustomTabsHelperFragment.open((Activity)drawerView.getContext(),mCustomTabsIntent, Uri.parse(URLS.ALTEREGO), mCustomTabsFallback);
                     break;
                 case R.id.github:
-                    CustomTabsHelperFragment.open(getParent(), mCustomTabsIntent, Uri.parse(URLS.GITHUB), mCustomTabsFallback);
+                    CustomTabsHelperFragment.open((Activity)drawerView.getContext(), mCustomTabsIntent, Uri.parse(URLS.GITHUB), mCustomTabsFallback);
                     break;
                 default:
                     throw new DeveloperError("Menu item " + item + " not supported");
