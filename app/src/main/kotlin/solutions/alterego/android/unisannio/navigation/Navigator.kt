@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v4.app.TaskStackBuilder
 import solutions.alterego.android.unisannio.ateneo.AteneoActivity
+import solutions.alterego.android.unisannio.ateneo.AteneoStudentiActivity
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaActivity
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaComunicazioniActivity
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiStudentiActivity
@@ -20,9 +21,8 @@ class Navigator(val activityContext: Activity) {
     }
 
     fun toAteneoStudenti() {
-        val ateneo = Intent(activityContext, AteneoActivity::class.java)
-        ateneo.putExtra("STUDENTI", true)
-        activityContext.startActivity(ateneo);
+        val ateneo_studenti = Intent(activityContext, AteneoStudentiActivity::class.java)
+        activityContext.startActivity(ateneo_studenti);
     }
 
     fun toIngegneriaDipartimento() {

@@ -37,14 +37,13 @@
     <string name="activity_cercapersone_detail_title">Dettaglio Persona</string>
     <string name="custom_tab_error">"Non possiedi installato il browser Google Chrome"</string>
     <string name="custom_tab_error_activity">"Impossibile lanciare l'activity di browsing"</string>
-    <string name="title_activity_ateneo">AteneoActivity</string>
+    <string name="title_activity_ateneo">Ateneo</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_scienze">ScienzeActivity</string>
-    <string name="title_activity_giurisprudenza">GiurisprudenzaActivity</string>
-    <string name="title_activity_sea">SeaActivity</string>
-    <string name="title_activity_giurisprudenza_comunicazioni">GiurisprudenzaComunicazioniActivity
-    </string>
-    <string name="title_activity_ingegneria_dipartimento">IngegneriaDipartimentoActivity</string>
-    <string name="title_activity_ingegneria_avvisi_studenti">IngegneriaAvvisiStudentiActivity
-    </string>
+    <string name="title_activity_scienze">Scienze</string>
+    <string name="title_activity_giurisprudenza">Giurisprudenza</string>
+    <string name="title_activity_sea">S.E.A.</string>
+    <string name="title_activity_giurisprudenza_comunicazioni">GiurisprudenzaComunicazioni</string>
+    <string name="title_activity_ingegneria_dipartimento">IngegneriaDipartimento</string>
+    <string name="title_activity_ingegneria_avvisi_studenti">IngegneriaAvvisiStudenti</string>
+    <string name="title_activity_ateneo_studenti">AteneoStudenti</string>
 </resources>

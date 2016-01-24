@@ -17,12 +17,6 @@ public class RetrieversModule {
 
     @Provides
     @Singleton
-    AteneoRetriever provideAteneoRetriever() {
-        return new AteneoRetriever();
-    }
-
-    @Provides
-    @Singleton
     GiurisprudenzaRetriever provideGiurisprudenzaRetriever() {
         return new GiurisprudenzaRetriever(URLS.GIURISPRUDENZA_AVVISI);
     }
@@ -51,4 +45,9 @@ public class RetrieversModule {
         return new IngegneriaAvvisiStudentiRetriever();
     }
 
+    @Provides
+    @Singleton
+    AteneoRetriever provideAteneoRetriever() {
+        return new AteneoRetriever(URLS.ATENEO_NEWS);
+    }
 }

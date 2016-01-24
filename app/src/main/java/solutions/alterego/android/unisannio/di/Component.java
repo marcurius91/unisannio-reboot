@@ -8,6 +8,7 @@ import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.MainActivity;
 import solutions.alterego.android.unisannio.ateneo.AteneoActivity;
 import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiFragment;
+import solutions.alterego.android.unisannio.ateneo.AteneoStudentiActivity;
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaActivity;
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaAvvisiFragment;
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaComunicazioniActivity;
@@ -39,6 +40,8 @@ public interface Component {
     void inject(ScienzeAvvisiFragment app);
 
     void inject(AteneoActivity ateneoActivity);
+
+    void inject(AteneoStudentiActivity ateneoStudentiActivity);
 
     void inject(ScienzeActivity scienzeActivity);
 
