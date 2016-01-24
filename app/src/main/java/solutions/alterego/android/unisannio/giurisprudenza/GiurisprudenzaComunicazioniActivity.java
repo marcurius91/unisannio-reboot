@@ -68,6 +68,8 @@ public class GiurisprudenzaComunicazioniActivity extends NavigationDrawerActivit
         setContentView(R.layout.activity_giurisprudenza);
         //ButterKnife.bind(this);
 
+        mAnalyticsManager = new AnalyticsManager(this);
+
         mMap = new Intent(this, MapsActivity.class);
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
 
@@ -146,8 +148,7 @@ public class GiurisprudenzaComunicazioniActivity extends NavigationDrawerActivit
                 CustomTabsHelperFragment.open(this, mCustomTabsIntent, Uri.parse(URLS.GIURISPRUDENZA), mCustomTabsFallback);
                 break;
             case R.id.action_map:
-                //TODO Fix problem on analyticsManager on click button Map crashing app
-                //mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.mappa)));
+                mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.mappa)));
                 mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.GIURISPRUDENZA()));
                 startActivity(mMap);
                 break;
