@@ -3,10 +3,14 @@ package solutions.alterego.android.unisannio;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,10 +18,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Toast;
 import android.widget.Toolbar;
+
+import org.chromium.customtabsclient.CustomTabsActivityHelper;
 
 import javax.inject.Inject;
 
+import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import solutions.alterego.android.unisannio.utils.DeveloperError;
 
 public abstract class NavigationDrawerActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,6 +44,7 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
     private NavigationView navigationView;
 
     private ViewGroup rootContainer;
+
 
     @Override
     @CallSuper
@@ -141,6 +150,8 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
 
     private class NavigateAfterDrawerCloseListener implements DrawerLayout.DrawerListener {
 
+        private CustomTabsIntent mCustomTabsIntent;
+
         private final MenuItem item;
 
         public NavigateAfterDrawerCloseListener(MenuItem item) {
@@ -160,6 +171,12 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
         @Override
         public void onDrawerClosed(View drawerView) {
             drawerLayout.setDrawerListener(null);
+
+                    mCustomTabsIntent = new CustomTabsIntent.Builder()
+                    .enableUrlBarHiding()
+                    .setToolbarColor(mColorPrimary)
+                    .setShowTitle(true)
+                    .build();
 
             switch (item.getItemId()) {
                 case R.id.drawer_ateneo_avvisi://TODO pointing to same News
@@ -189,8 +206,12 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
                 case R.id.avvisi_studenti_sea:
                     navigate().toSeaStudenti();
                     break;
-
-                //TODO Add reaction to button AlterEgo Solutions and Github with ChromeCustomTab
+                case R.id.alteregosolution:
+                    CustomTabsHelperFragment.open(getParent(), mCustomTabsIntent, Uri.parse(URLS.ALTEREGO), mCustomTabsFallback);
+                    break;
+                case R.id.github:
+                    CustomTabsHelperFragment.open(getParent(), mCustomTabsIntent, Uri.parse(URLS.GITHUB), mCustomTabsFallback);
+                    break;
                 default:
                     throw new DeveloperError("Menu item " + item + " not supported");
             }
@@ -200,5 +221,20 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
         public void onDrawerStateChanged(int newState) {
             // No-op
         }
+
+        private final CustomTabsActivityHelper.CustomTabsFallback mCustomTabsFallback =
+                new CustomTabsActivityHelper.CustomTabsFallback() {
+                    @Override
+                    public void openUri(Activity activity, Uri uri) {
+                        Toast.makeText(activity, R.string.custom_tab_error, Toast.LENGTH_SHORT).show();
+                        try {
+                            activity.startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                        } catch (ActivityNotFoundException e) {
+                            e.printStackTrace();
+                            Toast.makeText(activity, R.string.custom_tab_error_activity, Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+                    }
+                };
     }
 }

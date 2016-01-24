@@ -1,8 +1,11 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
@@ -13,7 +16,9 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import org.chromium.customtabsclient.CustomTabsActivityHelper;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
@@ -29,6 +34,7 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.DetailActivity;
+import solutions.alterego.android.unisannio.MapsActivity;
 import solutions.alterego.android.unisannio.NavigationDrawerActivity;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
@@ -57,6 +63,7 @@ public class IngegneriaDipartimentoActivity extends NavigationDrawerActivity {
 
     private ArticleAdapter mAdapter;
 
+    protected Intent mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +73,12 @@ public class IngegneriaDipartimentoActivity extends NavigationDrawerActivity {
         setContentView(R.layout.activity_ingegneria_dipartimento);
         ButterKnife.bind(this);
 
+        mMap = new Intent(this, MapsActivity.class);
+        mCustomTabsIntent = new CustomTabsIntent.Builder()
+                .enableUrlBarHiding()
+                .setToolbarColor(mColorPrimary)
+                .setShowTitle(true)
+                .build();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.ingegneria_dipartimento_recycle_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.ingegneria_dipartimento_swipe_container);
@@ -163,4 +176,19 @@ public class IngegneriaDipartimentoActivity extends NavigationDrawerActivity {
     protected void onAppbarNavigationClick () {
         openNavigationDrawer();
     }
+
+    private final CustomTabsActivityHelper.CustomTabsFallback mCustomTabsFallback =
+            new CustomTabsActivityHelper.CustomTabsFallback() {
+                @Override
+                public void openUri(Activity activity, Uri uri) {
+                    Toast.makeText(activity, R.string.custom_tab_error, Toast.LENGTH_SHORT).show();
+                    try {
+                        activity.startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                    } catch (ActivityNotFoundException e) {
+                        e.printStackTrace();
+                        Toast.makeText(activity, R.string.custom_tab_error_activity, Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+            };
 }

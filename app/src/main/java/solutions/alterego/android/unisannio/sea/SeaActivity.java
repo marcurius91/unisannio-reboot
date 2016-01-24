@@ -1,5 +1,6 @@
 package solutions.alterego.android.unisannio.sea;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
@@ -19,6 +20,7 @@ import butterknife.BindColor;
 import butterknife.ButterKnife;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import solutions.alterego.android.unisannio.App;
+import solutions.alterego.android.unisannio.MapsActivity;
 import solutions.alterego.android.unisannio.NavigationDrawerActivity;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
@@ -34,6 +36,8 @@ public class SeaActivity extends NavigationDrawerActivity {
     @BindColor(R.color.primaryColor)
     int mColorPrimary;
 
+    protected Intent mMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +45,8 @@ public class SeaActivity extends NavigationDrawerActivity {
 
         setContentView(R.layout.activity_sea);
         ButterKnife.bind(this);
+
+        mMap = new Intent(this, MapsActivity.class);
 
         mCustomTabsIntent = new CustomTabsIntent.Builder()
                 .enableUrlBarHiding()

@@ -29,6 +29,7 @@ import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
+import solutions.alterego.android.unisannio.MapsActivity;
 import solutions.alterego.android.unisannio.NavigationDrawerActivity;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
@@ -61,6 +62,8 @@ public class AteneoActivity extends NavigationDrawerActivity {
 
     private CustomTabsIntent mCustomTabsIntent;
 
+    protected Intent mMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +72,7 @@ public class AteneoActivity extends NavigationDrawerActivity {
         setContentView(R.layout.activity_new_ateneo);
         ButterKnife.bind(this);
 
+        mMap = new Intent(this, MapsActivity.class);
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.ateneo_recycle_view);
