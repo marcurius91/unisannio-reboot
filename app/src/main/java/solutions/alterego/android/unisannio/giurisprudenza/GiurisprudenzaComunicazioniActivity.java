@@ -1,5 +1,6 @@
 package solutions.alterego.android.unisannio.giurisprudenza;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
@@ -25,6 +26,7 @@ import butterknife.BindColor;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
+import solutions.alterego.android.unisannio.MapsActivity;
 import solutions.alterego.android.unisannio.NavigationDrawerActivity;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
@@ -56,6 +58,8 @@ public class GiurisprudenzaComunicazioniActivity extends NavigationDrawerActivit
 
     private CustomTabsIntent mCustomTabsIntent;
 
+    protected Intent mMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +68,7 @@ public class GiurisprudenzaComunicazioniActivity extends NavigationDrawerActivit
         setContentView(R.layout.activity_giurisprudenza);
         //ButterKnife.bind(this);
 
+        mMap = new Intent(this, MapsActivity.class);
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.giurisprudenza_recycle_view);
@@ -141,7 +146,8 @@ public class GiurisprudenzaComunicazioniActivity extends NavigationDrawerActivit
                 CustomTabsHelperFragment.open(this, mCustomTabsIntent, Uri.parse(URLS.GIURISPRUDENZA), mCustomTabsFallback);
                 break;
             case R.id.action_map:
-                mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.mappa)));
+                //TODO Fix problem on analyticsManager on click button Map crashing app
+                //mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.mappa)));
                 mMap.putParcelableArrayListExtra("MARKERS", ((ArrayList) UnisannioGeoData.GIURISPRUDENZA()));
                 startActivity(mMap);
                 break;

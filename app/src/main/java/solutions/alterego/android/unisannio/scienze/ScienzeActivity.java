@@ -1,5 +1,6 @@
 package solutions.alterego.android.unisannio.scienze;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
@@ -14,6 +15,7 @@ import butterknife.BindColor;
 import butterknife.ButterKnife;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import solutions.alterego.android.unisannio.App;
+import solutions.alterego.android.unisannio.MapsActivity;
 import solutions.alterego.android.unisannio.NavigationDrawerActivity;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
@@ -29,6 +31,8 @@ public class ScienzeActivity extends NavigationDrawerActivity {
     @BindColor(R.color.primaryColor)
     int mColorPrimary;
 
+    protected Intent mMap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -37,6 +41,8 @@ public class ScienzeActivity extends NavigationDrawerActivity {
 
         setContentView(R.layout.activity_scienze);
         ButterKnife.bind(this);
+
+        mMap = new Intent(this, MapsActivity.class);
 
         mCustomTabsIntent = new CustomTabsIntent.Builder()
                 .enableUrlBarHiding()

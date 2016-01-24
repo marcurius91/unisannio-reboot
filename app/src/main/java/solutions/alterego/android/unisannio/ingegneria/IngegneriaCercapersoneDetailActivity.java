@@ -92,7 +92,6 @@ public class IngegneriaCercapersoneDetailActivity extends AppCompatActivity{
             });
         }
 
-        //TODO Capire se effettivamente ci serve dato che apre il sito interno di facoltà e non quello personale del professore
         //Check if WebPage String is empty and launch the relative Intent
         if(!mPerson.getWebPage().isEmpty()) {
             mWebpage.setOnClickListener(new View.OnClickListener() {
