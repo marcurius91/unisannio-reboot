@@ -3,6 +3,7 @@ package solutions.alterego.android.unisannio.ateneo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,11 +13,12 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.interfaces.IParser;
+import solutions.alterego.android.unisannio.interfaces.IRetriever;
 import solutions.alterego.android.unisannio.models.Article;
 
-public class AteneoRetriever {
+public class AteneoRetriever implements IRetriever<Document>{
 
-    public Observable<List<Article>> getNewsList(final boolean studenti) {
+    /*public Observable<List<Article>> getNewsList(final boolean studenti) {
         return Observable
                 .create(new Observable.OnSubscribe<List<Article>>() {
                     @Override
@@ -51,5 +53,40 @@ public class AteneoRetriever {
             return new ArrayList<>();
         }
         return newsList;
+    }*/
+
+    private String urlToRetrieve;
+
+    public AteneoRetriever(String url_retrieve){
+        this.urlToRetrieve = url_retrieve;
+    }
+
+
+    @Override
+    public Observable<Document> retriveDocument() {
+        return Observable
+                .create(new Observable.OnSubscribe<Document>() {
+                    @Override
+                    public void call(Subscriber<? super Document> subscriber) {
+
+                        Document doc = null;
+                        try {
+                            doc = getDocument();
+                        } catch (IOException e) {
+                            subscriber.onError(e);
+                        }
+
+                        if (doc != null) {
+                            subscriber.onNext(doc);
+                            //Log.e("RETRIVER",doc.getAllElements().toString());
+                            subscriber.onCompleted();
+                        }
+                    }
+                }).subscribeOn(Schedulers.io());
+
+    }
+
+    public Document getDocument() throws IOException {
+        return Jsoup.connect(urlToRetrieve).timeout(10 * 1000).userAgent("Mozilla").get();
     }
 }

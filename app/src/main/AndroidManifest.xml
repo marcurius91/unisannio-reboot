@@ -97,6 +97,10 @@
         <activity
             android:name=".ingegneria.IngegneriaAvvisiStudentiActivity"
             android:label="@string/title_activity_ingegneria_avvisi_studenti"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ateneo.AteneoStudentiActivity"
+            android:label="@string/title_activity_ateneo_studenti"
             android:theme="@style/AppTheme"></activity>
     </application>
 

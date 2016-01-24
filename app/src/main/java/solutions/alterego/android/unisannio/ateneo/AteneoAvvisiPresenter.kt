@@ -9,11 +9,11 @@ class AteneoAvvisiPresenter {
 
     lateinit var retriever: AteneoRetriever
 
-    fun getNews(isStudenti: Boolean) {
+    /*fun getNews(isStudenti: Boolean) {
         retriever.getNewsList(isStudenti)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe()
-    }
+    }*/
 }
 

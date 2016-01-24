@@ -60,6 +60,8 @@ public class AteneoAvvisiFragment extends Fragment {
 
     private CustomTabsIntent mCustomTabsIntent;
 
+    private AteneoPresenter mPresenter;
+
     public static AteneoAvvisiFragment newInstance(boolean studenti) {
         //Bundle bundle = new Bundle();
         //bundle.putBoolean("STUDENTI", studenti);
@@ -91,6 +93,8 @@ public class AteneoAvvisiFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
+        mPresenter = new AteneoPresenter(URLS.ATENEO_NEWS);
+
         //Bundle bundle = getArguments();
         /*if (bundle != null) {
             mIsStudenti = bundle.getBoolean("STUDENTI");
@@ -98,7 +102,7 @@ public class AteneoAvvisiFragment extends Fragment {
 
         mIsStudenti = true;
 
-        mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(mIsStudenti));
+        //mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(mIsStudenti));
 
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this.getActivity());
         mCustomTabsIntent = new CustomTabsIntent.Builder()
@@ -118,10 +122,10 @@ public class AteneoAvvisiFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         mRecyclerView.setLayoutManager(layoutManager);
 
-        refreshList(mIsStudenti);
+        refreshList();
     }
 
-    private void refreshList(boolean isStudenti) {
+    /*private void refreshList(boolean isStudenti) {
         mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
 
@@ -147,6 +151,29 @@ public class AteneoAvvisiFragment extends Fragment {
                     public void onNext(List<Article> ateneoNewsList) {
                         mAdapter.addNews(ateneoNewsList);
                         mRecyclerView.setVisibility(View.VISIBLE);
+                    }
+                });
+    }*/
+
+    private void refreshList() {
+        mRecyclerView.setVisibility(View.GONE);
+        mSwipeRefreshLayout.setRefreshing(true);
+        mPresenter.getArticles()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ArrayList<Article>>() {
+                    @Override
+                    public void onCompleted() {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(ArrayList<Article> articles) {
+                        mAdapter.addNews(articles);
                     }
                 });
     }
