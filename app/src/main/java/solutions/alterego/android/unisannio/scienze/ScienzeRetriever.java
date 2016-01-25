@@ -21,7 +21,6 @@ public class ScienzeRetriever {
 
     public ScienzeRetriever(String url){
         this.urlRetrive = url;
-        Log.e("URL RETRIVE",url);
     }
 
     public Observable<List<Article>> get() {
