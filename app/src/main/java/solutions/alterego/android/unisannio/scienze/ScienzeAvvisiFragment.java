@@ -78,6 +78,7 @@ public class ScienzeAvvisiFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
         String url = URLS.SCIENZE_NEWS;
+
         mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(url));
 
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this.getActivity());
@@ -107,7 +108,7 @@ public class ScienzeAvvisiFragment extends Fragment {
 
                                    @Override
                                    public void onNext(ArrayList<String> bodys) {
-                                       article.setBody(bodys.get(0));
+                                       //article.setBody(bodys.get(0));
                                        Intent intent = new Intent();
                                        intent.setClass(getActivity(), DetailActivity.class);
                                        intent.putExtra("ARTICLE", Parcels.wrap(article));
