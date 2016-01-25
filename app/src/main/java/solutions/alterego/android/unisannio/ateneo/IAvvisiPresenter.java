@@ -1,11 +1,13 @@
-package solutions.alterego.android.unisannio.giurisprudenza;
+package solutions.alterego.android.unisannio.ateneo;
 
 import java.util.ArrayList;
 
 import rx.Observable;
 import solutions.alterego.android.unisannio.models.Article;
 
-interface IGiurisprudenzaPresenter {
+public interface IAvvisiPresenter {
 
     Observable<ArrayList<Article>> getArticles();
+
 }
+

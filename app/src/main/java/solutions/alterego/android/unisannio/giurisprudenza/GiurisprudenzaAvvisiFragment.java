@@ -25,6 +25,8 @@ import butterknife.Bind;
 import butterknife.BindColor;
 import butterknife.ButterKnife;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
@@ -44,7 +46,7 @@ public class GiurisprudenzaAvvisiFragment extends Fragment implements Giurisprud
 
     private ArticleAdapter mAdapter;
 
-    private GiurisprudenzaPresenter presenter;
+    private GiurisprudenzaPresenter mPresenter;
 
     private CustomTabsHelperFragment mCustomTabsHelperFragment;
 
@@ -68,10 +70,10 @@ public class GiurisprudenzaAvvisiFragment extends Fragment implements Giurisprud
     public void onViewCreated(View view, Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
 
-        Bundle bundle = getArguments();
-        String url = bundle.getString("URL");
+        //Bundle bundle = getArguments();
+        //String url = bundle.getString("URL");
 
-        presenter = new GiurisprudenzaPresenter(this, url);
+        mPresenter = new GiurisprudenzaPresenter(URLS.GIURISPRUDENZA_AVVISI);
 
         mSwipeRefreshLayout.setColorSchemeResources(
             R.color.unisannio_yellow,
@@ -108,7 +110,24 @@ public class GiurisprudenzaAvvisiFragment extends Fragment implements Giurisprud
     private void refreshList() {
         mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
-        presenter.getArticles();
+        mPresenter.getArticles()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ArrayList<Article>>() {
+                    @Override
+                    public void onCompleted() {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(ArrayList<Article> articles) {
+                        mAdapter.addNews(articles);
+                    }
+                });
     }
 
     @Override

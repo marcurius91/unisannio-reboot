@@ -24,6 +24,8 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
+import solutions.alterego.android.unisannio.App;
+import solutions.alterego.android.unisannio.NavigationDrawerActivity;
 import solutions.alterego.android.unisannio.navigation.NavigationViewManager;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
@@ -32,7 +34,7 @@ import solutions.alterego.android.unisannio.cercapersone.Person;
 import solutions.alterego.android.unisannio.cercapersone.SearchPerson;
 
 
-public class IngengeriaCercapersoneActivity extends AppCompatActivity{
+public class IngengeriaCercapersoneActivity extends NavigationDrawerActivity{
 
     @Bind(R.id.cercapersone_ingegneria_recycle_view)
     RecyclerView mRecyclerView;
@@ -40,8 +42,8 @@ public class IngengeriaCercapersoneActivity extends AppCompatActivity{
     @Bind(R.id.cercapersone_ingegneria_swipe_container)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
-    @Bind(R.id.toolbar_actionbar)
-    Toolbar mToolbar;
+    //@Bind(R.id.toolbar_actionbar)
+    //Toolbar mToolbar;
 
     @Bind(R.id.searchView_Cercapersone_Ingegneria)
     SearchView mCercapersoneSearchView;
@@ -61,13 +63,16 @@ public class IngengeriaCercapersoneActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_ingengeria_cercapersone);
+        //App.component(this).inject(this);
 
+        /*
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        */
 
         //Initializing NavigationView
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        //navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
         mCercapersoneSearchView = (SearchView) findViewById(R.id.searchView_Cercapersone_Ingegneria);
 
@@ -128,6 +133,7 @@ public class IngengeriaCercapersoneActivity extends AppCompatActivity{
             }
         });
 
+        /*
         // Initializing Drawer Layout and ActionBarToggle
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_cercapersone);
 
@@ -154,10 +160,19 @@ public class IngengeriaCercapersoneActivity extends AppCompatActivity{
         //calling sync state is necessay or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();
 
+        */
+
         //TODO Fix bug on next lines (We don't have a fragment to replace)
         //getSupportFragmentManager().beginTransaction().replace(R.id.container, AteneoAvvisiFragment.newInstance(false)).commit();
         //navigationViewManager = new NavigationViewManager(drawerLayout,this);
         //navigationView = navigationViewManager.setUpNavigationDrawer(navigationView);
 
+    }
+
+    @Override
+    protected int getNavigationDrawerMenuIdForThisActivity() {return R.id.cercapersone_ingegneria;}
+    @Override
+    protected void onAppbarNavigationClick() {
+        openNavigationDrawer();
     }
 }

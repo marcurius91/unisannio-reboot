@@ -1,60 +1,22 @@
-package solutions.alterego.android.unisannio.giurisprudenza;
+package solutions.alterego.android.unisannio.ateneo;
+
 
 import android.util.Log;
 
 import org.jsoup.nodes.Document;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import solutions.alterego.android.unisannio.cercapersone.Person;
 import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.interfaces.IRetriever;
 import solutions.alterego.android.unisannio.models.Article;
 
-public class GiurisprudenzaPresenter implements IGiurisprudenzaPresenter {
-
-    /*private IParser<Article> mParser;
-
-    private IRetriever<Document> mRetriver;
-
-    private final GiurisprudenzaView view;
-
-    public GiurisprudenzaPresenter(GiurisprudenzaView view, String url) {
-        this.view = view;
-
-        mParser = new GiurisprudenzaParser();
-        mRetriver = new GiurisprudenzaRetriever(url);
-    }
-
-    @Override
-    public void getArticles() {
-        mRetriver.retriveDocument()
-            .map(document -> mParser.parse(document))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(new Observer<List<Article>>() {
-                @Override
-                public void onCompleted() {
-                    view.stopProgress();
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    view.stopProgress();
-                }
-
-                @Override
-                public void onNext(List<Article> list) {
-                    view.setArticles(list);
-                }
-            });
-    }*/
+public class AteneoPresenter implements IAvvisiPresenter {
 
     private IParser<Article> mParser;
 
@@ -62,10 +24,9 @@ public class GiurisprudenzaPresenter implements IGiurisprudenzaPresenter {
 
     ArrayList<Article> list = new ArrayList<>();
 
-    public GiurisprudenzaPresenter(String url) {
-
-        mParser = new GiurisprudenzaParser();
-        mRetriever = new GiurisprudenzaRetriever(url);
+    public AteneoPresenter(String url){
+        mParser = new AteneoAvvisiParser();
+        mRetriever = new AteneoRetriever(url);
     }
 
     @Override
@@ -87,7 +48,7 @@ public class GiurisprudenzaPresenter implements IGiurisprudenzaPresenter {
 
                                     @Override
                                     public void onError(Throwable e) {
-                                        Log.e("GIUR PRES onError()", e.toString());
+                                        Log.e("ATENEO PRES onError()", e.toString());
 
                                     }
 
