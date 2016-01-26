@@ -8,7 +8,7 @@ import solutions.alterego.android.assertThat
 
 class ScienzeDetailParserTest {
 
-    val url = "http://www.sciunisannio.it/avvisi/56-various/4773-spostamento-orario-e-aula-tutorati-matematica-22-dicembre-2015";
+    val url = "http://www.sciunisannio.it/avvisi/56-various/4833-seconda-prova-di-genetica-28-gennaio-2016-ore-1300-aula-magna";
     val retriver = ScienzeDetailRetriver(url);
     val parser = ScienzeDetailParser();
     lateinit var document : Document;
