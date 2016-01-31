@@ -38,7 +38,7 @@ public class ScienzeParser implements IParser {
             if (date != null && title != null) {
                 DateTimeFormatter dtf = DateTimeFormat.forPattern("dd MMM yyyy");
                 DateTime jodatime = dtf.withLocale(Locale.ITALIAN).parseDateTime(date.replace(".", " ").toLowerCase());
-                newsList.add(new Article(title, link, "BODY OF ARTICLE", jodatime, ""));
+                newsList.add(new Article(title, link,"BODY ARTICLE", jodatime, ""));
             }
         }
 

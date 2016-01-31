@@ -10,6 +10,7 @@ import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -60,6 +61,8 @@ public class ScienzeActivity extends NavigationDrawerActivity {
 
     private ArticleAdapter mAdapter;
 
+    ScienzeDetailPresenter mPresenter;
+
     protected Intent mMap;
 
     @Override
@@ -70,6 +73,7 @@ public class ScienzeActivity extends NavigationDrawerActivity {
 
         setContentView(R.layout.activity_scienze);
         ButterKnife.bind(this);
+
 
         mMap = new Intent(this, MapsActivity.class);
 
@@ -95,10 +99,33 @@ public class ScienzeActivity extends NavigationDrawerActivity {
         mRecyclerView.setVisibility(View.VISIBLE);
 
         mAdapter = new ArticleAdapter(new ArrayList<>(), (article, holder) -> {
-            Intent intent = new Intent();
-            intent.setClass(this, DetailActivity.class);
-            intent.putExtra("ARTICLE", Parcels.wrap(article));
 
+            String url1 = URLS.SCIENZE_NEWS + article.getUrl();
+
+            mPresenter = new ScienzeDetailPresenter(url1);
+
+            mPresenter.getBodyNews()
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<ArrayList<String>>() {
+                        @Override
+                        public void onCompleted() {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            Log.e("Error presenter", e.toString());
+                        }
+
+                        @Override
+                        public void onNext(ArrayList<String> strings) {
+                            article.setBody(strings.get(0));
+                            Intent intent = new Intent();
+                            intent.setClass(getApplicationContext(),DetailActivity.class);
+                            intent.putExtra("ARTICLE", Parcels.wrap(article));
+                            startActivity(intent);
+                        }
+                    });
             /*ActivityOptionsCompat options =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(this,
                             Pair.create(((ArticleAdapter.ViewHolder) holder).title, getString(R.string.transition_article_title)),
@@ -106,7 +133,7 @@ public class ScienzeActivity extends NavigationDrawerActivity {
                             Pair.create(((ArticleAdapter.ViewHolder) holder).author, getString(R.string.transition_article_author))
                     );
             ActivityCompat.startActivity(this, intent, options.toBundle());*/
-            startActivity(intent);
+
         }, R.drawable.teatro);
 
         refreshList();
