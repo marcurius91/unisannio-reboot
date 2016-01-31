@@ -8,7 +8,7 @@ import solutions.alterego.android.assertThat
 
 class ScienzeDetailRetriverTest {
 
-    val url = "http://www.sciunisannio.it/avvisi/56-various/4833-seconda-prova-di-genetica-28-gennaio-2016-ore-1300-aula-magna";
+    val url = "http://www.sciunisannio.it/avvisi/56-various/4842-esito-prove-esame-profssa-stilo";
     lateinit var document : Document;
     val retriver = ScienzeDetailRetriver(url);
 
