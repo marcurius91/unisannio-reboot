@@ -112,13 +112,14 @@ public class ScienzeAvvisiFragment extends Fragment {
                                        Intent intent = new Intent();
                                        intent.setClass(getActivity(), DetailActivity.class);
                                        intent.putExtra("ARTICLE", Parcels.wrap(article));
-                                       ActivityOptionsCompat options =
+                                       /*ActivityOptionsCompat options =
                                                ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
                                                        Pair.create(((ArticleAdapter.ViewHolder) holder).title, getString(R.string.transition_article_title)),
                                                        Pair.create(((ArticleAdapter.ViewHolder) holder).date, getString(R.string.transition_article_date)),
                                                        Pair.create(((ArticleAdapter.ViewHolder) holder).author, getString(R.string.transition_article_author))
                                                );
-                                       ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
+                                       ActivityCompat.startActivity(getActivity(), intent, options.toBundle());*/
+                                       startActivity(intent);
                                    }
                                }
                     );
