@@ -101,13 +101,14 @@ public class IngegneriaAvvisiStudentiActivity extends NavigationDrawerActivity {
             intent.setClass(this, DetailActivity.class);
             intent.putExtra("ARTICLE", Parcels.wrap(article));
 
-            ActivityOptionsCompat options =
+            /*ActivityOptionsCompat options =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(this,
                             Pair.create(((ArticleAdapter.ViewHolder) holder).title, getString(R.string.transition_article_title)),
                             Pair.create(((ArticleAdapter.ViewHolder) holder).date, getString(R.string.transition_article_date)),
                             Pair.create(((ArticleAdapter.ViewHolder) holder).author, getString(R.string.transition_article_author))
                     );
-            ActivityCompat.startActivity(this, intent, options.toBundle());
+            ActivityCompat.startActivity(this, intent, options.toBundle());*/
+            startActivity(intent);
         }, R.drawable.ding);
 
         refreshList();
