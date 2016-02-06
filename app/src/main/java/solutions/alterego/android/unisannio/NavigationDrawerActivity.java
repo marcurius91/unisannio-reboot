@@ -29,7 +29,7 @@ import javax.inject.Inject;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import solutions.alterego.android.unisannio.utils.DeveloperError;
 
-public abstract class NavigationDrawerActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public abstract class NavigationDrawerActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private static final String EXTRA_FROM_NAV_DRAWER = BuildConfig.APPLICATION_ID + ".extra.from_nav_drawer";
 
@@ -91,7 +91,11 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
     }
 
     private void setupNavigationDrawer() {
-        navigationView.setCheckedItem(getNavigationDrawerMenuIdForThisActivity());
+        //navigationView.setItemChecked(getNavigationDrawerMenuIdForThisActivity());
+        if(getNavigationDrawerMenuIdForThisActivity() < 17) {
+            navigationView.getMenu().getItem(getNavigationDrawerMenuIdForThisActivity());
+        }
+        else navigationView.getMenu().getItem(0);
         navigationView.setNavigationItemSelectedListener(this);
         hackToHideNavDrawerHeaderRipple();
     }
