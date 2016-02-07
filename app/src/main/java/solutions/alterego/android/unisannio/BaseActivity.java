@@ -2,6 +2,7 @@ package solutions.alterego.android.unisannio;
 
 import org.chromium.customtabsclient.CustomTabsActivityHelper;
 
+import android.app.ActionBar;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +11,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.internal.app.ToolbarActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Toast;
 
 import butterknife.BindColor;
@@ -74,7 +77,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         appbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         if (appbar != null) {
             setSupportActionBar(appbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             appbar.setNavigationOnClickListener(v -> onAppbarNavigationClick());
         }
 
@@ -90,7 +92,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @Nullable
-    protected final Toolbar getSupportAppBar() {
+    protected Toolbar getSupportAppBar() {
         return appbar;
     }
 
