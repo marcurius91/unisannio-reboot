@@ -74,6 +74,13 @@ public class IngengeriaCercapersoneActivity extends NavigationDrawerActivity{
         //Initializing NavigationView
         //navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+        setSupportActionBar(toolbar);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
         mCercapersoneSearchView = (SearchView) findViewById(R.id.searchView_Cercapersone_Ingegneria);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.cercapersone_ingegneria_recycle_view);
