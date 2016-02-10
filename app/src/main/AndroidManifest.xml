@@ -53,6 +53,14 @@
             android:value="8501bc0640d6af5e895dfc1c5d65a99fbd2c0286" />
 
         <activity
+          android:name=".ateneo.AteneoActivity"
+          android:label="@string/app_name">
+          <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
+        </activity>
+        <activity
             android:name=".DetailActivity"
             android:label="@string/title_activity_detail"
             android:screenOrientation="portrait" />
@@ -65,15 +73,6 @@
         <activity
             android:name=".ingegneria.IngegneriaCercapersoneDetailActivity"
             android:label="@string/activity_cercapersone_detail_title" />
-        <activity
-            android:name=".ateneo.AteneoActivity"
-            android:label="@string/title_activity_ateneo">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".scienze.ScienzeActivity"
             android:label="@string/title_activity_scienze"
@@ -98,6 +97,7 @@
             android:name=".ingegneria.IngegneriaAvvisiStudentiActivity"
             android:label="@string/title_activity_ingegneria_avvisi_studenti"
             android:theme="@style/AppTheme" />
+
         <activity
             android:name=".ateneo.AteneoStudentiActivity"
             android:label="@string/title_activity_ateneo_studenti"
