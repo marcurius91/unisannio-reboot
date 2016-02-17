@@ -9,9 +9,12 @@ import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -73,6 +76,13 @@ public class IngegneriaAvvisiStudentiActivity extends NavigationDrawerActivity {
         setContentView(R.layout.activity_ingegneria_avvisi_studenti);
         ButterKnife.bind(this);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+        setSupportActionBar(toolbar);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
         mCustomTabsIntent = new CustomTabsIntent.Builder()
                 .enableUrlBarHiding()
                 .setToolbarColor(mColorPrimary)
@@ -101,13 +111,14 @@ public class IngegneriaAvvisiStudentiActivity extends NavigationDrawerActivity {
             intent.setClass(this, DetailActivity.class);
             intent.putExtra("ARTICLE", Parcels.wrap(article));
 
-            ActivityOptionsCompat options =
+            /*ActivityOptionsCompat options =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(this,
                             Pair.create(((ArticleAdapter.ViewHolder) holder).title, getString(R.string.transition_article_title)),
                             Pair.create(((ArticleAdapter.ViewHolder) holder).date, getString(R.string.transition_article_date)),
                             Pair.create(((ArticleAdapter.ViewHolder) holder).author, getString(R.string.transition_article_author))
                     );
-            ActivityCompat.startActivity(this, intent, options.toBundle());
+            ActivityCompat.startActivity(this, intent, options.toBundle());*/
+            startActivity(intent);
         }, R.drawable.ding);
 
         refreshList();

@@ -6,10 +6,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import org.chromium.customtabsclient.CustomTabsActivityHelper;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +33,10 @@ import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
+import solutions.alterego.android.unisannio.DetailActivity;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
+import solutions.alterego.android.unisannio.cercapersone.Person;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
 
@@ -71,6 +78,7 @@ public class ScienzeAvvisiFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
         String url = URLS.SCIENZE_NEWS;
+
         mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(url));
 
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this.getActivity());
@@ -82,8 +90,41 @@ public class ScienzeAvvisiFragment extends Fragment {
 
         mAdapter = new ArticleAdapter(new ArrayList<>(), (article, holder) -> {
             String url1 = URLS.SCIENZE_NEWS + article.getUrl();
-            CustomTabsHelperFragment.open(getActivity(), mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
+            //CustomTabsHelperFragment.open(getActivity(), mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
+            ScienzeDetailPresenter mDetailPresenter = new ScienzeDetailPresenter(url1);
+
+            mDetailPresenter.getBodyNews()
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<ArrayList<String>>() {
+                                   @Override
+                                   public void onCompleted() {
+
+                                   }
+
+                                   @Override
+                                   public void onError(Throwable e) {
+                                       Log.e("getBodyNews", e.toString());
+                                   }
+
+                                   @Override
+                                   public void onNext(ArrayList<String> bodys) {
+                                       //article.setBody(bodys.get(0));
+                                       Intent intent = new Intent();
+                                       intent.setClass(getActivity(), DetailActivity.class);
+                                       intent.putExtra("ARTICLE", Parcels.wrap(article));
+                                       /*ActivityOptionsCompat options =
+                                               ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
+                                                       Pair.create(((ArticleAdapter.ViewHolder) holder).title, getString(R.string.transition_article_title)),
+                                                       Pair.create(((ArticleAdapter.ViewHolder) holder).date, getString(R.string.transition_article_date)),
+                                                       Pair.create(((ArticleAdapter.ViewHolder) holder).author, getString(R.string.transition_article_author))
+                                               );
+                                       ActivityCompat.startActivity(getActivity(), intent, options.toBundle());*/
+                                       startActivity(intent);
+                                   }
+                               }
+                    );
         },R.drawable.teatro);
+
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
@@ -96,7 +137,9 @@ public class ScienzeAvvisiFragment extends Fragment {
         mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
 
-        ScienzeRetriever.get(url)
+        ScienzeRetriever sr = new ScienzeRetriever(url);
+
+        sr.get()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new Observer<List<Article>>() {
                 @Override

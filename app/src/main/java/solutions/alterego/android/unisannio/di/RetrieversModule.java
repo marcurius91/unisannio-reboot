@@ -30,7 +30,7 @@ public class RetrieversModule {
     @Provides
     @Singleton
     ScienzeRetriever provideScienzeRetriever() {
-        return new ScienzeRetriever();
+        return new ScienzeRetriever(URLS.SCIENZE_NEWS);
     }
 
     @Provides
