@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -55,7 +56,20 @@ public class DetailActivity extends AppCompatActivity {
         mToolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         mArticle = Parcels.unwrap(getIntent().getParcelableExtra("ARTICLE"));
-        mTitle.setText(mArticle.getTitle());
+
+        //TODO Sometimes this part of code going to NullPointerException on Android 4.3.1, isolate problem if possible
+        if(mArticle != null){
+            if((mArticle.getTitle() != null)){
+                mTitle.setText(mArticle.getTitle());
+            }
+            else
+            {
+                Log.e("Detail On Create","Null Article Title");
+            }
+        }
+        else {
+            Log.e("Detail On Create", "Null Article parsed");
+        }
         mDate.setText(localDateFormatter.print(mArticle.getDate()));
         mAuthor.setText(mArticle.getAuthor());
         mBody.setText(mArticle.getBody());
