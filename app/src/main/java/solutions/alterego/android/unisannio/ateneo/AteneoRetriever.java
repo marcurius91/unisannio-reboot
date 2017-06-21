@@ -1,5 +1,7 @@
 package solutions.alterego.android.unisannio.ateneo;
 
+import android.util.Log;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 

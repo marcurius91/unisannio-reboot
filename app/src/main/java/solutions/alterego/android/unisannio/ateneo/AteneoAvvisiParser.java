@@ -1,5 +1,7 @@
 package solutions.alterego.android.unisannio.ateneo;
 
+import android.util.Log;
+
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -16,8 +18,13 @@ import solutions.alterego.android.unisannio.models.Article;
 public class AteneoAvvisiParser implements IParser {
 
     public List<Article> parse(Document doc) {
-        List<Article> newsList = new ArrayList<>();
 
+        List<Article> newsList = new ArrayList<>();
+        String date = null;
+        String title = null;
+        String id = null;
+
+        /*
         Elements newsItems = doc.select("div.meta > table > tbody > tr");
 
         for (int i = 2; i < newsItems.size(); i++) {
@@ -43,6 +50,41 @@ public class AteneoAvvisiParser implements IParser {
                 newsList.add(new Article(title, id, "", jodatime, ""));
             }
         }
+        */
+
+        Elements newsItems = doc.select("div.view-content").select("tbody").select("tr");
+
+        for(int i = 1; i < newsItems.size(); i++) {
+
+            Elements bodyElement = newsItems.get(i).select("td");
+            if (bodyElement != null) {
+
+                //get the id of the news.
+                Element id_element = bodyElement.get(0);
+                id = id_element.text();
+
+                //get the Title of the news.
+                Element title_element = bodyElement.get(2).select("a").first();
+                title = title_element.text();
+
+                //get the date of the news
+                Element date_element = bodyElement.get(3).select("span").first();
+                date = date_element.text();
+
+            }
+
+            if(title != null && date != null){
+                //newsList.add(new Article(title,id,"",date,""));
+            }
+
+        }
+
+        //TODO Find why the Parser is called twice.
+        //Log.e("END","End of Parser");
+
+
+
         return newsList;
+
     }
 }
