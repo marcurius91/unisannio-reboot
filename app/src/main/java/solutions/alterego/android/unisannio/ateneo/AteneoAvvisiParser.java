@@ -74,7 +74,9 @@ public class AteneoAvvisiParser implements IParser {
             }
 
             if(title != null && date != null){
-                //newsList.add(new Article(title,id,"",date,""));
+                DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
+                DateTime jodatime = dtf.parseDateTime(date);
+                newsList.add(new Article(title,id,"",jodatime,""));
             }
 
         }
