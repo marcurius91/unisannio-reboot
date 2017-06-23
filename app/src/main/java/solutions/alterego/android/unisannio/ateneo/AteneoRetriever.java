@@ -60,6 +60,7 @@ public class AteneoRetriever implements IRetriever<Document>{
     private String urlToRetrieve;
 
     public AteneoRetriever(String url_retrieve){
+        //TODO Find a way to get all the news from mutliple pages. News goes from page 0 to page 40
         this.urlToRetrieve = url_retrieve;
     }
 
