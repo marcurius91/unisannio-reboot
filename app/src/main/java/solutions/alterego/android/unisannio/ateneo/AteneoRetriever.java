@@ -8,6 +8,7 @@ import org.jsoup.nodes.Document;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -58,10 +59,15 @@ public class AteneoRetriever implements IRetriever<Document>{
     }*/
 
     private String urlToRetrieve;
+    private List<String> urlsToRetrieve = new ArrayList<>();
 
     public AteneoRetriever(String url_retrieve){
-        //TODO Find a way to get all the news from mutliple pages. News goes from page 0 to page 40
         this.urlToRetrieve = url_retrieve;
+
+        //Fill the arrayList with all the urls based on the ATENEO_NEWS URL from page 0 to page 41.
+        for(int i = 0; i < 42; i++){
+            urlsToRetrieve.add(url_retrieve.concat("?page=").concat(String.valueOf(i)));
+        }
     }
 
 
@@ -87,6 +93,9 @@ public class AteneoRetriever implements IRetriever<Document>{
                     }
                 }).subscribeOn(Schedulers.io());
 
+    }
+    private void loadList(){
+        Observable.from(urlsToRetrieve).
     }
 
     public Document getDocument() throws IOException {

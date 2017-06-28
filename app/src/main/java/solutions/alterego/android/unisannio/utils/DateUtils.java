@@ -43,6 +43,7 @@ public class DateUtils {
 
     }
 
+    //method for extracting the literal month and convert into numerical
     public static String convertMonth(String date){
 
         String date_temp = date.replace("Pubblicato:","");

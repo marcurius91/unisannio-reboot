@@ -81,11 +81,6 @@ public class AteneoAvvisiParser implements IParser {
 
         }
 
-        //TODO Find why the Parser is called twice.
-        //Log.e("END","End of Parser");
-
-
-
         return newsList;
 
     }
