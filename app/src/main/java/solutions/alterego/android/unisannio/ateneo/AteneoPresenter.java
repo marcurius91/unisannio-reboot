@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.interfaces.IParser;
@@ -22,7 +23,8 @@ public class AteneoPresenter implements IAvvisiPresenter {
 
     private IRetriever<Document> mRetriever;
 
-    ArrayList<Article> list = new ArrayList<>();
+
+    ArrayList<Article> global_article_list = new ArrayList<>();
 
     public AteneoPresenter(String url){
         mParser = new AteneoAvvisiParser();
@@ -31,6 +33,9 @@ public class AteneoPresenter implements IAvvisiPresenter {
 
     @Override
     public Observable<ArrayList<Article>> getArticles() {
+
+
+
         return Observable.
                 create(new Observable.OnSubscribe<ArrayList<Article>>(){
 
@@ -54,11 +59,15 @@ public class AteneoPresenter implements IAvvisiPresenter {
 
                                     @Override
                                     public void onNext(Document document) {
-                                        list = (ArrayList<Article>) mParser.parse(document);
-                                        subscriber.onNext(list);
-                                        /*for (int i = 0; i < list.size(); i++) {
-                                            Log.e("OBSERVER onNext()", list.get(i).toString());
-                                        }*/
+
+                                        //Log.e("Ateneo Presenter",document.toString());
+                                        ArrayList<Article> list = (ArrayList<Article>) mParser.parse(document);
+                                        global_article_list.addAll(list);
+                                        subscriber.onNext(global_article_list);
+                                        //for (int i = 0; i < list.size(); i++) {
+                                        //    Log.e("OBSERVER onNext()", list.get(i).toString());
+                                        //}
+
 
                                     }
                                 });
