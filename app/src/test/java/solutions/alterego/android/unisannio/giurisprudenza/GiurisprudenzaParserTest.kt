@@ -43,6 +43,6 @@ class GiurisprudenzaParserTest {
         assertTrue(title.isNotEmpty())
 
         val year = date.toString().substring(0, 4).toInt();
-        assertThat(year).isEqualTo(2016)
+        assertThat(year).isEqualTo(2017)
     }
 }
