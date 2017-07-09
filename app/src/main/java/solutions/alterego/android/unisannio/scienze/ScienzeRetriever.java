@@ -64,7 +64,7 @@ public class ScienzeRetriever {
                 }).subscribeOn(Schedulers.io());
     }
 
-    private Document getDocument(String urlRetrive) throws IOException {
+    public Document getDocument(String urlRetrive) throws IOException {
         return Jsoup.connect(urlRetrive).timeout(10 * 1000).userAgent("Mozilla").get();
     }
 
