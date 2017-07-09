@@ -1,5 +1,9 @@
 package solutions.alterego.android.unisannio.scienze;
 
+import android.util.Log;
+
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -10,13 +14,47 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.StringTokenizer;
 
+import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.models.Article;
+import solutions.alterego.android.unisannio.utils.DateUtils;
 
 public class ScienzeParser implements IParser {
 
+    String AUTHOR = "Didattica";
+
     public List<Article> parse(Document document) {
+
+       Elements elements = document.body().select("div.blog").select("div.item");
+        List<Article> newsList = new ArrayList<>();
+
+            String date = null;
+            String title = null;
+            String body = null;
+            String url = null;
+
+
+            for(Element element : elements) {
+
+                Element titleElement = element.select("h2 >  a[href]").first();
+                title = titleElement.text();
+
+                Element bodyElement = element.select("p").first();
+                body = bodyElement.text();
+
+                Element dateElement = element.select("dd.published").first();
+                date = DateUtils.convertMonthFromScienze(dateElement.text());
+                DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
+                DateTime jodatime = dtf.withLocale(Locale.ITALIAN).parseDateTime(date.replace(".", " ").toLowerCase());
+
+                Elements linkElement = element.select("h2 > a");
+                url = URLS.SCIENZE.concat(linkElement.attr("href"));
+
+                newsList.add(new Article(title,url,body,jodatime,AUTHOR));
+            }
+        /*
         Elements newsItems = document.select("li.latestnewsfl_green");
 
         List<Article> newsList = new ArrayList<>();
@@ -64,6 +102,7 @@ public class ScienzeParser implements IParser {
                 newsList.add(new Article(title, link, "", jodatime, ""));
             }
         }
+        */
         return newsList;
     }
 }

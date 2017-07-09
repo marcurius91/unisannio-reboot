@@ -109,7 +109,7 @@ public class ScienzeActivity extends NavigationDrawerActivity {
 
         mAdapter = new ArticleAdapter(new ArrayList<>(), (article, holder) -> {
 
-            String url1 = URLS.SCIENZE_NEWS + article.getUrl();
+            String url1 = article.getUrl();
 
             mPresenter = new ScienzeDetailPresenter(url1);
 
@@ -159,10 +159,10 @@ public class ScienzeActivity extends NavigationDrawerActivity {
                 .subscribe(new Observer<List<Article>>() {
                     @Override
                     public void onCompleted() {
-                        if (mRecyclerView != null && mSwipeRefreshLayout != null) {
+                        /* (mRecyclerView != null && mSwipeRefreshLayout != null) {
                             mRecyclerView.setVisibility(View.VISIBLE);
                             mSwipeRefreshLayout.setRefreshing(false);
-                        }
+                        }*/
                     }
 
                     @Override
@@ -176,6 +176,10 @@ public class ScienzeActivity extends NavigationDrawerActivity {
                     @Override
                     public void onNext(List<Article> list) {
                         mAdapter.addNews(list);
+                        if (mRecyclerView != null && mSwipeRefreshLayout != null) {
+                            mRecyclerView.setVisibility(View.VISIBLE);
+                            mSwipeRefreshLayout.setRefreshing(false);
+                        }
                     }
                 });
     }

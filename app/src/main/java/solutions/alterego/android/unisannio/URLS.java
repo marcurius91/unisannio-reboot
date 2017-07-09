@@ -12,7 +12,7 @@ public class URLS {
 
     public static final String ATENEO_DETAIL_STUDENTI_BASE_URL = "http://www.unisannio.it/it/amministrazione/avviso/";
 
-    public static final String SCIENZE_NEWS = "http://www.sciunisannio.it";
+    public static final String SCIENZE_NEWS = "http://www.dstunisannio.it/index.php/didattica";
 
     public static final String SCIENZE = "http://www.dstunisannio.it";
 
