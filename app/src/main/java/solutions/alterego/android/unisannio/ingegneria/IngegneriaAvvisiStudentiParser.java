@@ -1,5 +1,7 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
+import android.util.Log;
+
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -9,6 +11,7 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.models.Article;
@@ -16,26 +19,15 @@ import solutions.alterego.android.unisannio.utils.DateUtils;
 
 public class IngegneriaAvvisiStudentiParser implements IParser {
 
-    public static final String SELECT_HEADER = "#header > h2 > a";
-
-    public static final String URL = "href";
-
-    public static final String SELECT_PARAGRAFS = "p";
-
     public static final String EMPTY_AUTHOR_PLACEHOLDER = "Presidio didattico";
-
-    public static final String SELECT_PUBLISH_INFO = "#publishinfo";
-
-    public static final String SELECT_BODY = ".avvtext";
-
-    public static final String AUTHOR = "Autore";
 
     public static String SELECT_ELEMENTS = "#maincontent-block > #item";
 
     @Override
     public List parse(Document document) {
 
-        Elements elements = getElements(document);
+
+        /*Elements elements = getElements(document);
 
         List<Article> list = new ArrayList<>();
 
@@ -64,6 +56,50 @@ public class IngegneriaAvvisiStudentiParser implements IParser {
 
             list.add(new Article(title, url, body, jodatime, author));
         }
+        return list;*/
+
+        Elements elements = document.select("div.item");
+
+        List<Article> list = new ArrayList<>();
+
+        for (int i = 0; i<elements.size(); i++){
+
+            //get the title of the news
+            Elements title_element = elements.get(i).select("h2").select("a").select("span.avvtitle");
+            String title = title_element.text();
+
+            //get the url of the news
+            Element url_element = elements.get(i).select("h2").select("a").first();
+            String url = url_element.attr("href");
+
+            //get the body of the news
+            Element body_element = elements.get(i).select("div.avvtext").first();
+            String body = body_element.text();
+
+            //Extract date from publish field of the news
+            Element publish_element = elements.get(i).select("div").select("p.publishinfo").first();
+            String publish = publish_element.text();
+            StringTokenizer st = new StringTokenizer(publish," ");
+            String st1 = st.nextToken();
+            String st2 = st.nextToken();
+            String date = st.nextToken();
+
+            DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
+            DateTime jodatime = dtf.parseDateTime(date);
+
+            //get the author of the news
+            Element authors_elements = elements.get(i).select("div").select("p").last();
+            String author = null;
+
+            if(authors_elements.text().contains("Autore")){
+                author = authors_elements.text().substring(7);
+            }
+
+            else author = EMPTY_AUTHOR_PLACEHOLDER;
+
+            list.add(new Article(title, url, body, jodatime, author));
+        }
+
         return list;
     }
 

@@ -17,13 +17,12 @@ public class ScienzeDetailParser implements IParser<String>{
     @Override
     public List<String> parse(Document document) {
 
-        Elements newsBodys = document.select("div.rt-grid-9");
+        Elements newsBodys = document.select("div.item-page");
 
         for(Element element : newsBodys){
-            String str = element.select("p").text();
-            String str1 = str.replace(" Various","");
+            String str = element.select("p").get(1).text();
 
-            bodyelements.add(0,str1);
+            bodyelements.add(0,str);
         }
 
         return bodyelements;

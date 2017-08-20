@@ -4,21 +4,23 @@ public class URLS {
 
     public static final String ATENEO = "http://www.unisannio.it";
 
-    public static final String ATENEO_NEWS = "http://www.unisannio.it/notizie/avvisi/index.php";
+    public static final String ATENEO_NEWS = "http://www.unisannio.it/it/amministrazione/albo-online/albo";
 
-    public static final String ATENEO_STUDENTI_NEWS = "http://www.unisannio.it/studenti/avvisi/index.php";
+    public static final String ATENEO_STUDENTI_NEWS = "http://www.unisannio.it/it/bacheca/generale";
 
-    public static final String ATENEO_DETAIL_BASE_URL = "http://www.unisannio.it/notizie/avvisi/viscom.php?id=";
+    public static final String ATENEO_DETAIL_BASE_URL = "http://www.unisannio.it/it/amministrazione/avviso/";
 
-    public static final String ATENEO_DETAIL_STUDENTI_BASE_URL = "http://www.unisannio.it/studenti/avvisi/viscom.php?id=";
+    public static final String ATENEO_DETAIL_STUDENTI_BASE_URL = "http://www.unisannio.it/it/amministrazione/avviso/";
 
-    public static final String SCIENZE_NEWS = "http://www.sciunisannio.it";
+    public static final String SCIENZE_NEWS = "http://www.dstunisannio.it/index.php/didattica";
 
     public static final String SCIENZE = "http://www.dstunisannio.it";
 
     public static final String INGEGNERIA = "https://www.ding.unisannio.it/";
 
-    public static final String INGEGNERIA_NEWS_STUDENTI = "https://www.ding.unisannio.it/en/avvisi-com/avvisi-didattica";
+    public static final String INGEGNERIA_NEWS_STUDENTI = "https://www.ding.unisannio.it/en/avvisi-com/avvisi-didattica#";
+
+    public static final String INGEGNERIA_NEWS_STUDENTI_FEED_RSS = "http://www.ding.unisannio.it/html/rss/rss.php";
 
     public static final String INGEGNERIA_NEWS_DIPARTIMENTO = "https://www.ding.unisannio.it/avvisi-com/avvisi";
 

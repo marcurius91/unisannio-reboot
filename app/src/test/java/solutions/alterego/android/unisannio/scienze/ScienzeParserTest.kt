@@ -8,11 +8,12 @@ import org.junit.runner.RunWith
 import org.mockito.Mockito
 import org.mockito.runners.MockitoJUnitRunner
 import solutions.alterego.android.assertThat
+import solutions.alterego.android.unisannio.URLS
 
 @RunWith(MockitoJUnitRunner::class)
 class ScienzeParserTest {
 
-    val url = "http://www.sciunisannio.it";
+    val url = URLS.SCIENZE_NEWS;
     val parser = ScienzeParser();
     val retriver = ScienzeRetriever(url);
     lateinit var document: Document
@@ -20,7 +21,7 @@ class ScienzeParserTest {
 
     @Before
     fun setUp(){
-    document = retriver.document;
+    document = retriver.getDocument(url);
     assertThat(document).isNotNull;
     }
 

@@ -1,11 +1,14 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -21,7 +24,7 @@ import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.cercapersone.Person;
 import solutions.alterego.android.unisannio.models.Article;
 
-public class IngegneriaCercapersoneDetailActivity extends AppCompatActivity{
+public class IngegneriaCercapersoneDetailActivity extends AppCompatActivity {
 
     @Bind(R.id.detail_cercapersone_email)
     TextView mEmail;
@@ -58,7 +61,8 @@ public class IngegneriaCercapersoneDetailActivity extends AppCompatActivity{
 
         mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_action_arrow_left));
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
                 IngegneriaCercapersoneDetailActivity.this.onBackPressed();
             }
         });
@@ -74,7 +78,7 @@ public class IngegneriaCercapersoneDetailActivity extends AppCompatActivity{
         mName.setText(mPerson.getNome());
 
         //Check if email String is empty and launch the relative Intent
-        if(!mPerson.getEmail().isEmpty()) {
+        if (!mPerson.getEmail().isEmpty()) {
             mEmail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -86,11 +90,22 @@ public class IngegneriaCercapersoneDetailActivity extends AppCompatActivity{
         }
 
         //Check if phone String is empty and launch the relative Intent
-        if(!mPerson.getTelefono().isEmpty()) {
+        if (!mPerson.getTelefono().isEmpty()) {
             mPhone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mPerson.getTelefono()));
+                    //TODO Fix with a PermissionManager Class
+                    if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return;
+                    }
                     startActivity(intent);
                 }
             });
