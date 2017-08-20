@@ -3,10 +3,8 @@ package solutions.alterego.android.unisannio.scienze;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.util.Pair;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,18 +16,14 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import org.parceler.Parcels;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-
 import butterknife.Bind;
 import butterknife.BindColor;
 import butterknife.ButterKnife;
+import java.util.ArrayList;
+import java.util.List;
+import javax.inject.Inject;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
+import org.parceler.Parcels;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
@@ -40,7 +34,7 @@ import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
 import solutions.alterego.android.unisannio.analytics.Screen;
-import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiStudentiRetriever;
+import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
@@ -107,34 +101,30 @@ public class ScienzeActivity extends NavigationDrawerActivity {
 
         mRecyclerView.setVisibility(View.VISIBLE);
 
-        mAdapter = new ArticleAdapter(new ArrayList<>(), (article, holder) -> {
+        mAdapter = new ArticleAdapter(new ArrayList<Article>(), new OpenArticleDetailListener() {
+            @Override public void openArticleDetail(@NonNull final Article article, @NonNull RecyclerView.ViewHolder holder) {
 
-            String url1 = URLS.SCIENZE_NEWS + article.getUrl();
+                String url1 = URLS.SCIENZE_NEWS + article.getUrl();
 
-            mPresenter = new ScienzeDetailPresenter(url1);
+                mPresenter = new ScienzeDetailPresenter(url1);
 
-            mPresenter.getBodyNews()
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<ArrayList<String>>() {
-                        @Override
-                        public void onCompleted() {
+                mPresenter.getBodyNews().observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ArrayList<String>>() {
+                    @Override public void onCompleted() {
 
-                        }
+                    }
 
-                        @Override
-                        public void onError(Throwable e) {
-                            Log.e("Error presenter", e.toString());
-                        }
+                    @Override public void onError(Throwable e) {
+                        Log.e("Error presenter", e.toString());
+                    }
 
-                        @Override
-                        public void onNext(ArrayList<String> strings) {
-                            article.setBody(strings.get(0));
-                            Intent intent = new Intent();
-                            intent.setClass(getApplicationContext(),DetailActivity.class);
-                            intent.putExtra("ARTICLE", Parcels.wrap(article));
-                            startActivity(intent);
-                        }
-                    });
+                    @Override public void onNext(ArrayList<String> strings) {
+                        article.setBody(strings.get(0));
+                        Intent intent = new Intent();
+                        intent.setClass(getApplicationContext(), DetailActivity.class);
+                        intent.putExtra("ARTICLE", Parcels.wrap(article));
+                        startActivity(intent);
+                    }
+                });
             /*ActivityOptionsCompat options =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(this,
                             Pair.create(((ArticleAdapter.ViewHolder) holder).title, getString(R.string.transition_article_title)),
@@ -143,6 +133,7 @@ public class ScienzeActivity extends NavigationDrawerActivity {
                     );
             ActivityCompat.startActivity(this, intent, options.toBundle());*/
 
+            }
         }, R.drawable.teatro);
 
         refreshList();

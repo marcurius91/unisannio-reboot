@@ -31,7 +31,7 @@ public class ScienzeDetailPresenter {
                 create(new Observable.OnSubscribe<ArrayList<String>>() {
 
                     @Override
-                    public void call(Subscriber<? super ArrayList<String>> subscriber) {
+                    public void call(final Subscriber<? super ArrayList<String>> subscriber) {
 
                         mRetriver.retriveDocument()
                                 .observeOn(AndroidSchedulers.mainThread())

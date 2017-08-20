@@ -12,7 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.map.UniPoint;
 
@@ -72,7 +75,7 @@ public class MapsActivity extends FragmentActivity {
      * stopped or paused), {@link #onCreate(Bundle)} may not be called again so we should call this
      * method in {@link #onResume()} to guarantee that it will be called.
      */
-    private void setUpMapIfNeeded(List<UniPoint> markers) {
+    private void setUpMapIfNeeded(final List<UniPoint> markers) {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
@@ -80,20 +83,28 @@ public class MapsActivity extends FragmentActivity {
 
             getMap().subscribeOn(Schedulers.computation())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .filter(googleMap -> googleMap != null)
-                    .subscribe(googleMap -> {
-                        mMap = googleMap;
-                        setUpMap(markers);
+                    .filter(new Func1<GoogleMap, Boolean>() {
+                        @Override public Boolean call(GoogleMap googleMap) {
+                            return googleMap != null;
+                        }
+                    })
+                    .subscribe(new Action1<GoogleMap>() {
+                        @Override public void call(GoogleMap googleMap) {
+                            mMap = googleMap;
+                            MapsActivity.this.setUpMap(markers);
+                        }
                     });
         }
     }
 
     private Observable<GoogleMap> getMap() {
-        return Observable.create(subscriber -> {
-            GoogleMap map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        return Observable.create(new Observable.OnSubscribe<GoogleMap>() {
+            @Override public void call(Subscriber<? super GoogleMap> subscriber) {
+                GoogleMap map = ((SupportMapFragment) MapsActivity.this.getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 
-            subscriber.onNext(map);
-            subscriber.onCompleted();
+                subscriber.onNext(map);
+                subscriber.onCompleted();
+            }
         });
     }
 }

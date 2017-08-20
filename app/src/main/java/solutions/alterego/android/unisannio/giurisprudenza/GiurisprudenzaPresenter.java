@@ -1,18 +1,13 @@
 package solutions.alterego.android.unisannio.giurisprudenza;
 
 import android.util.Log;
-
-import org.jsoup.nodes.Document;
-
 import java.util.ArrayList;
-import java.util.List;
-
+import org.jsoup.nodes.Document;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import solutions.alterego.android.unisannio.cercapersone.Person;
 import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.interfaces.IRetriever;
 import solutions.alterego.android.unisannio.models.Article;
@@ -74,7 +69,7 @@ public class GiurisprudenzaPresenter implements IGiurisprudenzaPresenter {
                 create(new Observable.OnSubscribe<ArrayList<Article>>(){
 
                     @Override
-                    public void call(Subscriber<? super ArrayList<Article>> subscriber) {
+                    public void call(final Subscriber<? super ArrayList<Article>> subscriber) {
 
                         mRetriever.retriveDocument()
                                 .observeOn(AndroidSchedulers.mainThread())
