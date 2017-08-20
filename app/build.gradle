@@ -129,7 +129,7 @@ dependencies {
     apt "org.parceler:parceler:1.0.3"
 
     // Parsing
-    compile 'org.jsoup:jsoup:1.7.3'
+    compile 'org.jsoup:jsoup:1.9.2'
     compile 'com.alterego:androidrssreaderlibrary:1.0.0'
 
     // Rx
