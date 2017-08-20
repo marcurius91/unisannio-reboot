@@ -133,8 +133,8 @@ dependencies {
     compile 'com.alterego:androidrssreaderlibrary:1.0.0'
 
     // Rx
-    compile 'io.reactivex:rxjava:1.1.0'
-    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'io.reactivex:rxjava:1.3.0'
+    compile 'io.reactivex:rxandroid:1.2.1'
 
     // Debugging
     compile 'com.facebook.stetho:stetho:1.5.0'
