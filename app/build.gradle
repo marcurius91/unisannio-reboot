@@ -125,8 +125,6 @@ dependencies {
     provided 'javax.annotation:jsr250-api:1.0'
 
     // Annotations
-    apt "org.projectlombok:lombok:1.14.8"
-    provided "org.projectlombok:lombok:1.14.8"
     compile "org.parceler:parceler-api:1.0.3"
     apt "org.parceler:parceler:1.0.3"
 
