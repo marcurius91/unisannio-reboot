@@ -105,9 +105,10 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
         // See https://code.google.com/p/android/issues/detail?id=176400
         View navigationHeader = findViewById(R.id.navigation_header);
         if (navigationHeader != null) {
-            ((View) navigationHeader.getParent()).setOnClickListener(
-                v -> {
-                    // Do nothing
+            ((View) navigationHeader.getParent()).setOnClickListener(new View.OnClickListener() {
+                    @Override public void onClick(View v) {
+                        // Do nothing
+                    }
                 }
             );
         }

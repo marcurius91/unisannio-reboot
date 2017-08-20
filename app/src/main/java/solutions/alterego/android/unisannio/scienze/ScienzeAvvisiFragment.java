@@ -5,11 +5,9 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,24 +17,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
-import org.chromium.customtabsclient.CustomTabsActivityHelper;
-import org.parceler.Parcels;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.Bind;
 import butterknife.BindColor;
 import butterknife.ButterKnife;
+import java.util.ArrayList;
+import java.util.List;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
+import org.chromium.customtabsclient.CustomTabsActivityHelper;
+import org.parceler.Parcels;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.DetailActivity;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
-import solutions.alterego.android.unisannio.cercapersone.Person;
+import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
 
@@ -77,9 +72,13 @@ public class ScienzeAvvisiFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        String url = URLS.SCIENZE_NEWS;
+        final String url = URLS.SCIENZE_NEWS;
 
-        mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(url));
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override public void onRefresh() {
+                ScienzeAvvisiFragment.this.refreshList(url);
+            }
+        });
 
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this.getActivity());
         mCustomTabsIntent = new CustomTabsIntent.Builder()
@@ -88,30 +87,26 @@ public class ScienzeAvvisiFragment extends Fragment {
                 .setShowTitle(true)
                 .build();
 
-        mAdapter = new ArticleAdapter(new ArrayList<>(), (article, holder) -> {
-            String url1 = URLS.SCIENZE_NEWS + article.getUrl();
-            //CustomTabsHelperFragment.open(getActivity(), mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
-            ScienzeDetailPresenter mDetailPresenter = new ScienzeDetailPresenter(url1);
+        mAdapter = new ArticleAdapter(new ArrayList<Article>(), new OpenArticleDetailListener() {
+            @Override public void openArticleDetail(@NonNull final Article article, @NonNull RecyclerView.ViewHolder holder) {
+                String url1 = URLS.SCIENZE_NEWS + article.getUrl();
+                //CustomTabsHelperFragment.open(getActivity(), mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
+                ScienzeDetailPresenter mDetailPresenter = new ScienzeDetailPresenter(url1);
 
-            mDetailPresenter.getBodyNews()
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<ArrayList<String>>() {
-                                   @Override
-                                   public void onCompleted() {
+                mDetailPresenter.getBodyNews().observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ArrayList<String>>() {
+                    @Override public void onCompleted() {
 
-                                   }
+                    }
 
-                                   @Override
-                                   public void onError(Throwable e) {
-                                       Log.e("getBodyNews", e.toString());
-                                   }
+                    @Override public void onError(Throwable e) {
+                        Log.e("getBodyNews", e.toString());
+                    }
 
-                                   @Override
-                                   public void onNext(ArrayList<String> bodys) {
-                                       //article.setBody(bodys.get(0));
-                                       Intent intent = new Intent();
-                                       intent.setClass(getActivity(), DetailActivity.class);
-                                       intent.putExtra("ARTICLE", Parcels.wrap(article));
+                    @Override public void onNext(ArrayList<String> bodys) {
+                        //article.setBody(bodys.get(0));
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), DetailActivity.class);
+                        intent.putExtra("ARTICLE", Parcels.wrap(article));
                                        /*ActivityOptionsCompat options =
                                                ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
                                                        Pair.create(((ArticleAdapter.ViewHolder) holder).title, getString(R.string.transition_article_title)),
@@ -119,10 +114,10 @@ public class ScienzeAvvisiFragment extends Fragment {
                                                        Pair.create(((ArticleAdapter.ViewHolder) holder).author, getString(R.string.transition_article_author))
                                                );
                                        ActivityCompat.startActivity(getActivity(), intent, options.toBundle());*/
-                                       startActivity(intent);
-                                   }
-                               }
-                    );
+                        startActivity(intent);
+                    }
+                });
+            }
         },R.drawable.teatro);
 
         mRecyclerView.setAdapter(mAdapter);

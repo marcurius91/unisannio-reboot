@@ -1,14 +1,10 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
-import org.parceler.Parcels;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,17 +12,17 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import java.util.ArrayList;
+import java.util.List;
+import org.parceler.Parcels;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.DetailActivity;
 import solutions.alterego.android.unisannio.R;
+import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
 
@@ -83,12 +79,17 @@ public class IngegneriaAvvisiFragment extends Fragment {
             }
         //}
 
-        mSwipeRefreshLayout.setOnRefreshListener(this::refreshList);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override public void onRefresh() {
+                refreshList();
+            }
+        });
 
-        mAdapter = new ArticleAdapter(new ArrayList<>(), (article, holder) -> {
-            Intent intent = new Intent();
-            intent.setClass(getActivity(), DetailActivity.class);
-            intent.putExtra("ARTICLE", Parcels.wrap(article));
+        mAdapter = new ArticleAdapter(new ArrayList<Article>(), new OpenArticleDetailListener() {
+            @Override public void openArticleDetail(@NonNull Article article, @NonNull RecyclerView.ViewHolder holder) {
+                Intent intent = new Intent();
+                intent.setClass(IngegneriaAvvisiFragment.this.getActivity(), DetailActivity.class);
+                intent.putExtra("ARTICLE", Parcels.wrap(article));
 
             /*ActivityOptionsCompat options =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
@@ -96,8 +97,9 @@ public class IngegneriaAvvisiFragment extends Fragment {
                             Pair.create(((ArticleAdapter.ViewHolder) holder).date, getString(R.string.transition_article_date)),
                             Pair.create(((ArticleAdapter.ViewHolder) holder).author, getString(R.string.transition_article_author))
                     );*/
-            //ActivityCompat.startActivity(getActivity(), intent,options.toBundle());
-            startActivity(intent);
+                //ActivityCompat.startActivity(getActivity(), intent,options.toBundle());
+                IngegneriaAvvisiFragment.this.startActivity(intent);
+            }
         },R.drawable.ding);
         mRecyclerView.setAdapter(mAdapter);
 

@@ -2,14 +2,10 @@ package solutions.alterego.android.unisannio.ingegneria;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
-import org.jsoup.nodes.Document;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
+import org.jsoup.nodes.Document;
 import rx.Observable;
 import rx.Observer;
-import rx.Scheduler;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -50,7 +46,7 @@ public class IngegneriaCercapersonePresenter implements ICercapersonePresenter {
                 create(new Observable.OnSubscribe<ArrayList<Person>>(){
 
                     @Override
-                    public void call(Subscriber<? super ArrayList<Person>> subscriber) {
+                    public void call(final Subscriber<? super ArrayList<Person>> subscriber) {
 
                         mRetriever.retriveDocument()
                                 .observeOn(AndroidSchedulers.mainThread())

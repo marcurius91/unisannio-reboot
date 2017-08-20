@@ -86,10 +86,10 @@ public class IngengeriaCercapersoneActivity extends NavigationDrawerActivity{
         mRecyclerView = (RecyclerView) findViewById(R.id.cercapersone_ingegneria_recycle_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.cercapersone_ingegneria_swipe_container);
 
-        IngegneriaCercapersonePresenter icp = new IngegneriaCercapersonePresenter();
+        final IngegneriaCercapersonePresenter icp = new IngegneriaCercapersonePresenter();
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new CercapersoneAdapter(new ArrayList<>(),R.layout.ingegneria_cercapersone_list_person);
+        mAdapter = new CercapersoneAdapter(new ArrayList<Person>(),R.layout.ingegneria_cercapersone_list_person);
         mRecyclerView.setAdapter(mAdapter);
 
         mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.primaryColor));
@@ -121,7 +121,7 @@ public class IngengeriaCercapersoneActivity extends NavigationDrawerActivity{
 
                             @Override
                             public void onError(Throwable e) {
-                                Log.e("ACTIVITY CERCAPERSONE onError()", e.toString());
+                                Log.e("ACTIVITY CERCAPERSONE", e.toString());
                             }
 
                             @Override

@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -32,6 +33,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
+import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
 
@@ -88,7 +90,11 @@ public class SeaAvvisiFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList());
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override public void onRefresh() {
+                SeaAvvisiFragment.this.refreshList();
+            }
+        });
 
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this.getActivity());
         mCustomTabsIntent = new CustomTabsIntent.Builder()
@@ -97,9 +103,11 @@ public class SeaAvvisiFragment extends Fragment {
                 .setShowTitle(true)
                 .build();
 
-        mAdapter = new ArticleAdapter(new ArrayList<>(), (article, holder) -> {
-            String url1 = URLS.SEA + article.getUrl();
-            CustomTabsHelperFragment.open(getActivity(), mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
+        mAdapter = new ArticleAdapter(new ArrayList<Article>(), new OpenArticleDetailListener() {
+            @Override public void openArticleDetail(@NonNull Article article, @NonNull RecyclerView.ViewHolder holder) {
+                String url1 = URLS.SEA + article.getUrl();
+                CustomTabsHelperFragment.open(SeaAvvisiFragment.this.getActivity(), mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
+            }
         },R.drawable.sea);
         mRecyclerView.setAdapter(mAdapter);
 

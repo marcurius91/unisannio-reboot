@@ -35,7 +35,7 @@ public class AteneoPresenter implements IAvvisiPresenter {
                 create(new Observable.OnSubscribe<ArrayList<Article>>(){
 
                     @Override
-                    public void call(Subscriber<? super ArrayList<Article>> subscriber) {
+                    public void call(final Subscriber<? super ArrayList<Article>> subscriber) {
 
                         mRetriever.retriveDocument()
                                 .observeOn(AndroidSchedulers.mainThread())

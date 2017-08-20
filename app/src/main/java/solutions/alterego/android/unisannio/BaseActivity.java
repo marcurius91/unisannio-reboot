@@ -1,7 +1,9 @@
 package solutions.alterego.android.unisannio;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
@@ -64,7 +66,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         appbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         if (appbar != null) {
             setSupportActionBar(appbar);
-            appbar.setNavigationOnClickListener(v -> onAppbarNavigationClick());
+            appbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) {
+                    BaseActivity.this.onAppbarNavigationClick();
+                }
+            });
         }
     }
 
@@ -80,13 +86,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         return appbar;
     }
 
-    protected final CustomTabsActivityHelper.CustomTabsFallback mCustomTabsFallback = (activity, uri) -> {
-        Toast.makeText(activity, R.string.custom_tab_error, Toast.LENGTH_SHORT).show();
-        try {
-            activity.startActivity(new Intent(Intent.ACTION_VIEW, uri));
-        } catch (ActivityNotFoundException e) {
-            e.printStackTrace();
-            Toast.makeText(activity, R.string.custom_tab_error_activity, Toast.LENGTH_SHORT).show();
+    protected final CustomTabsActivityHelper.CustomTabsFallback mCustomTabsFallback = new CustomTabsActivityHelper.CustomTabsFallback() {
+        @Override public void openUri(Activity activity, Uri uri) {
+            Toast.makeText(activity, R.string.custom_tab_error, Toast.LENGTH_SHORT).show();
+            try {
+                activity.startActivity(new Intent(Intent.ACTION_VIEW, uri));
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(activity, R.string.custom_tab_error_activity, Toast.LENGTH_SHORT).show();
+            }
         }
     };
 }
