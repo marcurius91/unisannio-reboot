@@ -57,7 +57,11 @@ public class IngegneriaCercapersoneDetailActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_action_arrow_left));
-        mToolbar.setNavigationOnClickListener(v -> onBackPressed());
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                IngegneriaCercapersoneDetailActivity.this.onBackPressed();
+            }
+        });
 
         Bundle data = getIntent().getExtras();
         mPerson = data.getParcelable("PERSON");

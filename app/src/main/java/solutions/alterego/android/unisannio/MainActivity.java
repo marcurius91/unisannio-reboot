@@ -1,5 +1,6 @@
 package solutions.alterego.android.unisannio;
 
+import android.app.Activity;
 import org.chromium.customtabsclient.CustomTabsActivityHelper;
 
 import android.content.ActivityNotFoundException;
@@ -238,15 +239,15 @@ public class MainActivity extends AppCompatActivity {
         return fragmentName;
     }
 
-    private final CustomTabsActivityHelper.CustomTabsFallback mCustomTabsFallback =
-        (activity, uri) -> {
+    private final CustomTabsActivityHelper.CustomTabsFallback mCustomTabsFallback = new CustomTabsActivityHelper.CustomTabsFallback() {
+        @Override public void openUri(Activity activity, Uri uri) {
             Toast.makeText(activity, R.string.custom_tab_error, Toast.LENGTH_SHORT).show();
             try {
                 activity.startActivity(new Intent(Intent.ACTION_VIEW, uri));
             } catch (ActivityNotFoundException e) {
                 e.printStackTrace();
-                Toast.makeText(activity, R.string.custom_tab_error_activity, Toast.LENGTH_SHORT)
-                    .show();
+                Toast.makeText(activity, R.string.custom_tab_error_activity, Toast.LENGTH_SHORT).show();
             }
-        };
+        }
+    };
 }

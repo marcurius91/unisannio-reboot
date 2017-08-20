@@ -1,9 +1,6 @@
 package solutions.alterego.android.unisannio.di;
 
 import javax.inject.Singleton;
-
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.MainActivity;
 import solutions.alterego.android.unisannio.ateneo.AteneoActivity;
@@ -21,8 +18,7 @@ import solutions.alterego.android.unisannio.scienze.ScienzeAvvisiFragment;
 import solutions.alterego.android.unisannio.sea.SeaActivity;
 import solutions.alterego.android.unisannio.sea.SeaAvvisiFragment;
 
-@Singleton
-@dagger.Component(modules = {SystemServicesModule.class, RetrieversModule.class, PresentersModule.class, ParserModule.class})
+@Singleton @dagger.Component(modules = { SystemServicesModule.class, RetrieversModule.class, PresentersModule.class, ParserModule.class })
 public interface Component {
 
     void inject(IngengeriaCercapersoneActivity app);
@@ -55,14 +51,9 @@ public interface Component {
 
     void inject(IngegneriaAvvisiStudentiActivity ingegneriaAvvisiStudentiActivity);
 
-
-    @NoArgsConstructor(access = AccessLevel.PRIVATE)
     final class Initializer {
-
         public static Component init(App app) {
-            return DaggerComponent.builder()
-                    .systemServicesModule(new SystemServicesModule(app))
-                    .build();
+            return DaggerComponent.builder().systemServicesModule(new SystemServicesModule(app)).build();
         }
     }
 }

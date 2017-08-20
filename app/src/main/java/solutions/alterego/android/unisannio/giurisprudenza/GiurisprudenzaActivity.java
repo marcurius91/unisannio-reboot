@@ -1,16 +1,13 @@
 package solutions.alterego.android.unisannio.giurisprudenza;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -19,29 +16,19 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.SearchView;
-
-import java.util.ArrayList;
-
-import javax.inject.Inject;
-
 import butterknife.Bind;
 import butterknife.BindColor;
-import butterknife.ButterKnife;
+import java.util.ArrayList;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
-import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.MapsActivity;
 import solutions.alterego.android.unisannio.NavigationDrawerActivity;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
 import solutions.alterego.android.unisannio.analytics.Screen;
-import solutions.alterego.android.unisannio.cercapersone.CercapersoneAdapter;
-import solutions.alterego.android.unisannio.cercapersone.Person;
-import solutions.alterego.android.unisannio.cercapersone.SearchPerson;
-import solutions.alterego.android.unisannio.ingegneria.IngegneriaCercapersonePresenter;
+import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
@@ -116,9 +103,11 @@ public class GiurisprudenzaActivity extends NavigationDrawerActivity {
 
         mRecyclerView.setVisibility(View.VISIBLE);
 
-        mAdapter = new ArticleAdapter(new ArrayList<>(), (article, holder) -> {
-            String url1 = URLS.GIURISPRUDENZA + article.getUrl();
-            CustomTabsHelperFragment.open(this, mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
+        mAdapter = new ArticleAdapter(new ArrayList<Article>(), new OpenArticleDetailListener() {
+            @Override public void openArticleDetail(@NonNull Article article, @NonNull RecyclerView.ViewHolder holder) {
+                String url1 = URLS.GIURISPRUDENZA + article.getUrl();
+                CustomTabsHelperFragment.open(GiurisprudenzaActivity.this, mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
+            }
         }, R.drawable.calandra);
 
         refreshList();

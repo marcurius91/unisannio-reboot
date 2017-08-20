@@ -1,5 +1,6 @@
 package solutions.alterego.android.unisannio;
 
+import android.view.View;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.parceler.Parcels;
@@ -53,7 +54,11 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_action_arrow_left));
-        mToolbar.setNavigationOnClickListener(v -> onBackPressed());
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                DetailActivity.this.onBackPressed();
+            }
+        });
 
         mArticle = Parcels.unwrap(getIntent().getParcelableExtra("ARTICLE"));
 
