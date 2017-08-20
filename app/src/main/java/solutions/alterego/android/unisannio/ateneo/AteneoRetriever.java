@@ -69,7 +69,7 @@ public class AteneoRetriever implements IRetriever<Document>{
     @Override
     public Observable<Document> retriveDocument() {
 
-        List<Document> documents = new ArrayList<>();
+        final List<Document> documents = new ArrayList<>();
 
         Subscription urlsubscription = loadUrlList().subscribe(new Observer<String>() {
             @Override

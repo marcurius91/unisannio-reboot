@@ -40,7 +40,7 @@ public class ScienzeRetriever {
         return Observable
                 .create(new Observable.OnSubscribe<List<Article>>() {
                     @Override
-                    public void call(Subscriber<? super List<Article>> subscriber) {
+                    public void call(final Subscriber<? super List<Article>> subscriber) {
                         retrieveDocuments().observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(new Observer<Document>() {
                                     @Override
@@ -79,7 +79,7 @@ public class ScienzeRetriever {
     //Create a list of documents starting from multiple urls contains in urlsToRetrieve
     private Observable<Document> retrieveDocuments(){
 
-        List<Document> documents = new ArrayList<>();
+        final List<Document> documents = new ArrayList<>();
 
         Subscription urlsubscription = loadUrlList().subscribe(new Observer<String>() {
             @Override

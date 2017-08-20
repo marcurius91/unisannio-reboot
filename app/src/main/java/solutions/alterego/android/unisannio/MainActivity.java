@@ -220,6 +220,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //get the active Fragment
+
+    //TODO ISSUE Error:(225, 52) FragmentManager.getFragments can only be called from within the same library group (groupId=com.android.support)
     public Fragment getVisibleFragment(){
         FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
         List<Fragment> fragments = fragmentManager.getFragments();
