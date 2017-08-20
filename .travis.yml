@@ -3,8 +3,8 @@ language: android
 android:
   components:
     - tools
-    - build-tools-23.0.2
-    - android-23
+    - build-tools-25.0.2
+    - android-26
     - extra-android-m2repository
     - extra-android-support
     - extra-google-google_play_services
@@ -12,10 +12,6 @@ android:
 
 jdk: oraclejdk8
 
-notifications:
-  email: false
-  slack: alteregosolutions:q2eicS9FFWEEyrmn55SPa5mT
-  
 sudo: false
 
 cache:
