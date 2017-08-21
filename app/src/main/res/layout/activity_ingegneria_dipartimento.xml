@@ -27,11 +27,4 @@
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <fragment
-        android:id="@+id/fragment"
-        android:name="solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiFragment"
-        tools:layout="@layout/fragment_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
 </LinearLayout>
