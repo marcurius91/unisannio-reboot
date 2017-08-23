@@ -6,6 +6,8 @@ import org.parceler.Parcel;
 @Parcel
 public class Article {
 
+    String mId;
+
     String mTitle;
 
     String mUrl;
@@ -16,7 +18,19 @@ public class Article {
 
     String mAuthor;
 
+    String mDepartment;
+
     public Article() {
+    }
+
+    public Article(String id, String title, String url, String body, DateTime date, String author, String department) {
+        this.mId = id;
+        this.mTitle = title;
+        this.mUrl = url;
+        this.mBody = body;
+        this.mDate = date;
+        this.mAuthor = author;
+        this.mDepartment = department;
     }
 
     public Article(String title, String url, String body, DateTime date, String author) {
@@ -26,6 +40,8 @@ public class Article {
         this.mDate = date;
         this.mAuthor = author;
     }
+
+    public String getId() {return this.mId;}
 
     public String getTitle() {
         return this.mTitle;
@@ -47,6 +63,12 @@ public class Article {
         return this.mAuthor;
     }
 
+    public String getDepartment() {
+        return this.mDepartment;
+    }
+
+    public void setId(String mId) {this.mId = mId;}
+
     public void setTitle(String mTitle) {
         this.mTitle = mTitle;
     }
@@ -65,6 +87,10 @@ public class Article {
 
     public void setAuthor(String mAuthor) {
         this.mAuthor = mAuthor;
+    }
+
+    public String setDepartment(String mDepartment) {
+        return this.mDepartment = mDepartment;
     }
 
     public boolean equals(Object o) {

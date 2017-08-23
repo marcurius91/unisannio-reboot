@@ -9,9 +9,9 @@ public interface IDbManager {
     boolean addArticle(Article article);
     boolean addArticles(List<Article> articleList);
     Article getArticle(int id);
-    List<Article> searchArticleByDept();
-    List<Article> searchArticleByDeptAndDate();
+    List<Article> searchArticleByDept(String dept);
+    List<Article> searchArticleByDeptAndDate(String dept,String date);
     int updateArticle(Article article);
-    int deleteArticle(Article article);
+    void deleteArticle(Article article);
 
 }
