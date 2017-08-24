@@ -69,20 +69,10 @@ public class IngegneriaAvvisiStudentiActivity extends NavigationDrawerActivity {
 
     protected Intent mMap;
 
-    DbManager dbManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.component(this).inject(this);
-
-        dbManager = new DbManager(this);
-
-        DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
-        DateTime jodatime = dtf.parseDateTime("24/08/2017");
-        Article art = new Article("001","Title","www.google.it","Lorem Ipsum", jodatime ,"AutoreX","Dipartimento di Ingegneria");
-        boolean isadded = dbManager.addArticle(art);
-
 
         setContentView(R.layout.activity_ingegneria_avvisi_studenti);
         ButterKnife.bind(this);
@@ -122,7 +112,6 @@ public class IngegneriaAvvisiStudentiActivity extends NavigationDrawerActivity {
                 Intent intent = new Intent();
                 intent.setClass(IngegneriaAvvisiStudentiActivity.this, DetailActivity.class);
                 intent.putExtra("ARTICLE", Parcels.wrap(article));
-
 
             /*ActivityOptionsCompat options =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(this,
