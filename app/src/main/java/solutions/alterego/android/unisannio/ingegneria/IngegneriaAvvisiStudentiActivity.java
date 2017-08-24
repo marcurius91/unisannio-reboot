@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.widget.DrawerLayout;
@@ -13,6 +14,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +28,9 @@ import java.util.List;
 import javax.inject.Inject;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import org.chromium.customtabsclient.CustomTabsActivityHelper;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.parceler.Parcels;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -37,6 +42,7 @@ import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
 import solutions.alterego.android.unisannio.analytics.Screen;
+import solutions.alterego.android.unisannio.dbManager.DbManager;
 import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.models.Article;
@@ -63,10 +69,20 @@ public class IngegneriaAvvisiStudentiActivity extends NavigationDrawerActivity {
 
     protected Intent mMap;
 
+    DbManager dbManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.component(this).inject(this);
+
+        dbManager = new DbManager(this);
+
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
+        DateTime jodatime = dtf.parseDateTime("24/08/2017");
+        Article art = new Article("001","Title","www.google.it","Lorem Ipsum", jodatime ,"AutoreX","Dipartimento di Ingegneria");
+        boolean isadded = dbManager.addArticle(art);
+
 
         setContentView(R.layout.activity_ingegneria_avvisi_studenti);
         ButterKnife.bind(this);
@@ -106,6 +122,7 @@ public class IngegneriaAvvisiStudentiActivity extends NavigationDrawerActivity {
                 Intent intent = new Intent();
                 intent.setClass(IngegneriaAvvisiStudentiActivity.this, DetailActivity.class);
                 intent.putExtra("ARTICLE", Parcels.wrap(article));
+
 
             /*ActivityOptionsCompat options =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(this,

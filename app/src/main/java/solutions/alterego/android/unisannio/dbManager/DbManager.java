@@ -5,9 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 import android.util.Log;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.List;
 
@@ -27,10 +30,13 @@ public class DbManager extends SQLiteOpenHelper implements IDbManager{
     public static final String COLUMN_ARTICLE_DEPARTMENT = "Department";
     public static final int DATABASE_VERSION = 1;
 
+    //DB Path external directory
+    public static final String str_db_path = Environment.getExternalStorageDirectory().getAbsolutePath().concat("/solutions.alterego.android.unisannio/");
+
     String message_returned = null;
 
     public DbManager(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, str_db_path+DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
@@ -118,8 +124,9 @@ public class DbManager extends SQLiteOpenHelper implements IDbManager{
         if (cursor != null){
             cursor.moveToFirst();
 
-            DateTime dt = new DateTime(cursor.getString(4));
-            article = new Article(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),dt,cursor.getString(5),cursor.getString(6));
+            DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
+            DateTime jodatime = dtf.parseDateTime(cursor.getString(4));
+            article = new Article(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),jodatime,cursor.getString(5),cursor.getString(6));
 
         }
 
@@ -142,11 +149,12 @@ public class DbManager extends SQLiteOpenHelper implements IDbManager{
                 String title = c.getString(1);
                 String url = c.getString(2);
                 String body = c.getString(3);
-                DateTime date = new DateTime(c.getString(4));
+                DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
+                DateTime jodatime = dtf.parseDateTime(c.getString(4));
                 String author = c.getString(5);
                 String dept = c.getString(6);
 
-                Article article = new Article(id,title,url,body,date,author,dept);
+                Article article = new Article(id,title,url,body,jodatime,author,dept);
                 articles.add(article);
 
             }while(c.moveToNext());
@@ -172,11 +180,12 @@ public class DbManager extends SQLiteOpenHelper implements IDbManager{
                 String title = c.getString(1);
                 String url = c.getString(2);
                 String body = c.getString(3);
-                DateTime dt = new DateTime(c.getString(4));
+                DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
+                DateTime jodatime = dtf.parseDateTime(c.getString(4));
                 String author = c.getString(5);
                 String dept = c.getString(6);
 
-                Article article = new Article(id,title,url,body,dt,author,dept);
+                Article article = new Article(id,title,url,body,jodatime,author,dept);
                 articles.add(article);
 
             }while(c.moveToNext());
