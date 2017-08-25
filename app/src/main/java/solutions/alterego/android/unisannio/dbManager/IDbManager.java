@@ -4,7 +4,7 @@ import java.util.List;
 
 import solutions.alterego.android.unisannio.models.Article;
 
-public interface IDbManager {
+ interface IDbManager {
 
     boolean addArticle(Article article);
     boolean addArticles(List<Article> articleList);

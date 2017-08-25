@@ -5,7 +5,7 @@ import java.util.List;
 
 import solutions.alterego.android.unisannio.models.Article;
 
-public interface IAddPresenter {
+ interface IAddPresenter {
 
     boolean addArticle(Article Article);
     boolean addArticles(List<Article> articles);

@@ -180,12 +180,14 @@ public class DbManager extends SQLiteOpenHelper implements IDbManager{
     //Method for searching an article by Department and Date
     @Override
     public List<Article> searchArticleByDeptAndDate(String department, String date) {
+
+        Log.e("SEARCH DEPT AND DATE",department + " " + date);
         SQLiteDatabase db = this.getReadableDatabase();
 
         List<Article> articles = new ArrayList<Article> ();
 
-        String query =(" SELECT _rowid_, * FROM Article WHERE Department = ? and Date = ?");
-        Cursor c = db.rawQuery(query, new String[] {department,date});
+        String query =(" SELECT _rowid_, * FROM Article WHERE Date = ? and Department =? ");
+        Cursor c = db.rawQuery(query, new String[] {date,department});
 
         if(c.moveToFirst()){
             do{
