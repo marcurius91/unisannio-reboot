@@ -13,5 +13,6 @@ public interface IDbManager {
     List<Article> searchArticleByDeptAndDate(String dept,String date);
     int updateArticle(Article article);
     void deleteArticle(Article article);
+    boolean checkIfArticleExist(Article article);
 
 }

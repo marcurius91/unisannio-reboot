@@ -11,8 +11,12 @@ import android.util.Log;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import solutions.alterego.android.unisannio.models.Article;
 
@@ -77,7 +81,11 @@ public class DbManager extends SQLiteOpenHelper implements IDbManager{
         values.put(DbManager.COLUMN_ARTICLE_TITLE,article.getTitle());
         values.put(DbManager.COLUMN_ARTICLE_URL,article.getUrl());
         values.put(DbManager.COLUMN_ARTICLE_BODY,article.getBody());
-        values.put(DbManager.COLUMN_ARTICLE_DATE, String.valueOf(article.getDate()));
+        DateTime dt = article.getDate();
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy/MM/dd");
+        String dtStr = fmt.print(dt);
+        Log.e("DATA INIZIALE",dtStr);
+        values.put(DbManager.COLUMN_ARTICLE_DATE, dtStr);
         values.put(DbManager.COLUMN_ARTICLE_AUTHOR, article.getAuthor());
         values.put(DbManager.COLUMN_ARTICLE_DEPARTMENT, article.getDepartment());
 
@@ -101,7 +109,11 @@ public class DbManager extends SQLiteOpenHelper implements IDbManager{
             values.put(DbManager.COLUMN_ARTICLE_TITLE,article.getTitle());
             values.put(DbManager.COLUMN_ARTICLE_URL,article.getUrl());
             values.put(DbManager.COLUMN_ARTICLE_BODY,article.getBody());
-            values.put(DbManager.COLUMN_ARTICLE_DATE, String.valueOf(article.getDate()));
+            DateTime dt = article.getDate();
+            DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy/MM/dd");
+            String dtStr = fmt.print(dt);
+            Log.e("DATA INIZIALE",dtStr);
+            values.put(DbManager.COLUMN_ARTICLE_DATE, String.valueOf(dtStr));
             values.put(DbManager.COLUMN_ARTICLE_AUTHOR, article.getAuthor());
             values.put(DbManager.COLUMN_ARTICLE_DEPARTMENT, article.getDepartment());
             database.insert(TABLE_ARTICLE, null, values);
@@ -124,9 +136,9 @@ public class DbManager extends SQLiteOpenHelper implements IDbManager{
         if (cursor != null){
             cursor.moveToFirst();
 
-            DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
+            DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy/MM/dd");
             DateTime jodatime = dtf.parseDateTime(cursor.getString(4));
-            article = new Article(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),jodatime,cursor.getString(5),cursor.getString(6));
+            article = new Article(cursor.getString(1),cursor.getString(2),cursor.getString(3),jodatime,cursor.getString(5),cursor.getString(6));
 
         }
 
@@ -134,58 +146,59 @@ public class DbManager extends SQLiteOpenHelper implements IDbManager{
         return article;
     }
 
+    //Method for searching Article by department
     @Override
     public List<Article> searchArticleByDept(String department) {
         SQLiteDatabase db = this.getReadableDatabase();
         
-        List<Article> articles = null;
-        
-        Cursor c = db.rawQuery("SELECT * FROM " +   TABLE_ARTICLE +  " WHERE " + COLUMN_ARTICLE_DEPARTMENT + " = ?", new String[] {department});
-
+        List<Article> articles = new ArrayList<Article>();
+        String query =(" SELECT _rowid_, * FROM Article WHERE Department = ? ");
+        Cursor c = db.rawQuery(query,new String[] {department});
         if(c.moveToFirst()){
             do{
                 //assing values
-                String id = c.getString(0);
-                String title = c.getString(1);
-                String url = c.getString(2);
-                String body = c.getString(3);
-                DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
-                DateTime jodatime = dtf.parseDateTime(c.getString(4));
-                String author = c.getString(5);
-                String dept = c.getString(6);
+                String title = c.getString(2);
+                String url = c.getString(3);
+                String body = c.getString(4);
+                DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy/MM/dd");
+                DateTime jodatime = dtf.parseDateTime(c.getString(5));
+                String author = c.getString(6);
+                String dept = c.getString(7);
 
-                Article article = new Article(id,title,url,body,jodatime,author,dept);
-                articles.add(article);
+                Article article = new Article(title,url,body,jodatime,author,dept);
+                boolean isAdded = articles.add(article);
 
             }while(c.moveToNext());
         }
+
         c.close();
         db.close();
 
         return articles;
     }
 
+    //Method for searching an article by Department and Date
     @Override
     public List<Article> searchArticleByDeptAndDate(String department, String date) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        List<Article> articles = null;
+        List<Article> articles = new ArrayList<Article> ();
 
-        Cursor c = db.rawQuery("SELECT * FROM " +   TABLE_ARTICLE +  " WHERE " + COLUMN_ARTICLE_DEPARTMENT + " = ? AND" + COLUMN_ARTICLE_DATE + " = ?", new String[] {department,date});
+        String query =(" SELECT _rowid_, * FROM Article WHERE Department = ? and Date = ?");
+        Cursor c = db.rawQuery(query, new String[] {department,date});
 
         if(c.moveToFirst()){
             do{
                 //assing values
-                String id = c.getString(0);
-                String title = c.getString(1);
-                String url = c.getString(2);
-                String body = c.getString(3);
-                DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
-                DateTime jodatime = dtf.parseDateTime(c.getString(4));
-                String author = c.getString(5);
-                String dept = c.getString(6);
+                String title = c.getString(2);
+                String url = c.getString(3);
+                String body = c.getString(4);
+                DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy/MM/dd");
+                DateTime jodatime = dtf.parseDateTime(c.getString(5));
+                String author = c.getString(6);
+                String dept = c.getString(7);
 
-                Article article = new Article(id,title,url,body,jodatime,author,dept);
+                Article article = new Article(title,url,body,jodatime,author,dept);
                 articles.add(article);
 
             }while(c.moveToNext());
@@ -196,6 +209,7 @@ public class DbManager extends SQLiteOpenHelper implements IDbManager{
         return articles;
     }
 
+    //Method for update article
     @Override
     public int updateArticle(Article article) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -204,7 +218,10 @@ public class DbManager extends SQLiteOpenHelper implements IDbManager{
         values.put(DbManager.COLUMN_ARTICLE_TITLE,article.getTitle());
         values.put(DbManager.COLUMN_ARTICLE_URL,article.getUrl());
         values.put(DbManager.COLUMN_ARTICLE_BODY,article.getBody());
-        values.put(DbManager.COLUMN_ARTICLE_DATE, String.valueOf(article.getDate()));
+        DateTime dt = article.getDate();
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+        String dtStr = fmt.print(dt);
+        values.put(DbManager.COLUMN_ARTICLE_DATE, dtStr);
         values.put(DbManager.COLUMN_ARTICLE_AUTHOR, article.getAuthor());
         values.put(DbManager.COLUMN_ARTICLE_DEPARTMENT, article.getDepartment());
 
@@ -218,6 +235,39 @@ public class DbManager extends SQLiteOpenHelper implements IDbManager{
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_ARTICLE, COLUMN_ARTICLE_TITLE + "=? and " + COLUMN_ARTICLE_URL + "=?" , new String[]{article.getTitle(),article.getUrl()});
         db.close();
+    }
+
+    //Method for check if article existing in db.
+    @Override
+    public boolean checkIfArticleExist(Article article){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        boolean exist = false;
+
+        String query =(" SELECT _rowid_, * FROM Article WHERE Title = ? and Url =? and Body =? and Author =? and Department =? ");
+        Cursor c = db.rawQuery(query, new String[] {article.getTitle(),article.getUrl(),article.getBody(),article.getAuthor(),article.getDepartment()});
+
+
+        if(c.moveToFirst()){
+            do{
+                //assing values
+                String title = c.getString(2);
+                String url = c.getString(3);
+                String body = c.getString(4);
+                DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy/MM/dd");
+                DateTime jodatime = dtf.parseDateTime(c.getString(5));
+                String author = c.getString(6);
+                String dept = c.getString(7);
+
+                if(title != null && url != null && body != null && author != null && dept != null){
+                    exist = true;
+                }
+            }while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+
+        return exist;
     }
 
 

@@ -23,8 +23,7 @@ public class Article {
     public Article() {
     }
 
-    public Article(String id, String title, String url, String body, DateTime date, String author, String department) {
-        this.mId = id;
+    public Article(String title, String url, String body, DateTime date, String author, String department) {
         this.mTitle = title;
         this.mUrl = url;
         this.mBody = body;
