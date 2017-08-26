@@ -35,6 +35,7 @@ import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
+import solutions.alterego.android.unisannio.runtimePermission.PermissionManager;
 
 public class AteneoActivity extends NavigationDrawerActivity {
 
@@ -60,10 +61,15 @@ public class AteneoActivity extends NavigationDrawerActivity {
 
     protected Intent mMap;
 
+    PermissionManager mPermissionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.component(this).inject(this);
+
+        mPermissionManager = new PermissionManager(this);
+        mPermissionManager.managingPermission();
 
         setContentView(R.layout.activity_new_ateneo);
         ButterKnife.bind(this);
