@@ -1,22 +1,17 @@
 package solutions.alterego.android.unisannio;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.map.UniPoint;
 
 public class MapsActivity extends FragmentActivity {
@@ -27,6 +22,17 @@ public class MapsActivity extends FragmentActivity {
 
     private void setUpMap(List<UniPoint> markers) {
         // For showing a move to my location button
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         mMap.setMyLocationEnabled(true);
 
         for (UniPoint uniPoint : markers) {
@@ -81,30 +87,12 @@ public class MapsActivity extends FragmentActivity {
             // Try to obtain the map from the SupportMapFragment.
             // Check if we were successful in obtaining the map.
 
-            getMap().subscribeOn(Schedulers.computation())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .filter(new Func1<GoogleMap, Boolean>() {
-                        @Override public Boolean call(GoogleMap googleMap) {
-                            return googleMap != null;
-                        }
-                    })
-                    .subscribe(new Action1<GoogleMap>() {
-                        @Override public void call(GoogleMap googleMap) {
-                            mMap = googleMap;
-                            MapsActivity.this.setUpMap(markers);
-                        }
-                    });
+            ((SupportMapFragment) MapsActivity.this.getSupportFragmentManager().findFragmentById(R.id.map)).getMapAsync(new OnMapReadyCallback() {
+                @Override public void onMapReady(GoogleMap googleMap) {
+                    mMap = googleMap;
+                    MapsActivity.this.setUpMap(markers);
+                }
+            });
         }
-    }
-
-    private Observable<GoogleMap> getMap() {
-        return Observable.create(new Observable.OnSubscribe<GoogleMap>() {
-            @Override public void call(Subscriber<? super GoogleMap> subscriber) {
-                GoogleMap map = ((SupportMapFragment) MapsActivity.this.getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-
-                subscriber.onNext(map);
-                subscriber.onCompleted();
-            }
-        });
     }
 }

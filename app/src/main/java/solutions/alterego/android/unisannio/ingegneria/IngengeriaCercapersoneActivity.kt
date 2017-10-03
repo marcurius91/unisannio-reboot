@@ -51,9 +51,9 @@ class IngengeriaCercapersoneActivity : NavigationDrawerActivity() {
         //Initializing NavigationView
         //navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
-        val toolbar = findViewById(R.id.toolbar_actionbar) as Toolbar
+        val toolbar : Toolbar = findViewById(R.id.toolbar_actionbar)
         setSupportActionBar(toolbar)
-        val drawer = findViewById(R.id.navigation_drawer) as DrawerLayout
+        val drawer: DrawerLayout = findViewById(R.id.navigation_drawer)
         val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close)
         drawer.setDrawerListener(toggle)
         toggle.syncState()
