@@ -1,5 +1,7 @@
 package solutions.alterego.android.unisannio.sea;
 
+import java.util.UUID;
+import org.joda.time.DateTime;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -9,6 +11,7 @@ import java.util.List;
 
 import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.models.Article;
+import solutions.alterego.android.unisannio.utils.ExtensionKt;
 
 public class SeaParser implements IParser {
 
@@ -19,7 +22,7 @@ public class SeaParser implements IParser {
         for (Element e : elements) {
             String title = e.text();
             String link = e.select("a").attr("href");
-            articles.add(new Article(title, link, "", null, ""));
+            articles.add(new Article(UUID.randomUUID().toString(), title, "", link, "", ExtensionKt.toIso8601(DateTime.now())));
         }
         return articles;
     }

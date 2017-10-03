@@ -1,19 +1,16 @@
 package solutions.alterego.android.unisannio.ateneo;
 
-import android.util.Log;
-
+import java.util.ArrayList;
+import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.models.Article;
+import solutions.alterego.android.unisannio.utils.ExtensionKt;
 
 public class AteneoAvvisiParser implements IParser {
 
@@ -76,9 +73,8 @@ public class AteneoAvvisiParser implements IParser {
             if(title != null && date != null){
                 DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
                 DateTime jodatime = dtf.parseDateTime(date);
-                newsList.add(new Article(title,id,"",jodatime,""));
+                newsList.add(new Article(id, title,"", "", "", ExtensionKt.toIso8601(jodatime)));
             }
-
         }
 
         return newsList;
