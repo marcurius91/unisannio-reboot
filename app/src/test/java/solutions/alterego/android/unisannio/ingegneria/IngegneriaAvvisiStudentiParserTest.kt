@@ -4,6 +4,7 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito
@@ -37,6 +38,7 @@ class IngegneriaAvvisiStudentiParserTest {
     }
 
     @Test
+    @Ignore
     fun testParse() {
         val list = parser.parse(document)
         assertThat(list).isNotNull

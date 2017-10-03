@@ -1,6 +1,5 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
-
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -15,54 +14,37 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
-import org.parceler.Parcels;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.cercapersone.Person;
-import solutions.alterego.android.unisannio.models.Article;
 
 public class IngegneriaCercapersoneDetailActivity extends AppCompatActivity {
 
-    @Bind(R.id.detail_cercapersone_email)
-    TextView mEmail;
-
-    @Bind(R.id.detail_cercapersone_role)
-    TextView mRole;
-
-    @Bind(R.id.detail_cercapersone_office)
-    TextView mOffice;
-
-    @Bind(R.id.detail_cercapersone_webpage)
-    TextView mWebpage;
-
-    @Bind(R.id.detail_cercapersone_phone)
-    TextView mPhone;
-
-    @Bind(R.id.detail_cercapersone_name)
-    TextView mName;
-
-    @Bind(R.id.toolbar_actionbar)
-    Toolbar mToolbar;
-
     public Person mPerson;
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP) @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingegneria_cercapersone_detail);
-        ButterKnife.bind(this);
+
+        TextView mEmail = (TextView) findViewById(R.id.detail_cercapersone_email);
+
+        TextView mRole = (TextView) findViewById(R.id.detail_cercapersone_role);
+
+        TextView mOffice = (TextView) findViewById(R.id.detail_cercapersone_office);
+
+        TextView mWebpage = (TextView) findViewById(R.id.detail_cercapersone_webpage);
+
+        TextView mPhone = (TextView) findViewById(R.id.detail_cercapersone_phone);
+
+        TextView mName = (TextView) findViewById(R.id.detail_cercapersone_name);
+
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_action_arrow_left));
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            @Override public void onClick(View v) {
                 IngegneriaCercapersoneDetailActivity.this.onBackPressed();
             }
         });
@@ -80,10 +62,8 @@ public class IngegneriaCercapersoneDetailActivity extends AppCompatActivity {
         //Check if email String is empty and launch the relative Intent
         if (!mPerson.getEmail().isEmpty()) {
             mEmail.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                            "mailto", mPerson.getEmail(), null));
+                @Override public void onClick(View v) {
+                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", mPerson.getEmail(), null));
                     startActivity(Intent.createChooser(emailIntent, "Invio Email alla Persona"));
                 }
             });
@@ -92,11 +72,11 @@ public class IngegneriaCercapersoneDetailActivity extends AppCompatActivity {
         //Check if phone String is empty and launch the relative Intent
         if (!mPerson.getTelefono().isEmpty()) {
             mPhone.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                @Override public void onClick(View v) {
                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mPerson.getTelefono()));
                     //TODO Fix with a PermissionManager Class
-                    if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE)
+                        != PackageManager.PERMISSION_GRANTED) {
                         // TODO: Consider calling
                         //    ActivityCompat#requestPermissions
                         // here to request the missing permissions, and then overriding
@@ -112,10 +92,9 @@ public class IngegneriaCercapersoneDetailActivity extends AppCompatActivity {
         }
 
         //Check if WebPage String is empty and launch the relative Intent
-        if(!mPerson.getWebPage().isEmpty()) {
+        if (!mPerson.getWebPage().isEmpty()) {
             mWebpage.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                @Override public void onClick(View v) {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mPerson.getWebPage()));
                     startActivity(intent);
                 }
@@ -123,15 +102,12 @@ public class IngegneriaCercapersoneDetailActivity extends AppCompatActivity {
         }
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_detail, menu);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -147,5 +123,4 @@ public class IngegneriaCercapersoneDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

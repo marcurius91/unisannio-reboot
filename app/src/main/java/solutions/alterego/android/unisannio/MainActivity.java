@@ -1,8 +1,6 @@
 package solutions.alterego.android.unisannio;
 
 import android.app.Activity;
-import org.chromium.customtabsclient.CustomTabsActivityHelper;
-
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
@@ -19,17 +17,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-
 import javax.inject.Inject;
-
-import butterknife.Bind;
-import butterknife.BindColor;
-import butterknife.ButterKnife;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
+import org.chromium.customtabsclient.CustomTabsActivityHelper;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
 import solutions.alterego.android.unisannio.analytics.Screen;
 import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiFragment;
@@ -47,26 +40,22 @@ public class MainActivity extends AppCompatActivity {
     NavigationViewManager navigationViewManager;
     private Intent mMap;
 
-    @Bind(R.id.toolbar_actionbar)
     Toolbar mToolbar;
-
-    @BindColor(R.color.primaryColor)
     int mColorPrimary;
 
-    @Inject
-    AnalyticsManager mAnalyticsManager;
+    @Inject AnalyticsManager mAnalyticsManager;
 
     private CustomTabsHelperFragment mCustomTabsHelperFragment;
 
     private CustomTabsIntent mCustomTabsIntent;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.component(this).inject(this);
 
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+        mColorPrimary = getResources().getColor(R.color.primaryColor);
 
         mMap = new Intent(this, MapsActivity.class);
         // Initializing Toolbar and setting it as the actionbar
@@ -74,11 +63,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
-        mCustomTabsIntent = new CustomTabsIntent.Builder()
-                .enableUrlBarHiding()
-                .setToolbarColor(mColorPrimary)
-                .setShowTitle(true)
-                .build();
+        mCustomTabsIntent = new CustomTabsIntent.Builder().enableUrlBarHiding().setToolbarColor(mColorPrimary).setShowTitle(true).build();
 
         //Initializing NavigationView
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -87,43 +72,37 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         //set fragment Avvisi ateneo default when the app start
         getSupportFragmentManager().beginTransaction().replace(R.id.container, AteneoAvvisiFragment.newInstance(false)).commit();
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.drawer_open,
-                R.string.drawer_close) {
+        ActionBarDrawerToggle actionBarDrawerToggle =
+            new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close) {
 
+                @Override public void onDrawerClosed(View drawerView) {
+                    // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
+                    super.onDrawerClosed(drawerView);
+                }
 
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
-                super.onDrawerClosed(drawerView);
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
-                super.onDrawerOpened(drawerView);
-            }
-        };
+                @Override public void onDrawerOpened(View drawerView) {
+                    // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
+                    super.onDrawerOpened(drawerView);
+                }
+            };
 
         //Setting the actionbarToggle to drawer layout
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
-        navigationViewManager = new NavigationViewManager(drawerLayout,this);
+        navigationViewManager = new NavigationViewManager(drawerLayout, this);
         navigationView = navigationViewManager.setUpNavigationDrawer(navigationView);
 
         //calling sync state is necessay or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();
-
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -132,8 +111,8 @@ public class MainActivity extends AppCompatActivity {
         Intent browserIntent;
 
         //Ateneo
-        if(fragmentName.equalsIgnoreCase("AteneoAvvisiFragment")){
-            switch (id){
+        if (fragmentName.equalsIgnoreCase("AteneoAvvisiFragment")) {
+            switch (id) {
                 case R.id.action_web_page:
                     //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
                     mAnalyticsManager.track(new Screen(getString(R.string.ateneo), getString(R.string.sito_web)));
@@ -149,8 +128,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //Ingegneria
-        if(fragmentName.equalsIgnoreCase("IngegneriaAvvisiFragment")){
-            switch (id){
+        if (fragmentName.equalsIgnoreCase("IngegneriaAvvisiFragment")) {
+            switch (id) {
                 case R.id.action_web_page:
                     //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
                     mAnalyticsManager.track(new Screen(getString(R.string.ingegneria), getString(R.string.sito_web)));
@@ -166,8 +145,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //Scienze e Tecnologie
-        if(fragmentName.equalsIgnoreCase("ScienzeAvvisiFragment")){
-            switch (id){
+        if (fragmentName.equalsIgnoreCase("ScienzeAvvisiFragment")) {
+            switch (id) {
                 case R.id.action_web_page:
                     //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
                     mAnalyticsManager.track(new Screen(getString(R.string.scienze), getString(R.string.sito_web)));
@@ -183,8 +162,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //Giurisprudenza
-        if(fragmentName.equalsIgnoreCase("GiurisprudenzaAvvisiFragment")){
-            switch (id){
+        if (fragmentName.equalsIgnoreCase("GiurisprudenzaAvvisiFragment")) {
+            switch (id) {
                 case R.id.action_web_page:
                     //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
                     mAnalyticsManager.track(new Screen(getString(R.string.giurisprudenza), getString(R.string.sito_web)));
@@ -200,8 +179,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //SEA
-        if(fragmentName.equalsIgnoreCase("SeaAvvisiFragment")){
-            switch (id){
+        if (fragmentName.equalsIgnoreCase("SeaAvvisiFragment")) {
+            switch (id) {
                 case R.id.action_web_page:
                     //Log.e("Active Fragment",getVisibleFragmentName(getVisibleFragment()));
                     mAnalyticsManager.track(new Screen(getString(R.string.sea), getString(R.string.sito_web)));
@@ -222,21 +201,20 @@ public class MainActivity extends AppCompatActivity {
     //get the active Fragment
 
     //TODO ISSUE Error:(225, 52) FragmentManager.getFragments can only be called from within the same library group (groupId=com.android.support)
-    public Fragment getVisibleFragment(){
+    public Fragment getVisibleFragment() {
         FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
         List<Fragment> fragments = fragmentManager.getFragments();
-        for(Fragment fragment : fragments){
-            if(fragment != null && fragment.getUserVisibleHint())
-                return fragment;
+        for (Fragment fragment : fragments) {
+            if (fragment != null && fragment.getUserVisibleHint()) return fragment;
         }
         return null;
     }
 
     //get the name of the active Fragment
-    public String getVisibleFragmentName(Fragment fragment){
-        String str,fragmentName;
+    public String getVisibleFragmentName(Fragment fragment) {
+        String str, fragmentName;
         str = fragment.toString();
-        StringTokenizer st = new StringTokenizer(str,"{");
+        StringTokenizer st = new StringTokenizer(str, "{");
         fragmentName = st.nextToken();
         return fragmentName;
     }

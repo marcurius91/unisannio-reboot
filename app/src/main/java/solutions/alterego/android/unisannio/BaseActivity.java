@@ -14,13 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import butterknife.BindColor;
-import butterknife.ButterKnife;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import org.chromium.customtabsclient.CustomTabsActivityHelper;
 import solutions.alterego.android.unisannio.navigation.Navigator;
-
-;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -31,8 +27,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     private CustomTabsHelperFragment mCustomTabsHelperFragment;
 
     protected CustomTabsIntent mCustomTabsIntent;
-
-    @BindColor(R.color.primaryColor) int mColorPrimary;
 
     protected Intent mMap;
 
@@ -49,10 +43,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override public void setContentView(View view) {
         super.setContentView(view);
         findAndSetAppbar();
-        ButterKnife.bind(this);
 
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
-        mCustomTabsIntent = new CustomTabsIntent.Builder().enableUrlBarHiding().setToolbarColor(mColorPrimary).setShowTitle(true).build();
+        int color = getResources().getColor(R.color.primaryColor);
+        mCustomTabsIntent = new CustomTabsIntent.Builder().enableUrlBarHiding().setToolbarColor(color).setShowTitle(true).build();
 
         mMap = new Intent(this, MapsActivity.class);
     }
