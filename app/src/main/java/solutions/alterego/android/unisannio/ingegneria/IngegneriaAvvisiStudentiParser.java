@@ -10,18 +10,18 @@ import org.joda.time.format.DateTimeFormatter;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import solutions.alterego.android.unisannio.interfaces.IParser;
+import solutions.alterego.android.unisannio.interfaces.Parser;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.utils.ExtensionKt;
 
-public class IngegneriaAvvisiStudentiParser implements IParser {
+public class IngegneriaAvvisiStudentiParser implements Parser<Article> {
 
     public static final String EMPTY_AUTHOR_PLACEHOLDER = "Presidio didattico";
 
     public static String SELECT_ELEMENTS = "#maincontent-block > #item";
 
     @Override
-    public List parse(Document document) {
+    public List<Article> parse(Document document) {
 
 
         /*Elements elements = getElements(document);

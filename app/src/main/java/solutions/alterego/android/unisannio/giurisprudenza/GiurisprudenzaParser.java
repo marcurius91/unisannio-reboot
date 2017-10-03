@@ -11,11 +11,11 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import solutions.alterego.android.unisannio.interfaces.IParser;
+import solutions.alterego.android.unisannio.interfaces.Parser;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.utils.ExtensionKt;
 
-public class GiurisprudenzaParser implements IParser<Article> {
+public class GiurisprudenzaParser implements Parser<Article> {
 
     public List<Article> parse(Document document) {
         Elements elements = document.select("table.lista > tbody > tr[class^=row]");

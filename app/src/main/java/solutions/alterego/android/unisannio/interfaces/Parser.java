@@ -6,7 +6,7 @@ import java.util.List;
 
 import rx.Observable;
 
-public interface IParser<T> {
+public interface Parser<T> {
 
     List<T> parse(Document document);
 }

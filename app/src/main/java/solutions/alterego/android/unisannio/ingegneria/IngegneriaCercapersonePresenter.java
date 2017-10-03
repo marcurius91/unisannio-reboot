@@ -11,19 +11,19 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.cercapersone.ICercapersonePresenter;
 import solutions.alterego.android.unisannio.cercapersone.Person;
-import solutions.alterego.android.unisannio.interfaces.IParser;
+import solutions.alterego.android.unisannio.interfaces.Parser;
 import solutions.alterego.android.unisannio.interfaces.IRetriever;
 
 public class IngegneriaCercapersonePresenter implements ICercapersonePresenter {
 
-    private IParser mParser;
+    private Parser mParser;
 
     private IRetriever mRetriever;
 
     ArrayList<Person> persons = new ArrayList<>();
 
     @Override
-    public void setParser(@NonNull IParser parser) {
+    public void setParser(@NonNull Parser parser) {
         mParser = parser;
     }
 

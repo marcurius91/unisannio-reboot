@@ -10,14 +10,14 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import solutions.alterego.android.unisannio.URLS;
-import solutions.alterego.android.unisannio.interfaces.IParser;
+import solutions.alterego.android.unisannio.interfaces.Parser;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.utils.DateUtils;
 import solutions.alterego.android.unisannio.utils.ExtensionKt;
 
-public class IngegneriaAvvisiDipartimentoParser implements IParser {
+public class IngegneriaAvvisiDipartimentoParser implements Parser<Article> {
 
-    @Override public List parse(Document document) {
+    @Override public List<Article> parse(Document document) {
         List<Article> list = new ArrayList<>();
 
         Element body_element = document.body();
