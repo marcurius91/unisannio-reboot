@@ -16,9 +16,6 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import butterknife.Bind;
-import butterknife.BindColor;
-import butterknife.ButterKnife;
 import java.util.ArrayList;
 import javax.inject.Inject;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
@@ -41,13 +38,8 @@ public class AteneoActivity extends NavigationDrawerActivity {
     @Inject
     AnalyticsManager mAnalyticsManager;
 
-    @Bind(R.id.ateneo_recycle_view)
     RecyclerView mRecyclerView;
-
-    @BindColor(R.color.primaryColor)
     int mColorPrimary;
-
-    @Bind(R.id.ateneo_swipe_container)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     private CustomTabsHelperFragment mCustomTabsHelperFragment;
@@ -66,7 +58,10 @@ public class AteneoActivity extends NavigationDrawerActivity {
         App.component(this).inject(this);
 
         setContentView(R.layout.activity_new_ateneo);
-        ButterKnife.bind(this);
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.ateneo_ptr);
+        mColorPrimary = getResources().getColor(R.color.primaryColor);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(toolbar);
@@ -118,7 +113,7 @@ public class AteneoActivity extends NavigationDrawerActivity {
     }
 
     private void refreshList() {
-        //mRecyclerView.setVisibility(View.GONE);
+        //cercapersone_ingegneria_recycle_view.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
         mPresenter.getArticles()
                 .observeOn(AndroidSchedulers.mainThread())

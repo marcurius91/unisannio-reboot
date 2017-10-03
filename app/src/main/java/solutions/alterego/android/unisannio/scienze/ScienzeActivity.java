@@ -5,9 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.util.Pair;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,18 +16,11 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import org.parceler.Parcels;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
-
-import butterknife.Bind;
-import butterknife.BindColor;
-import butterknife.ButterKnife;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
+import org.parceler.Parcels;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
@@ -41,11 +31,11 @@ import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
 import solutions.alterego.android.unisannio.analytics.Screen;
-import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiStudentiRetriever;
 import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
+import timber.log.Timber;
 
 public class ScienzeActivity extends NavigationDrawerActivity {
 
@@ -55,13 +45,8 @@ public class ScienzeActivity extends NavigationDrawerActivity {
     @Inject
     ScienzeRetriever mRetriever;
 
-    @Bind(R.id.scienze_recycle_view)
     RecyclerView mRecyclerView;
-
-    @BindColor(R.color.primaryColor)
     int mColorPrimary;
-
-    @Bind(R.id.scienze_swipe_container)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     private ArticleAdapter mAdapter;
@@ -77,7 +62,10 @@ public class ScienzeActivity extends NavigationDrawerActivity {
         App.component(this).inject(this);
 
         setContentView(R.layout.activity_scienze);
-        ButterKnife.bind(this);
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.ateneo_ptr);
+        mColorPrimary = getResources().getColor(R.color.primaryColor);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(toolbar);
@@ -164,15 +152,15 @@ public class ScienzeActivity extends NavigationDrawerActivity {
                 .subscribe(new Observer<List<Article>>() {
                     @Override
                     public void onCompleted() {
-                        /* (mRecyclerView != null && mSwipeRefreshLayout != null) {
-                            mRecyclerView.setVisibility(View.VISIBLE);
-                            mSwipeRefreshLayout.setRefreshing(false);
+                        /* (cercapersone_ingegneria_recycle_view != null && cercapersone_ingegneria_swipe_container != null) {
+                            cercapersone_ingegneria_recycle_view.setVisibility(View.VISIBLE);
+                            cercapersone_ingegneria_swipe_container.setRefreshing(false);
                         }*/
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        App.l.e(e);
+                        Timber.e(e);
                         if (mSwipeRefreshLayout != null) {
                             mSwipeRefreshLayout.setRefreshing(false);
                         }

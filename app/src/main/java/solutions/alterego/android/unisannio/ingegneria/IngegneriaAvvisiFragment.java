@@ -12,8 +12,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import java.util.ArrayList;
 import java.util.List;
 import org.parceler.Parcels;
@@ -25,13 +23,11 @@ import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
+import timber.log.Timber;
 
 public class IngegneriaAvvisiFragment extends Fragment {
 
-    @Bind(R.id.ingegneria_recycler_view)
     RecyclerView mRecyclerView;
-
-    @Bind(R.id.ingengeria_ptr)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     IngegneriaRetriever mRetriever;
@@ -45,22 +41,17 @@ public class IngegneriaAvvisiFragment extends Fragment {
         IngegneriaAvvisiFragment fragment = new IngegneriaAvvisiFragment();
         //fragment.setArguments(bundle);
         return fragment;
-
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_ingegneria, container, false);
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        ButterKnife.bind(this, view);
+    @Override public void onViewCreated(View view, Bundle savedInstanceState) {
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.ingegneria_recycler_view);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.ingengeria_ptr);
 
-        mSwipeRefreshLayout.setColorSchemeResources(
-            R.color.unisannio_yellow,
-            R.color.unisannio_yellow_dark,
-            R.color.unisannio_yellow_light,
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.unisannio_yellow, R.color.unisannio_yellow_dark, R.color.unisannio_yellow_light,
             R.color.unisannio_blue);
 
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,
@@ -70,13 +61,13 @@ public class IngegneriaAvvisiFragment extends Fragment {
 
         //Bundle bundle = getArguments();
         //if (bundle != null) {
-            boolean isDipartimento = /*bundle.getBoolean("DIPARTIMENTO");*/ true;
+        boolean isDipartimento = /*bundle.getBoolean("DIPARTIMENTO");*/ true;
 
-            if (isDipartimento) {
-                mRetriever = new IngegneriaAvvisiDipartimentoRetriever();
-            } else {
-                mRetriever = new IngegneriaAvvisiStudentiRetriever();
-            }
+        if (isDipartimento) {
+            mRetriever = new IngegneriaAvvisiDipartimentoRetriever();
+        } else {
+            mRetriever = new IngegneriaAvvisiStudentiRetriever();
+        }
         //}
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -100,7 +91,7 @@ public class IngegneriaAvvisiFragment extends Fragment {
                 //ActivityCompat.startActivity(getActivity(), intent,options.toBundle());
                 IngegneriaAvvisiFragment.this.startActivity(intent);
             }
-        },R.drawable.ding);
+        }, R.drawable.ding);
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
@@ -113,40 +104,28 @@ public class IngegneriaAvvisiFragment extends Fragment {
         mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
 
-        mRetriever.get()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(new Observer<List<Article>>() {
-                @Override
-                public void onCompleted() {
-                    if (mRecyclerView != null && mSwipeRefreshLayout != null) {
-                        mRecyclerView.setVisibility(View.VISIBLE);
-                        mSwipeRefreshLayout.setRefreshing(false);
-                    }
+        mRetriever.get().observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<Article>>() {
+            @Override public void onCompleted() {
+                if (mRecyclerView != null && mSwipeRefreshLayout != null) {
+                    mRecyclerView.setVisibility(View.VISIBLE);
+                    mSwipeRefreshLayout.setRefreshing(false);
                 }
+            }
 
-                @Override
-                public void onError(Throwable e) {
-                    App.l.e(e);
-                    if (mSwipeRefreshLayout != null) {
-                        mSwipeRefreshLayout.setRefreshing(false);
-                    }
+            @Override public void onError(Throwable e) {
+                Timber.e(e);
+                if (mSwipeRefreshLayout != null) {
+                    mSwipeRefreshLayout.setRefreshing(false);
                 }
+            }
 
-                @Override
-                public void onNext(List<Article> list) {
-                    mAdapter.addNews(list);
-                }
-            });
+            @Override public void onNext(List<Article> list) {
+                mAdapter.addNews(list);
+            }
+        });
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
-
-    @Override
-    public void onAttach(Context context) {
+    @Override public void onAttach(Context context) {
         super.onAttach(context);
         App.component(context).inject(this);
     }

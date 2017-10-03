@@ -16,8 +16,6 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import butterknife.Bind;
-import butterknife.BindColor;
 import java.util.ArrayList;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import rx.Observer;
@@ -35,16 +33,8 @@ import solutions.alterego.android.unisannio.models.ArticleAdapter;
 
 public class GiurisprudenzaActivity extends NavigationDrawerActivity {
 
-    //@Inject
-    //AnalyticsManager mAnalyticsManager;
-
-    @Bind(R.id.giurisprudenza_recycle_view)
     RecyclerView mRecyclerView;
-
-    @BindColor(R.color.primaryColor)
     int mColorPrimary;
-
-    @Bind(R.id.giurisprudenza_swipe_container)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     private CustomTabsHelperFragment mCustomTabsHelperFragment;
@@ -62,10 +52,9 @@ public class GiurisprudenzaActivity extends NavigationDrawerActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //App.component(this).inject(this);
 
         setContentView(R.layout.activity_giurisprudenza);
-        //ButterKnife.bind(this);
+        mColorPrimary = getResources().getColor(R.color.primaryColor);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(toolbar);
@@ -118,7 +107,7 @@ public class GiurisprudenzaActivity extends NavigationDrawerActivity {
     }
 
     private void refreshList() {
-        //mRecyclerView.setVisibility(View.GONE);
+        //cercapersone_ingegneria_recycle_view.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
         mPresenter.getArticles()
                 .observeOn(AndroidSchedulers.mainThread())

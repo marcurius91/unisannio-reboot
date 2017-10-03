@@ -18,9 +18,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-import butterknife.Bind;
-import butterknife.BindColor;
-import butterknife.ButterKnife;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -41,6 +38,7 @@ import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
+import timber.log.Timber;
 
 public class IngegneriaDipartimentoActivity extends NavigationDrawerActivity {
 
@@ -50,13 +48,8 @@ public class IngegneriaDipartimentoActivity extends NavigationDrawerActivity {
 
     @Inject IngegneriaAvvisiDipartimentoRetriever mRetriever;
 
-    @Bind(R.id.ingegneria_dipartimento_recycle_view)
     RecyclerView mRecyclerView;
-
-    @BindColor(R.color.primaryColor)
     int mColorPrimary;
-
-    @Bind(R.id.ingegneria_dipartimento_swipe_container)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     private ArticleAdapter mAdapter;
@@ -69,7 +62,7 @@ public class IngegneriaDipartimentoActivity extends NavigationDrawerActivity {
         App.component(this).inject(this);
 
         setContentView(R.layout.activity_ingegneria_dipartimento);
-        ButterKnife.bind(this);
+        mColorPrimary = getResources().getColor(R.color.primaryColor);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(toolbar);
@@ -139,7 +132,7 @@ public class IngegneriaDipartimentoActivity extends NavigationDrawerActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        App.l.e(e);
+                        Timber.e(e);
                         if (mSwipeRefreshLayout != null) {
                             mSwipeRefreshLayout.setRefreshing(false);
                         }

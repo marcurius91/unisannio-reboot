@@ -1,11 +1,5 @@
 package solutions.alterego.android.unisannio.navigation;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-
-import org.chromium.customtabsclient.CustomTabsActivityHelper;
-
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -19,11 +13,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 import android.widget.Toast;
-
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import javax.inject.Inject;
-
-import butterknife.BindColor;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
+import org.chromium.customtabsclient.CustomTabsActivityHelper;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
@@ -44,7 +39,6 @@ public class NavigationViewManager extends FragmentActivity {
     @Inject
     AnalyticsManager mAnalyticsManager;
 
-    @BindColor(R.color.primaryColor)
     int mColorPrimary;
 
     private CustomTabsHelperFragment mCustomTabsHelperFragment;
@@ -64,6 +58,7 @@ public class NavigationViewManager extends FragmentActivity {
     }
 
     public NavigationView setUpNavigationDrawer(NavigationView navigationView) {
+        mColorPrimary = getResources().getColor(R.color.primaryColor);
 
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo((FragmentActivity) context);
         mCustomTabsIntent = new CustomTabsIntent.Builder()

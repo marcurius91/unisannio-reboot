@@ -4,22 +4,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-
 import java.util.ArrayList;
-
 import javax.inject.Inject;
-
-import butterknife.BindColor;
-import butterknife.ButterKnife;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.MapsActivity;
@@ -35,7 +26,6 @@ public class SeaActivity extends NavigationDrawerActivity {
     @Inject
     AnalyticsManager mAnalyticsManager;
 
-    @BindColor(R.color.primaryColor)
     int mColorPrimary;
 
     protected Intent mMap;
@@ -46,7 +36,7 @@ public class SeaActivity extends NavigationDrawerActivity {
         App.component(this).inject(this);
 
         setContentView(R.layout.activity_sea);
-        ButterKnife.bind(this);
+        mColorPrimary = getResources().getColor(R.color.primaryColor);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(toolbar);
