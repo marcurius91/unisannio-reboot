@@ -17,9 +17,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import butterknife.Bind;
-import butterknife.BindColor;
-import butterknife.ButterKnife;
 import java.util.ArrayList;
 import javax.inject.Inject;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
@@ -35,17 +32,11 @@ import solutions.alterego.android.unisannio.models.ArticleAdapter;
 
 public class AteneoAvvisiFragment extends Fragment {
 
-    @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
-
-    @Bind(R.id.ateneo_ptr)
     SwipeRefreshLayout mSwipeRefreshLayout;
-
-    @BindColor(R.color.primaryColor)
     int mColorPrimary;
 
-    @Inject
-    AteneoRetriever mAteneoRetriever;
+    @Inject AteneoRetriever mAteneoRetriever;
 
     private ArticleAdapter mAdapter;
 
@@ -66,25 +57,22 @@ public class AteneoAvvisiFragment extends Fragment {
         return fragment;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_recyclerview, container, false);
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        ButterKnife.bind(this, view);
+    @Override public void onViewCreated(View view, Bundle savedInstanceState) {
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.ateneo_ptr);
+        mColorPrimary = getResources().getColor(R.color.primaryColor);
 
         int drawable = R.drawable.guerrazzi;
 
-        mSwipeRefreshLayout.setColorSchemeResources(
-                R.color.unisannio_yellow,
-                R.color.unisannio_yellow_dark,
-                R.color.unisannio_yellow_light,
-                R.color.unisannio_blue);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.unisannio_yellow, R.color.unisannio_yellow_dark, R.color.unisannio_yellow_light,
+            R.color.unisannio_blue);
 
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
+            (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
@@ -97,22 +85,17 @@ public class AteneoAvvisiFragment extends Fragment {
 
         mIsStudenti = true;
 
-        //mSwipeRefreshLayout.setOnRefreshListener(() -> refreshList(mIsStudenti));
+        //cercapersone_ingegneria_swipe_container.setOnRefreshListener(() -> refreshList(mIsStudenti));
 
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this.getActivity());
-        mCustomTabsIntent = new CustomTabsIntent.Builder()
-                .enableUrlBarHiding()
-                .setToolbarColor(mColorPrimary)
-                .setShowTitle(true)
-                .build();
-
+        mCustomTabsIntent = new CustomTabsIntent.Builder().enableUrlBarHiding().setToolbarColor(mColorPrimary).setShowTitle(true).build();
 
         mAdapter = new ArticleAdapter(new ArrayList<Article>(), new OpenArticleDetailListener() {
             @Override public void openArticleDetail(@NonNull Article article, @NonNull RecyclerView.ViewHolder holder) {
                 String url1 = mIsStudenti ? URLS.ATENEO_DETAIL_STUDENTI_BASE_URL + article.getUrl() : URLS.ATENEO_DETAIL_BASE_URL + article.getUrl();
                 CustomTabsHelperFragment.open(AteneoAvvisiFragment.this.getActivity(), mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
             }
-        },R.drawable.guerrazzi);
+        }, R.drawable.guerrazzi);
 
         mRecyclerView.setAdapter(mAdapter);
 
@@ -123,8 +106,8 @@ public class AteneoAvvisiFragment extends Fragment {
     }
 
     /*private void refreshList(boolean isStudenti) {
-        mRecyclerView.setVisibility(View.GONE);
-        mSwipeRefreshLayout.setRefreshing(true);
+        cercapersone_ingegneria_recycle_view.setVisibility(View.GONE);
+        cercapersone_ingegneria_swipe_container.setRefreshing(true);
 
         mAteneoRetriever.getNewsList(isStudenti)
                 .subscribeOn(Schedulers.io())
@@ -132,22 +115,22 @@ public class AteneoAvvisiFragment extends Fragment {
                 .subscribe(new Observer<List<Article>>() {
                     @Override
                     public void onCompleted() {
-                        if (mSwipeRefreshLayout != null) {
-                            mSwipeRefreshLayout.setRefreshing(false);
+                        if (cercapersone_ingegneria_swipe_container != null) {
+                            cercapersone_ingegneria_swipe_container.setRefreshing(false);
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        if (mSwipeRefreshLayout != null) {
-                            mSwipeRefreshLayout.setRefreshing(false);
+                        if (cercapersone_ingegneria_swipe_container != null) {
+                            cercapersone_ingegneria_swipe_container.setRefreshing(false);
                         }
                     }
 
                     @Override
                     public void onNext(List<Article> ateneoNewsList) {
                         mAdapter.addNews(ateneoNewsList);
-                        mRecyclerView.setVisibility(View.VISIBLE);
+                        cercapersone_ingegneria_recycle_view.setVisibility(View.VISIBLE);
                     }
                 });
     }*/
@@ -155,52 +138,35 @@ public class AteneoAvvisiFragment extends Fragment {
     private void refreshList() {
         mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
-        mPresenter.getArticles()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ArrayList<Article>>() {
-                    @Override
-                    public void onCompleted() {
-                        mSwipeRefreshLayout.setRefreshing(false);
-                    }
+        mPresenter.getArticles().observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ArrayList<Article>>() {
+            @Override public void onCompleted() {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
 
-                    @Override
-                    public void onError(Throwable e) {
+            @Override public void onError(Throwable e) {
 
-                    }
+            }
 
-                    @Override
-                    public void onNext(ArrayList<Article> articles) {
-                        mAdapter.addNews(articles);
-                    }
-                });
+            @Override public void onNext(ArrayList<Article> articles) {
+                mAdapter.addNews(articles);
+            }
+        });
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
-
-    @Override
-    public void onAttach(Context context) {
+    @Override public void onAttach(Context context) {
         super.onAttach(context);
         App.component(context).inject(this);
     }
 
-    private final CustomTabsActivityHelper.CustomTabsFallback mCustomTabsFallback =
-            new CustomTabsActivityHelper.CustomTabsFallback() {
-                @Override
-                public void openUri(Activity activity, Uri uri) {
-                    Toast.makeText(activity, R.string.custom_tab_error, Toast.LENGTH_SHORT).show();
-                    try {
-                        activity.startActivity(new Intent(Intent.ACTION_VIEW, uri));
-                    } catch (ActivityNotFoundException e) {
-                        e.printStackTrace();
-                        Toast.makeText(activity, R.string.custom_tab_error_activity, Toast.LENGTH_SHORT)
-                                .show();
-                    }
-                }
-            };
-
-
+    private final CustomTabsActivityHelper.CustomTabsFallback mCustomTabsFallback = new CustomTabsActivityHelper.CustomTabsFallback() {
+        @Override public void openUri(Activity activity, Uri uri) {
+            Toast.makeText(activity, R.string.custom_tab_error, Toast.LENGTH_SHORT).show();
+            try {
+                activity.startActivity(new Intent(Intent.ACTION_VIEW, uri));
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(activity, R.string.custom_tab_error_activity, Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 }

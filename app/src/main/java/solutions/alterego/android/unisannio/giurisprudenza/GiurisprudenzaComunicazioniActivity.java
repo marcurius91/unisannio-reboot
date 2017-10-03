@@ -16,8 +16,6 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import butterknife.Bind;
-import butterknife.BindColor;
 import java.util.ArrayList;
 import javax.inject.Inject;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
@@ -39,13 +37,8 @@ public class GiurisprudenzaComunicazioniActivity extends NavigationDrawerActivit
     @Inject
     AnalyticsManager mAnalyticsManager;
 
-    @Bind(R.id.giurisprudenza_comunicazioni_recycle_view)
     RecyclerView mRecyclerView;
-
-    @BindColor(R.color.primaryColor)
     int mColorPrimary;
-
-    @Bind(R.id.giurisprudenza_comunicazioni_swipe_container)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
     private CustomTabsHelperFragment mCustomTabsHelperFragment;
@@ -78,6 +71,7 @@ public class GiurisprudenzaComunicazioniActivity extends NavigationDrawerActivit
         mMap = new Intent(this, MapsActivity.class);
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
 
+        mColorPrimary = getResources().getColor(R.color.primaryColor);
         mRecyclerView = (RecyclerView) findViewById(R.id.giurisprudenza_recycle_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.giurisprudenza_swipe_container);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -117,7 +111,7 @@ public class GiurisprudenzaComunicazioniActivity extends NavigationDrawerActivit
     }
 
     private void refreshList() {
-        //mRecyclerView.setVisibility(View.GONE);
+        //cercapersone_ingegneria_recycle_view.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
         mPresenter.getArticles()
                 .observeOn(AndroidSchedulers.mainThread())

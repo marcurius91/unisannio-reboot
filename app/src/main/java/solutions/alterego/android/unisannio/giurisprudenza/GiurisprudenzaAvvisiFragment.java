@@ -1,14 +1,12 @@
 package solutions.alterego.android.unisannio.giurisprudenza;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
-import org.chromium.customtabsclient.CustomTabsActivityHelper;
-
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -19,14 +17,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.Bind;
-import butterknife.BindColor;
-import butterknife.ButterKnife;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
+import org.chromium.customtabsclient.CustomTabsActivityHelper;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
@@ -37,14 +31,8 @@ import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
 
 public class GiurisprudenzaAvvisiFragment extends Fragment implements GiurisprudenzaView {
-
-    @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
-
-    @Bind(R.id.ateneo_ptr)
     SwipeRefreshLayout mSwipeRefreshLayout;
-
-    @BindColor(R.color.primaryColor)
     int mColorPrimary;
 
     private ArticleAdapter mAdapter;
@@ -71,10 +59,10 @@ public class GiurisprudenzaAvvisiFragment extends Fragment implements Giurisprud
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        ButterKnife.bind(this, view);
 
-        //Bundle bundle = getArguments();
-        //String url = bundle.getString("URL");
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.ateneo_ptr);
+        mColorPrimary = getResources().getColor(R.color.primaryColor);
 
         mPresenter = new GiurisprudenzaPresenter(URLS.GIURISPRUDENZA_AVVISI);
 
@@ -138,12 +126,6 @@ public class GiurisprudenzaAvvisiFragment extends Fragment implements Giurisprud
                         mAdapter.addNews(articles);
                     }
                 });
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     @Override

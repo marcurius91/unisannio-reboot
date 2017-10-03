@@ -16,18 +16,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
-import org.chromium.customtabsclient.CustomTabsActivityHelper;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
-
-import butterknife.Bind;
-import butterknife.BindColor;
-import butterknife.ButterKnife;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
+import org.chromium.customtabsclient.CustomTabsActivityHelper;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
@@ -36,16 +29,12 @@ import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
+import timber.log.Timber;
 
 public class SeaAvvisiFragment extends Fragment {
 
-    @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
-
-    @Bind(R.id.ateneo_ptr)
     SwipeRefreshLayout mSwipeRefreshLayout;
-
-    @BindColor(R.color.primaryColor)
     int mColorPrimary;
 
     @Inject
@@ -73,7 +62,9 @@ public class SeaAvvisiFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        ButterKnife.bind(this, view);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.ateneo_ptr);
+        mColorPrimary = getResources().getColor(R.color.primaryColor);
 
         //Bundle bundle = getArguments();
         //String url = bundle.getString("URL");
@@ -133,7 +124,7 @@ public class SeaAvvisiFragment extends Fragment {
 
                 @Override
                 public void onError(Throwable e) {
-                    App.l.e(e);
+                    Timber.e(e);
                     if (mSwipeRefreshLayout != null) {
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
@@ -145,12 +136,6 @@ public class SeaAvvisiFragment extends Fragment {
                     mRecyclerView.setVisibility(View.VISIBLE);
                 }
             });*/
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     @Override

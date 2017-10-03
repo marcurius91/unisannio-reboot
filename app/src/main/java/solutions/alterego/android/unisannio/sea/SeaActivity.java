@@ -5,12 +5,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -19,14 +16,8 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import java.util.ArrayList;
-
 import javax.inject.Inject;
-
-import butterknife.Bind;
-import butterknife.BindColor;
-import butterknife.ButterKnife;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -37,8 +28,6 @@ import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
 import solutions.alterego.android.unisannio.analytics.Screen;
-import solutions.alterego.android.unisannio.ateneo.AteneoActivity;
-import solutions.alterego.android.unisannio.ateneo.AteneoPresenter;
 import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.models.Article;
@@ -49,14 +38,7 @@ public class SeaActivity extends NavigationDrawerActivity {
     @Inject
     AnalyticsManager mAnalyticsManager;
 
-    @Bind(R.id.sea_recycle_view)
-    RecyclerView mRecyclerView;
-
-    @BindColor(R.color.primaryColor)
     int mColorPrimary;
-
-    @Bind(R.id.ateneo_swipe_container)
-    SwipeRefreshLayout mSwipeRefreshLayout;
 
     private CustomTabsHelperFragment mCustomTabsHelperFragment;
 
@@ -67,8 +49,8 @@ public class SeaActivity extends NavigationDrawerActivity {
     private SeaPresenter mPresenter;
 
     protected Intent mMap;
-
-
+    private RecyclerView mRecyclerView;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +58,7 @@ public class SeaActivity extends NavigationDrawerActivity {
         App.component(this).inject(this);
 
         setContentView(R.layout.activity_sea);
-        //ButterKnife.bind(this);
+        mColorPrimary = getResources().getColor(R.color.primaryColor);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(toolbar);
