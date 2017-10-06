@@ -3,18 +3,18 @@ package solutions.alterego.android.unisannio.ingegneria;
 import android.util.Log;
 
 import org.joda.time.DateTime;
-import org.joda.time.Interval;
+
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.safety.Whitelist;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.utils.DateUtils;
@@ -25,47 +25,29 @@ public class IngegneriaAvvisiDipartimentoParser implements IParser {
     public List parse(Document document) {
         List<Article> list = new ArrayList<>();
 
-        Element body_element = document.body();
-        Elements elements = body_element.select("*");
-
-         /*for (Element element : elements) {
-            String title = element.select(".leading-0 > h2").first().text();
-
-            String body = element.select(".leading-0 > p").first().text();
-
-            String date = element.select(".published").first().text().replace("Pubblicato ", "");
-            DateTimeFormatter dtf = DateTimeFormat.forPattern("EEEE, dd MMMM yyyy");
-            DateTime jodatime = dtf.withLocale(Locale.ITALIAN).parseDateTime(date.toLowerCase());
-
-            list.add(new Article(title, URLS.INGEGNERIA_NEWS_DIPARTIMENTO, body, jodatime, ""));
-        }
-        return list;
-    }*/
+        Elements elements = document.select("item");
 
 
+         for (Element element: elements){
+             String title = element.select("title").text();
+             String body = clearHtml(element.select("description").text());
+             String date = element.select("pubdate").text();
+             String author = element.select("author").text();
+             String link = element.select("guid").text();
 
-             //XML OF THE PAGE SUCK.
-             //Tag between two news is <div class="leading-XXX" with XXX incremental integer.
-             //I use the header tag to count the news and use this index for select query
+             DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
+             DateTime jodatime = dtf.parseDateTime(DateUtils.convertMonth(date.substring(5)));
 
-             Elements index_element = elements.select("div.page-header").select("h2");
-             int index_news = index_element.size();
-
-             for(int j=0; j<index_news; j++){
-                 String search_query = ".leading-".concat(String.valueOf(j));
-                 Element news = elements.select(search_query).first();
-
-                 String title = news.select("div.page-header").select("h2").text();
-                 String body = news.select("p").text();
-                 String date = DateUtils.convertMonth(news.select("dd.published").select("time").text());
-
-                 DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
-                 DateTime jodatime = dtf.parseDateTime(date);
-
-                 list.add(new Article(title, URLS.INGEGNERIA_NEWS_DIPARTIMENTO, body, jodatime, ""));
-
-             }
+             list.add(new Article(title, link, body, jodatime, author));
+         }
 
         return list;
+    }
+
+    //Method that remove all the htlm tag from the body of the article.
+    public String clearHtml(String html){
+        String tmp1 = Jsoup.clean(html,Whitelist.none());
+        String tmp2 = tmp1.replace("&nbsp;","").replace("&gt;","");
+        return tmp2;
     }
 }

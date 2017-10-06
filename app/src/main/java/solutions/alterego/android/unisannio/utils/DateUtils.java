@@ -93,6 +93,43 @@ public class DateUtils {
             case "Dicembre":
                 month = "12";
                 break;
+
+            case "Jen":
+                month = "01";
+                break;
+            case "Feb":
+                month = "02";
+                break;
+            case "Mar":
+                month = "03";
+                break;
+            case "Apr":
+                month = "04";
+                break;
+            case "May":
+                month = "05";
+                break;
+            case "Jun":
+                month = "06";
+                break;
+            case "Jul":
+                month = "07";
+                break;
+            case "Aug":
+                month = "08";
+                break;
+            case "Sep":
+                month = "09";
+                break;
+            case "Oct":
+                month = "10";
+                break;
+            case "Nov":
+                month = "11";
+                break;
+            case "Dec":
+                month = "12";
+                break;
             default:
                 throw new IllegalArgumentException("Invalid month: " + month);
         }
@@ -110,6 +147,8 @@ public class DateUtils {
 
         String date_temp = date.replace(",","");
         date_temp = date_temp.replace(" ","/");
+
+        Log.e("Date err",date_temp);
 
         StringTokenizer st = new StringTokenizer(date_temp,"/");
         String month = st.nextToken();
@@ -153,6 +192,42 @@ public class DateUtils {
                 month = "11";
                 break;
             case "Dicembre":
+                month = "12";
+                break;
+            case "Jan":
+                month = "01";
+                break;
+            case "Feb":
+                month = "02";
+                break;
+            case "Mar":
+                month = "03";
+                break;
+            case "Apr":
+                month = "04";
+                break;
+            case "May":
+                month = "05";
+                break;
+            case "Jun":
+                month = "06";
+                break;
+            case "Jul":
+                month = "07";
+                break;
+            case "Aug":
+                month = "08";
+                break;
+            case "Sep":
+                month = "09";
+                break;
+            case "Oct":
+                month = "10";
+                break;
+            case "Nov":
+                month = "11";
+                break;
+            case "Dec":
                 month = "12";
                 break;
             default:
