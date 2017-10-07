@@ -1,5 +1,6 @@
 package solutions.alterego.android.unisannio.giurisprudenza;
 
+import java.util.UUID;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.models.Article;
+import solutions.alterego.android.unisannio.utils.ExtensionKt;
 
 public class GiurisprudenzaParser implements IParser<Article> {
 
@@ -29,7 +31,7 @@ public class GiurisprudenzaParser implements IParser<Article> {
             DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-MM-yyyyHH:mm:SS");
             DateTime jodatime = dtf.parseDateTime(date.trim().replace("alle", "").replace(" ", "").substring(1));
 
-            articles.add(new Article(title, link, "", jodatime, ""));
+            articles.add(new Article(UUID.randomUUID().toString(), title, "", link, "", ExtensionKt.toIso8601(jodatime)));
         }
         return articles;
     }

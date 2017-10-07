@@ -2,6 +2,7 @@ package solutions.alterego.android.unisannio.ingegneria
 
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.content.ContextCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
@@ -55,7 +56,7 @@ class IngengeriaCercapersoneActivity : NavigationDrawerActivity() {
         setSupportActionBar(toolbar)
         val drawer: DrawerLayout = findViewById(R.id.navigation_drawer)
         val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close)
-        drawer.setDrawerListener(toggle)
+        drawer.addDrawerListener(toggle)
         toggle.syncState()
 
         val icp = IngegneriaCercapersonePresenter()
@@ -64,7 +65,7 @@ class IngengeriaCercapersoneActivity : NavigationDrawerActivity() {
         mAdapter = CercapersoneAdapter(ArrayList(), R.layout.ingegneria_cercapersone_list_person)
         cercapersone_ingegneria_recycle_view.adapter = mAdapter
 
-        cercapersone_ingegneria_swipe_container.setColorSchemeColors(resources.getColor(R.color.primaryColor))
+        cercapersone_ingegneria_swipe_container.setColorSchemeColors(ContextCompat.getColor(this, R.color.primaryColor))
         cercapersone_ingegneria_swipe_container.setProgressViewOffset(false, 0,
             TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24f, resources.displayMetrics).toInt())
 

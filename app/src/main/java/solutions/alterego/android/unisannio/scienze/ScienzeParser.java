@@ -1,25 +1,20 @@
 package solutions.alterego.android.unisannio.scienze;
 
-import android.util.Log;
-
-import net.danlew.android.joda.JodaTimeAndroid;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.StringTokenizer;
-
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.utils.DateUtils;
+import solutions.alterego.android.unisannio.utils.ExtensionKt;
 
 public class ScienzeParser implements IParser {
 
@@ -27,33 +22,32 @@ public class ScienzeParser implements IParser {
 
     public List<Article> parse(Document document) {
 
-       Elements elements = document.body().select("div.blog").select("div.item");
+        Elements elements = document.body().select("div.blog").select("div.item");
         List<Article> newsList = new ArrayList<>();
 
-            String date = null;
-            String title = null;
-            String body = null;
-            String url = null;
+        String date = null;
+        String title = null;
+        String body = null;
+        String url = null;
 
+        for (Element element : elements) {
 
-            for(Element element : elements) {
+            Element titleElement = element.select("h2 >  a[href]").first();
+            title = titleElement.text();
 
-                Element titleElement = element.select("h2 >  a[href]").first();
-                title = titleElement.text();
+            Element bodyElement = element.select("p").first();
+            body = bodyElement.text();
 
-                Element bodyElement = element.select("p").first();
-                body = bodyElement.text();
+            Element dateElement = element.select("dd.published").first();
+            date = DateUtils.convertMonthFromScienze(dateElement.text());
+            DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
+            DateTime jodatime = dtf.withLocale(Locale.ITALIAN).parseDateTime(date.replace(".", " ").toLowerCase());
 
-                Element dateElement = element.select("dd.published").first();
-                date = DateUtils.convertMonthFromScienze(dateElement.text());
-                DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
-                DateTime jodatime = dtf.withLocale(Locale.ITALIAN).parseDateTime(date.replace(".", " ").toLowerCase());
+            Elements linkElement = element.select("h2 > a");
+            url = URLS.SCIENZE.concat(linkElement.attr("href"));
 
-                Elements linkElement = element.select("h2 > a");
-                url = URLS.SCIENZE.concat(linkElement.attr("href"));
-
-                newsList.add(new Article(title,url,body,jodatime,AUTHOR));
-            }
+            newsList.add(new Article(UUID.randomUUID().toString(), title, AUTHOR, url, body, ExtensionKt.toIso8601(jodatime)));
+        }
         /*
         Elements newsItems = document.select("li.latestnewsfl_green");
 

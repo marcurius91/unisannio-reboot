@@ -99,6 +99,10 @@ android {
     }
 }
 
+androidExtensions {
+    experimental = true
+}
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
@@ -141,8 +145,6 @@ dependencies {
 
     // Utils
     implementation 'net.danlew:android.joda:2.8.2'
-    implementation "org.parceler:parceler-api:1.0.3"
-    kapt "org.parceler:parceler:1.0.3"
 
     // Testing
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"

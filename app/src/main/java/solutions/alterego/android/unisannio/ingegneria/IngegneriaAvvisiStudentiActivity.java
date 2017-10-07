@@ -23,7 +23,6 @@ import java.util.List;
 import javax.inject.Inject;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import org.chromium.customtabsclient.CustomTabsActivityHelper;
-import org.parceler.Parcels;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
@@ -98,7 +97,7 @@ public class IngegneriaAvvisiStudentiActivity extends NavigationDrawerActivity {
             @Override public void openArticleDetail(@NonNull Article article, @NonNull RecyclerView.ViewHolder holder) {
                 Intent intent = new Intent();
                 intent.setClass(IngegneriaAvvisiStudentiActivity.this, DetailActivity.class);
-                intent.putExtra("ARTICLE", Parcels.wrap(article));
+                intent.putExtra("ARTICLE", article);
 
             /*ActivityOptionsCompat options =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(this,

@@ -12,9 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import java.util.Locale;
+import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.parceler.Parcels;
+import org.joda.time.format.ISODateTimeFormat;
 import solutions.alterego.android.unisannio.models.Article;
 
 public class DetailActivity extends AppCompatActivity {
@@ -29,9 +30,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private Article mArticle;
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP) @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
@@ -49,24 +48,21 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        mArticle = Parcels.unwrap(getIntent().getParcelableExtra("ARTICLE"));
+        mArticle = getIntent().getParcelableExtra("ARTICLE");
 
         //TODO Sometimes this part of code going to NullPointerException on Android 4.3.1, isolate problem if possible
-        if(mArticle != null){
-            if((mArticle.getTitle() != null)){
+        if (mArticle != null) {
+            if ((mArticle.getTitle() != null)) {
                 mTitle.setText(mArticle.getTitle());
+            } else {
+                Log.e("Detail On Create", "Null Article Title");
             }
-            else
-            {
-                Log.e("Detail On Create","Null Article Title");
-            }
-        }
-        else {
+        } else {
             Log.e("Detail On Create", "Null Article parsed");
         }
 
         mDate = (TextView) findViewById(R.id.detail_date);
-        mDate.setText(localDateFormatter.print(mArticle.getDate()));
+        mDate.setText(localDateFormatter.print(DateTime.parse(mArticle.getDate(), ISODateTimeFormat.dateTime())));
 
         mAuthor = (TextView) findViewById(R.id.detail_author);
         mAuthor.setText(mArticle.getAuthor());
@@ -75,15 +71,12 @@ public class DetailActivity extends AppCompatActivity {
         mBody.setText(mArticle.getBody());
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_detail, menu);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
