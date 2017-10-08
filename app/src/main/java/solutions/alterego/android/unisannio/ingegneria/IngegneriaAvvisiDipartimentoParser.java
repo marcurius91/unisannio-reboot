@@ -1,7 +1,6 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
-import android.util.Log;
-
+import android.support.annotation.NonNull;
 import java.util.UUID;
 import org.joda.time.DateTime;
 
@@ -16,14 +15,14 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import solutions.alterego.android.unisannio.interfaces.IParser;
+import solutions.alterego.android.unisannio.interfaces.Parser;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.utils.DateUtils;
 
-public class IngegneriaAvvisiDipartimentoParser implements IParser {
+public class IngegneriaAvvisiDipartimentoParser implements Parser<Article> {
 
-    @Override
-    public List parse(Document document) {
+    @NonNull @Override
+    public List<Article> parse(@NonNull Document document) {
         List<Article> list = new ArrayList<>();
 
         Elements elements = document.select("item");
@@ -46,9 +45,8 @@ public class IngegneriaAvvisiDipartimentoParser implements IParser {
     }
 
     //Method that remove all the htlm tag from the body of the article.
-    public String clearHtml(String html){
+    private String clearHtml(String html){
         String tmp1 = Jsoup.clean(html,Whitelist.none());
-        String tmp2 = tmp1.replace("&nbsp;","").replace("&gt;","");
-        return tmp2;
+        return tmp1.replace("&nbsp;","").replace("&gt;","");
     }
 }

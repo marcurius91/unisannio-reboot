@@ -4,13 +4,13 @@ import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiParser
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaParser
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiDipartimentoParser
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiStudentiParser
-import solutions.alterego.android.unisannio.interfaces.Parser
 import solutions.alterego.android.unisannio.map.UniPoint
 import solutions.alterego.android.unisannio.map.UnisannioGeoData
 import solutions.alterego.android.unisannio.models.Article
 import solutions.alterego.android.unisannio.scienze.ScienzeDetailParser
 import solutions.alterego.android.unisannio.scienze.ScienzeParser
 import solutions.alterego.android.unisannio.sea.SeaParser
+import solutions.alterego.android.unisannio.interfaces.Parser
 
 sealed class Faculty(
     val nameResource: Int /* Ingegneria */,
