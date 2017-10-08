@@ -11,8 +11,6 @@ import rx.Observer;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiParser;
-import solutions.alterego.android.unisannio.ateneo.AteneoRetriever;
 import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.interfaces.IRetriever;
 import solutions.alterego.android.unisannio.models.Article;
@@ -39,7 +37,7 @@ public class SeaPresenter implements ISeaPresenter{
                     @Override
                     public void call(final Subscriber<? super ArrayList<Article>> subscriber) {
 
-                        mRetriever.retriveDocument()
+                        mRetriever.retrieveDocument()
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(new Observer<Document>() {
 

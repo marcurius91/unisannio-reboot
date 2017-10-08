@@ -5,23 +5,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Environment;
 import android.util.Log;
-
+import java.util.ArrayList;
+import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 import solutions.alterego.android.unisannio.models.Article;
 
 public class DbManager extends SQLiteOpenHelper implements IDbManager{
-
 
     public static final String DATABASE_NAME = "Unisannio_reboot";
     public static final String TABLE_ARTICLE = "Article";
@@ -33,14 +25,10 @@ public class DbManager extends SQLiteOpenHelper implements IDbManager{
     public static final String COLUMN_ARTICLE_AUTHOR = "Author";
     public static final String COLUMN_ARTICLE_DEPARTMENT = "Department";
     public static final int DATABASE_VERSION = 1;
-
-    //DB Path external directory
-    public static final String str_db_path = Environment.getExternalStorageDirectory().getAbsolutePath().concat("/solutions.alterego.android.unisannio/");
-
     String message_returned = null;
 
     public DbManager(Context context) {
-        super(context, str_db_path+DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override

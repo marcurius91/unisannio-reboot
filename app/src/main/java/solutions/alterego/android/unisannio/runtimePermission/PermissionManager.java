@@ -22,21 +22,11 @@ public class PermissionManager implements IPermissionManager {
     @Override public void managingPermission() {
 
         int locationPermission = ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        int positionPermission = ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION);
-        int positionPermission01 = ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION);
 
         List<String> listPermissionsNeeded = new ArrayList<>();
         if (locationPermission != PackageManager.PERMISSION_GRANTED) {
             //check for write external storage permission
             listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        }
-        if (positionPermission != PackageManager.PERMISSION_GRANTED) {
-            //check for write external storage permission
-            listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
-        }
-        if (positionPermission01 != PackageManager.PERMISSION_GRANTED) {
-            //check for write external storage permission
-            listPermissionsNeeded.add(Manifest.permission.ACCESS_COARSE_LOCATION);
         }
         if (!listPermissionsNeeded.isEmpty()) {
             //Request multiple permission with multiple dialog
