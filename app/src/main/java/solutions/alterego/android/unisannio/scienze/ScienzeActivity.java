@@ -18,9 +18,9 @@ import android.view.MenuItem;
 import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import javax.inject.Inject;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
-import org.parceler.Parcels;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
@@ -39,11 +39,9 @@ import timber.log.Timber;
 
 public class ScienzeActivity extends NavigationDrawerActivity {
 
-    @Inject
-    AnalyticsManager mAnalyticsManager;
+    @Inject AnalyticsManager mAnalyticsManager;
 
-    @Inject
-    ScienzeRetriever mRetriever;
+    @Inject ScienzeRetriever mRetriever;
 
     RecyclerView mRecyclerView;
     int mColorPrimary;
@@ -55,8 +53,7 @@ public class ScienzeActivity extends NavigationDrawerActivity {
 
     protected Intent mMap;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         App.component(this).inject(this);
@@ -76,11 +73,7 @@ public class ScienzeActivity extends NavigationDrawerActivity {
 
         mMap = new Intent(this, MapsActivity.class);
 
-        mCustomTabsIntent = new CustomTabsIntent.Builder()
-                .enableUrlBarHiding()
-                .setToolbarColor(mColorPrimary)
-                .setShowTitle(true)
-                .build();
+        mCustomTabsIntent = new CustomTabsIntent.Builder().enableUrlBarHiding().setToolbarColor(mColorPrimary).setShowTitle(true).build();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.scienze_recycle_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.scienze_swipe_container);
@@ -89,7 +82,7 @@ public class ScienzeActivity extends NavigationDrawerActivity {
 
         mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.primaryColor));
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
+            (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
 
         mSwipeRefreshLayout.setEnabled(false);
         mSwipeRefreshLayout.setRefreshing(true);
@@ -98,35 +91,30 @@ public class ScienzeActivity extends NavigationDrawerActivity {
         mRecyclerView.setVisibility(View.VISIBLE);
 
         mAdapter = new ArticleAdapter(new ArrayList<Article>(), new OpenArticleDetailListener() {
-            @Override
-            public void openArticleDetail(@NonNull final Article article, @NonNull RecyclerView.ViewHolder holder) {
+            @Override public void openArticleDetail(@NonNull final Article article, @NonNull RecyclerView.ViewHolder holder) {
 
                 String url1 = article.getUrl();
 
                 mPresenter = new ScienzeDetailPresenter(url1);
 
-                mPresenter.getBodyNews()
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Observer<ArrayList<String>>() {
-                            @Override
-                            public void onCompleted() {
+                mPresenter.getBodyNews().observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ArrayList<String>>() {
+                    @Override public void onCompleted() {
 
-                            }
+                    }
 
-                            @Override
-                            public void onError(Throwable e) {
-                                Log.e("Error presenter", e.toString());
-                            }
+                    @Override public void onError(Throwable e) {
+                        Log.e("Error presenter", e.toString());
+                    }
 
-                            @Override
-                            public void onNext(ArrayList<String> strings) {
-                                article.setBody(strings.get(0));
-                                Intent intent = new Intent();
-                                intent.setClass(getApplicationContext(),DetailActivity.class);
-                                intent.putExtra("ARTICLE", Parcels.wrap(article));
-                                startActivity(intent);
-                            }
-                        });
+                    @Override public void onNext(ArrayList<String> strings) {
+                        Intent intent = new Intent();
+                        intent.setClass(getApplicationContext(), DetailActivity.class);
+                        intent.putExtra("ARTICLE",
+                            article.copy(UUID.randomUUID().toString(), article.getTitle(), article.getAuthor(), article.getUrl(), strings.get(0),
+                                article.getDate()));
+                        startActivity(intent);
+                    }
+                });
             /*ActivityOptionsCompat options =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(this,
                             Pair.create(((ArticleAdapter.ViewHolder) holder).title, getString(R.string.transition_article_title)),
@@ -147,44 +135,37 @@ public class ScienzeActivity extends NavigationDrawerActivity {
         mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
 
-        mRetriever.get()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Article>>() {
-                    @Override
-                    public void onCompleted() {
+        mRetriever.get().observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<Article>>() {
+            @Override public void onCompleted() {
                         /* (cercapersone_ingegneria_recycle_view != null && cercapersone_ingegneria_swipe_container != null) {
                             cercapersone_ingegneria_recycle_view.setVisibility(View.VISIBLE);
                             cercapersone_ingegneria_swipe_container.setRefreshing(false);
                         }*/
-                    }
+            }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        Timber.e(e);
-                        if (mSwipeRefreshLayout != null) {
-                            mSwipeRefreshLayout.setRefreshing(false);
-                        }
-                    }
+            @Override public void onError(Throwable e) {
+                Timber.e(e);
+                if (mSwipeRefreshLayout != null) {
+                    mSwipeRefreshLayout.setRefreshing(false);
+                }
+            }
 
-                    @Override
-                    public void onNext(List<Article> list) {
-                        mAdapter.addNews(list);
-                        if (mRecyclerView != null && mSwipeRefreshLayout != null) {
-                            mRecyclerView.setVisibility(View.VISIBLE);
-                            mSwipeRefreshLayout.setRefreshing(false);
-                        }
-                    }
-                });
+            @Override public void onNext(List<Article> list) {
+                mAdapter.addNews(list);
+                if (mRecyclerView != null && mSwipeRefreshLayout != null) {
+                    mRecyclerView.setVisibility(View.VISIBLE);
+                    mSwipeRefreshLayout.setRefreshing(false);
+                }
+            }
+        });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_web_page:
@@ -200,13 +181,11 @@ public class ScienzeActivity extends NavigationDrawerActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected int getNavigationDrawerMenuIdForThisActivity() {
+    @Override protected int getNavigationDrawerMenuIdForThisActivity() {
         return R.id.avvisi_studenti_scienze_tecnologie;
     }
 
-    @Override
-    protected void onAppbarNavigationClick() {
+    @Override protected void onAppbarNavigationClick() {
         openNavigationDrawer();
     }
 }

@@ -1,7 +1,5 @@
 package solutions.alterego.android.unisannio.utils;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
@@ -16,13 +14,12 @@ public class DateUtils {
         Pattern p = Pattern.compile("(\\d{2}).+?(\\d{2}.+?(\\d{4}))");
         Matcher m = p.matcher(s);
 
-        while (m.find()){
+        while (m.find()) {
             date = m.group();
         }
 
         return date;
     }
-
 
     //method for extracting all the numbers from string
     public static ArrayList<Integer> extractingNumbers(String s) {
@@ -35,28 +32,27 @@ public class DateUtils {
             numbers.add(Integer.parseInt(m.group()));
         }
 
-        if(numbers.size() <= 0) {
+        if (numbers.size() <= 0) {
             numbers.add(-1);
         }
 
         return numbers;
-
     }
 
     //method for extracting the literal month and convert into numerical
-    public static String convertMonth(String date){
+    public static String convertMonth(String date) {
 
-        String date_temp = date.replace("Pubblicato:","");
-        date_temp = date_temp.replace(" ","/");
+        String date_temp = date.replace("Pubblicato:", "");
+        date_temp = date_temp.replace(" ", "/");
 
-        StringTokenizer st = new StringTokenizer(date_temp,"/");
+        StringTokenizer st = new StringTokenizer(date_temp, "/");
         String day = st.nextToken();
         String month = st.nextToken();
         String year = st.nextToken();
 
         String final_date = null;
 
-        switch (month){
+        switch (month) {
             case "Gennaio":
                 month = "01";
                 break;
@@ -102,23 +98,20 @@ public class DateUtils {
         return final_date;
     }
 
-
-
-
     //method for extracting the literal month and convert into numerical
-    public static String convertMonthFromScienze(String date){
+    public static String convertMonthFromScienze(String date) {
 
-        String date_temp = date.replace(",","");
-        date_temp = date_temp.replace(" ","/");
+        String date_temp = date.replace(",", "");
+        date_temp = date_temp.replace(" ", "/");
 
-        StringTokenizer st = new StringTokenizer(date_temp,"/");
+        StringTokenizer st = new StringTokenizer(date_temp, "/");
         String month = st.nextToken();
         String day = st.nextToken();
         String year = st.nextToken();
 
         String final_date = null;
 
-        switch (month){
+        switch (month) {
             case "Gennaio":
                 month = "01";
                 break;
@@ -163,6 +156,4 @@ public class DateUtils {
 
         return final_date;
     }
-
-
 }

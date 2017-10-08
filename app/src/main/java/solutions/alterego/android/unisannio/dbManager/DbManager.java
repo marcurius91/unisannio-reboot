@@ -1,18 +1,6 @@
 package solutions.alterego.android.unisannio.dbManager;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-import java.util.ArrayList;
-import java.util.List;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-import solutions.alterego.android.unisannio.models.Article;
-
+/*
 public class DbManager extends SQLiteOpenHelper implements IDbManager{
 
     public static final String DATABASE_NAME = "Unisannio_reboot";
@@ -69,13 +57,13 @@ public class DbManager extends SQLiteOpenHelper implements IDbManager{
         values.put(DbManager.COLUMN_ARTICLE_TITLE,article.getTitle());
         values.put(DbManager.COLUMN_ARTICLE_URL,article.getUrl());
         values.put(DbManager.COLUMN_ARTICLE_BODY,article.getBody());
-        DateTime dt = article.getDate();
+        DateTime dt = DateTime.parse(article.getDate());
         DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy/MM/dd");
         String dtStr = fmt.print(dt);
         Log.e("DATA INIZIALE",dtStr);
         values.put(DbManager.COLUMN_ARTICLE_DATE, dtStr);
         values.put(DbManager.COLUMN_ARTICLE_AUTHOR, article.getAuthor());
-        values.put(DbManager.COLUMN_ARTICLE_DEPARTMENT, article.getDepartment());
+        //values.put(DbManager.COLUMN_ARTICLE_DEPARTMENT, article.getDepartment());
 
         database.insert(TABLE_ARTICLE, null, values);
 
@@ -97,13 +85,13 @@ public class DbManager extends SQLiteOpenHelper implements IDbManager{
             values.put(DbManager.COLUMN_ARTICLE_TITLE,article.getTitle());
             values.put(DbManager.COLUMN_ARTICLE_URL,article.getUrl());
             values.put(DbManager.COLUMN_ARTICLE_BODY,article.getBody());
-            DateTime dt = article.getDate();
+            DateTime dt = DateTime.parse(article.getDate());
             DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy/MM/dd");
             String dtStr = fmt.print(dt);
             Log.e("DATA INIZIALE",dtStr);
             values.put(DbManager.COLUMN_ARTICLE_DATE, String.valueOf(dtStr));
             values.put(DbManager.COLUMN_ARTICLE_AUTHOR, article.getAuthor());
-            values.put(DbManager.COLUMN_ARTICLE_DEPARTMENT, article.getDepartment());
+            //values.put(DbManager.COLUMN_ARTICLE_DEPARTMENT, article.getDepartment());
             database.insert(TABLE_ARTICLE, null, values);
         }
 
@@ -262,3 +250,4 @@ public class DbManager extends SQLiteOpenHelper implements IDbManager{
 
 
 }
+*/

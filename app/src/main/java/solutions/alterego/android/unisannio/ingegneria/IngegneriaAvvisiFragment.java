@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
-import org.parceler.Parcels;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
@@ -80,7 +79,7 @@ public class IngegneriaAvvisiFragment extends Fragment {
             @Override public void openArticleDetail(@NonNull Article article, @NonNull RecyclerView.ViewHolder holder) {
                 Intent intent = new Intent();
                 intent.setClass(IngegneriaAvvisiFragment.this.getActivity(), DetailActivity.class);
-                intent.putExtra("ARTICLE", Parcels.wrap(article));
+                intent.putExtra("ARTICLE", article);
 
             /*ActivityOptionsCompat options =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),

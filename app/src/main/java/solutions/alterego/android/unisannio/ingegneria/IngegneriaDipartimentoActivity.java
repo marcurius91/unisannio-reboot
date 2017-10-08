@@ -23,7 +23,6 @@ import java.util.List;
 import javax.inject.Inject;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import org.chromium.customtabsclient.CustomTabsActivityHelper;
-import org.parceler.Parcels;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
@@ -42,9 +41,7 @@ import timber.log.Timber;
 
 public class IngegneriaDipartimentoActivity extends NavigationDrawerActivity {
 
-
-    @Inject
-    AnalyticsManager mAnalyticsManager;
+    @Inject AnalyticsManager mAnalyticsManager;
 
     @Inject IngegneriaAvvisiDipartimentoRetriever mRetriever;
 
@@ -56,8 +53,7 @@ public class IngegneriaDipartimentoActivity extends NavigationDrawerActivity {
 
     protected Intent mMap;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.component(this).inject(this);
 
@@ -72,11 +68,7 @@ public class IngegneriaDipartimentoActivity extends NavigationDrawerActivity {
         toggle.syncState();
 
         mMap = new Intent(this, MapsActivity.class);
-        mCustomTabsIntent = new CustomTabsIntent.Builder()
-                .enableUrlBarHiding()
-                .setToolbarColor(mColorPrimary)
-                .setShowTitle(true)
-                .build();
+        mCustomTabsIntent = new CustomTabsIntent.Builder().enableUrlBarHiding().setToolbarColor(mColorPrimary).setShowTitle(true).build();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.ingegneria_dipartimento_recycle_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.ingegneria_dipartimento_swipe_container);
@@ -85,7 +77,7 @@ public class IngegneriaDipartimentoActivity extends NavigationDrawerActivity {
 
         mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.primaryColor));
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
+            (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
 
         mSwipeRefreshLayout.setEnabled(false);
         mSwipeRefreshLayout.setRefreshing(true);
@@ -97,7 +89,7 @@ public class IngegneriaDipartimentoActivity extends NavigationDrawerActivity {
             @Override public void openArticleDetail(@NonNull Article article, @NonNull RecyclerView.ViewHolder holder) {
                 Intent intent = new Intent();
                 intent.setClass(IngegneriaDipartimentoActivity.this, DetailActivity.class);
-                intent.putExtra("ARTICLE", Parcels.wrap(article));
+                intent.putExtra("ARTICLE", article);
 
             /*ActivityOptionsCompat options =
                     ActivityOptionsCompat.makeSceneTransitionAnimation(this,
@@ -119,40 +111,33 @@ public class IngegneriaDipartimentoActivity extends NavigationDrawerActivity {
         mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
 
-        mRetriever.get()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Article>>() {
-                    @Override
-                    public void onCompleted() {
-                        if (mRecyclerView != null && mSwipeRefreshLayout != null) {
-                            mRecyclerView.setVisibility(View.VISIBLE);
-                            mSwipeRefreshLayout.setRefreshing(false);
-                        }
-                    }
+        mRetriever.get().observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<Article>>() {
+            @Override public void onCompleted() {
+                if (mRecyclerView != null && mSwipeRefreshLayout != null) {
+                    mRecyclerView.setVisibility(View.VISIBLE);
+                    mSwipeRefreshLayout.setRefreshing(false);
+                }
+            }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        Timber.e(e);
-                        if (mSwipeRefreshLayout != null) {
-                            mSwipeRefreshLayout.setRefreshing(false);
-                        }
-                    }
+            @Override public void onError(Throwable e) {
+                Timber.e(e);
+                if (mSwipeRefreshLayout != null) {
+                    mSwipeRefreshLayout.setRefreshing(false);
+                }
+            }
 
-                    @Override
-                    public void onNext(List<Article> list) {
-                        mAdapter.addNews(list);
-                    }
-                });
+            @Override public void onNext(List<Article> list) {
+                mAdapter.addNews(list);
+            }
+        });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu (Menu menu){
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected (MenuItem item){
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_web_page:
@@ -168,28 +153,23 @@ public class IngegneriaDipartimentoActivity extends NavigationDrawerActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected int getNavigationDrawerMenuIdForThisActivity() {
+    @Override protected int getNavigationDrawerMenuIdForThisActivity() {
         return R.id.drawer_ingegneria_avvisi_dipartimento;
     }
 
-    @Override
-    protected void onAppbarNavigationClick () {
+    @Override protected void onAppbarNavigationClick() {
         openNavigationDrawer();
     }
 
-    private final CustomTabsActivityHelper.CustomTabsFallback mCustomTabsFallback =
-            new CustomTabsActivityHelper.CustomTabsFallback() {
-                @Override
-                public void openUri(Activity activity, Uri uri) {
-                    Toast.makeText(activity, R.string.custom_tab_error, Toast.LENGTH_SHORT).show();
-                    try {
-                        activity.startActivity(new Intent(Intent.ACTION_VIEW, uri));
-                    } catch (ActivityNotFoundException e) {
-                        e.printStackTrace();
-                        Toast.makeText(activity, R.string.custom_tab_error_activity, Toast.LENGTH_SHORT)
-                                .show();
-                    }
-                }
-            };
+    private final CustomTabsActivityHelper.CustomTabsFallback mCustomTabsFallback = new CustomTabsActivityHelper.CustomTabsFallback() {
+        @Override public void openUri(Activity activity, Uri uri) {
+            Toast.makeText(activity, R.string.custom_tab_error, Toast.LENGTH_SHORT).show();
+            try {
+                activity.startActivity(new Intent(Intent.ACTION_VIEW, uri));
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(activity, R.string.custom_tab_error_activity, Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 }
