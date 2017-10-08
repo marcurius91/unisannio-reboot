@@ -12,16 +12,17 @@ import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaCercapersoneDetailActivity;
 import timber.log.Timber;
 
-public class CercapersoneAdapter extends RecyclerView.Adapter<CercapersoneAdapter.ViewHolder>{
+public class CercapersoneAdapter extends RecyclerView.Adapter<CercapersoneAdapter.ViewHolder> {
 
     private List<Person> mPersons;
     private int mRowLayout;
     private View v;
 
-    public CercapersoneAdapter(List<Person> persons, int rowLayout){
+    public CercapersoneAdapter(List<Person> persons, int rowLayout) {
         mPersons = persons;
         mRowLayout = rowLayout;
     }
+
     public void addPersons(List<Person> persons) {
         mPersons.clear();
         mPersons.addAll(persons);
@@ -54,8 +55,7 @@ public class CercapersoneAdapter extends RecyclerView.Adapter<CercapersoneAdapte
         return mPersons == null ? 0 : mPersons.size();
     }
 
-
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView name;
         ArrayList<Person> pers;
@@ -68,12 +68,11 @@ public class CercapersoneAdapter extends RecyclerView.Adapter<CercapersoneAdapte
             itemView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View v) {
+        @Override public void onClick(View v) {
             Timber.e("The Item Clicked position: " + pers.get(getPosition()).getPerson().getNome());
             Person prs = pers.get(getPosition()).getPerson();
-            Intent intent = new Intent(v.getContext(),IngegneriaCercapersoneDetailActivity.class);
-            intent.putExtra("PERSON",prs);
+            Intent intent = new Intent(v.getContext(), IngegneriaCercapersoneDetailActivity.class);
+            intent.putExtra("PERSON", prs);
             v.getContext().startActivity(intent);
         }
     }

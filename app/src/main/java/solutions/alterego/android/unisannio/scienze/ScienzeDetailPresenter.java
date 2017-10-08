@@ -33,7 +33,7 @@ public class ScienzeDetailPresenter {
                     @Override
                     public void call(final Subscriber<? super ArrayList<String>> subscriber) {
 
-                        mRetriver.retriveDocument()
+                        mRetriver.retrieveDocument()
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(new Observer<Document>() {
 

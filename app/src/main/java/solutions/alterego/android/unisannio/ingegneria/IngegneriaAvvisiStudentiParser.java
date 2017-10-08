@@ -1,21 +1,18 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
-import android.util.Log;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+import java.util.UUID;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
-
 import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.models.Article;
-import solutions.alterego.android.unisannio.utils.DateUtils;
+import solutions.alterego.android.unisannio.utils.ExtensionKt;
 
 public class IngegneriaAvvisiStudentiParser implements IParser {
 
@@ -97,7 +94,7 @@ public class IngegneriaAvvisiStudentiParser implements IParser {
 
             else author = EMPTY_AUTHOR_PLACEHOLDER;
 
-            list.add(new Article(title, url, body, jodatime, author));
+            list.add(new Article(UUID.randomUUID().toString(), title, author, url, body, ExtensionKt.toIso8601(jodatime)));
         }
 
         return list;

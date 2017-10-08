@@ -11,8 +11,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener;
 import solutions.alterego.android.unisannio.utils.VHHeader;
@@ -112,7 +114,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         void setItem(Article news) {
             mArticle = news;
-            String prettyDate = localDateFormatter.print(news.getDate());
+            String prettyDate = localDateFormatter.print(DateTime.parse(news.getDate(), ISODateTimeFormat.dateTime()));
             date.setText(prettyDate);
             title.setText(news.getTitle());
 

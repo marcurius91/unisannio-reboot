@@ -24,7 +24,7 @@ public class ScienzeDetailRetriver implements IRetriever<Document>{
     }
 
     @Override
-    public Observable<Document> retriveDocument() {
+    public Observable<Document> retrieveDocument() {
         return Observable
                 .create(new Observable.OnSubscribe<Document>() {
                     @Override

@@ -11,16 +11,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.MapsActivity;
 import solutions.alterego.android.unisannio.NavigationDrawerActivity;
@@ -33,6 +34,7 @@ import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
 import solutions.alterego.android.unisannio.runtimePermission.PermissionManager;
+import timber.log.Timber;
 
 public class AteneoActivity extends NavigationDrawerActivity {
 
@@ -59,9 +61,6 @@ public class AteneoActivity extends NavigationDrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.component(this).inject(this);
-
-        mPermissionManager = new PermissionManager(this);
-        mPermissionManager.managingPermission();
 
         setContentView(R.layout.activity_new_ateneo);
 
@@ -122,22 +121,23 @@ public class AteneoActivity extends NavigationDrawerActivity {
         //cercapersone_ingegneria_recycle_view.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
         mPresenter.getArticles()
+            .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ArrayList<Article>>() {
+                .subscribe(new Observer<List<Article>>() {
                     @Override
                     public void onCompleted() {
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-                        Log.e("ATENEO ACTIVITY:", e.toString());
+                    public void onNext(List<Article> articles) {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        mAdapter.addNews(articles);
                     }
 
                     @Override
-                    public void onNext(ArrayList<Article> articles) {
-                        mAdapter.addNews(articles);
-                        mSwipeRefreshLayout.setRefreshing(false);
+                    public void onError(Throwable e) {
+                        Timber.e(e);
                     }
                 });
     }

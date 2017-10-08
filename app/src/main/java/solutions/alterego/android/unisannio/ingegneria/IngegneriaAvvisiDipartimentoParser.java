@@ -2,6 +2,7 @@ package solutions.alterego.android.unisannio.ingegneria;
 
 import android.util.Log;
 
+import java.util.UUID;
 import org.joda.time.DateTime;
 
 import org.joda.time.format.DateTimeFormat;
@@ -38,7 +39,7 @@ public class IngegneriaAvvisiDipartimentoParser implements IParser {
              DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
              DateTime jodatime = dtf.parseDateTime(DateUtils.convertMonth(date.substring(5)));
 
-             list.add(new Article(title, link, body, jodatime, author));
+             list.add(new Article(UUID.randomUUID().toString(), title, author, link, body, jodatime.toString()));
          }
 
         return list;

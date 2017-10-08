@@ -1,7 +1,5 @@
 package solutions.alterego.android.unisannio.utils;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
@@ -148,9 +146,7 @@ public class DateUtils {
         String date_temp = date.replace(",","");
         date_temp = date_temp.replace(" ","/");
 
-        Log.e("Date err",date_temp);
-
-        StringTokenizer st = new StringTokenizer(date_temp,"/");
+        StringTokenizer st = new StringTokenizer(date_temp, "/");
         String month = st.nextToken();
         String day = st.nextToken();
         String year = st.nextToken();

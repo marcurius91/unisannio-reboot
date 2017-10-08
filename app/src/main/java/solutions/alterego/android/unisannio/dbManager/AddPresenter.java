@@ -1,12 +1,6 @@
 package solutions.alterego.android.unisannio.dbManager;
 
-import android.content.Context;
-import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.List;
-import solutions.alterego.android.unisannio.models.Article;
-
+/*
 public class AddPresenter implements IAddPresenter {
     private DbManager mDbManager;
     String department;
@@ -47,9 +41,10 @@ public class AddPresenter implements IAddPresenter {
     public List<Article> setUpDepartment(List<Article> articles) {
 
         for(int i = 0; i<articles.size(); i++) {
-            articles.get(i).setDepartment(department);
+            //articles.get(i).setDepartment(department);
         }
 
         return articles;
     }
 }
+*/
