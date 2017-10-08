@@ -29,7 +29,7 @@ public class GiurisprudenzaPresenter implements IGiurisprudenzaPresenter {
 
     @Override
     public void getArticles() {
-        mRetriver.retriveDocument()
+        mRetriver.retrieveDocument()
             .map(document -> mParser.parse(document))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -71,7 +71,7 @@ public class GiurisprudenzaPresenter implements IGiurisprudenzaPresenter {
                     @Override
                     public void call(final Subscriber<? super ArrayList<Article>> subscriber) {
 
-                        mRetriever.retriveDocument()
+                        mRetriever.retrieveDocument()
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(new Observer<Document>() {
 

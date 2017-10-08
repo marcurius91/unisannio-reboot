@@ -37,18 +37,21 @@ public class CercapersoneAdapter extends RecyclerView.Adapter<CercapersoneAdapte
         notifyItemInserted(position);
     }
 
-    @Override public ViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
+    @Override
+    public ViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
         v = LayoutInflater.from(viewGroup.getContext()).inflate(mRowLayout, viewGroup, false);
-        ViewHolder vh = new ViewHolder(v, mPersons);
-        return new ViewHolder(v, mPersons);
+        ViewHolder vh = new ViewHolder(v,mPersons);
+        return new ViewHolder(v,mPersons);
     }
 
-    @Override public void onBindViewHolder(final ViewHolder viewHolder, int i) {
+    @Override
+    public void onBindViewHolder(final ViewHolder viewHolder, int i) {
         final Person person = mPersons.get(i);
         viewHolder.name.setText(person.getNome());
     }
 
-    @Override public int getItemCount() {
+    @Override
+    public int getItemCount() {
         return mPersons == null ? 0 : mPersons.size();
     }
 

@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import org.chromium.customtabsclient.CustomTabsActivityHelper;
@@ -138,7 +139,7 @@ public class AteneoAvvisiFragment extends Fragment {
     private void refreshList() {
         mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
-        mPresenter.getArticles().observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ArrayList<Article>>() {
+        mPresenter.getArticles().observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<Article>>() {
             @Override public void onCompleted() {
                 mSwipeRefreshLayout.setRefreshing(false);
             }
@@ -147,7 +148,7 @@ public class AteneoAvvisiFragment extends Fragment {
 
             }
 
-            @Override public void onNext(ArrayList<Article> articles) {
+            @Override public void onNext(List<Article> articles) {
                 mAdapter.addNews(articles);
             }
         });

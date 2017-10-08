@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import rx.Observer;
@@ -115,7 +116,7 @@ public class AteneoStudentiActivity extends NavigationDrawerActivity {
         mSwipeRefreshLayout.setRefreshing(true);
         mPresenter.getArticles()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ArrayList<Article>>() {
+                .subscribe(new Observer<List<Article>>() {
                     @Override
                     public void onCompleted() {
                         mSwipeRefreshLayout.setRefreshing(false);
@@ -127,7 +128,7 @@ public class AteneoStudentiActivity extends NavigationDrawerActivity {
                     }
 
                     @Override
-                    public void onNext(ArrayList<Article> articles) {
+                    public void onNext(List<Article> articles) {
                         mAdapter.addNews(articles);
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
