@@ -8,7 +8,7 @@ import rx.Observer;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import solutions.alterego.android.unisannio.interfaces.IParser;
+import solutions.alterego.android.unisannio.interfaces.Parser;
 import solutions.alterego.android.unisannio.interfaces.IRetriever;
 import solutions.alterego.android.unisannio.models.Article;
 
@@ -51,7 +51,7 @@ public class GiurisprudenzaPresenter implements IGiurisprudenzaPresenter {
             });
     }*/
 
-    private IParser<Article> mParser;
+    private Parser<Article> mParser;
 
     private IRetriever<Document> mRetriever;
 

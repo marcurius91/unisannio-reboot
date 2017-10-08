@@ -9,11 +9,11 @@ import org.joda.time.format.DateTimeFormatter;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import solutions.alterego.android.unisannio.interfaces.IParser;
+import solutions.alterego.android.unisannio.interfaces.Parser;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.utils.ExtensionKt;
 
-public class AteneoAvvisiParser implements IParser<Article> {
+public class AteneoAvvisiParser implements Parser<Article> {
 
     @NonNull public List<Article> parse(@NonNull Document doc) {
 

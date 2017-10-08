@@ -1,7 +1,5 @@
 package solutions.alterego.android.unisannio.scienze;
 
-import android.util.Log;
-
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -9,9 +7,9 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import solutions.alterego.android.unisannio.interfaces.IParser;
+import solutions.alterego.android.unisannio.interfaces.Parser;
 
-public class ScienzeDetailParser implements IParser<String>{
+public class ScienzeDetailParser implements Parser<String> {
     ArrayList<String> bodyelements = new ArrayList<>();
 
     @Override

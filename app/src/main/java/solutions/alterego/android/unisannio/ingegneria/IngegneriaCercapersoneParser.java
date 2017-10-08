@@ -1,21 +1,17 @@
 package solutions.alterego.android.unisannio.ingegneria;
 
-import android.util.Log;
-
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
-import rx.Observable;
 import solutions.alterego.android.unisannio.cercapersone.Person;
-import solutions.alterego.android.unisannio.interfaces.IParser;
+import solutions.alterego.android.unisannio.interfaces.Parser;
 
-public class IngegneriaCercapersoneParser implements IParser<Person> {
+public class IngegneriaCercapersoneParser implements Parser<Person> {
 
     @Inject
     public IngegneriaCercapersoneParser() {

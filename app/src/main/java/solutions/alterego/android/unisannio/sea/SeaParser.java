@@ -1,5 +1,6 @@
 package solutions.alterego.android.unisannio.sea;
 
+import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -8,14 +9,14 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import solutions.alterego.android.unisannio.URLS;
-import solutions.alterego.android.unisannio.interfaces.IParser;
+import solutions.alterego.android.unisannio.interfaces.Parser;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.utils.ExtensionKt;
 import timber.log.Timber;
 
-public class SeaParser implements IParser {
+public class SeaParser implements Parser<Article> {
 
-    public List<Article> parse(Document document) {
+    @NonNull public List<Article> parse(@NonNull Document document) {
         List<Article> articles = new ArrayList<>();
         Elements elements = document.select("div.moduletable");
         Elements titles = elements.select("h4.jazin-title");
