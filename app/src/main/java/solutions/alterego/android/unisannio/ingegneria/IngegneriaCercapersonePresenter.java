@@ -48,7 +48,7 @@ public class IngegneriaCercapersonePresenter implements ICercapersonePresenter {
                     @Override
                     public void call(final Subscriber<? super ArrayList<Person>> subscriber) {
 
-                        mRetriever.retriveDocument()
+                        mRetriever.retrieveDocument()
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(new Observer<Document>() {
 

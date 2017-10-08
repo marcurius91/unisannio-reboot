@@ -112,7 +112,7 @@ public class SeaAvvisiFragment extends Fragment {
         mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
 
-        mRetriever.get()
+        /*mRetriever.get()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new Observer<List<Article>>() {
                 @Override
@@ -135,7 +135,7 @@ public class SeaAvvisiFragment extends Fragment {
                     mAdapter.addNews(ateneoNewses);
                     mRecyclerView.setVisibility(View.VISIBLE);
                 }
-            });
+            });*/
     }
 
     @Override

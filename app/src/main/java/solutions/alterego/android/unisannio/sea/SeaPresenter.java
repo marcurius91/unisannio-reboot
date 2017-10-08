@@ -1,5 +1,4 @@
-package solutions.alterego.android.unisannio.ateneo;
-
+package solutions.alterego.android.unisannio.sea;
 
 import android.util.Log;
 
@@ -10,14 +9,13 @@ import java.util.ArrayList;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.interfaces.IParser;
 import solutions.alterego.android.unisannio.interfaces.IRetriever;
 import solutions.alterego.android.unisannio.models.Article;
 
-public class AteneoPresenter implements IAvvisiPresenter {
+public class SeaPresenter implements ISeaPresenter{
 
     private IParser<Article> mParser;
 
@@ -26,23 +24,20 @@ public class AteneoPresenter implements IAvvisiPresenter {
 
     ArrayList<Article> global_article_list = new ArrayList<>();
 
-    public AteneoPresenter(String url){
-        mParser = new AteneoAvvisiParser();
-        mRetriever = new AteneoRetriever(url);
+    public SeaPresenter(String url){
+        mParser = new SeaParser();
+        mRetriever = new SeaRetriever(url);
     }
 
     @Override
     public Observable<ArrayList<Article>> getArticles() {
-
-
-
         return Observable.
                 create(new Observable.OnSubscribe<ArrayList<Article>>(){
 
                     @Override
                     public void call(final Subscriber<? super ArrayList<Article>> subscriber) {
 
-                        mRetriever.retriveDocument()
+                        mRetriever.retrieveDocument()
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(new Observer<Document>() {
 
@@ -53,7 +48,7 @@ public class AteneoPresenter implements IAvvisiPresenter {
 
                                     @Override
                                     public void onError(Throwable e) {
-                                        Log.e("ATENEO PRES onError()", e.toString());
+                                        Log.e("SEA PRES onError()", e.toString());
 
                                     }
 
