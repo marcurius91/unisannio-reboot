@@ -18,11 +18,13 @@ public class URLS {
 
     public static final String INGEGNERIA = "https://www.ding.unisannio.it/";
 
-    public static final String INGEGNERIA_NEWS_STUDENTI = "https://www.ding.unisannio.it/en/avvisi-com/avvisi-didattica#";
+    public static final String INGEGNERIA_NEWS_STUDENTI = "https://www.ding.unisannio.it/avvisi-com/avvisi-didattica";
 
     public static final String INGEGNERIA_NEWS_STUDENTI_FEED_RSS = "http://www.ding.unisannio.it/html/rss/rss.php";
 
     public static final String INGEGNERIA_NEWS_DIPARTIMENTO = "https://www.ding.unisannio.it/avvisi-com/avvisi";
+
+    public static final String INGEGNERIA_NEWS_DIPARTIMENTO_FEED_RSS = "https://www.ding.unisannio.it/avvisi-com/avvisi?format=feed&type=rss";
 
     public static final String GIURISPRUDENZA = "http://www.giurisprudenza.unisannio.it";
 
