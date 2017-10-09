@@ -22,7 +22,7 @@ public class IngegneriaAvvisiDipartimentoRetriever implements IngegneriaRetrieve
                     public void call(Subscriber<? super List<Article>> subscriber) {
                         Document doc = null;
                         try {
-                            doc = Jsoup.connect(URLS.INGEGNERIA_NEWS_DIPARTIMENTO_FEED_RSS).timeout(10 * 1000).get();
+                            doc = getDocument();
                         } catch (IOException e) {
                             subscriber.onError(e);
                         }
@@ -34,5 +34,9 @@ public class IngegneriaAvvisiDipartimentoRetriever implements IngegneriaRetrieve
                     }
                 })
                 .subscribeOn(Schedulers.io());
+    }
+
+    public Document getDocument() throws IOException {
+        return Jsoup.connect(URLS.INGEGNERIA_NEWS_DIPARTIMENTO_FEED_RSS).timeout(10 * 1000).get();
     }
 }
