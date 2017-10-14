@@ -8,15 +8,17 @@ import org.jsoup.nodes.Document
 import org.junit.Test
 import rx.observers.TestSubscriber
 import solutions.alterego.android.MockitoRxTest
+import solutions.alterego.android.unisannio.Dst
+import solutions.alterego.android.unisannio.repository.DocumentRetriever
 
-class RetrieverDstTest : MockitoRxTest() {
+class DocumentRetrieverTest : MockitoRxTest() {
 
     @Test
     fun `retrieve DST RSS`() {
-        val retriever = RetrieverDst()
+        val retriever = DocumentRetriever()
 
         val subscriber = TestSubscriber<Document>()
-        retriever.retrieve(FacultyDst.sections[0].url).subscribe(subscriber)
+        retriever.retrieve(Dst.sections[0].url).subscribe(subscriber)
 
         subscriber.assertNoErrors()
         subscriber.assertCompleted()
