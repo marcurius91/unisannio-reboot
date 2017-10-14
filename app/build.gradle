@@ -35,7 +35,7 @@ apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "solutions.alterego.android.unisannio"
@@ -99,6 +99,13 @@ android {
     }
 }
 
+configurations.all {
+    resolutionStrategy {
+        force 'com.android.support:customtabs:26.1.0'
+        cacheDynamicVersionsFor 10 * 60, 'seconds'
+    }
+}
+
 androidExtensions {
     experimental = true
 }
@@ -114,8 +121,8 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$support_libs"
     implementation "com.android.support:design:$support_libs"
     implementation "com.android.support:multidex:1.0.2"
-    implementation "com.google.android.gms:play-services-maps:11.4.0"
-    implementation "com.google.android.gms:play-services-analytics:11.4.0"
+    implementation "com.google.android.gms:play-services-maps:$play_services"
+    implementation "com.google.android.gms:play-services-analytics:$play_services"
 
     // Dagger
     implementation 'com.google.dagger:dagger:2.11'
