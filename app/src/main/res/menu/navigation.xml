@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item
+      android:id="@+id/navigation_ateneo"
+      android:icon="@drawable/ic_ateneo"
+      android:title="@string/ateneo"/>
+
+  <item
+      android:id="@+id/navigation_ingegneria"
+      android:icon="@drawable/ic_ingegneria"
+      android:title="@string/ingegneria"/>
+
+  <item
+      android:id="@+id/navigation_scienze"
+      android:icon="@drawable/ic_scienze"
+      android:title="@string/scienze"/>
+
+  <item
+      android:id="@+id/navigation_sea"
+      android:icon="@drawable/ic_sea"
+      android:title="@string/sea"/>
+
+  <item
+      android:id="@+id/navigation_giurisprudenza"
+      android:icon="@drawable/ic_giurisprudenza"
+      android:title="@string/giurisprudenza"/>
+</menu>

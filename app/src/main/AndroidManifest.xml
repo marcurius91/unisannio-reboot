@@ -2,106 +2,110 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="solutions.alterego.android.unisannio">
 
-    <supports-screens
-        android:largeScreens="true"
-        android:normalScreens="true"
-        android:resizeable="true"
-        android:smallScreens="true"
-        android:xlargeScreens="true" />
+  <supports-screens
+      android:largeScreens="true"
+      android:normalScreens="true"
+      android:resizeable="true"
+      android:smallScreens="true"
+      android:xlargeScreens="true"/>
 
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.CALL_PHONE"/>
+  <uses-permission android:name="android.permission.INTERNET"/>
 
-    <!-- Google Maps -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+  <!-- Google Maps -->
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+  <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
 
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true" />
+  <uses-feature
+      android:glEsVersion="0x00020000"
+      android:required="true"/>
 
-    <application
-        android:name=".App"
-        android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+  <application
+      android:name=".App"
+      android:allowBackup="true"
+      android:icon="@drawable/ic_launcher"
+      android:label="@string/app_name"
+      android:theme="@style/AppTheme">
+    <activity
+        android:name=".MainActivity"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
+        android:screenOrientation="portrait">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
+      <!-- <intent-filter> -->
+      <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
+      <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+      <!-- </intent-filter> -->
+    </activity>
 
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyC6VLqkZUVLQPbP8J8XfH0PRz8vzEjOmxU" />
-        <meta-data
-            android:name="com.crashlytics.ApiKey"
-            android:value="8501bc0640d6af5e895dfc1c5d65a99fbd2c0286" />
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version"/>
+    <meta-data
+        android:name="com.google.android.maps.v2.API_KEY"
+        android:value="AIzaSyC6VLqkZUVLQPbP8J8XfH0PRz8vzEjOmxU"/>
+    <meta-data
+        android:name="com.crashlytics.ApiKey"
+        android:value="8501bc0640d6af5e895dfc1c5d65a99fbd2c0286"/>
 
-        <activity
-          android:name=".ateneo.AteneoActivity"
-          android:label="@string/app_name">
-          <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-          </intent-filter>
-        </activity>
-        <activity
-            android:name=".DetailActivity"
-            android:label="@string/title_activity_detail"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
-        <activity
-            android:name=".ingegneria.IngengeriaCercapersoneActivity"
-            android:label="@string/title_activity_cercapersone" />
-        <activity
-            android:name=".ingegneria.IngegneriaCercapersoneDetailActivity"
-            android:label="@string/activity_cercapersone_detail_title" />
-        <activity
-            android:name=".scienze.ScienzeActivity"
-            android:label="@string/title_activity_scienze"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".giurisprudenza.GiurisprudenzaActivity"
-            android:label="@string/title_activity_giurisprudenza"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".sea.SeaActivity"
-            android:label="@string/title_activity_sea"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".giurisprudenza.GiurisprudenzaComunicazioniActivity"
-            android:label="@string/title_activity_giurisprudenza_comunicazioni"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".ingegneria.IngegneriaDipartimentoActivity"
-            android:label="@string/title_activity_ingegneria_dipartimento"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".ingegneria.IngegneriaAvvisiStudentiActivity"
-            android:label="@string/title_activity_ingegneria_avvisi_studenti"
-            android:theme="@style/AppTheme" />
+    <activity
+        android:name=".ateneo.AteneoActivity"
+        android:label="@string/app_name">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
 
-        <activity
-            android:name=".ateneo.AteneoStudentiActivity"
-            android:label="@string/title_activity_ateneo_studenti"
-            android:theme="@style/AppTheme"></activity>
-    </application>
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
+    <activity
+        android:name=".DetailActivity"
+        android:label="@string/title_activity_detail"
+        android:screenOrientation="portrait"/>
+    <activity
+        android:name=".MapsActivity"
+        android:label="@string/title_activity_maps"/>
+    <activity
+        android:name=".ingegneria.IngengeriaCercapersoneActivity"
+        android:label="@string/title_activity_cercapersone"/>
+    <activity
+        android:name=".ingegneria.IngegneriaCercapersoneDetailActivity"
+        android:label="@string/activity_cercapersone_detail_title"/>
+    <activity
+        android:name=".scienze.ScienzeActivity"
+        android:label="@string/title_activity_scienze"
+        android:theme="@style/AppTheme"/>
+    <activity
+        android:name=".giurisprudenza.GiurisprudenzaActivity"
+        android:label="@string/title_activity_giurisprudenza"
+        android:theme="@style/AppTheme"/>
+    <activity
+        android:name=".sea.SeaActivity"
+        android:label="@string/title_activity_sea"
+        android:theme="@style/AppTheme"/>
+    <activity
+        android:name=".giurisprudenza.GiurisprudenzaComunicazioniActivity"
+        android:label="@string/title_activity_giurisprudenza_comunicazioni"
+        android:theme="@style/AppTheme"/>
+    <activity
+        android:name=".ingegneria.IngegneriaDipartimentoActivity"
+        android:label="@string/title_activity_ingegneria_dipartimento"
+        android:theme="@style/AppTheme"/>
+    <activity
+        android:name=".ingegneria.IngegneriaAvvisiStudentiActivity"
+        android:label="@string/title_activity_ingegneria_avvisi_studenti"
+        android:theme="@style/AppTheme"/>
+    <activity
+        android:name=".ateneo.AteneoStudentiActivity"
+        android:label="@string/title_activity_ateneo_studenti"
+        android:theme="@style/AppTheme"/>
+    <activity
+        android:name=".dst.UnisannioReboot"
+        android:label="@string/app_name">
+    </activity>
+  </application>
 
 </manifest>
