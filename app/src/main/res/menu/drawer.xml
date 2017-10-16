@@ -1,112 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+  <group android:checkableBehavior="single">
 
-        <item
-            android:id="@+id/drawer_section_ateneo"
-            android:enabled="false"
-            android:icon="@drawable/ic_ateneo"
-            android:title="@string/ateneo"/>
+    <item
+        android:id="@+id/drawer_section_ateneo"
+        android:enabled="false"
+        android:icon="@drawable/ic_ateneo"
+        android:title="@string/ateneo"/>
 
-        <item
-            android:id="@+id/drawer_ateneo_avvisi"
-            android:checked="false"
-            android:title="@string/ateneo_avvisi" />
+    <item
+        android:id="@+id/drawer_ateneo_avvisi"
+        android:checked="false"
+        android:title="@string/ateneo_avvisi"/>
 
-        <item
-            android:id="@+id/drawer_ateneo_avvisi_studenti"
-            android:checked="false"
-            android:title="@string/avvisi_studenti" />
+    <item
+        android:id="@+id/drawer_ateneo_avvisi_studenti"
+        android:checked="false"
+        android:title="@string/avvisi_studenti"/>
 
-    </group>
+  </group>
 
-    <group android:checkableBehavior="single">
+  <group android:checkableBehavior="single">
 
-        <item
-            android:id="@+id/drawer_section_ingegneria"
-            android:enabled="false"
-            android:icon="@drawable/ic_ingegneria"
-            android:title="@string/ingegneria" />
-        <item
-            android:id="@+id/drawer_ingegneria_avvisi_dipartimento"
-            android:checked="false"
-            android:title="@string/ateneo_avvisi" />
+    <item
+        android:id="@+id/drawer_section_ingegneria"
+        android:enabled="false"
+        android:icon="@drawable/ic_ingegneria"
+        android:title="@string/ingegneria"/>
+    <item
+        android:id="@+id/drawer_ingegneria_avvisi_dipartimento"
+        android:checked="false"
+        android:title="@string/ateneo_avvisi"/>
 
-        <item
-            android:id="@+id/drawer_ingegneria_avvisi_studenti"
-            android:checked="false"
-            android:title="@string/avvisi_studenti" />
+    <item
+        android:id="@+id/drawer_ingegneria_avvisi_studenti"
+        android:checked="false"
+        android:title="@string/avvisi_studenti"/>
 
-        <item
-            android:id="@+id/cercapersone_ingegneria"
-            android:checked="false"
-            android:title="@string/cercapersone" />
+    <item
+        android:id="@+id/cercapersone_ingegneria"
+        android:checked="false"
+        android:title="@string/cercapersone"/>
 
-    </group>
+  </group>
 
-    <group android:checkableBehavior="single">
+  <group android:checkableBehavior="single">
 
-        <item
-            android:id="@+id/SCIENZE_TECNOLOGIE"
-            android:enabled="false"
-            android:icon="@drawable/ic_scienze"
-            android:title="@string/scienze" />
-        <item
-            android:id="@+id/avvisi_studenti_scienze_tecnologie"
-            android:checked="false"
-            android:title="@string/avvisi_studenti" />
+    <item
+        android:id="@+id/SCIENZE_TECNOLOGIE"
+        android:enabled="false"
+        android:icon="@drawable/ic_scienze"
+        android:title="@string/scienze"/>
+    <item
+        android:id="@+id/avvisi_studenti_scienze_tecnologie"
+        android:checked="false"
+        android:title="@string/avvisi_studenti"/>
 
-    </group>
+  </group>
 
-    <group android:checkableBehavior="single">
+  <group android:checkableBehavior="single">
 
     <item
         android:id="@+id/GIURISPRUDENZA"
         android:enabled="false"
         android:icon="@drawable/ic_giurisprudenza"
-        android:title="@string/giurisprudenza" />
+        android:title="@string/giurisprudenza"/>
     <item
         android:id="@+id/avvisi_studenti_giurisprudenza"
         android:checked="false"
-        android:title="@string/avvisi_studenti" />
+        android:title="@string/avvisi_studenti"/>
 
     <item
         android:id="@+id/comunicazioni"
         android:checked="false"
-        android:title="@string/comunicazioni" />
+        android:title="@string/comunicazioni"/>
 
-</group>
+  </group>
 
-    <group android:checkableBehavior="single">
+  <group android:checkableBehavior="single">
 
     <item
         android:id="@+id/SEA"
         android:enabled="false"
         android:icon="@drawable/ic_sea"
-        android:title="@string/sea" />
+        android:title="@string/sea"/>
     <item
         android:id="@+id/avvisi_studenti_sea"
         android:checked="false"
-        android:title="@string/avvisi_studenti" />
+        android:title="@string/avvisi_studenti"/>
 
-    </group>
+  </group>
 
-    <group android:checkableBehavior="single">
+  <group android:checkableBehavior="single">
 
     <item
         android:id="@+id/about"
         android:enabled="false"
         android:icon="@drawable/ic_action_android"
-        android:title="@string/about" />
+        android:title="@string/about"/>
     <item
         android:id="@+id/alteregosolution"
         android:checked="false"
-        android:title="@string/alter_ego" />
+        android:title="@string/alter_ego"/>
     <item
-            android:id="@+id/github"
-            android:checked="false"
-            android:title="@string/github" />
-    </group>
+        android:id="@+id/github"
+        android:checked="false"
+        android:title="@string/github"/>
+
+    <item
+        android:id="@+id/debug"
+        android:checked="false"
+        android:title="Debug"/>
+  </group>
 
 </menu>

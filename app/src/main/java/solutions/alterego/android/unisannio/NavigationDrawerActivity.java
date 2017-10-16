@@ -3,6 +3,7 @@ package solutions.alterego.android.unisannio;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.NativeActivity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +28,7 @@ import org.chromium.customtabsclient.CustomTabsActivityHelper;
 import javax.inject.Inject;
 
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
+import solutions.alterego.android.unisannio.dst.UnisannioReboot;
 import solutions.alterego.android.unisannio.utils.DeveloperError;
 
 public abstract class NavigationDrawerActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -219,6 +221,9 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
                     break;
                 case R.id.github:
                     CustomTabsHelperFragment.open((Activity)drawerView.getContext(), mCustomTabsIntent, Uri.parse(URLS.GITHUB), mCustomTabsFallback);
+                    break;
+                case R.id.debug:
+                    startActivity(new Intent(NavigationDrawerActivity.this, UnisannioReboot.class));
                     break;
                 default:
                     throw new DeveloperError("Menu item " + item + " not supported");
