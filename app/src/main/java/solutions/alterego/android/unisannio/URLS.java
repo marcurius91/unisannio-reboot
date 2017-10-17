@@ -12,9 +12,15 @@ public class URLS {
 
     public static final String ATENEO_DETAIL_STUDENTI_BASE_URL = "http://www.unisannio.it/it/amministrazione/avviso/";
 
+    public static final String ATENEO_PROSSIMI_EVENTI = " www.unisannio.it/it/events.xml";
+
+    public static final String ATENEO_NEWS_COMUNICATI_STAMPA = "www.unisannio.it/it/news/rss.xml";
+
     public static final String SCIENZE_NEWS = "http://www.dstunisannio.it/index.php/didattica";
 
     public static final String SCIENZE = "http://www.dstunisannio.it";
+
+    public static final String SCIENZE_NEWS_RSS = "http://www.dstunisannio.it/index.php/didattica?format=feed&type=rss";
 
     public static final String INGEGNERIA = "https://www.ding.unisannio.it/";
 
@@ -31,8 +37,12 @@ public class URLS {
     public static final String GIURISPRUDENZA_AVVISI
             = "http://www.giurisprudenza.unisannio.it/index.php?option=com_avvisi&controller=elenco&view=elenco&catid=2&Itemid=267";
 
+    public static final String GIURISPRUDENZA_AVVISI_RSS = "http://www.giurisprudenza.unisannio.it/index.php?option=com_rss&catid=2";
+
     public static final String GIURISPRUDENZA_COMUNICAZIONI
             = "http://www.giurisprudenza.unisannio.it/index.php?option=com_avvisi&controller=elenco&view=elenco&catid=1&Itemid=431";
+
+    public static final String GIURISPRUDENZA_COMUNICAZIONI_RSS = "http://www.giurisprudenza.unisannio.it/index.php?option=com_rss&catid=1";
 
     public static final String SEA_NEWS = "http://www.didatticademm.it/index.php?option=com_content&view=section&id=5&Itemid=65";
 
