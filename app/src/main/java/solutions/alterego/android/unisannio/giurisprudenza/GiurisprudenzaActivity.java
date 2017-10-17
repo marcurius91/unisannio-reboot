@@ -41,7 +41,7 @@ public class GiurisprudenzaActivity extends NavigationDrawerActivity {
 
     private ArticleAdapter mAdapter;
 
-    private GiurisprudenzaPresenter mPresenter;
+    private GiurisprudenzaAvvisiPresenter mPresenter;
 
     private CustomTabsIntent mCustomTabsIntent;
 
@@ -71,7 +71,7 @@ public class GiurisprudenzaActivity extends NavigationDrawerActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.giurisprudenza_recycle_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.giurisprudenza_swipe_container);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        mPresenter = new GiurisprudenzaPresenter(URLS.GIURISPRUDENZA_AVVISI);
+        mPresenter = new GiurisprudenzaAvvisiPresenter();
 
         mRecyclerView.setLayoutManager(layoutManager);
 
@@ -94,7 +94,7 @@ public class GiurisprudenzaActivity extends NavigationDrawerActivity {
 
         mAdapter = new ArticleAdapter(new ArrayList<Article>(), new OpenArticleDetailListener() {
             @Override public void openArticleDetail(@NonNull Article article, @NonNull RecyclerView.ViewHolder holder) {
-                String url1 = URLS.GIURISPRUDENZA + article.getUrl();
+                String url1 = URLS.GIURISPRUDENZA /*+ article.getUrl()*/;
                 CustomTabsHelperFragment.open(GiurisprudenzaActivity.this, mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
             }
         }, R.drawable.calandra);
@@ -107,7 +107,7 @@ public class GiurisprudenzaActivity extends NavigationDrawerActivity {
     }
 
     private void refreshList() {
-        //cercapersone_ingegneria_recycle_view.setVisibility(View.GONE);
+        //mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
         mPresenter.getArticles()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -119,7 +119,7 @@ public class GiurisprudenzaActivity extends NavigationDrawerActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("GIUR ACTIVITY:",e.toString());
+                        Log.e("GIURISP ACTIVITY:", e.toString());
                     }
 
                     @Override

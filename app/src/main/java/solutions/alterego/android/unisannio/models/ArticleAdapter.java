@@ -114,7 +114,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         void setItem(Article news) {
             mArticle = news;
-            String prettyDate = localDateFormatter.print(DateTime.parse(news.getDate(), ISODateTimeFormat.dateTime()));
+            String prettyDate = null;
+            if(news.getDate() != null){
+              prettyDate   = localDateFormatter.print(DateTime.parse(news.getDate(), ISODateTimeFormat.dateTime()));
+            }
             date.setText(prettyDate);
             title.setText(news.getTitle());
 
