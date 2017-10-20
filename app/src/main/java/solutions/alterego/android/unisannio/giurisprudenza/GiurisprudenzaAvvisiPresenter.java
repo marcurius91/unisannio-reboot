@@ -14,13 +14,13 @@ import solutions.alterego.android.unisannio.models.Article;
 
 public class GiurisprudenzaAvvisiPresenter {
 
-    private GiurisprudenzaAvvisiParser mParser;
+    private GiurisprudenzaParser mParser;
     private GiurisprudenzaAvvisiRetriever mRetriever;
     ArrayList<Article> list = new ArrayList<>();
 
 
     public GiurisprudenzaAvvisiPresenter() {
-        this.mParser = new GiurisprudenzaAvvisiParser();
+        this.mParser = new GiurisprudenzaParser();
         this.mRetriever = new GiurisprudenzaAvvisiRetriever();
     }
 

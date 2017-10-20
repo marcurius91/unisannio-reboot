@@ -13,12 +13,12 @@ import solutions.alterego.android.unisannio.models.Article;
 
 public class GiurisprudenzaComunicazioniPresenter {
 
-    private GiurisprudenzaComunicazioniParser mParser;
+    private GiurisprudenzaParser mParser;
     private GiurisprudenzaComunicazioniRetriever mRetriever;
     ArrayList<Article> list = new ArrayList<>();
 
     public GiurisprudenzaComunicazioniPresenter() {
-        this.mParser = new GiurisprudenzaComunicazioniParser();
+        this.mParser = new GiurisprudenzaParser();
         this.mRetriever = new GiurisprudenzaComunicazioniRetriever();
     }
 
@@ -46,7 +46,7 @@ public class GiurisprudenzaComunicazioniPresenter {
 
                                     @Override
                                     public void onNext(Document document) {
-                                        list = (ArrayList<Article>) mParser.parse(document);
+                                        list = mParser.parse(document);
                                         subscriber.onNext(list);
                                     }
 
