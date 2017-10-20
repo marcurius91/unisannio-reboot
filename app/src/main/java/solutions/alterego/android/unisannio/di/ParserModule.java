@@ -12,7 +12,7 @@ public class ParserModule {
 
     @Provides
     @Singleton
-            AteneoAvvisiParser provideAteneoParser(){
+    AteneoAvvisiParser provideAteneoParser(){
             return new AteneoAvvisiParser();
     }
 

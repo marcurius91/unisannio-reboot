@@ -4,8 +4,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiParser;
 import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiPresenter;
+import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiParser;
 import solutions.alterego.android.unisannio.ateneo.AteneoRetriever;
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaCercapersoneParser;
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaCercapersonePresenter;
