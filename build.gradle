@@ -3,6 +3,8 @@ buildscript {
     ext.support_libs = '26.1.0'
     ext.play_services = '11.4.2'
 
+    ext.timberVersion = "4.6.0"
+
     repositories {
         jcenter()
         google()

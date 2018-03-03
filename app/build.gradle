@@ -113,7 +113,7 @@ androidExtensions {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    compile 'com.jakewharton.timber:timber:4.5.1'
+    compile "com.jakewharton.timber:timber:$timberVersion"
 
     implementation "com.android.support:support-v4:$support_libs"
     implementation "com.android.support:appcompat-v7:$support_libs"
