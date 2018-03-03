@@ -1,14 +1,18 @@
 buildscript {
-    ext.kotlin_version = '1.1.51'
+    ext.kotlin_version = '1.2.30'
     ext.support_libs = '26.1.0'
-    ext.play_services = '11.4.2'
+    ext.play_services = '11.8.0'
+
+    ext.timberVersion = "4.6.0"
+    ext.jsoupVersion = "1.11.2"
+    ext.daggerVersion = "2.11"
 
     repositories {
         jcenter()
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-rc1'
+        classpath 'com.android.tools.build:gradle:3.0.1'
     }
 }
 

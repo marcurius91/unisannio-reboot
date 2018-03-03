@@ -2,10 +2,12 @@ package solutions.alterego.android.unisannio.giurisprudenza
 
 import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import solutions.alterego.android.assertThat
 import kotlin.test.assertTrue
 
+@Ignore
 class GiurisprudenzaParserTest {
 
     val url = "http://www.giurisprudenza.unisannio.it/index.php?option=com_avvisi&controller=elenco&view=elenco&catid=2&Itemid=267";
@@ -30,6 +32,7 @@ class GiurisprudenzaParserTest {
     }
 
     @Test
+    @Ignore
     fun testArticleListConsistency() {
         val list = parser.parse(document);
         assertThat(list.size > 0)
