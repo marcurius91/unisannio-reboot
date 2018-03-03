@@ -9,7 +9,8 @@ import solutions.alterego.android.unisannio.scienze.ScienzeDetailParser
 import solutions.alterego.android.unisannio.interfaces.Parser as OldParser
 
 class Faculty(
-    val nameResource: Int /* Ingegneria */,
+    val hearderImage: Int,
+    val name: String /* Ingegneria */,
     val website: String /* https://www.ding.unisannio.it/ */,
     val mapMarkers: List<UniPoint>,
     val sections: List<Section>,
@@ -23,7 +24,8 @@ data class Section(
 )
 
 val Dst = Faculty(
-    nameResource = R.string.scienze,
+    hearderImage = 0,
+    name = "Scienze e Tecnologia",
     website = "http://www.dstunisannio.it/",
     mapMarkers = UnisannioGeoData.SCIENZE(),
     sections = listOf(
@@ -37,7 +39,8 @@ val Dst = Faculty(
 )
 
 val Giurisprudenza = Faculty(
-    string.giurisprudenza,
+    0,
+    "Giurisprudenza",
     URLS.GIURISPRUDENZA,
     UnisannioGeoData.GIURISPRUDENZA(),
     listOf(
