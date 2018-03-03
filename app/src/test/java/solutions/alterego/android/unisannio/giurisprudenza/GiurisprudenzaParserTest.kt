@@ -2,6 +2,7 @@ package solutions.alterego.android.unisannio.giurisprudenza
 
 import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import solutions.alterego.android.assertThat
 import kotlin.test.assertTrue
@@ -30,6 +31,7 @@ class GiurisprudenzaParserTest {
     }
 
     @Test
+    @Ignore
     fun testArticleListConsistency() {
         val list = parser.parse(document);
         assertThat(list.size > 0)
