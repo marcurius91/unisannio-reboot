@@ -4,18 +4,16 @@ import solutions.alterego.android.unisannio.ateneo.AteneoAvvisiParser
 import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaParser
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiDipartimentoParser
 import solutions.alterego.android.unisannio.ingegneria.IngegneriaAvvisiStudentiParser
+import solutions.alterego.android.unisannio.interfaces.Parser
 import solutions.alterego.android.unisannio.map.UniPoint
 import solutions.alterego.android.unisannio.map.UnisannioGeoData
 import solutions.alterego.android.unisannio.models.Article
-import solutions.alterego.android.unisannio.scienze.ScienzeDetailParser
-import solutions.alterego.android.unisannio.scienze.ScienzeParser
 import solutions.alterego.android.unisannio.sea.SeaParser
-import solutions.alterego.android.unisannio.interfaces.Parser
 
-sealed class Faculty(
+class Faculty(
     val nameResource: Int /* Ingegneria */,
-    val mainUrl: String /* https://www.ding.unisannio.it/ */,
-    val mapPoints: List<UniPoint>,
+    val website: String /* https://www.ding.unisannio.it/ */,
+    val mapMarkers: List<UniPoint>,
     val sections: List<Section>,
     val detailParser: Parser<String>? = null
 )
@@ -26,7 +24,7 @@ data class Section(
     val parser: Parser<Article> /* IngegneriaAvvisiStudentiParser */
 )
 
-class AteneoFaculty : Faculty(
+val AteneoFaculty = Faculty(
     R.string.ateneo,
     URLS.ATENEO,
     UnisannioGeoData.ATENEO(),
@@ -44,7 +42,7 @@ class AteneoFaculty : Faculty(
     )
 )
 
-class IngegneriaFaculty : Faculty(
+val IngegneriaFaculty = Faculty(
     R.string.ingegneria,
     URLS.INGEGNERIA,
     UnisannioGeoData.INGEGNERIA(),
@@ -62,21 +60,7 @@ class IngegneriaFaculty : Faculty(
     )
 )
 
-class ScienzeFaculty : Faculty(
-    R.string.scienze,
-    URLS.SCIENZE,
-    UnisannioGeoData.SCIENZE(),
-    listOf(
-        Section(
-            R.string.title_activity_scienze,
-            URLS.SCIENZE_NEWS,
-            ScienzeParser()
-        )
-    ),
-    ScienzeDetailParser()
-)
-
-class GiurisprudenzaFaculty : Faculty(
+val GiurisprudenzaFaculty = Faculty(
     R.string.giurisprudenza,
     URLS.GIURISPRUDENZA,
     UnisannioGeoData.GIURISPRUDENZA(),
@@ -94,7 +78,7 @@ class GiurisprudenzaFaculty : Faculty(
     )
 )
 
-class SeaFaculty : Faculty(
+val SeaFaculty = Faculty(
     R.string.sea,
     URLS.SEA,
     UnisannioGeoData.SEA(),
