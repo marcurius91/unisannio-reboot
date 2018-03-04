@@ -1,1 +1,1 @@
-include ':app', ':ingegneria', ':scienze', ':giurisprudenza', ':core'
+include ':app', ':ingegneria', ':scienze', ':giurisprudenza', ':core', ':ateneo'
