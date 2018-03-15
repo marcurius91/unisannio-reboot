@@ -38,7 +38,7 @@ import solutions.alterego.android.unisannio.runtimePermission.PermissionManager;
 import timber.log.Timber;
 
 public class AteneoActivity extends NavigationDrawerActivity {
-
+//prova commit francesco
     @Inject
     AnalyticsManager mAnalyticsManager;
 
