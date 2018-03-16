@@ -42,6 +42,10 @@
             android:id="@+id/cercapersone_ingegneria"
             android:checked="false"
             android:title="@string/cercapersone" />
+        <item
+            android:id="@+id/drawer"
+            android:checked="false"
+            android:title="@string/occupazione_aule" />
 
     </group>
 

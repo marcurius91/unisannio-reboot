@@ -20,6 +20,7 @@
             android:checked="false"
             android:title="@string/avvisi_studenti" />
 
+
     </group>
 
     <group android:checkableBehavior="single">

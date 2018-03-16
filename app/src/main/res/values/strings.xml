@@ -7,6 +7,8 @@
     <string name="action_settings">Settings</string>
     <string name="ateneo"><b><i>Ateneo</i></b></string>
     <string name="ateneo_avvisi">Avvisi Ateneo</string>
+    <!---->
+    <string name="occupazione_aule">Occupazione Aule</string>
     <string name="ingegneria"><b><i>Ingegneria</i></b></string>
     <string name="scienze"><b><i>Scienze e Tecnologie</i></b></string>
     <string name="giurisprudenza"><b><i>Giurisprudenza</i></b></string>

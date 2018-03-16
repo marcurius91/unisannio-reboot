@@ -34,6 +34,6 @@
             android:layout_gravity="start"
             app:headerLayout="@layout/header"
             app:menu="@menu/drawer"
-            app:itemIconTint="@color/unisannio_yellow"/>
+            app:itemIconTint="@color/unisannio_blue"/>
 
 </android.support.v4.widget.DrawerLayout>
