@@ -149,7 +149,7 @@ public class NavigationViewManager extends FragmentActivity {
                         return true;
 
                     //About
-                    case R.id.alteregosolution:
+                    /*case R.id.alteregosolution:
                         //mAnalyticsManager.track(new Screen(context.getString(R.string.about), context.getString(R.string.sito_web)));
                         CustomTabsHelperFragment.open(((FragmentActivity) context),mCustomTabsIntent, Uri.parse(URLS.ALTEREGO), mCustomTabsFallback);
                         return true;
@@ -157,7 +157,7 @@ public class NavigationViewManager extends FragmentActivity {
                         //mAnalyticsManager.track(new Screen(context.getString(R.string.about), context.getString(R.string.github)));
                         CustomTabsHelperFragment.open(((FragmentActivity) context),mCustomTabsIntent, Uri.parse(URLS.GITHUB), mCustomTabsFallback);
                         return true;
-
+                   */
                     default:
                         Toast.makeText(context.getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
                         return true;

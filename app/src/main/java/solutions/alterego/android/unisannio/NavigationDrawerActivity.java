@@ -186,13 +186,14 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
                 case R.id.avvisi_studenti_sea:
                     navigate().toSeaStudenti();
                     break;
-                case R.id.alteregosolution:
+                /*case R.id.alteregosolution:
                     CustomTabsHelperFragment.open((Activity) drawerView.getContext(), mCustomTabsIntent, Uri.parse(URLS.ALTEREGO),
                         mCustomTabsFallback);
                     break;
                 case R.id.github:
                     CustomTabsHelperFragment.open((Activity) drawerView.getContext(), mCustomTabsIntent, Uri.parse(URLS.GITHUB), mCustomTabsFallback);
                     break;
+                 */
                 default:
                     throw new DeveloperError("Menu item " + item + " not supported");
             }

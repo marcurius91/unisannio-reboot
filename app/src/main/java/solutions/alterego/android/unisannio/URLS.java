@@ -37,10 +37,10 @@ public class URLS {
     public static final String SEA_NEWS = "http://www.didatticademm.it/index.php?option=com_content&view=section&id=5&Itemid=65";
 
     public static final String SEA = "http://www.didatticademm.it";
-
+/*
     public static final String ALTEREGO = "http://alterego.solutions";
 
     public static final String GITHUB = "https://github.com/alter-ego/unisannio-reboot";
-
+*/
     public static final String RSS_FEED_INGEGNERIA = "http://www.ding.unisannio.it/html/rss/rssIVAN.php?key=kjsdh2cijnhGVIUBiGd598oyagdo";
 }
