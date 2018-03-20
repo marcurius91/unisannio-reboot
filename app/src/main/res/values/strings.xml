@@ -10,11 +10,11 @@
      <string name="ateneo_avvisi">Avvisi Ateneo</string>
 
      <!--elementi spinner sezione unisannio-->
-    <string-array name="staticivili">
-        <item>Divorziato/a</item>
-        <item>Separato/a</item>
-        <item>Coniugato/a</item>
-        <item>Celibe/Nubile</item>
+    <string-array name="ateneo">
+        <item> </item>
+        <item></item>
+        <item></item>
+        <item></item>
     </string-array>
 
     <!--fine elementi-->

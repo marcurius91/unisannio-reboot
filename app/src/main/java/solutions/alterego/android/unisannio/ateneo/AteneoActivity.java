@@ -16,6 +16,12 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -35,6 +41,7 @@ import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
 import solutions.alterego.android.unisannio.runtimePermission.PermissionManager;
+import solutions.alterego.android.unisannio.utils.ListaElementi;
 import timber.log.Timber;
 
 public class AteneoActivity extends NavigationDrawerActivity {
@@ -58,12 +65,14 @@ public class AteneoActivity extends NavigationDrawerActivity {
 
     PermissionManager mPermissionManager;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.component(this).inject(this);
 
-        setContentView(R.layout.activity_new_ateneo);
+    setContentView(R.layout.activity_new_ateneo);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.ateneo_ptr);
