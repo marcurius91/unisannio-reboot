@@ -16,20 +16,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import java.util.ArrayList;
-import java.util.List;
-import javax.inject.Inject;
-import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
+
 import org.chromium.customtabsclient.CustomTabsActivityHelper;
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
+
+import java.util.ArrayList;
+
+import javax.inject.Inject;
+
+import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import solutions.alterego.android.unisannio.App;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
-import timber.log.Timber;
 
 public class SeaAvvisiFragment extends Fragment {
 
@@ -71,9 +71,9 @@ public class SeaAvvisiFragment extends Fragment {
         //replaced refreshlist(url) with refreshlist()
 
         mSwipeRefreshLayout.setColorSchemeResources(
-            R.color.unisannio_yellow,
-            R.color.unisannio_yellow_dark,
-            R.color.unisannio_yellow_light,
+            R.color.primaryColor,
+            R.color.primaryDarkColor,
+            R.color.primatyLightColor,
             R.color.unisannio_blue);
 
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,

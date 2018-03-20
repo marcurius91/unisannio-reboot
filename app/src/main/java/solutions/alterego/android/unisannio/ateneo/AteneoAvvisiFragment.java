@@ -17,11 +17,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import org.chromium.customtabsclient.CustomTabsActivityHelper;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.inject.Inject;
+
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
-import org.chromium.customtabsclient.CustomTabsActivityHelper;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
@@ -69,7 +73,7 @@ public class AteneoAvvisiFragment extends Fragment {
 
         int drawable = R.drawable.guerrazzi;
 
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.unisannio_yellow, R.color.unisannio_yellow_dark, R.color.unisannio_yellow_light,
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.primaryColor, R.color.primaryDarkColor, R.color.primatyLightColor,
             R.color.unisannio_blue);
 
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,

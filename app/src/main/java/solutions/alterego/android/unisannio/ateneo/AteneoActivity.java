@@ -16,15 +16,12 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.inject.Inject;
+
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -41,8 +38,9 @@ import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
 import solutions.alterego.android.unisannio.runtimePermission.PermissionManager;
-import solutions.alterego.android.unisannio.utils.ListaElementi;
 import timber.log.Timber;
+
+//import solutions.alterego.android.unisannio.utils.ListaElementi;  //Mi dava errore dicendo che non esiste
 
 public class AteneoActivity extends NavigationDrawerActivity {
 //prova commit francesco

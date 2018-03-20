@@ -12,8 +12,10 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
@@ -50,7 +52,7 @@ public class IngegneriaAvvisiFragment extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.ingegneria_recycler_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.ingengeria_ptr);
 
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.unisannio_yellow, R.color.unisannio_yellow_dark, R.color.unisannio_yellow_light,
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.primaryColor, R.color.primaryDarkColor, R.color.primatyLightColor,
             R.color.unisannio_blue);
 
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,
