@@ -2,13 +2,13 @@ package solutions.alterego.android.unisannio;
 
 public class URLS {
 
-    public static final String ATENEO = "http://www.unisannio.it";  // Funziona a cazzo perchè il sito è stato cambiato
+    public static final String ATENEO = "http://www.unisannio.it";  // Link usato quando si preme il tasto in alto a dx
 
-    public static final String ATENEO_NEWS = "http://www.unisannio.it/it/amministrazione/albo-online/albo"; //non funzionante forse va messo http://www.unisannio.it/it/amministrazione/albo-online/avvisi
+    public static final String ATENEO_NEWS = "http://www.unisannio.it/it/amministrazione/albo-online/albo?page=0";
 
-    public static final String ATENEO_STUDENTI_NEWS = "http://www.unisannio.it/it/bacheca/generale";   //non funziona perchè non ci sono avvisi studenti ateneo
+    public static final String ATENEO_STUDENTI_NEWS = "http://www.unisannio.it/it/bacheca/generale";
 
-    public static final String ATENEO_DETAIL_BASE_URL = "http://www.unisannio.it/it/amministrazione/avviso/";
+    public static final String ATENEO_DETAIL_BASE_URL = "http://www.unisannio.it/it/amministrazione/avviso/";   //Usato, con l'aggiunteadell' ID, quando si clicca su un avviso di ateneo
 
     public static final String ATENEO_DETAIL_STUDENTI_BASE_URL = "http://www.unisannio.it/it/amministrazione/avviso/";
 

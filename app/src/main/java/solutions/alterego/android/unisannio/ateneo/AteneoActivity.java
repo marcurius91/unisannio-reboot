@@ -71,9 +71,10 @@ public class AteneoActivity extends NavigationDrawerActivity {
         App.component(this).inject(this);
 
     setContentView(R.layout.activity_new_ateneo);
-
+        //Queste due inizializzazioni probabilmente non servono perchè vengono sovrascritte sotto senza essere usate prima
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.ateneo_ptr);
+
         mColorPrimary = getResources().getColor(R.color.primaryColor);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
@@ -113,7 +114,7 @@ public class AteneoActivity extends NavigationDrawerActivity {
 
         mAdapter = new ArticleAdapter(new ArrayList<Article>(), new OpenArticleDetailListener() {
             @Override public void openArticleDetail(@NonNull Article article, @NonNull RecyclerView.ViewHolder holder) {
-                String url1 = /*URLS.ATENEO_DETAIL_STUDENTI_BASE_URL + article.getUrl():*/ URLS.ATENEO_DETAIL_BASE_URL + article.getUrl();
+                String url1 = URLS.ATENEO_DETAIL_BASE_URL + article.getId();
                 CustomTabsHelperFragment.open(AteneoActivity.this, mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
             }
         },R.drawable.guerrazzi);
@@ -126,7 +127,6 @@ public class AteneoActivity extends NavigationDrawerActivity {
     }
 
     private void refreshList() {
-        //cercapersone_ingegneria_recycle_view.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
         mPresenter.getArticles()
             .subscribeOn(Schedulers.io())
