@@ -124,6 +124,9 @@ public class AteneoActivity extends NavigationDrawerActivity {
         mRecyclerView.setAdapter(mAdapter);
 
 
+
+
+
     }
 
     private void refreshList() {

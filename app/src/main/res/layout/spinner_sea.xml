@@ -2,9 +2,11 @@
 
 
 <Spinner xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/spinner"
-    android:layout_width="match_parent"
+    android:id="@+id/spinnerSea"
+    android:layout_width="140dp"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
-    android:gravity="center_vertical" />
+    android:gravity="center_vertical"
+    android:entries="@array/economia"
+    />
 

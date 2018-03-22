@@ -9,17 +9,18 @@
     <!-- ateneo-->
      <item
          android:id="@+id/navigation_drawer_ateneo"
-         app:actionLayout="@layout/spinner"
+         app:actionLayout="@layout/spinner_ateneo"
          android:icon="@drawable/ic_ateneo"
          android:enabled="false"
          android:title="@string/ateneo"
+         android:entries="@array/ateneo"
 
   />
 
     <!-- ingengeria-->
      <item
          android:id="@+id/navigation_drawer_ingegneria"
-         app:actionLayout="@layout/spinner"
+         app:actionLayout="@layout/spinner_ingegneria"
          android:icon="@drawable/ic_ingegneria"
          android:enabled="false"
          android:title="@string/ingegneria"
@@ -28,7 +29,7 @@
     <!-- scienze-->
      <item
          android:id="@+id/navigation_drawer_scienze_tecnologie"
-         app:actionLayout="@layout/spinner"
+         app:actionLayout="@layout/spinner_scienze"
          android:icon="@drawable/ic_scienze"
          android:enabled="false"
          android:title="@string/scienze" />
@@ -37,7 +38,7 @@
     <!-- giurisprudenza-->
      <item
          android:id="@+id/navigation_drawer_giurisprudenza"
-         app:actionLayout="@layout/spinner"
+         app:actionLayout="@layout/spinner_giurisprudenza"
          android:icon="@drawable/ic_giurisprudenza"
          android:enabled="false"
          android:title="@string/giurisprudenza"  />
@@ -46,7 +47,7 @@
     <!-- sea-->
      <item
          android:id="@+id/navigation_drawer_sea"
-         app:actionLayout="@layout/spinner"
+         app:actionLayout="@layout/spinner_sea"
          android:icon="@drawable/ic_sea"
          android:enabled="false"
          android:title="@string/sea"   />
