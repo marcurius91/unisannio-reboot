@@ -1,4 +1,4 @@
-//prova commit fr
+
 package solutions.alterego.android.unisannio.ateneo;
 
 import android.content.Intent;
@@ -16,6 +16,10 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +31,14 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.App;
+import solutions.alterego.android.unisannio.MainActivity;
 import solutions.alterego.android.unisannio.MapsActivity;
 import solutions.alterego.android.unisannio.NavigationDrawerActivity;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
 import solutions.alterego.android.unisannio.analytics.Screen;
+import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaAvvisiFragment;
 import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.models.Article;
@@ -40,10 +46,9 @@ import solutions.alterego.android.unisannio.models.ArticleAdapter;
 import solutions.alterego.android.unisannio.runtimePermission.PermissionManager;
 import timber.log.Timber;
 
-//import solutions.alterego.android.unisannio.utils.ListaElementi;  //Mi dava errore dicendo che non esiste
 
 public class AteneoActivity extends NavigationDrawerActivity {
-//prova commit francesco
+
     @Inject
     AnalyticsManager mAnalyticsManager;
 
@@ -60,6 +65,12 @@ public class AteneoActivity extends NavigationDrawerActivity {
     private AteneoPresenter mPresenter;
 
     protected Intent mMap;
+
+    String ateneo[];
+    String ingegneria[];
+    String scienze[];
+    String giurisprudenza[];
+    String sea[];
 
     PermissionManager mPermissionManager;
 
@@ -124,6 +135,82 @@ public class AteneoActivity extends NavigationDrawerActivity {
         mRecyclerView.setAdapter(mAdapter);
 
 
+
+
+        ateneo=getResources().getStringArray(R.array.ateneo);
+
+        Spinner spinnerA = (Spinner) navigationView.getMenu().findItem(R.id.navigation_drawer_ateneo).getActionView();
+        spinnerA.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,ateneo));
+        spinnerA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(AteneoActivity.this,"ateneo mannaggia dio vuoi funziona",Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+
+        ingegneria= getResources().getStringArray(R.array.ingegneria);
+
+        Spinner spinnerI = (Spinner) navigationView.getMenu().findItem(R.id.navigation_drawer_ingegneria).getActionView();
+        spinnerI.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,ingegneria));
+        spinnerI.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(AteneoActivity.this,"ingegn mannaggia dio vuoi funziona",Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+
+        scienze=getResources().getStringArray(R.array.scienze);
+
+        Spinner spinnerS = (Spinner) navigationView.getMenu().findItem(R.id.navigation_drawer_scienze_tecnologie).getActionView();
+        spinnerS.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,scienze));
+        spinnerS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(AteneoActivity.this,"scienze mannaggia dio vuoi funziona",Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+
+        giurisprudenza= getResources().getStringArray(R.array.giur);
+
+        Spinner spinnerG= (Spinner) navigationView.getMenu().findItem(R.id.navigation_drawer_giurisprudenza).getActionView();
+        spinnerG.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,giurisprudenza));
+        spinnerG.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // Toast.makeText(AteneoActivity.this,"giur mannaggia dio vuoi funziona",Toast.LENGTH_SHORT).show();
+
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        sea= getResources().getStringArray(R.array.economia);
+
+        Spinner spinnerSe= (Spinner) navigationView.getMenu().findItem(R.id.navigation_drawer_sea).getActionView();
+        spinnerSe.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,sea));
+        spinnerSe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //Toast.makeText(AteneoActivity.this,"sea mannaggia dio vuoi funziona",Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
 
 
