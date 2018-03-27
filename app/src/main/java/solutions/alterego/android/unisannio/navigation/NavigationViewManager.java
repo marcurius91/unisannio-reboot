@@ -11,11 +11,17 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 import com.google.android.gms.common.api.GoogleApiClient;
 import javax.inject.Inject;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import org.chromium.customtabsclient.CustomTabsActivityHelper;
+
+import solutions.alterego.android.unisannio.MainActivity;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
@@ -31,7 +37,7 @@ public class NavigationViewManager extends FragmentActivity {
     private DrawerLayout drawerLayout;
     public Context context;
     private Intent cercapersoneIngegneria;
-
+ String language[]={"vretrb","btrfge"};
 
     @Inject
     AnalyticsManager mAnalyticsManager;
@@ -54,7 +60,7 @@ public class NavigationViewManager extends FragmentActivity {
 
     }
 
-    public NavigationView setUpNavigationDrawer(NavigationView navigationView) {
+    public NavigationView setUpNavigationDrawer(final NavigationView navigationView) {
         mColorPrimary = getResources().getColor(R.color.primaryColor);
 
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo((FragmentActivity) context);
@@ -63,6 +69,9 @@ public class NavigationViewManager extends FragmentActivity {
                 .setToolbarColor(mColorPrimary)
                 .setShowTitle(true)
                 .build();
+
+
+
 
 
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
@@ -85,6 +94,8 @@ public class NavigationViewManager extends FragmentActivity {
                 }
 
                 drawerLayout.closeDrawers();
+
+
 
                 //Check to see which item was being clicked and perform appropriate action
                 switch (menuItem.getItemId()) {

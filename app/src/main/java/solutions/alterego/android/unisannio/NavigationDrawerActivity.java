@@ -34,7 +34,7 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
 
     private DrawerLayout drawerLayout;
 
-    private NavigationView navigationView;
+    protected NavigationView navigationView;
 
     private ViewGroup rootContainer;
 
