@@ -6,9 +6,9 @@ public class URLS {
 
     public static final String ATENEO_NEWS = "http://www.unisannio.it/it/amministrazione/albo-online/albo?page=0";
 
-    public static final String ATENEO_STUDENTI_NEWS = "http://www.unisannio.it/it/bacheca/generale";
+    public static final String ATENEO_STUDENTI_NEWS = "http://www.unisannio.it/it/bacheca/studente-iscritto";
 
-    public static final String ATENEO_DETAIL_BASE_URL = "http://www.unisannio.it/it/amministrazione/avviso/";   //Usato, con l'aggiunteadell' ID, quando si clicca su un avviso di ateneo
+    public static final String ATENEO_DETAIL_BASE_URL = "http://www.unisannio.it/it/amministrazione/avviso/";   //Usato, con l'aggiunteadell' ID, quando si clicca su un avviso si di ateneo che per gli studenti
 
     public static final String ATENEO_DETAIL_STUDENTI_BASE_URL = "http://www.unisannio.it/it/amministrazione/avviso/";
 
