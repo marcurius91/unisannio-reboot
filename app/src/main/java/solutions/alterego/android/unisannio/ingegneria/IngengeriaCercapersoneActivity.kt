@@ -71,7 +71,7 @@ class IngengeriaCercapersoneActivity : NavigationDrawerActivity() {
 
         // Progress
         cercapersone_ingegneria_swipe_container.isEnabled = false
-        cercapersone_ingegneria_swipe_container.isRefreshing = true
+        cercapersone_ingegneria_swipe_container.isRefreshing = false
         cercapersone_ingegneria_recycle_view.visibility = View.GONE
 
         cercapersone_ingegneria_recycle_view.visibility = View.VISIBLE

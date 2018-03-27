@@ -1,11 +1,14 @@
 
 package solutions.alterego.android.unisannio.ateneo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -66,11 +69,7 @@ public class AteneoActivity extends NavigationDrawerActivity {
 
     protected Intent mMap;
 
-    String ateneo[];
-    String ingegneria[];
-    String scienze[];
-    String giurisprudenza[];
-    String sea[];
+
 
     PermissionManager mPermissionManager;
 
@@ -80,6 +79,7 @@ public class AteneoActivity extends NavigationDrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.component(this).inject(this);
+
 
     setContentView(R.layout.activity_new_ateneo);
         //Queste due inizializzazioni probabilmente non servono perchè vengono sovrascritte sotto senza essere usate prima
@@ -134,83 +134,6 @@ public class AteneoActivity extends NavigationDrawerActivity {
 
         mRecyclerView.setAdapter(mAdapter);
 
-
-
-
-        ateneo=getResources().getStringArray(R.array.ateneo);
-
-        Spinner spinnerA = (Spinner) navigationView.getMenu().findItem(R.id.navigation_drawer_ateneo).getActionView();
-        spinnerA.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,ateneo));
-        spinnerA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(AteneoActivity.this,"ateneo mannaggia dio vuoi funziona",Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-
-        ingegneria= getResources().getStringArray(R.array.ingegneria);
-
-        Spinner spinnerI = (Spinner) navigationView.getMenu().findItem(R.id.navigation_drawer_ingegneria).getActionView();
-        spinnerI.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,ingegneria));
-        spinnerI.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(AteneoActivity.this,"ingegn mannaggia dio vuoi funziona",Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-
-        scienze=getResources().getStringArray(R.array.scienze);
-
-        Spinner spinnerS = (Spinner) navigationView.getMenu().findItem(R.id.navigation_drawer_scienze_tecnologie).getActionView();
-        spinnerS.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,scienze));
-        spinnerS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(AteneoActivity.this,"scienze mannaggia dio vuoi funziona",Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-
-        giurisprudenza= getResources().getStringArray(R.array.giur);
-
-        Spinner spinnerG= (Spinner) navigationView.getMenu().findItem(R.id.navigation_drawer_giurisprudenza).getActionView();
-        spinnerG.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,giurisprudenza));
-        spinnerG.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // Toast.makeText(AteneoActivity.this,"giur mannaggia dio vuoi funziona",Toast.LENGTH_SHORT).show();
-
-
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-        sea= getResources().getStringArray(R.array.economia);
-
-        Spinner spinnerSe= (Spinner) navigationView.getMenu().findItem(R.id.navigation_drawer_sea).getActionView();
-        spinnerSe.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,sea));
-        spinnerSe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //Toast.makeText(AteneoActivity.this,"sea mannaggia dio vuoi funziona",Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
 
 
 

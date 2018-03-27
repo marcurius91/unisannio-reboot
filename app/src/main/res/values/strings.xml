@@ -9,46 +9,6 @@
      <string name="ateneo"><b><i>Ateneo</i></b></string>
      <string name="ateneo_avvisi">Avvisi Ateneo</string>
 
-     <!--elementi spinner sezione ateneo-->
-    <string-array name="ateneo">
-        <item>Ateneo</item>
-        <item>Avvisi Studenti</item>
-
-    </string-array>
-
-     <!--fine elementi-->
-
-    <!--elementi spinner sezione ingegneria-->
-    <string-array name="ingegneria">
-        <item>Avvisi Dipartimento</item>
-        <item>Avvisi Studenti</item>
-        <item>Occupazione Aule</item>
-
-    </string-array>
-
-    <!--fine elementi-->
-
-    <!--elementi spinner sezione ingegneria-->
-    <string-array name="scienze">
-        <item>Avvisi Studenti</item>
-    </string-array>
-
-    <!--fine elementi-->
-
-    <!--elementi spinner sezione ingegneria-->
-    <string-array name="giur">
-        <item>Avvisi Studenti</item>
-        <item>Comunicazioni</item>
-
-    </string-array>
-
-    <!--fine elementi-->
-
-    <string-array name="economia">
-        <item>Avvisi Studenti</item>
-    </string-array>
-
-    <!--fine elementi-->
 
     <string name="occupazione_aule">Occupazione Aule</string>
     <string name="ingegneria"><b><i>Ingegneria</i></b></string>

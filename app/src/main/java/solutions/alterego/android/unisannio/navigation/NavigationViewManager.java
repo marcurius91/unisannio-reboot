@@ -37,7 +37,7 @@ public class NavigationViewManager extends FragmentActivity {
     private DrawerLayout drawerLayout;
     public Context context;
     private Intent cercapersoneIngegneria;
- String language[]={"vretrb","btrfge"};
+
 
     @Inject
     AnalyticsManager mAnalyticsManager;
