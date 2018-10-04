@@ -25,9 +25,13 @@ public class SeaPresenter implements ISeaPresenter{
     ArrayList<Article> global_article_list = new ArrayList<>();
 
     public SeaPresenter(String url){
+
         mParser = new SeaParser();
         mRetriever = new SeaRetriever(url);
     }
+
+
+
 
     @Override
     public Observable<ArrayList<Article>> getArticles() {

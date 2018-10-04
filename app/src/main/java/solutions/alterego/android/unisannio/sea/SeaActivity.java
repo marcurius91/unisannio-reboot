@@ -22,12 +22,14 @@ import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
+import solutions.alterego.android.unisannio.DetailActivity;
 import solutions.alterego.android.unisannio.MapsActivity;
 import solutions.alterego.android.unisannio.NavigationDrawerActivity;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
 import solutions.alterego.android.unisannio.analytics.Screen;
+import solutions.alterego.android.unisannio.ingegneria.IngegneriaDipartimentoActivity;
 import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.models.Article;
@@ -47,6 +49,10 @@ public class SeaActivity extends NavigationDrawerActivity {
     private CustomTabsIntent mCustomTabsIntent;
 
     private SeaPresenter mPresenter;
+
+
+    public String url1=null;
+
 
     protected Intent mMap;
     private RecyclerView mRecyclerView;
@@ -71,7 +77,9 @@ public class SeaActivity extends NavigationDrawerActivity {
 
         mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
 
+
         mPresenter = new SeaPresenter(URLS.SEA_NEWS);
+
 
         mRecyclerView = (RecyclerView) findViewById(R.id.sea_recycle_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.sea_swipe_container);
@@ -97,10 +105,34 @@ public class SeaActivity extends NavigationDrawerActivity {
 
         mAdapter = new ArticleAdapter(new ArrayList<Article>(), new OpenArticleDetailListener() {
             @Override public void openArticleDetail(@NonNull Article article, @NonNull RecyclerView.ViewHolder holder) {
-                String url1 = URLS.SEA_NEWS;
-                CustomTabsHelperFragment.open(SeaActivity.this, mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
+
+
+                Intent intent = new Intent();
+                intent.setClass(getApplicationContext(), DetailActivity.class);
+                intent.putExtra("ARTICLE", article);
+
+            /*ActivityOptionsCompat options =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+                            Pair.create(((ArticleAdapter.ViewHolder) holder).title, getString(R.string.transition_article_title)),
+                            Pair.create(((ArticleAdapter.ViewHolder) holder).date, getString(R.string.transition_article_date)),
+                            Pair.create(((ArticleAdapter.ViewHolder) holder).author, getString(R.string.transition_article_author))
+                    );
+            ActivityCompat.startActivity(this, intent, options.toBundle());*/
+
+                SeaActivity.this.startActivity(intent);
+
+                //   String url1 = URLS.SEA_NEWS;
+               //CustomTabsHelperFragment.open(SeaActivity.this, mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
+
+
+
+
+
+
+
             }
         },R.drawable.sea);
+
 
         refreshList();
 
@@ -110,6 +142,7 @@ public class SeaActivity extends NavigationDrawerActivity {
     private void refreshList() {
         //mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
+
         mPresenter.getArticles()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ArrayList<Article>>() {
