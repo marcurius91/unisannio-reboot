@@ -22,21 +22,22 @@ public class SeaParser implements Parser<Article> {
 
     @NonNull public List<Article> parse(@NonNull Document document) {
         List<Article> articles = new ArrayList<>();
-        Elements elements = document.select("div.moduletable");
-        Elements titles = elements.select("h4.jazin-title");
+        Elements elements = document.select("div.nspArt.nspCol1");
+        //Elements titles = elements.select("h4.nspHeader.tleft.fnone");
 
        // Elements bodies=document.body().select("div#ja-current-content");//DA QUELLO INIZIALE DI SEA NEWS
 
-        for (int i = 0; i < titles.size(); i++) {
-            Element link = titles.select("a").get(i);
+        for (int i = 0; i < elements.size(); i++) {
+
+            Element link = elements.get(i).select("a").first();
             String url = URLS.SEA.concat(link.attr("href"));
-            String title = titles.get(i).text();
+            String title = elements.get(i).select("h4.nspHeader.tleft.fnone").text();
 
 
 
 
 
-           Element bodies=document.select("div#ja-current-content").first();
+           Element bodies=document.select("p.nspText.tleft.fleft").first();
             String body=bodies.text();
 
 
