@@ -2,8 +2,6 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-
              <group android:checkableBehavior="single">
 
 
@@ -75,11 +73,6 @@
                      android:id="@+id/avvisi_studenti_giurisprudenza"
                      android:checked="false"
                      android:title="@string/avvisi_studenti" />
-
-                 <item
-                     android:id="@+id/comunicazioni"
-                     android:checked="false"
-                     android:title="@string/comunicazioni" />
 
              </group>
 

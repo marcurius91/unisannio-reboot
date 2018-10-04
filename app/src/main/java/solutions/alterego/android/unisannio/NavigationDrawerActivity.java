@@ -180,9 +180,6 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
                 case R.id.avvisi_studenti_giurisprudenza:
                     navigate().toGiurisprudenzaStudenti();
                     break;
-                case R.id.comunicazioni:
-                    navigate().toGiurisprudenzaComunicazioni();
-                    break;
                 case R.id.avvisi_studenti_sea:
                     navigate().toSeaStudenti();
                     break;
