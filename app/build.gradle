@@ -110,10 +110,6 @@ androidExtensions {
 }
 
 dependencies {
-    implementation project(':core')
-    implementation project(':giurisprudenza')
-    implementation project(':scienze')
-    implementation project(':ingegneria')
 
     implementation "com.android.support:multidex:1.0.3"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
