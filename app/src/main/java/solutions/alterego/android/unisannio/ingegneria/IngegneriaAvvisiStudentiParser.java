@@ -65,9 +65,11 @@ public class IngegneriaAvvisiStudentiParser implements Parser<Article> {
             Elements title_element = elements.get(i).select("h2").select("a").select("span.avvtitle");
             String title = title_element.text();
 
+
             //get the url of the news
             Element url_element = elements.get(i).select("h2").select("a").first();
             String url = url_element.attr("href");
+
 
             //get the body of the news
             Element body_element = elements.get(i).select("div.avvtext").first();
