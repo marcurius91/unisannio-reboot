@@ -31,17 +31,14 @@ public class SeaParser implements Parser<Article> {
 
             Element link = elements.get(i).select("a").first();
             String url = URLS.SEA.concat(link.attr("href"));
+
             String title = elements.get(i).select("h4.nspHeader.tleft.fnone").text();
 
+            // Element bodies=document.select("p.nspText.tleft.fleft").first();
+            String body=elements.get(i).select("p.nspText.tleft.fleft").text();
 
 
-
-
-           Element bodies=document.select("p.nspText.tleft.fleft").first();
-            String body=bodies.text();
-
-
-            articles.add(new Article(UUID.randomUUID().toString(), title, "", url, document.toString(), ExtensionKt.toIso8601(DateTime.now())));
+            articles.add(new Article(UUID.randomUUID().toString(), title, "", url, body, ExtensionKt.toIso8601(DateTime.now())));
         }
 
         return articles;
