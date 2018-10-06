@@ -18,6 +18,5 @@ cache:
   directories:
     - $HOME/.gradle
 
-
 #script: ./gradlew clean assembleDebug testDebugUnitTest
 script: - ./gradlew assembleRelease --stacktrace
