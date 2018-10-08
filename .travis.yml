@@ -19,4 +19,4 @@ cache:
     - $HOME/.gradle
 
 
-script: ./gradlew clean assembleDebug testDebugUnitTest
+script: ./gradlew clean assemble
