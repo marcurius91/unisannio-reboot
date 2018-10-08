@@ -18,4 +18,4 @@ cache:
   directories:
     - $HOME/.gradle
 
-script: gradle clean assembleDebug testDebugUnitTest
+script: gradle clean assemble
