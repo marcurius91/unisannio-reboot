@@ -42,8 +42,6 @@ public class GiurisprudenzaAvvisiFragment extends Fragment implements Giurisprud
 
     private GiurisprudenzaPresenter mPresenter;
 
-    private CustomTabsHelperFragment mCustomTabsHelperFragment;
-
     private CustomTabsIntent mCustomTabsIntent;
 
     public static Fragment newInstance(String url) {
@@ -86,7 +84,7 @@ public class GiurisprudenzaAvvisiFragment extends Fragment implements Giurisprud
             }
         });
 
-        mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this.getActivity());
+        CustomTabsHelperFragment mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this.getActivity());
         mCustomTabsIntent = new CustomTabsIntent.Builder()
             .enableUrlBarHiding()
             .setToolbarColor(mColorPrimary)

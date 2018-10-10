@@ -1,8 +1,6 @@
 package solutions.alterego.android.unisannio.scienze;
 
 
-import android.util.Log;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 

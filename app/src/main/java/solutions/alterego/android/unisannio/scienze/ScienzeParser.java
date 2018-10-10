@@ -18,8 +18,6 @@ import solutions.alterego.android.unisannio.utils.ExtensionKt;
 
 public class ScienzeParser implements Parser<Article> {
 
-    private String AUTHOR = "Didattica";
-
     public List<Article> parse(Document document) {
 
         Elements elements = document.body().select("div.blog").select("div.item");
@@ -46,6 +44,7 @@ public class ScienzeParser implements Parser<Article> {
             Elements linkElement = element.select("h2 > a");
             url = URLS.SCIENZE.concat(linkElement.attr("href"));
 
+            String AUTHOR = "Didattica";
             newsList.add(new Article(UUID.randomUUID().toString(), title, AUTHOR, url, body, ExtensionKt.toIso8601(jodatime)));
         }
         /*

@@ -1,14 +1,11 @@
 package solutions.alterego.android.unisannio.sea;
 
-import android.net.Uri;
 import android.support.annotation.NonNull;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import org.joda.time.DateTime;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -16,7 +13,6 @@ import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.interfaces.Parser;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.utils.ExtensionKt;
-import timber.log.Timber;
 
 public class SeaParser implements Parser<Article> {
 

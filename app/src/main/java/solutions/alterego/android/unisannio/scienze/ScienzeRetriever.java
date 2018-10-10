@@ -2,8 +2,6 @@ package solutions.alterego.android.unisannio.scienze;
 
 import android.util.Log;
 
-import com.facebook.stetho.inspector.elements.android.AndroidDocumentConstants;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import java.io.IOException;

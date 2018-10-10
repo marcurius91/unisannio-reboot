@@ -37,8 +37,6 @@ public class GiurisprudenzaActivity extends NavigationDrawerActivity {
     int mColorPrimary;
     SwipeRefreshLayout mSwipeRefreshLayout;
 
-    private CustomTabsHelperFragment mCustomTabsHelperFragment;
-
     private ArticleAdapter mAdapter;
 
     private GiurisprudenzaPresenter mPresenter;
@@ -66,7 +64,7 @@ public class GiurisprudenzaActivity extends NavigationDrawerActivity {
         mAnalyticsManager = new AnalyticsManager(this);
 
         mMap = new Intent(this, MapsActivity.class);
-        mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
+        CustomTabsHelperFragment mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
         
         mRecyclerView = (RecyclerView) findViewById(R.id.giurisprudenza_recycle_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.giurisprudenza_swipe_container);

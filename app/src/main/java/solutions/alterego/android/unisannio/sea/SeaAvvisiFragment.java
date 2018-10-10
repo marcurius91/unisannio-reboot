@@ -34,7 +34,6 @@ import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
-import solutions.alterego.android.unisannio.scienze.ScienzeDetailPresenter;
 
 public class SeaAvvisiFragment extends Fragment {
 
@@ -44,12 +43,6 @@ public class SeaAvvisiFragment extends Fragment {
 
     @Inject
     SeaRetriever mRetriever;
-
-    private ArticleAdapter mAdapter;
-
-    private CustomTabsHelperFragment mCustomTabsHelperFragment;
-
-    private CustomTabsIntent mCustomTabsIntent;
 
     public static Fragment newInstance(String url) {
         Bundle bundle = new Bundle();
@@ -96,30 +89,34 @@ public class SeaAvvisiFragment extends Fragment {
             }
         });
 
-        mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this.getActivity());
-        mCustomTabsIntent = new CustomTabsIntent.Builder()
+        CustomTabsHelperFragment mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this.getActivity());
+        CustomTabsIntent mCustomTabsIntent = new CustomTabsIntent.Builder()
                 .enableUrlBarHiding()
                 .setToolbarColor(mColorPrimary)
                 .setShowTitle(true)
                 .build();
 
-        mAdapter = new ArticleAdapter(new ArrayList<Article>(), new OpenArticleDetailListener() {
-            @Override public void openArticleDetail(@NonNull final Article article, @NonNull RecyclerView.ViewHolder holder) {
+        ArticleAdapter mAdapter = new ArticleAdapter(new ArrayList<Article>(), new OpenArticleDetailListener() {
+            @Override
+            public void openArticleDetail(@NonNull final Article article, @NonNull RecyclerView.ViewHolder holder) {
 
                 String url1 = URLS.SEA_NEWS + article.getUrl();
                 //CustomTabsHelperFragment.open(getActivity(), mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
                 SeaPresenter mDetailPresenter = new SeaPresenter(url1);
 
                 mDetailPresenter.getArticles().observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ArrayList<Article>>() {
-                    @Override public void onCompleted() {
+                    @Override
+                    public void onCompleted() {
 
                     }
 
-                    @Override public void onError(Throwable e) {
+                    @Override
+                    public void onError(Throwable e) {
                         Log.e("getBodyNews", e.toString());
                     }
 
-                    @Override public void onNext(ArrayList<Article> bodys) {
+                    @Override
+                    public void onNext(ArrayList<Article> bodys) {
                         //article.setBody(bodys.get(0));
                         Intent intent = new Intent();
                         intent.setClass(getActivity(), DetailActivity.class);
@@ -134,10 +131,10 @@ public class SeaAvvisiFragment extends Fragment {
                         startActivity(intent);
                     }
                 });
-               // String url1 = URLS.SEA + article.getUrl();
+                // String url1 = URLS.SEA + article.getUrl();
                 //CustomTabsHelperFragment.open(SeaAvvisiFragment.this.getActivity(), mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
             }
-        },R.drawable.sea);
+        }, R.drawable.sea);
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());

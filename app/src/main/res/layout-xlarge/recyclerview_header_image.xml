@@ -10,5 +10,6 @@
             android:tint="@color/primaryColor"
             android:id="@+id/header_image"
             android:layout_gravity="center_horizontal"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+        android:contentDescription="TODO" />
 </LinearLayout>

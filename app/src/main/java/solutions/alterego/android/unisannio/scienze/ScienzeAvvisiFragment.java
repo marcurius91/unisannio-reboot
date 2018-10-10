@@ -43,10 +43,6 @@ public class ScienzeAvvisiFragment extends Fragment {
 
     private ArticleAdapter mAdapter;
 
-    private CustomTabsHelperFragment mCustomTabsHelperFragment;
-
-    private CustomTabsIntent mCustomTabsIntent;
-
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_recyclerview, container, false);
     }
@@ -73,8 +69,8 @@ public class ScienzeAvvisiFragment extends Fragment {
             }
         });
 
-        mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this.getActivity());
-        mCustomTabsIntent = new CustomTabsIntent.Builder().enableUrlBarHiding().setToolbarColor(mColorPrimary).setShowTitle(true).build();
+        CustomTabsHelperFragment mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this.getActivity());
+        CustomTabsIntent mCustomTabsIntent = new CustomTabsIntent.Builder().enableUrlBarHiding().setToolbarColor(mColorPrimary).setShowTitle(true).build();
 
         mAdapter = new ArticleAdapter(new ArrayList<Article>(), new OpenArticleDetailListener() {
             @Override public void openArticleDetail(@NonNull final Article article, @NonNull RecyclerView.ViewHolder holder) {

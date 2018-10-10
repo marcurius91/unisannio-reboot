@@ -16,7 +16,6 @@ public class CercapersoneAdapter extends RecyclerView.Adapter<CercapersoneAdapte
 
     private List<Person> mPersons;
     private int mRowLayout;
-    private View v;
 
     public CercapersoneAdapter(List<Person> persons, int rowLayout) {
         mPersons = persons;
@@ -39,7 +38,7 @@ public class CercapersoneAdapter extends RecyclerView.Adapter<CercapersoneAdapte
 
     @Override
     public ViewHolder onCreateViewHolder(final ViewGroup viewGroup, int i) {
-        v = LayoutInflater.from(viewGroup.getContext()).inflate(mRowLayout, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(mRowLayout, viewGroup, false);
         ViewHolder vh = new ViewHolder(v,mPersons);
         return new ViewHolder(v,mPersons);
     }

@@ -17,8 +17,6 @@ public class PermissionManager implements IPermissionManager {
         this.activity = Activity;
     }
 
-    private int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
-
     @Override public void managingPermission() {
 
         int locationPermission = ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -30,8 +28,9 @@ public class PermissionManager implements IPermissionManager {
         }
         if (!listPermissionsNeeded.isEmpty()) {
             //Request multiple permission with multiple dialog
+            int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
             ActivityCompat.requestPermissions(activity, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),
-                REQUEST_ID_MULTIPLE_PERMISSIONS);
+                    REQUEST_ID_MULTIPLE_PERMISSIONS);
         }
     }
 
