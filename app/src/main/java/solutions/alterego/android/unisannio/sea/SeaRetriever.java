@@ -1,18 +1,14 @@
 package solutions.alterego.android.unisannio.sea;
 
-import android.util.Log;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
-import java.util.List;
 
 import rx.Observable;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.interfaces.IRetriever;
-import solutions.alterego.android.unisannio.models.Article;
 
 public class SeaRetriever implements IRetriever<Document>{
 

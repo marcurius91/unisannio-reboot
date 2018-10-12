@@ -1,14 +1,11 @@
 
 package solutions.alterego.android.unisannio.ateneo;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,10 +16,6 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,14 +27,12 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.App;
-import solutions.alterego.android.unisannio.MainActivity;
 import solutions.alterego.android.unisannio.MapsActivity;
 import solutions.alterego.android.unisannio.NavigationDrawerActivity;
 import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
 import solutions.alterego.android.unisannio.analytics.Screen;
-import solutions.alterego.android.unisannio.giurisprudenza.GiurisprudenzaAvvisiFragment;
 import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.models.Article;
@@ -58,8 +49,6 @@ public class AteneoActivity extends NavigationDrawerActivity {
     RecyclerView mRecyclerView;
     int mColorPrimary;
     SwipeRefreshLayout mSwipeRefreshLayout;
-
-    private CustomTabsHelperFragment mCustomTabsHelperFragment;
 
     private ArticleAdapter mAdapter;
 
@@ -97,7 +86,7 @@ public class AteneoActivity extends NavigationDrawerActivity {
 
 
         mMap = new Intent(this, MapsActivity.class);
-        mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
+        CustomTabsHelperFragment mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
 
         mPresenter = new AteneoPresenter(URLS.ATENEO_NEWS);
 

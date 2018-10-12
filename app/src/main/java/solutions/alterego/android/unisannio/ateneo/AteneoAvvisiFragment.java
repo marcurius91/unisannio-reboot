@@ -47,8 +47,6 @@ public class AteneoAvvisiFragment extends Fragment {
 
     private boolean mIsStudenti;
 
-    private CustomTabsHelperFragment mCustomTabsHelperFragment;
-
     private CustomTabsIntent mCustomTabsIntent;
 
     private AteneoPresenter mPresenter;
@@ -92,7 +90,7 @@ public class AteneoAvvisiFragment extends Fragment {
 
         //cercapersone_ingegneria_swipe_container.setOnRefreshListener(() -> refreshList(mIsStudenti));
 
-        mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this.getActivity());
+        CustomTabsHelperFragment mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this.getActivity());
         mCustomTabsIntent = new CustomTabsIntent.Builder().enableUrlBarHiding().setToolbarColor(mColorPrimary).setShowTitle(true).build();
 
         mAdapter = new ArticleAdapter(new ArrayList<Article>(), new OpenArticleDetailListener() {

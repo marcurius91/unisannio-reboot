@@ -46,8 +46,6 @@ public class AteneoStudentiActivity extends NavigationDrawerActivity {
     SwipeRefreshLayout mSwipeRefreshLayout;
     int mColorPrimary;
 
-    private CustomTabsHelperFragment mCustomTabsHelperFragment;
-
     private ArticleAdapter mAdapter;
 
     private CustomTabsIntent mCustomTabsIntent;
@@ -75,7 +73,7 @@ public class AteneoStudentiActivity extends NavigationDrawerActivity {
         toggle.syncState();
 
         mMap = new Intent(this, MapsActivity.class);
-        mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
+        CustomTabsHelperFragment mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
 
         mPresenter = new AteneoPresenter(URLS.ATENEO_STUDENTI_NEWS);
         mRecyclerView = (RecyclerView) findViewById(R.id.ateneo_studenti_recycle_view);

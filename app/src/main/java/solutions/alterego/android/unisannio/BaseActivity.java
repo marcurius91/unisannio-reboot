@@ -24,8 +24,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private Toolbar appbar;
 
-    private CustomTabsHelperFragment mCustomTabsHelperFragment;
-
     protected CustomTabsIntent mCustomTabsIntent;
 
     protected Intent mMap;
@@ -44,7 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.setContentView(view);
         findAndSetAppbar();
 
-        mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
+        CustomTabsHelperFragment mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
         int color = getResources().getColor(R.color.primaryColor);
         mCustomTabsIntent = new CustomTabsIntent.Builder().enableUrlBarHiding().setToolbarColor(color).setShowTitle(true).build();
 

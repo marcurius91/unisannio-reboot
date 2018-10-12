@@ -29,7 +29,6 @@ import solutions.alterego.android.unisannio.R;
 import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.analytics.AnalyticsManager;
 import solutions.alterego.android.unisannio.analytics.Screen;
-import solutions.alterego.android.unisannio.ingegneria.IngegneriaDipartimentoActivity;
 import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener;
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.models.Article;
@@ -55,7 +54,6 @@ public class SeaActivity extends NavigationDrawerActivity {
 
 
     protected Intent mMap;
-    private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
@@ -81,7 +79,7 @@ public class SeaActivity extends NavigationDrawerActivity {
         mPresenter = new SeaPresenter(URLS.SEA_NEWS);
 
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.sea_recycle_view);
+        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.sea_recycle_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.sea_swipe_container);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);

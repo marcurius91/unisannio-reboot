@@ -11,5 +11,6 @@
       android:layout_gravity="center_horizontal"
       android:adjustViewBounds="true"
       android:cropToPadding="true"
-      android:scaleType="centerCrop"/>
+      android:scaleType="centerCrop"
+        android:contentDescription="TODO" />
 </LinearLayout>
