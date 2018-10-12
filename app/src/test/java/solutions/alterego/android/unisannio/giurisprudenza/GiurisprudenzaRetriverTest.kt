@@ -5,10 +5,11 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import solutions.alterego.android.assertThat
+import solutions.alterego.android.unisannio.URLS
 
 class GiurisprudenzaRetriverTest {
 
-    val url = "http://www.giurisprudenza.unisannio.it/index.php?option=com_avvisi&controller=elenco&view=elenco&catid=2&Itemid=267";
+    val url = URLS.GIURISPRUDENZA;
     lateinit var document : Document;
     val retriver = GiurisprudenzaRetriever(url);
 
