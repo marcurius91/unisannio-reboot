@@ -26,10 +26,10 @@ public class URLS {
 
     public static final String INGEGNERIA_NEWS_DIPARTIMENTO_FEED_RSS = "https://www.ding.unisannio.it/avvisi-com/avvisi?format=feed&type=rss";
 
-    public static final String GIURISPRUDENZA = "http://www.giurisprudenza.unisannio.it";
+    public static final String GIURISPRUDENZA = "https://www.giurisprudenzaunisannio.it/";
 
     public static final String GIURISPRUDENZA_AVVISI
-            = "http://www.giurisprudenza.unisannio.it/index.php?option=com_avvisi&controller=elenco&view=elenco&catid=2&Itemid=267";
+            = "https://www.giurisprudenzaunisannio.it/index.php/avvisi";
 
     public static final String GIURISPRUDENZA_COMUNICAZIONI
             = "http://www.giurisprudenza.unisannio.it/index.php?option=com_avvisi&controller=elenco&view=elenco&catid=1&Itemid=431";
