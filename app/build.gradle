@@ -62,7 +62,10 @@ android {
     }
 
     lintOptions {
-        disable 'InvalidPackage'
+        htmlReport true
+        htmlOutput file("lint-report.html")
+        abortOnError true
+        warningsAsErrors false
     }
 
     packagingOptions {

@@ -15,80 +15,83 @@
                      android:id="@+id/drawer_ateneo_avvisi_studenti"
                      android:checked="false"
                      android:title="@string/avvisi_studenti" />
-                 <item
-                     android:id="@+id/drawer_ingegneria_avvisi_dipartimento"
-                     android:checked="false"
-                     android:title="@string/ateneo_avvisi" />
+                 <!-- modificare l id-->
+                 <!--  <item
+                       android:id="@+id/drawer_ingegneria_avvisi_dipartimento"
+                       android:checked="false"
+                       android:title="@string/ateneo_avvisi" />-->
 
-             </group>
+               </group>
 
-                 <group android:checkableBehavior="single">
+                   <group android:checkableBehavior="single">
 
-                     <item
-                         android:id="@+id/INGEGNERIA"
-                         android:enabled="false"
-                         android:icon="@drawable/ic_ingegneria"
-                         android:title="@string/ingegneria" />
-
-
-
-                     <item
-                         android:id="@+id/drawer_ingegneria_avvisi_studenti"
-                         android:checked="false"
-                         android:title="@string/avvisi_studenti" />
-
-                     <item
-                         android:id="@+id/cercapersone_ingegneria"
-                         android:checked="false"
-                         android:title="@string/cercapersone" />
-                     <item
-                         android:id="@+id/drawer_occupazione_aule"
-                         android:checked="false"
-                         android:title="@string/occupazione_aule" />
-
-                 </group>
-
-                 <group android:checkableBehavior="single">
-
-                     <item
-                         android:id="@+id/SCIENZE_TECNOLOGIE"
-                         android:enabled="false"
-                         android:icon="@drawable/ic_scienze"
-                         android:title="@string/scienze" />
-                     <item
-                         android:id="@+id/avvisi_studenti_scienze_tecnologie"
-                         android:checked="false"
-                         android:title="@string/avvisi_studenti" />
-
-                 </group>
-
-                 <group android:checkableBehavior="single">
-
-                 <item
-                     android:id="@+id/GIURISPRUDENZA"
-                     android:enabled="false"
-                     android:icon="@drawable/ic_giurisprudenza"
-                     android:title="@string/giurisprudenza" />
-                 <item
-                     android:id="@+id/avvisi_studenti_giurisprudenza"
-                     android:checked="false"
-                     android:title="@string/avvisi_studenti" />
-
-             </group>
-
-                 <group android:checkableBehavior="single">
-
-                 <item
-                     android:id="@+id/SEA"
-                     android:enabled="false"
-                     android:icon="@drawable/ic_sea"
-                     android:title="@string/sea" />
-                 <item
-                     android:id="@+id/avvisi_studenti_sea"
-                     android:checked="false"
-                     android:title="@string/avvisi_studenti" />
-
-                 </group>
+                       <item
+                           android:id="@+id/INGEGNERIA"
+                           android:enabled="false"
+                           android:icon="@drawable/ic_ingegneria"
+                           android:title="@string/ingegneria" />
 
 
-</menu>
+
+                       <item
+                           android:id="@+id/drawer_ingegneria_avvisi_studenti"
+                           android:checked="false"
+                           android:title="@string/avvisi_studenti" />
+
+                       <item
+                           android:id="@+id/drawer_ingegneria_avvisi_dipartimento"
+                           android:checked="false"
+                           android:title="@string/avvisi_dipartimento" />
+
+                       <item
+                           android:id="@+id/cercapersone_ingegneria"
+                           android:checked="false"
+                           android:title="@string/cercapersone" />
+
+
+                   </group>
+
+                   <group android:checkableBehavior="single">
+
+                       <item
+                           android:id="@+id/SCIENZE_TECNOLOGIE"
+                           android:enabled="false"
+                           android:icon="@drawable/ic_scienze"
+                           android:title="@string/scienze" />
+                       <item
+                           android:id="@+id/avvisi_studenti_scienze_tecnologie"
+                           android:checked="false"
+                           android:title="@string/avvisi_studenti" />
+
+                   </group>
+
+                   <group android:checkableBehavior="single">
+
+                   <item
+                       android:id="@+id/GIURISPRUDENZA"
+                       android:enabled="false"
+                       android:icon="@drawable/ic_giurisprudenza"
+                       android:title="@string/giurisprudenza" />
+                   <item
+                       android:id="@+id/avvisi_studenti_giurisprudenza"
+                       android:checked="false"
+                       android:title="@string/avvisi_studenti" />
+
+               </group>
+
+                   <group android:checkableBehavior="single">
+
+                   <item
+                       android:id="@+id/SEA"
+                       android:enabled="false"
+                       android:icon="@drawable/ic_sea"
+                       android:title="@string/sea" />
+                   <item
+                       android:id="@+id/avvisi_studenti_sea"
+                       android:checked="false"
+                       android:title="@string/avvisi_studenti" />
+
+                   </group>
+
+
+  </menu>
