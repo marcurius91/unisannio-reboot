@@ -38,7 +38,7 @@ public class IngegneriaAvvisiDipartimentoParser implements Parser<Article> {
              DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
              DateTime jodatime = dtf.parseDateTime(DateUtils.convertMonth(date.substring(5)));
 
-             list.add(new Article(UUID.randomUUID().toString(), title, author, link, body, jodatime.toString()));
+             list.add(new Article(UUID.randomUUID().toString(), title, "", link, body, jodatime.toString()));
          }
 
         return list;

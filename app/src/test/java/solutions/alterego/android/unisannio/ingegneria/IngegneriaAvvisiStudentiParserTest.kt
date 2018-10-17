@@ -38,7 +38,6 @@ class IngegneriaAvvisiStudentiParserTest {
     }
 
     @Test
-    @Ignore
     fun testParse() {
         val list = parser.parse(document)
         assertThat(list).isNotNull

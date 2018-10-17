@@ -100,7 +100,7 @@ public class AteneoStudentiActivity extends NavigationDrawerActivity {
 
         mAdapter = new ArticleAdapter(new ArrayList<Article>(), new OpenArticleDetailListener() {
             @Override public void openArticleDetail(@NonNull Article article, @NonNull RecyclerView.ViewHolder holder) {
-                String url1 = URLS.ATENEO_DETAIL_BASE_URL + article.getId(); /*:URLS.ATENEO_DETAIL_BASE_URL + article.getUrl()*/
+                String url1 = URLS.ATENEO_STUDENTI_NEWS; /*:URLS.ATENEO_DETAIL_BASE_URL + article.getUrl()*/
                 ;
                 CustomTabsHelperFragment.open(AteneoStudentiActivity.this, mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
             }
