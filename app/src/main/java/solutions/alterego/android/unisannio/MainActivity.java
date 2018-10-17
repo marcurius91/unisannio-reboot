@@ -16,9 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,12 +31,6 @@ import solutions.alterego.android.unisannio.navigation.NavigationViewManager;
 
 public class MainActivity extends AppCompatActivity {
 
-    //Defining Variables
-    //private Toolbar toolbar;
-    private NavigationView navigationView;
-
-    private DrawerLayout drawerLayout;
-
     NavigationViewManager navigationViewManager;
     private Intent mMap;
 
@@ -47,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
     int mColorPrimary;
 
     @Inject AnalyticsManager mAnalyticsManager;
-
-    private CustomTabsHelperFragment mCustomTabsHelperFragment;
 
     private CustomTabsIntent mCustomTabsIntent;
 
@@ -65,14 +54,16 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
+        CustomTabsHelperFragment mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
         mCustomTabsIntent = new CustomTabsIntent.Builder().enableUrlBarHiding().setToolbarColor(mColorPrimary).setShowTitle(true).build();
 
         //Initializing NavigationView
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        //Defining Variables
+        //private Toolbar toolbar;
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
         // Initializing Drawer Layout and ActionBarToggle
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         //set fragment Avvisi ateneo default when the app start
         getSupportFragmentManager().beginTransaction().replace(R.id.container, AteneoAvvisiFragment.newInstance(false)).commit();
         ActionBarDrawerToggle actionBarDrawerToggle =

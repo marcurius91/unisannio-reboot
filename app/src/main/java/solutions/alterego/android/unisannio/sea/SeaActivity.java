@@ -41,8 +41,6 @@ public class SeaActivity extends NavigationDrawerActivity {
 
     int mColorPrimary;
 
-    private CustomTabsHelperFragment mCustomTabsHelperFragment;
-
     private ArticleAdapter mAdapter;
 
     private CustomTabsIntent mCustomTabsIntent;
@@ -73,7 +71,7 @@ public class SeaActivity extends NavigationDrawerActivity {
 
         mMap = new Intent(this, MapsActivity.class);
 
-        mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
+        CustomTabsHelperFragment mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
 
 
         mPresenter = new SeaPresenter(URLS.SEA_NEWS);
