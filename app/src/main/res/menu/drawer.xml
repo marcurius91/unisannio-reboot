@@ -15,11 +15,11 @@
                      android:id="@+id/drawer_ateneo_avvisi_studenti"
                      android:checked="false"
                      android:title="@string/avvisi_studenti" />
-                 <!-- modificare l id-->
-                 <!--  <item
-                       android:id="@+id/drawer_ingegneria_avvisi_dipartimento"
+                
+                   <item
+                       android:id="@+id/drawer_ateneo_avvisi"
                        android:checked="false"
-                       android:title="@string/ateneo_avvisi" />-->
+                       android:title="@string/ateneo_avvisi" />
 
                </group>
 
