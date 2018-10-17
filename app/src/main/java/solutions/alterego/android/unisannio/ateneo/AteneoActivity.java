@@ -27,6 +27,7 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import solutions.alterego.android.unisannio.App;
+import solutions.alterego.android.unisannio.DetailActivity;
 import solutions.alterego.android.unisannio.MapsActivity;
 import solutions.alterego.android.unisannio.NavigationDrawerActivity;
 import solutions.alterego.android.unisannio.R;
@@ -116,6 +117,7 @@ public class AteneoActivity extends NavigationDrawerActivity {
             @Override public void openArticleDetail(@NonNull Article article, @NonNull RecyclerView.ViewHolder holder) {
                 String url1 = URLS.ATENEO_DETAIL_BASE_URL + article.getId();
                 CustomTabsHelperFragment.open(AteneoActivity.this, mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
+
             }
         },R.drawable.guerrazzi);
 
