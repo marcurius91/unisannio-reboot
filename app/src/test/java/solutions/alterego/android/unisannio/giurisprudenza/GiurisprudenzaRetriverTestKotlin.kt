@@ -7,9 +7,9 @@ import org.junit.Test
 import solutions.alterego.android.assertThat
 import solutions.alterego.android.unisannio.URLS
 
-class GiurisprudenzaRetriverTest {
+class GiurisprudenzaRetriverTestKotlin {
 
-    val url = URLS.GIURISPRUDENZA;
+    val url = URLS.GIURISPRUDENZA_AVVISI;
     lateinit var document : Document;
     val retriver = GiurisprudenzaRetriever(url);
 

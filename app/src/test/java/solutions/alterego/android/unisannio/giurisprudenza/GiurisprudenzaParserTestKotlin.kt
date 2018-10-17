@@ -5,11 +5,13 @@ import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
 import solutions.alterego.android.assertThat
+import solutions.alterego.android.unisannio.URLS
 import kotlin.test.assertTrue
 
-class GiurisprudenzaParserTest {
 
-    val url = "http://www.giurisprudenza.unisannio.it/index.php?option=com_avvisi&controller=elenco&view=elenco&catid=2&Itemid=267";
+class GiurisprudenzaParserTestKotlin {
+
+    val url = URLS.GIURISPRUDENZA_AVVISI;
     val retriver = GiurisprudenzaRetriever(url);
     val parser = GiurisprudenzaParser();
     val document = retriver.document
@@ -33,17 +35,17 @@ class GiurisprudenzaParserTest {
     @Test
     fun testArticleListConsistency() {
         val list = parser.parse(document);
-        assertThat(list.size > 0)
-
-        val date = list.get(1).date;
-        val author = list.get(1).author;
-        val title = list.get(1).title;
+       // assertThat(list.size > 0);
+        assertThat(list.isNotEmpty());
+        val date = list.get(0).date;
+        val author = list.get(0).author;
+        val title = list.get(0).title;
 
         assertThat(author).isNotNull;
         assertThat(title).isNotNull;
         assertTrue(title.isNotEmpty())
 
         val year = date.toString().substring(0, 4).toInt();
-        assertThat(year).isEqualTo(2017)
+        assertThat(year).isEqualTo(2018)
     }
 }
