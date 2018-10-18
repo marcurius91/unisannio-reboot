@@ -21,6 +21,7 @@ import android.widget.Toast;
 import org.chromium.customtabsclient.CustomTabsActivityHelper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -34,6 +35,7 @@ import solutions.alterego.android.unisannio.URLS;
 import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
+import timber.log.Timber;
 
 public class SeaAvvisiFragment extends Fragment {
 
@@ -41,17 +43,9 @@ public class SeaAvvisiFragment extends Fragment {
     SwipeRefreshLayout mSwipeRefreshLayout;
     int mColorPrimary;
 
-    @Inject
-    SeaRetriever mRetriever;
+   private ArticleAdapter mAdapter;
 
-    public static Fragment newInstance(String url) {
-        Bundle bundle = new Bundle();
-        bundle.putString("URL", url);
 
-        SeaAvvisiFragment fragment = new SeaAvvisiFragment();
-        fragment.setArguments(bundle);
-        return fragment;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -96,15 +90,15 @@ public class SeaAvvisiFragment extends Fragment {
                 .setShowTitle(true)
                 .build();
 
-        ArticleAdapter mAdapter = new ArticleAdapter(new ArrayList<Article>(), new OpenArticleDetailListener() {
+         mAdapter = new ArticleAdapter(new ArrayList<Article>(), new OpenArticleDetailListener() {
             @Override
             public void openArticleDetail(@NonNull final Article article, @NonNull RecyclerView.ViewHolder holder) {
 
                 String url1 = URLS.SEA_NEWS + article.getUrl();
                 //CustomTabsHelperFragment.open(getActivity(), mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
-                SeaPresenter mDetailPresenter = new SeaPresenter(url1);
+                SeaDetailPresenter mDetailPresenter = new SeaDetailPresenter(url1);
 
-                mDetailPresenter.getArticles().observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ArrayList<Article>>() {
+                mDetailPresenter.getBodyNews().observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ArrayList<String>>() {
                     @Override
                     public void onCompleted() {
 
@@ -116,24 +110,16 @@ public class SeaAvvisiFragment extends Fragment {
                     }
 
                     @Override
-                    public void onNext(ArrayList<Article> bodys) {
+                    public void onNext(ArrayList<String> bodys) {
                         //article.setBody(bodys.get(0));
                         Intent intent = new Intent();
                         intent.setClass(getActivity(), DetailActivity.class);
                         intent.putExtra("ARTICLE", article);
-                                       /*ActivityOptionsCompat options =
-                                               ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
-                                                       Pair.create(((ArticleAdapter.ViewHolder) holder).title, getString(R.string.transition_article_title)),
-                                                       Pair.create(((ArticleAdapter.ViewHolder) holder).date, getString(R.string.transition_article_date)),
-                                                       Pair.create(((ArticleAdapter.ViewHolder) holder).author, getString(R.string.transition_article_author))
-                                               );
-                                       ActivityCompat.startActivity(getActivity(), intent, options.toBundle());*/
+
                         startActivity(intent);
                     }
                 });
-                // String url1 = URLS.SEA + article.getUrl();
-                //CustomTabsHelperFragment.open(SeaAvvisiFragment.this.getActivity(), mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
-            }
+                    }
         }, R.drawable.sea);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -147,7 +133,8 @@ public class SeaAvvisiFragment extends Fragment {
         mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
 
-        /*mRetriever.get()
+        SeaRetriever sr=new SeaRetriever(url);
+        sr.get()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new Observer<List<Article>>() {
                 @Override
@@ -170,7 +157,7 @@ public class SeaAvvisiFragment extends Fragment {
                     mAdapter.addNews(ateneoNewses);
                     mRecyclerView.setVisibility(View.VISIBLE);
                 }
-            });*/
+            });
     }
 
     @Override

@@ -1,5 +1,6 @@
 package solutions.alterego.android.unisannio.sea;
 
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import javax.inject.Inject;
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import rx.Observer;
@@ -33,26 +36,31 @@ import solutions.alterego.android.unisannio.interfaces.OpenArticleDetailListener
 import solutions.alterego.android.unisannio.map.UnisannioGeoData;
 import solutions.alterego.android.unisannio.models.Article;
 import solutions.alterego.android.unisannio.models.ArticleAdapter;
+import timber.log.Timber;
 
 public class SeaActivity extends NavigationDrawerActivity {
 
-    @Inject
-    AnalyticsManager mAnalyticsManager;
+    @Inject AnalyticsManager mAnalyticsManager;
 
+    @Inject SeaRetriever mRetriever;
+
+    RecyclerView mRecyclerView;
     int mColorPrimary;
+
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     private ArticleAdapter mAdapter;
 
-    private CustomTabsIntent mCustomTabsIntent;
-
-    private SeaPresenter mPresenter;
 
 
-    public String url1=null;
+    private SeaDetailPresenter mPresenter;
+
+
+
 
 
     protected Intent mMap;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +68,10 @@ public class SeaActivity extends NavigationDrawerActivity {
         App.component(this).inject(this);
 
         setContentView(R.layout.activity_sea);
+
+        mRecyclerView=(RecyclerView) findViewById(R.id.recycler_view);
+        mSwipeRefreshLayout=(SwipeRefreshLayout) findViewById(R.id.ateneo_ptr);
+
         mColorPrimary = getResources().getColor(R.color.primaryColor);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
@@ -71,13 +83,9 @@ public class SeaActivity extends NavigationDrawerActivity {
 
         mMap = new Intent(this, MapsActivity.class);
 
-        CustomTabsHelperFragment mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
+        mCustomTabsIntent=new CustomTabsIntent.Builder().enableUrlBarHiding().setToolbarColor(mColorPrimary).setShowTitle(true).build();
+        mRecyclerView = (RecyclerView) findViewById(R.id.sea_recycle_view);
 
-
-        mPresenter = new SeaPresenter(URLS.SEA_NEWS);
-
-
-        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.sea_recycle_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.sea_swipe_container);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -86,13 +94,6 @@ public class SeaActivity extends NavigationDrawerActivity {
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,
                 (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
 
-
-        mCustomTabsIntent = new CustomTabsIntent.Builder()
-                .enableUrlBarHiding()
-                .setToolbarColor(mColorPrimary)
-                .setShowTitle(true)
-                .build();
-
         mSwipeRefreshLayout.setEnabled(false);
         mSwipeRefreshLayout.setRefreshing(true);
         mRecyclerView.setVisibility(View.GONE);
@@ -100,31 +101,31 @@ public class SeaActivity extends NavigationDrawerActivity {
         mRecyclerView.setVisibility(View.VISIBLE);
 
         mAdapter = new ArticleAdapter(new ArrayList<Article>(), new OpenArticleDetailListener() {
-            @Override public void openArticleDetail(@NonNull Article article, @NonNull RecyclerView.ViewHolder holder) {
+            @Override public void openArticleDetail(@NonNull final Article article, @NonNull RecyclerView.ViewHolder holder) {
 
+                String url1=article.getUrl();
+                mPresenter=new SeaDetailPresenter(url1);
 
-                Intent intent = new Intent();
-                intent.setClass(getApplicationContext(), DetailActivity.class);
-                intent.putExtra("ARTICLE", article);
+                mPresenter.getBodyNews().observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<ArrayList<String>>() {
+                    @Override
+                    public void onCompleted() {
 
-            /*ActivityOptionsCompat options =
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(this,
-                            Pair.create(((ArticleAdapter.ViewHolder) holder).title, getString(R.string.transition_article_title)),
-                            Pair.create(((ArticleAdapter.ViewHolder) holder).date, getString(R.string.transition_article_date)),
-                            Pair.create(((ArticleAdapter.ViewHolder) holder).author, getString(R.string.transition_article_author))
-                    );
-            ActivityCompat.startActivity(this, intent, options.toBundle());*/
+                    }
 
-                SeaActivity.this.startActivity(intent);
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("Error presenter",e.toString());
+                    }
 
-                //   String url1 = URLS.SEA_NEWS;
-               //CustomTabsHelperFragment.open(SeaActivity.this, mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
-
-
-
-
-
-
+                    @Override
+                    public void onNext(ArrayList<String> strings) {
+                        Intent intent = new Intent();
+                        intent.setClass(getApplicationContext(), DetailActivity.class);
+                        intent.putExtra("ARTICLE",  article.copy(UUID.randomUUID().toString(), article.getTitle(), article.getAuthor(), article.getUrl(), strings.get(0),
+                                article.getDate()));
+                        SeaActivity.this.startActivity(intent);
+                    }
+                });
 
             }
         },R.drawable.sea);
@@ -136,27 +137,34 @@ public class SeaActivity extends NavigationDrawerActivity {
     }
 
     private void refreshList() {
-        //mRecyclerView.setVisibility(View.GONE);
+        mRecyclerView.setVisibility(View.GONE);
         mSwipeRefreshLayout.setRefreshing(true);
 
-        mPresenter.getArticles()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ArrayList<Article>>() {
+
+        mRetriever.get().observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<Article>>() {
                     @Override
                     public void onCompleted() {
-                        mSwipeRefreshLayout.setRefreshing(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("SEA ACTIVITY:", e.toString());
+                        Timber.e(e);
+                        if(mSwipeRefreshLayout!=null)
+                            mSwipeRefreshLayout.setRefreshing(false);
+
                     }
 
-                    @Override
-                    public void onNext(ArrayList<Article> articles) {
-                        mAdapter.addNews(articles);
-                        mSwipeRefreshLayout.setRefreshing(false);
-                    }
+            @Override
+            public void onNext(List<Article> list) {
+                mAdapter.addNews(list);
+                if(mRecyclerView!=null && mSwipeRefreshLayout!=null )
+                {
+                    mRecyclerView.setVisibility(View.VISIBLE);
+                    mSwipeRefreshLayout.setRefreshing(false);
+                }
+            }
+
+
                 });
     }
 

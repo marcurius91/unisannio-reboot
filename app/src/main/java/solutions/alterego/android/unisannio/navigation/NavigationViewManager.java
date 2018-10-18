@@ -147,7 +147,7 @@ public class NavigationViewManager extends FragmentActivity {
                     case R.id.avvisi_studenti_sea:
                         //mAnalyticsManager.track(new Screen(context.getString(R.string.sea), context.getString(R.string.avvisi_studenti)));
                         fragmentManager.beginTransaction()
-                                .replace(R.id.container, SeaAvvisiFragment.newInstance(URLS.SEA_NEWS))
+                                .replace(R.id.container, new SeaAvvisiFragment())
                                 .commit();
                         return true;
 

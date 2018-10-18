@@ -19,9 +19,6 @@ public class SeaParser implements Parser<Article> {
     @NonNull public List<Article> parse(@NonNull Document document) {
         List<Article> articles = new ArrayList<>();
         Elements elements = document.select("div.nspArt.nspCol1");
-        //Elements titles = elements.select("h4.nspHeader.tleft.fnone");
-
-       // Elements bodies=document.body().select("div#ja-current-content");//DA QUELLO INIZIALE DI SEA NEWS
 
         for (int i = 0; i < elements.size(); i++) {
 
