@@ -145,6 +145,7 @@ dependencies {
     implementation 'net.danlew:android.joda:2.9.9.1'
 
     // TESTING
+
     testCompile 'junit:junit:4.12'
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testImplementation 'com.willowtreeapps.assertk:assertk:0.9'
