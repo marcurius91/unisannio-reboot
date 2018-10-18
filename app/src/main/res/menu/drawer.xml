@@ -47,7 +47,10 @@
                            android:id="@+id/cercapersone_ingegneria"
                            android:checked="false"
                            android:title="@string/cercapersone" />
-
+                       <item
+                           android:id="@+id/drawer_ingegneria_occupazioneaule"
+                           android:checked="false"
+                           android:title="@string/occupazioneaule" />
 
                    </group>
 
@@ -62,24 +65,33 @@
                            android:id="@+id/avvisi_studenti_scienze_tecnologie"
                            android:checked="false"
                            android:title="@string/avvisi_studenti" />
+                       <item
+                           android:id="@+id/drawer_scienze_occupazioneaule"
+                           android:checked="false"
+                           android:title="@string/occupazioneaule" />
 
                    </group>
 
-                   <group android:checkableBehavior="single">
+            <group android:checkableBehavior="single">
 
-                   <item
-                       android:id="@+id/GIURISPRUDENZA"
-                       android:enabled="false"
-                       android:icon="@drawable/ic_giurisprudenza"
-                       android:title="@string/giurisprudenza" />
-                   <item
-                       android:id="@+id/avvisi_studenti_giurisprudenza"
-                       android:checked="false"
-                       android:title="@string/avvisi_studenti" />
+                <item
+                    android:id="@+id/GIURISPRUDENZA"
+                    android:enabled="false"
+                    android:icon="@drawable/ic_giurisprudenza"
+                    android:title="@string/giurisprudenza" />
 
-               </group>
+                <item
+                    android:id="@+id/avvisi_studenti_giurisprudenza"
+                    android:checked="false"
+                    android:title="@string/avvisi_studenti" />
+                <item
+                    android:id="@+id/drawer_giurisprudenza_occupazioneaule"
+                    android:checked="false"
+                    android:title="@string/occupazioneaule" />
 
-                   <group android:checkableBehavior="single">
+            </group>
+
+                <group android:checkableBehavior="single">
 
                    <item
                        android:id="@+id/SEA"
@@ -90,8 +102,12 @@
                        android:id="@+id/avvisi_studenti_sea"
                        android:checked="false"
                        android:title="@string/avvisi_studenti" />
+                    <item
+                        android:id="@+id/drawer_sea_occupazioneaule"
+                        android:checked="false"
+                        android:title="@string/occupazioneaule" />
 
-                   </group>
+                </group>
 
 
   </menu>
