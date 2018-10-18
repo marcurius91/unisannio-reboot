@@ -159,10 +159,10 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
                 .build();
 
             switch (item.getItemId()) {
-                case R.id.drawer_ateneo_avvisi://TODO pointing to same News
+                case R.id.drawer_ateneo_avvisi:
                     navigate().toAteneo();
                     break;
-                case R.id.drawer_ateneo_avvisi_studenti://TODO pointing to same News
+                case R.id.drawer_ateneo_avvisi_studenti:
                     navigate().toAteneoStudenti();
                     break;
                 case R.id.drawer_ingegneria_avvisi_studenti:
@@ -183,10 +183,23 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
                 case R.id.avvisi_studenti_sea:
                     navigate().toSeaStudenti();
                     break;
-                /*case R.id.alteregosolution:
-                    CustomTabsHelperFragment.open((Activity) drawerView.getContext(), mCustomTabsIntent, Uri.parse(URLS.ALTEREGO),
+                case R.id.drawer_ingegneria_occupazioneaule:
+                    CustomTabsHelperFragment.open((Activity) drawerView.getContext(), mCustomTabsIntent, Uri.parse(URLS.INGEGNERIA_OCCUPAZIONEAULE),
                         mCustomTabsFallback);
                     break;
+                case R.id.drawer_scienze_occupazioneaule:
+                    CustomTabsHelperFragment.open((Activity) drawerView.getContext(), mCustomTabsIntent, Uri.parse(URLS.SCIENZE_OCCUPAZIONEAULE),
+                            mCustomTabsFallback);
+                    break;
+                case R.id.drawer_sea_occupazioneaule:
+                    CustomTabsHelperFragment.open((Activity) drawerView.getContext(), mCustomTabsIntent, Uri.parse(URLS.SEA_OCCUPAZIONEAULE),
+                            mCustomTabsFallback);
+                    break;
+                case R.id.drawer_giurisprudenza_occupazioneaule:
+                    CustomTabsHelperFragment.open((Activity) drawerView.getContext(), mCustomTabsIntent, Uri.parse(URLS.GIURISPRUDENZA_OCCUPAZIONEAULE),
+                            mCustomTabsFallback);
+                    break;
+                /*
                 case R.id.github:
                     CustomTabsHelperFragment.open((Activity) drawerView.getContext(), mCustomTabsIntent, Uri.parse(URLS.GITHUB), mCustomTabsFallback);
                     break;
