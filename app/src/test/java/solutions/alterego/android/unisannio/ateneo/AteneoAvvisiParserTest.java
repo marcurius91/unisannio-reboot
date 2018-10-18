@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  */
 public class AteneoAvvisiParserTest {
 
-    public String url = URLS.ATENEO;
+    public String url = URLS.ATENEO_NEWS;
     public AteneoRetriever retriver = new AteneoRetriever(url);
     public AteneoAvvisiParser parser = new AteneoAvvisiParser();
    // public Document document = retriver.getUrls();
