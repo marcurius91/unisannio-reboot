@@ -45,7 +45,9 @@ android {
         versionName "20151214"
         multiDexEnabled true
     }
-
+    aaptOptions{
+        cruncherEnabled = false
+    }
     signingConfigs {
     }
 
