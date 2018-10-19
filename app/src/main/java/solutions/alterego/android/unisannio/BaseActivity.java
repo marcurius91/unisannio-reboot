@@ -43,7 +43,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         findAndSetAppbar();
 
         CustomTabsHelperFragment mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo(this);
-        int color = getResources().getColor(R.color.primaryColor);
+        int color = getResources().getColor(R.color.ateneoColor);
         mCustomTabsIntent = new CustomTabsIntent.Builder().enableUrlBarHiding().setToolbarColor(color).setShowTitle(true).build();
 
         mMap = new Intent(this, MapsActivity.class);

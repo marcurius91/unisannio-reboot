@@ -63,12 +63,12 @@ public class GiurisprudenzaAvvisiFragment extends Fragment implements Giurisprud
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.ateneo_ptr);
-        mColorPrimary = getResources().getColor(R.color.primaryColor);
+        mColorPrimary = getResources().getColor(R.color.unisannio_blue);
 
         mPresenter = new GiurisprudenzaPresenter(URLS.GIURISPRUDENZA_AVVISI);
 
         mSwipeRefreshLayout.setColorSchemeResources(
-            R.color.primaryColor,
+            R.color.ateneoColor,
             R.color.primaryDarkColor,
             R.color.primatyLightColor,
             R.color.unisannio_blue);
@@ -97,7 +97,7 @@ public class GiurisprudenzaAvvisiFragment extends Fragment implements Giurisprud
                 CustomTabsHelperFragment.open(GiurisprudenzaAvvisiFragment.this.getActivity(), mCustomTabsIntent, Uri.parse(url1),
                     mCustomTabsFallback);
             }
-        }, R.drawable.calandra);
+        }, R.drawable.giurisprudenza);
         mRecyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());

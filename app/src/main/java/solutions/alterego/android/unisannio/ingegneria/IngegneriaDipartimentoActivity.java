@@ -58,7 +58,7 @@ public class IngegneriaDipartimentoActivity extends NavigationDrawerActivity {
         App.component(this).inject(this);
 
         setContentView(R.layout.activity_ingegneria_dipartimento);
-        mColorPrimary = getResources().getColor(R.color.primaryColor);
+        mColorPrimary = getResources().getColor(R.color.unisannio_red);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(toolbar);
@@ -75,7 +75,7 @@ public class IngegneriaDipartimentoActivity extends NavigationDrawerActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
 
-        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.primaryColor));
+        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.unisannio_red));
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,
             (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
 

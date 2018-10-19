@@ -23,8 +23,6 @@ import org.chromium.customtabsclient.CustomTabsActivityHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -56,14 +54,14 @@ public class SeaAvvisiFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.ateneo_ptr);
-        mColorPrimary = getResources().getColor(R.color.primaryColor);
+        mColorPrimary = getResources().getColor(R.color.unisannio_blue);
 
         //Bundle bundle = getArguments();
         //String url = bundle.getString("URL");
         //replaced refreshlist(url) with refreshlist()
 
         mSwipeRefreshLayout.setColorSchemeResources(
-            R.color.primaryColor,
+            R.color.ateneoColor,
             R.color.primaryDarkColor,
             R.color.primatyLightColor,
             R.color.unisannio_blue);

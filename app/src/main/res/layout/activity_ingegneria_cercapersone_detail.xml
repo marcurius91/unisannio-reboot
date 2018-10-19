@@ -35,7 +35,7 @@
                 android:transitionName="@string/transition_article_date"
                 tools:text="email"
                 android:id="@+id/detail_cercapersone_email"
-                android:textColor="@color/primaryDarkColor"
+                android:textColor="@color/unisannio_red"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"/>
             <TextView

@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:background="@color/primaryColor">
+        android:background="@color/ateneoColor">
     </SearchView>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -62,6 +62,6 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/header"
         app:menu="@menu/drawer"
-        app:itemIconTint="@color/primaryColor"/>
+        app:itemIconTint="@color/ateneoColor"/>
 
 </android.support.v4.widget.DrawerLayout>

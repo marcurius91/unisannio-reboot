@@ -65,7 +65,7 @@ class IngengeriaCercapersoneActivity : NavigationDrawerActivity() {
         mAdapter = CercapersoneAdapter(ArrayList(), R.layout.ingegneria_cercapersone_list_person)
         cercapersone_ingegneria_recycle_view.adapter = mAdapter
 
-        cercapersone_ingegneria_swipe_container.setColorSchemeColors(ContextCompat.getColor(this, R.color.primaryColor))
+        cercapersone_ingegneria_swipe_container.setColorSchemeColors(ContextCompat.getColor(this, R.color.ateneoColor))
         cercapersone_ingegneria_swipe_container.setProgressViewOffset(false, 0,
             TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24f, resources.displayMetrics).toInt())
 

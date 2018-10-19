@@ -61,11 +61,11 @@ public class IngegneriaAvvisiStudentiActivity extends NavigationDrawerActivity {
         App.component(this).inject(this);
 
         setContentView(R.layout.activity_ingegneria_avvisi_studenti);
-        mColorPrimary = getResources().getColor(R.color.primaryColor);
+        mColorPrimary = getResources().getColor(R.color.unisannio_red);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
+        DrawerLayout drawer =  findViewById(R.id.navigation_drawer);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
@@ -83,7 +83,7 @@ public class IngegneriaAvvisiStudentiActivity extends NavigationDrawerActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
 
-        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.primaryColor));
+        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.unisannio_red));
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,
                 (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
 

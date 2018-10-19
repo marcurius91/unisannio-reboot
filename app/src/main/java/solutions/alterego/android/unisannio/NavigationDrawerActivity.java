@@ -154,7 +154,7 @@ public abstract class NavigationDrawerActivity extends BaseActivity implements N
             drawerLayout.setDrawerListener(null);
 
             mCustomTabsIntent = new CustomTabsIntent.Builder().enableUrlBarHiding()
-                .setToolbarColor(getResources().getColor(R.color.primaryColor))
+                .setToolbarColor(getResources().getColor(R.color.ateneoColor))
                 .setShowTitle(true)
                 .build();
 

@@ -52,7 +52,7 @@ public class IngegneriaAvvisiFragment extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.ingegneria_recycler_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.ingengeria_ptr);
 
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.primaryColor, R.color.primaryDarkColor, R.color.primatyLightColor,
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.ateneoColor, R.color.primaryDarkColor, R.color.primatyLightColor,
             R.color.unisannio_blue);
 
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,

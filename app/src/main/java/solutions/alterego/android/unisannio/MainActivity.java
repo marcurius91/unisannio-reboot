@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
-        mColorPrimary = getResources().getColor(R.color.primaryColor);
+        mColorPrimary = getResources().getColor(R.color.ateneoColor);
 
         mMap = new Intent(this, MapsActivity.class);
         // Initializing Toolbar and setting it as the actionbar

@@ -62,7 +62,7 @@ public class ScienzeActivity extends NavigationDrawerActivity {
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.ateneo_ptr);
-        mColorPrimary = getResources().getColor(R.color.primaryColor);
+        mColorPrimary = getResources().getColor(R.color.unisannio_yellow);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(toolbar);
@@ -80,7 +80,7 @@ public class ScienzeActivity extends NavigationDrawerActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
 
-        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.primaryColor));
+        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.unisannio_yellow));
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,
             (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
 
@@ -124,7 +124,7 @@ public class ScienzeActivity extends NavigationDrawerActivity {
             ActivityCompat.startActivity(this, intent, options.toBundle());*/
 
             }
-        }, R.drawable.teatro);
+        }, R.drawable.scienze);
 
         refreshList();
 

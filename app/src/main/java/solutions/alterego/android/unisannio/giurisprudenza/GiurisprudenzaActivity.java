@@ -53,7 +53,7 @@ public class GiurisprudenzaActivity extends NavigationDrawerActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_giurisprudenza);
-        mColorPrimary = getResources().getColor(R.color.primaryColor);
+        mColorPrimary = getResources().getColor(R.color.unisannio_blue);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(toolbar);
@@ -74,7 +74,7 @@ public class GiurisprudenzaActivity extends NavigationDrawerActivity {
 
         mRecyclerView.setLayoutManager(layoutManager);
 
-        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.primaryColor));
+        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.unisannio_blue));
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,
                 (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
 
@@ -102,7 +102,7 @@ public class GiurisprudenzaActivity extends NavigationDrawerActivity {
 
 
             }
-        }, R.drawable.calandra);
+        }, R.drawable.giurisprudenza);
 
         refreshList();
 

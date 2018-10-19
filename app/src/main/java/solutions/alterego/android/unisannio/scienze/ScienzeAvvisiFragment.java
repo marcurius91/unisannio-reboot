@@ -51,9 +51,9 @@ public class ScienzeAvvisiFragment extends Fragment {
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.ateneo_ptr);
-        mColorPrimary = getResources().getColor(R.color.primaryColor);
+        mColorPrimary = getResources().getColor(R.color.unisannio_yellow);
 
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.primaryColor, R.color.primaryDarkColor, R.color.primatyLightColor,
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.ateneoColor, R.color.primaryDarkColor, R.color.primatyLightColor,
             R.color.unisannio_blue);
 
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,
@@ -103,7 +103,7 @@ public class ScienzeAvvisiFragment extends Fragment {
                     }
                 });
             }
-        }, R.drawable.teatro);
+        }, R.drawable.scienze);
 
         mRecyclerView.setAdapter(mAdapter);
 

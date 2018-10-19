@@ -23,7 +23,7 @@
     <string name="about"><b><i>About</i></b></string>
     <string name="alter_ego">Alter Ego Solutions</string>
     <string name="github">GitHub</string>
-    <string name="title_activity_detail">News</string>
+    <string name="title_activity_detail">Dettagli</string>
     <string name="transition_article_title">transition_article_title</string>
     <string name="transition_article_date">transition_article_date</string>
     <string name="transition_article_author">transition_article_author</string>

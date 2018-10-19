@@ -53,7 +53,7 @@ public class NavigationViewManager extends FragmentActivity {
     }
 
     public NavigationView setUpNavigationDrawer(final NavigationView navigationView) {
-        mColorPrimary = getResources().getColor(R.color.primaryColor);
+        mColorPrimary = getResources().getColor(R.color.ateneoColor);
 
         CustomTabsHelperFragment mCustomTabsHelperFragment = CustomTabsHelperFragment.attachTo((FragmentActivity) context);
         CustomTabsIntent mCustomTabsIntent = new CustomTabsIntent.Builder()

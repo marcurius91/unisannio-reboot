@@ -67,11 +67,11 @@ public class AteneoAvvisiFragment extends Fragment {
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.ateneo_ptr);
-        mColorPrimary = getResources().getColor(R.color.primaryColor);
+        mColorPrimary = getResources().getColor(R.color.ateneoColor);
 
-        int drawable = R.drawable.guerrazzi;
+        int drawable = R.drawable.ateneo;
 
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.primaryColor, R.color.primaryDarkColor, R.color.primatyLightColor,
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.ateneoColor, R.color.primaryDarkColor, R.color.primatyLightColor,
             R.color.unisannio_blue);
 
         mSwipeRefreshLayout.setProgressViewOffset(false, 0,
@@ -98,7 +98,7 @@ public class AteneoAvvisiFragment extends Fragment {
                 String url1 = mIsStudenti ? URLS.ATENEO_DETAIL_STUDENTI_BASE_URL + article.getUrl() : URLS.ATENEO_DETAIL_BASE_URL + article.getUrl();
                 CustomTabsHelperFragment.open(AteneoAvvisiFragment.this.getActivity(), mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
             }
-        }, R.drawable.guerrazzi);
+        }, R.drawable.ateneo);
 
         mRecyclerView.setAdapter(mAdapter);
 

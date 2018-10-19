@@ -7,7 +7,7 @@
     <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:tint="@color/primaryColor"
+            android:tint="@color/ateneoColor"
             android:id="@+id/header_image"
             android:layout_gravity="center_horizontal"
             android:scaleType="centerCrop"

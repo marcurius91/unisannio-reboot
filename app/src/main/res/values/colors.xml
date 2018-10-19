@@ -1,7 +1,7 @@
 <resources>
 
-    <color name="primaryColor">@color/unisannio_red</color>
-    <color name="primaryDarkColor">@color/unisannio_red_dark</color>
+    <color name="ateneoColor">@color/unisannio_violet</color>
+    <color name="primaryDarkColor">@color/unisannio_violet_dark</color>
     <color name="primatyLightColor">@color/unisannio_red_light</color>
     <color name="accentColor">@color/unisannio_blue</color>
 
@@ -14,9 +14,15 @@
     <color name="selected_gray">#ffdbdbdb</color>
     a60251
     <color name="unisannio_red_light">#ffb3b8</color>
-    <color name="unisannio_red">#c50251</color>
-    <color name="unisannio_red_dark">#a60251</color>
+    <color name="unisannio_violet">#c50251</color>
+    <color name="unisannio_violet_dark">#a60251</color>
     <color name="unisannio_blue">#216781</color>
+    <color name="unisannio_blue_dark">#214481</color>
+    <color name="unisannio_red">#e71621</color>
+    <color name="unisannio_red_dark">#f3bf1009</color>
+    <color name="unisannio_yellow">#f1b001</color>
+    <color name="unisannio_yellow_dark">#f9bf25</color>
+
 
     <color name="list_background_normal">#FCFCFC</color>
     <color name="list_background_secondary_normal">#F2F2F2</color>
