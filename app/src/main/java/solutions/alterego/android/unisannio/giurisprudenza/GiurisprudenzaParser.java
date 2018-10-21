@@ -39,6 +39,7 @@ public class GiurisprudenzaParser implements Parser<Article> {
                 //DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-MM-yyyyHH:mm:SS");
                 //DateTime jodatime = dtf.parseDateTime(date.trim().replace("alle", "").replace(" ", "").substring(1));
 
+
                 articles.add(new Article(UUID.randomUUID().toString(), title, "", url, body, ExtensionKt.toIso8601(DateTime.now())));
             }
         }

@@ -21,7 +21,7 @@ public class AteneoAvvisiParser implements Parser<Article> {
         String date = null;
         String title = null;
         String id = null;
-
+        String body=null;
         Elements newsItems = doc.select("div.view-content").select("tbody").select("tr");
 
         for (int i = 1; i < newsItems.size(); i++) {
@@ -35,7 +35,7 @@ public class AteneoAvvisiParser implements Parser<Article> {
                 //get the Title of the news.
                 Element title_element = bodyElement.get(2).select("a").first();
                 title = title_element.text();
-
+                body=bodyElement.text();
                 //get the date of the news
                 Element date_element = bodyElement.get(3).select("span").first();
                 date = date_element.text();
@@ -44,7 +44,7 @@ public class AteneoAvvisiParser implements Parser<Article> {
             if (title != null && date != null) {
                 DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
                 DateTime jodatime = dtf.parseDateTime(date);
-                newsList.add(new Article(id,title,"", "", "", ExtensionKt.toIso8601(jodatime)));
+                newsList.add(new Article(id,title,"", "", body, ExtensionKt.toIso8601(jodatime)));
             }
         }
 

@@ -26,6 +26,7 @@ import me.zhanghai.android.customtabshelper.CustomTabsHelperFragment;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import solutions.alterego.android.unisannio.App;
+import solutions.alterego.android.unisannio.DetailActivity;
 import solutions.alterego.android.unisannio.MapsActivity;
 import solutions.alterego.android.unisannio.NavigationDrawerActivity;
 import solutions.alterego.android.unisannio.R;
@@ -100,9 +101,13 @@ public class AteneoStudentiActivity extends NavigationDrawerActivity {
 
         mAdapter = new ArticleAdapter(new ArrayList<Article>(), new OpenArticleDetailListener() {
             @Override public void openArticleDetail(@NonNull Article article, @NonNull RecyclerView.ViewHolder holder) {
-                String url1 = URLS.ATENEO_STUDENTI_NEWS; /*:URLS.ATENEO_DETAIL_BASE_URL + article.getUrl()*/
-                ;
-                CustomTabsHelperFragment.open(AteneoStudentiActivity.this, mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
+                //String url1 = URLS.ATENEO_STUDENTI_NEWS; /*:URLS.ATENEO_DETAIL_BASE_URL + article.getUrl()*/
+                Intent intent = new Intent();
+                intent.setClass(getApplicationContext(), DetailActivity.class);
+                intent.putExtra("ARTICLE", article);
+                AteneoStudentiActivity.this.startActivity(intent);
+
+              //  CustomTabsHelperFragment.open(AteneoStudentiActivity.this, mCustomTabsIntent, Uri.parse(url1), mCustomTabsFallback);
             }
         },R.drawable.ateneo);
 
