@@ -69,9 +69,7 @@ public class ScienzeRetriever {
     //Create an ArrayList contains urls of multiple pages
     private Observable<String> loadUrlList(){
 
-        Observable<String> urltoRetrieve = Observable.from(urlsToRetrieve);
-
-        return urltoRetrieve;
+        return Observable.from(urlsToRetrieve);
     }
 
     //Create a list of documents starting from multiple urls contains in urlsToRetrieve

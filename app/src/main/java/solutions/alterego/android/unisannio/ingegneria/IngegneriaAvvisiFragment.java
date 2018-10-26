@@ -39,9 +39,8 @@ public class IngegneriaAvvisiFragment extends Fragment {
         //Bundle bundle = new Bundle();
         //bundle.putBoolean("DIPARTIMENTO", isDipartimento);
 
-        IngegneriaAvvisiFragment fragment = new IngegneriaAvvisiFragment();
         //fragment.setArguments(bundle);
-        return fragment;
+        return new IngegneriaAvvisiFragment();
     }
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

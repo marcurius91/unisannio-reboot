@@ -67,9 +67,7 @@ public class SeaRetriever {
         //Create an ArrayList contains urls of multiple pages
         private Observable<String> loadUrlList(){
 
-                Observable<String> urltoRetrieve = Observable.from(urlsToRetrieve);
-
-                return urltoRetrieve;
+            return Observable.from(urlsToRetrieve);
         }
 
         private Observable<Document> retrieveDocuments(){

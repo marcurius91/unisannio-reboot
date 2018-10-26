@@ -55,9 +55,8 @@ public class AteneoAvvisiFragment extends Fragment {
         //Bundle bundle = new Bundle();
         //bundle.putBoolean("STUDENTI", studenti);
 
-        AteneoAvvisiFragment fragment = new AteneoAvvisiFragment();
         //fragment.setArguments(bundle);
-        return fragment;
+        return new AteneoAvvisiFragment();
     }
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

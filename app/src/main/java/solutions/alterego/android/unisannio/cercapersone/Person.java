@@ -83,8 +83,7 @@ public class Person implements Parcelable{
     public String getTutoring(){ return tutoring; }
 
     public Person getPerson(){
-        Person p = new Person(nome,ruolo,email,telefono,ufficio,webPage,tutoring);
-        return p;
+        return new Person(nome,ruolo,email,telefono,ufficio,webPage,tutoring);
     }
 
     @Override
